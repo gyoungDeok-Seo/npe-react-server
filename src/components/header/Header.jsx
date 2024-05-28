@@ -2,7 +2,7 @@ import "./header.css";
 
 function Header() {
   return (
-    <div className="header">
+    <nav className="header">
       <div className="header-inner">
         <div className="left-box">
           <a href="" className="logo-link">
@@ -112,7 +112,7 @@ function Header() {
           </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 }
 export default Header;
