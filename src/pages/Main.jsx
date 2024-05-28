@@ -1,6 +1,7 @@
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
-import MainContainer from "../container/main/MainContainer";
+import Introduction from "../container/main/Introduction";
+import Landing from "../container/main/Landing";
 import "./main.css";
 function Main() {
   return (
@@ -19,7 +20,8 @@ function Main() {
       <div>
         <Header />
         <div className="container">
-          <MainContainer />
+          <Landing />
+          <Introduction />
         </div>
         <Footer />
       </div>
