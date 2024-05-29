@@ -2,8 +2,8 @@
   background-color: var(--color-white, #fff);
   border-color: var(--color-slate-300, #cbd5e1);
   border-style: solid;
-  border-bottom-width: 1px;
   border-width: 0;
+  border-bottom-width: 1px;
   flex-wrap: wrap;
   min-width: max-content;
   width: 100%;
@@ -94,6 +94,9 @@
   display: inline-flex;
   -webkit-appearance: button;
 }
+.login-btn:hover {
+  background-color: var(--color-slate-50, #f8fafc);
+}
 
 .login-btn-text {
   text-overflow: ellipsis;
@@ -125,7 +128,9 @@
   display: inline-flex;
   -webkit-appearance: button;
 }
-
+.join-btn:hover {
+  background-color: var(--color-background-button-primary-bold-hover, #1e293b);
+}
 .join-btn-text {
   text-overflow: ellipsis;
   overflow: hidden;

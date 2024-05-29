@@ -1,6 +1,9 @@
 import "./header.css";
 
-function Header() {
+function Header({setSearch}) {
+  const searchOpenHandler = () => {
+    setSearch((isOpen) => !isOpen);
+  };
   return (
     <nav className="header">
       <div className="header-inner">
@@ -79,7 +82,7 @@ function Header() {
           </a>
         </div>
         <div className="right-box">
-          <div className="search-box">
+          <div className="search-box" onClick={searchOpenHandler}>
             <svg
               width="24"
               height="24"

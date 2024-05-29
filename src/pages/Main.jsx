@@ -1,9 +1,12 @@
+import { useState } from "react";
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
+import Search from "../components/header/Search";
 import Introduction from "../container/main/Introduction";
 import Landing from "../container/main/Landing";
 import "./main.css";
 function Main() {
+  const [search, setSearch] = useState(false);
   return (
     <div>
       <div
@@ -18,7 +21,8 @@ function Main() {
         }}
       ></div>
       <div>
-        <Header />
+        <Header setSearch={setSearch} />
+        {search && <Search setSearch={setSearch}/>}
         <div className="container">
           <Landing />
           <Introduction />

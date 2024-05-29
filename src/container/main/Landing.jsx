@@ -2,8 +2,8 @@ import "./landing.css";
 
 function Landing() {
   return (
-    <section className="box">
-      <div className="inner">
+    <section className="landing-box">
+      <div className="landing-inner">
         <span
           style={{
             boxSizing: "border-box",
