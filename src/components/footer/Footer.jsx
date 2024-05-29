@@ -8,27 +8,27 @@ function Footer() {
           <a target="_blank" href="https://publy.co/content/755">
             <span className="terms">이용약관</span>
           </a>
-          <div class="slate"></div>
+          <div className="slate"></div>
           <a target="_blank" href="https://publy.co/content/756">
-            <span class="privacy">개인정보 처리방침</span>
+            <span className="privacy">개인정보 처리방침</span>
           </a>
         </div>
-        <div class="footer-mid">
+        <div className="footer-mid">
           <span>(주) 퍼블리</span>
-          <div class="slate"></div>
+          <div className="slate"></div>
           <span>대표이사: 박소령</span>
-          <div class="slate"></div>
+          <div className="slate"></div>
           <span>사업자 등록번호: 198-81-00096</span>
-          <div class="slate"></div>
+          <div className="slate"></div>
           <span>서울시 강남구 테헤란로 503 하이브로빌딩 10층</span>
-          <div class="slate"></div>
+          <div className="slate"></div>
           <span>통신 판매업: 2020-서울강남-02648</span>
-          <div class="slate"></div>
+          <div className="slate"></div>
           <span>직업 정보: J1200020230004</span>
-          <div class="slate"></div>
+          <div className="slate"></div>
           <span>유료직업소개사업: 제 2024-3220250-14-5-00011호</span>
         </div>
-        <div class="footer-bottom">
+        <div className="footer-bottom">
           커리어리 서비스에서 제공하는 상품 정보에 대하여 (주)퍼블리는
           통신판매중개자이며 통신판매의 당사자가 아닙니다.
           <br />
@@ -39,7 +39,7 @@ function Footer() {
             rel="noreferrer"
             target="_blank"
           >
-            <span class="consumer-resolution-link">
+            <span className="consumer-resolution-link">
               소비자분쟁해결기준
             </span>
           </a>

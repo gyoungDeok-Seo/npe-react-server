@@ -23,7 +23,7 @@ function Main() {
       <div>
         <Header setSearch={setSearch} />
         {search && <Search setSearch={setSearch}/>}
-        <div className="container">
+        <div className="main-container">
           <Landing />
           <Introduction />
         </div>
