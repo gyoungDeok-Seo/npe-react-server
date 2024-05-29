@@ -1,9 +1,9 @@
-.box {
+.landing-box {
   height: 832px;
   min-width: 1024px;
   width: 100%;
 }
-.inner {
+.landing-inner {
   width: 100%;
   height: 100%;
   position: relative;
