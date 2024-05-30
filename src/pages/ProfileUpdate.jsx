@@ -1,6 +1,49 @@
+import { useState } from "react";
 import Header from "../components/header/Header";
-
+import "./profileUpdate.css";
 function ProfileUpdate() {
+  const [file, setFile] = useState(
+    "https://careerly.co.kr/_next/image?url=https%3A%2F%2Fpubly-cdn.s3.ap-northeast-2.amazonaws.com%2Fstatic%2Fimages%2Fimg_profile-dummy.png&w=1920&q=75"
+  );
+  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
+  const [shortDescription, setShortDescription] = useState("");
+  const [nameLength, setNameLength] = useState(0);
+  const [titleLength, setTitleLength] = useState(0);
+  const [shortDescriptionLength, setShortDescriptionLength] = useState(0);
+
+  const handleFileCHange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const previewUrl = URL.createObjectURL(file);
+      setFile(previewUrl);
+    }
+  };
+
+  const handleNameChange = (e) => {
+    const valueLength = e.target.value.length;
+    setNameLength(valueLength);
+    if (valueLength <= 20) {
+      setName(e.target.value);
+    }
+  };
+
+  const handleTitleChange = (e) => {
+    const valueLength = e.target.value.length;
+    setTitleLength(valueLength);
+    if (valueLength <= 40) {
+      setTitle(e.target.value);
+    }
+  };
+
+  const handleDescriptionChange = (e) => {
+    const valueLength = e.target.value.length;
+    setShortDescriptionLength(valueLength);
+    if (valueLength <= 150) {
+      setShortDescription(e.target.value);
+    }
+  };
+
   return (
     <div>
       <div
@@ -23,7 +66,10 @@ function ProfileUpdate() {
             <div className="profile-img-upload-box">
               <div className="profile-img-upload-inner">
                 <div className="profile-relative-box">
-                  <label for="profile_image" className="profile-label-pointer">
+                  <label
+                    htmlFor="profile_image"
+                    className="profile-label-pointer"
+                  >
                     <div className="prev-profile-img-box">
                       <span
                         style={{
@@ -44,7 +90,7 @@ function ProfileUpdate() {
                         <img
                           alt=""
                           sizes="100vw"
-                          src="/_next/image?url=https%3A%2F%2Fpubly-cdn.s3.ap-northeast-2.amazonaws.com%2Fstatic%2Fimages%2Fimg_profile-dummy.png&amp;w=3840&amp;q=75"
+                          src={file}
                           decoding="async"
                           data-nimg="fill"
                           className="prev-profile-img"
@@ -94,66 +140,59 @@ function ProfileUpdate() {
                     type="file"
                     accept="image/*"
                     name="image"
+                    onChange={handleFileCHange}
                   />
                 </div>
               </div>
             </div>
             <div className="profile-update-input-box">
               <div className="profile-update-input-inner">
-                <label
-                  for="name"
-                  className="profile-update-label"
-                >
+                <label htmlFor="name" className="profile-update-label">
                   이름
-                  <span className="profile-update-label-sub">
-                    (필수)
-                  </span>
+                  <span className="profile-update-label-sub">(필수)</span>
                 </label>
-                <p className="input-length-count-text">3/20</p>
+                <p className="input-length-count-text">{nameLength}/20</p>
               </div>
               <input
                 type="text"
                 className="profile-update-input"
                 placeholder="이름을 입력해 주세요."
                 name="name"
-                maxlength="20"
+                maxLength="20"
+                onChange={handleNameChange}
               />
             </div>
             <div className="profile-update-input-box">
               <div className="profile-update-input-inner">
-                <label
-                  for="name"
-                  className="profile-update-label"
-                >
+                <label htmlFor="name" className="profile-update-label">
                   대표 직함
-                  <span className="profile-update-label-sub">
-                    (필수)
-                  </span>
+                  <span className="profile-update-label-sub">(필수)</span>
                 </label>
-                <p className="input-length-count-text">3/40</p>
+                <p className="input-length-count-text">{titleLength}/40</p>
               </div>
               <input
                 type="text"
                 className="profile-update-input"
                 placeholder="본인을 대표하는 직함을 입력해 주세요."
                 name="title"
-                maxlength="40"
+                maxLength="40"
+                onChange={handleTitleChange}
               />
             </div>
             <div className="profile-update-input-inner">
-              <label
-                for="name"
-                className="profile-update-label"
-              >
+              <label htmlFor="name" className="profile-update-label">
                 자기소개
               </label>
-              <p className="input-length-count-text">64/150</p>
+              <p className="input-length-count-text">
+                {shortDescriptionLength}/150
+              </p>
             </div>
             <textarea
-              className="tw-custom-textarea "
+              className="profile-update-textarea"
               placeholder="나를 소개해주세요."
-              name="profile-update-textarea"
-              maxlength="150"
+              name="shortDescription"
+              maxLength="150"
+              onChange={handleDescriptionChange}
             ></textarea>
           </div>
         </div>

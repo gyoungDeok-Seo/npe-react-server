@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./intro.css";
 
 function Intro() {
@@ -37,9 +38,9 @@ function Intro() {
                       </g>
                     </svg>
                   </button>
-                  <button type="button" className="profile-edit-btn">
+                  <Link to="/profiles/update" className="profile-edit-btn">
                     <span className="profile-edit-text">편집</span>
-                  </button>
+                  </Link>
                 </div>
               </div>
               <div className="profile-name-box">
