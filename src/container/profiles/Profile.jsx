@@ -1,11 +1,9 @@
 import "./profile.css";
 
-const nonExistent = () => {
+const nonExistent = (partText, part) => {
   return (
     <div className="non-existent-content">
-      <p className="non-existent-text">
-        지금 하고 있는 일, 혹은 이전에 한 일을 알려주세요.
-      </p>
+      <p className="non-existent-text">{partText}</p>
       <button type="button" className="non-existent-add-btn">
         <svg
           width="16"
@@ -26,7 +24,7 @@ const nonExistent = () => {
             </g>
           </g>
         </svg>
-        <span className="non-existent-add-text">경력 추가</span>
+        <span className="non-existent-add-text">{part} 추가</span>
       </button>
     </div>
   );
@@ -196,38 +194,10 @@ function Profile() {
                           </div>
                         </div>
                       ) : (
-                        <div className="non-existent-content">
-                          <p className="non-existent-text">
-                            지금 하고 있는 일, 혹은 이전에 한 일을 알려주세요.
-                          </p>
-                          <button
-                            type="button"
-                            className="non-existent-add-btn"
-                          >
-                            <svg
-                              width="16"
-                              height="16"
-                              strokeWidth="0"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="non-existent-add-svg"
-                            >
-                              <g>
-                                <g id="style=outline">
-                                  <path
-                                    id="Vector (Stroke)"
-                                    fillRule="evenodd"
-                                    clipRule="evenodd"
-                                    d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"
-                                  ></path>
-                                </g>
-                              </g>
-                            </svg>
-                            <span className="non-existent-add-text">
-                              경력 추가
-                            </span>
-                          </button>
-                        </div>
+                        nonExistent(
+                          " 지금 하고 있는 일, 혹은 이전에 한 일을 알려주세요.",
+                          "경력"
+                        )
                       )}
                     </div>
                     <div className="content-box" aria-label="교육">
@@ -331,39 +301,11 @@ function Profile() {
                           </div>
                         </div>
                       ) : (
-                        <div className="non-existent-content">
-                          <p className="non-existent-text">
-                            현재 혹은 이전에 다녔던 학교, 부트캠프 등<br /> 교육
-                            기관을 입력해 주세요.
-                          </p>
-                          <button
-                            type="button"
-                            className="non-existent-add-btn"
-                          >
-                            <svg
-                              width="16"
-                              height="16"
-                              strokeWidth="0"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="non-existent-add-svg"
-                            >
-                              <g>
-                                <g id="style=outline">
-                                  <path
-                                    id="Vector (Stroke)"
-                                    fillRule="evenodd"
-                                    clipRule="evenodd"
-                                    d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"
-                                  ></path>
-                                </g>
-                              </g>
-                            </svg>
-                            <span className="non-existent-add-text">
-                              경력 추가
-                            </span>
-                          </button>
-                        </div>
+                        nonExistent(
+                          `현재 혹은 이전에 다녔던 학교, 부트캠프 등<br /> 교육
+                      기관을 입력해 주세요.`,
+                          "교육"
+                        )
                       )}
                     </div>
                     <div className="content-box" aria-label="링크">
@@ -451,38 +393,10 @@ function Profile() {
                           </div>
                         </div>
                       ) : (
-                        <div className="non-existent-content">
-                          <p className="non-existent-text">
-                            블로그, SNS등 다양한 링크로 나를 표현해보세요.
-                          </p>
-                          <button
-                            type="button"
-                            className="non-existent-add-btn"
-                          >
-                            <svg
-                              width="16"
-                              height="16"
-                              strokeWidth="0"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="non-existent-add-svg"
-                            >
-                              <g>
-                                <g id="style=outline">
-                                  <path
-                                    id="Vector (Stroke)"
-                                    fillRule="evenodd"
-                                    clipRule="evenodd"
-                                    d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"
-                                  ></path>
-                                </g>
-                              </g>
-                            </svg>
-                            <span className="non-existent-add-text">
-                              링크 추가
-                            </span>
-                          </button>
-                        </div>
+                        nonExistent(
+                          `블로그, SNS등 다양한 링크로 나를 표현해보세요.`,
+                          "링크"
+                        )
                       )}
                     </div>
                   </div>
