@@ -55,7 +55,9 @@ button:not(:disabled) {
 [type=button], [type=reset], [type=submit], button {
     -webkit-appearance: button;
 }
-
+input[type=search]::-webkit-search-cancel-button {
+    -webkit-appearance: none
+}
 button {
     border: 0;
     background: none;
@@ -488,16 +490,16 @@ img, svg {
 
 `;
 function App() {
-  const queryClient = new QueryClient();
-  return (
-    <QueryClientProvider client={queryClient}>
-      {/* <Provider store={store}> */}
-      <GlobalStyle />
-      <Router />
-      {/* </Provider> */}
-      <ReactQueryDevtools />
-    </QueryClientProvider>
-  );
+    const queryClient = new QueryClient();
+    return (
+        <QueryClientProvider client={queryClient}>
+            {/* <Provider store={store}> */}
+            <GlobalStyle />
+            <Router />
+            {/* </Provider> */}
+            <ReactQueryDevtools />
+        </QueryClientProvider>
+    );
 }
 
 export default App;
