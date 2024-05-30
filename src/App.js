@@ -46,6 +46,12 @@ button, input, optgroup, select, textarea {
     font-size: inherit;
     line-height: inherit;
 }
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled),
+button:not(:disabled) {
+    cursor: pointer;
+}
 [type=button], [type=reset], [type=submit], button {
     -webkit-appearance: button;
 }
@@ -100,9 +106,21 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+}
 a {
   text-decoration: none;
   color:inherit;
+}
+b {
+    font-weight: bolder;
 }
 * {
   box-sizing: border-box;
