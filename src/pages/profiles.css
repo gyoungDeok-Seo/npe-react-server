@@ -1,0 +1,5 @@
+.myprofile-container {
+  position: relative;
+  background-color: var(--color-white, #fff);
+  min-height: 100vh;
+}
