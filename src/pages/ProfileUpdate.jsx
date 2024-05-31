@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "../components/header/Header";
 import "./profileUpdate.css";
+
 function ProfileUpdate() {
   const [file, setFile] = useState(
     "https://careerly.co.kr/_next/image?url=https%3A%2F%2Fpubly-cdn.s3.ap-northeast-2.amazonaws.com%2Fstatic%2Fimages%2Fimg_profile-dummy.png&w=1920&q=75"

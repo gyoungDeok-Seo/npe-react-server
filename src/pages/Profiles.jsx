@@ -22,7 +22,7 @@ function Profiles() {
         <div className="myprofile-container">
           <Header />
           <Intro />
-          
+
           <Profile />
         </div>
       </div>
