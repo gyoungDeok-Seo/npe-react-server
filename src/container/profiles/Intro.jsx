@@ -1,30 +1,192 @@
 import { Link } from "react-router-dom";
-import "./intro.css";
+import styled from "styled-components";
+
+const ProfileTopBox = styled.div`
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+`;
+const ProfileTopInner = styled.div`
+  width: 1024px;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  margin-left: auto;
+  margin-right: auto;
+  gap: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+`;
+const ProfileTopGirdBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-column: span 8 / span 8;
+  grid-column-start: 3;
+  gap: 2rem;
+`;
+const ProfileDescriptionTop = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+`;
+const ProfileDescriptionProfileImg = styled.img`
+  --tw-border-opacity: 1;
+  border-color: rgb(226 232 240 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  border-radius: 9999px;
+  -o-object-fit: cover;
+  border-width: 1px;
+  border-style: solid;
+  object-fit: cover;
+  flex: none;
+  overflow: hidden;
+`;
+const ProfileTopToolBox = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+const ProfileShareBtn = styled.button`
+  color: var(--color-text-button-primary, #334155);
+  font-weight: 700;
+  font-size: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-color: var(--color-slate-500, #64748b);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0.25rem;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+`;
+const ProfileShareSvg = styled.svg`
+  fill: var(--color-slate-700, #334155);
+  width: 1.5rem;
+  height: 1.5rem;
+  display: block;
+`;
+const ProfileEditBtn = styled(Link)`
+  color: var(--color-text-button-primary, #334155);
+  font-weight: 700;
+  font-size: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-color: var(--color-slate-500, #64748b);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0.25rem;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+`;
+const ProfileEditText = styled.span`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+`;
+const ProfileNameBox = styled.div`
+  margin-top: 2rem;
+`;
+const ProfileName = styled.span`
+  color: var(--color-text-bold, #0f172a);
+  font-weight: 600;
+  font-size: 1.875rem;
+  display: inline;
+  margin-bottom: 0;
+`;
+const ProfileJob = styled.p`
+  color: var(--color-text-subtle, #334155);
+  font-size: 1rem;
+`;
+const ProfileDescription = styled.p`
+  color: var(--color-text-bold, #0f172a);
+  line-height: 2;
+  font-size: 1rem;
+  white-space: pre-line;
+`;
+const ProfileTabBox = styled.div`
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+`;
+const ProfileTabInner = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  width: 1024px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  -moz-column-gap: 3rem;
+  column-gap: 3rem;
+  row-gap: 2rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+`;
+const ProfileTabList = styled.ul`
+  display: flex;
+  grid-column: span 8 / span 8;
+  grid-column-start: 3;
+`;
+const ProfileTabItem = styled.li`
+  position: relative;
+  display: inline-block;
+  flex: 1 1 0%;
+`;
+const ProfileTabBtn = styled.button`
+  color: var(--color-text-subtler, #64748b);
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-color: var(--color-white, #fff);
+  width: 100%;
+`;
+const ProfileTabUnderBar = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 0.125rem;
+  width: 100%;
+  background-color: var(--color-slate-900, #0f172a);
+  opacity: 0;
+`;
+
+const ProfileSelectTab = styled.div`
+  color: var(--color-text-bold, #0f172a);
+`;
+const ProfileSelectUnderBar = styled.div`
+  opacity: 1;
+`;
 
 function Intro() {
   return (
     <>
-      <div className="profile-top-box">
-        <div className="profile-top-inner">
-          <div className="profile-top-gird-box">
+      <ProfileTopBox>
+        <ProfileTopInner>
+          <ProfileTopGirdBox>
             <div>
-              <div className="profile-description-top">
-                <img
+              <ProfileDescriptionTop>
+                <ProfileDescriptionProfileImg
                   width="120"
                   height="120"
-                  className="profile-description-profile-img"
                   src="https://publy.imgix.net/static/images/img_profile-dummy.png?w=400&amp;h=400&amp;auto=format&amp;fm=png"
                   alt="프로필 이미지"
                 />
-                <div className="profile-top-tool-box">
-                  <button type="button" className="profile-share-btn">
-                    <svg
+                <ProfileTopToolBox>
+                  <ProfileShareBtn>
+                    <ProfileShareSvg
                       width="24"
                       height="24"
                       strokeWidth="0"
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
-                      className="profile-share-svg"
                     >
                       <g>
                         <g id="style=outline">
@@ -36,59 +198,51 @@ function Intro() {
                           ></path>
                         </g>
                       </g>
-                    </svg>
-                  </button>
-                  <Link to="/profiles/update" className="profile-edit-btn">
-                    <span className="profile-edit-text">편집</span>
-                  </Link>
-                </div>
-              </div>
-              <div className="profile-name-box">
+                    </ProfileShareSvg>
+                  </ProfileShareBtn>
+                  <ProfileEditBtn to="/profiles/update">
+                    <ProfileEditText>편집</ProfileEditText>
+                  </ProfileEditBtn>
+                </ProfileTopToolBox>
+              </ProfileDescriptionTop>
+              <ProfileNameBox>
                 <div>
-                  <h1
-                    className="profile-name"
-                    style={{ verticalAlign: "middle" }}
-                  >
+                  <ProfileName style={{ verticalAlign: "middle" }}>
                     백시현
-                  </h1>
+                  </ProfileName>
                 </div>
-                <p className="profile-job">취준생</p>
-              </div>
+                <ProfileJob>취준생</ProfileJob>
+              </ProfileNameBox>
             </div>
-            <p className="profile-description">
+            <ProfileDescription>
               프론트엔드 취준생 입니다. 저와 같은 문제를 겪은 분들과 문제를
               공유하기 위해 커리어리를 시작했습니다. #프론트엔드
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="profile-tab-box">
-        <div className="profile-tab-inner">
-          <ul className="profile-tab-list">
-            <li className="profile-tab-item">
-              <button
-                type="button"
-                className="profile-tab-btn profile-select-tab"
-              >
-                프로필
-              </button>
-              <div className="profile-tab-under-bar profile-select-under-bar"></div>
-            </li>
-            <li className="profile-tab-item">
-              <button type="button" className="profile-tab-btn">
+            </ProfileDescription>
+          </ProfileTopGirdBox>
+        </ProfileTopInner>
+      </ProfileTopBox>
+      <ProfileTabBox>
+        <ProfileTabInner>
+          <ProfileTabList>
+            <ProfileTabItem>
+              <ProfileTabBtn>프로필</ProfileTabBtn>
+              <ProfileTabUnderBar></ProfileTabUnderBar>
+            </ProfileTabItem>
+            <ProfileTabItem>
+              <ProfileTabBtn>
                 게시물 22
-              </button>
-              <div className="profile-tab-under-bar"></div>
-            </li>
-            <li className="profile-tab-item">
-              <button type="button" className="profile-tab-btn">
+              </ProfileTabBtn>
+              <ProfileTabUnderBar></ProfileTabUnderBar>
+            </ProfileTabItem>
+            <ProfileTabItem>
+              <ProfileTabBtn>
                 Q&amp;A 활동 9
-              </button>
-              <div className="profile-tab-under-bar"></div>
-            </li>
-          </ul>
-        </div>
-      </div>
+              </ProfileTabBtn>
+              <ProfileTabUnderBar></ProfileTabUnderBar>
+            </ProfileTabItem>
+          </ProfileTabList>
+        </ProfileTabInner>
+      </ProfileTabBox>
     </>
   );
 }

@@ -4,6 +4,7 @@ import HomePage from "./pages/Home";
 import QnA from "./pages/qna/QnA";
 import Profiles from "./pages/Profiles";
 import ProfileUpdate from "./pages/ProfileUpdate";
+import CareerCreate from "./pages/CareerCreate";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
   {
     path: "/profiles/update",
     element: <ProfileUpdate />,
+    children: [],
+  },
+  {
+    path: "/profiles/careers/create",
+    element: <CareerCreate />,
     children: [],
   },
 ]);

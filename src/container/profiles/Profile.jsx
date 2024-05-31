@@ -1,59 +1,171 @@
-import "./profile.css";
+import styled from "styled-components";
+import NonExistent from "../../components/profiles/intro/NonExistent";
 
-const nonExistent = (partText, part) => {
-  return (
-    <div className="non-existent-content">
-      <p className="non-existent-text">{partText}</p>
-      <button type="button" className="non-existent-add-btn">
-        <svg
-          width="16"
-          height="16"
-          strokeWidth="0"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          className="non-existent-add-svg"
-        >
-          <g>
-            <g id="style=outline">
-              <path
-                id="Vector (Stroke)"
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"
-              ></path>
-            </g>
-          </g>
-        </svg>
-        <span className="non-existent-add-text">{part} 추가</span>
-      </button>
-    </div>
-  );
-};
+const ProfileContentContainer = styled.div`
+  border-color: var(--color-slate-200, #e2e8f0);
+  border-width: 0;
+  border-style: solid;
+  border-top-width: 1px;
+`;
+const ProfileContentBox = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  width: 1024px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  -moz-column-gap: 3rem;
+  column-gap: 3rem;
+  row-gap: 2rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 5rem;
+`;
+const ProfileContentInner = styled.div`
+  grid-column: span 8 / span 8;
+  grid-column-start: 3;
+`;
+const ProfileProfileBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+`;
+const ContentBox = styled.div`
+  font-size: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  width: 100%;
+`;
+const ContentTextBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+const ContentText = styled.p`
+  --tw-text-opacity: 1;
+  color: rgb(15 23 42 / var(--tw-text-opacity));
+  font-weight: 700;
+  font-size: 1.125rem;
+  border-width: 0;
+`;
+const ContentUpdateBtn = styled.button`
+  border-width: 0;
+`;
+const ContentUpdateSvg = styled.svg`
+  fill: #64748b;
+  stroke: #64748b;
+`;
+const SkillList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  row-gap: 0.75rem;
+  margin-top: 1.25rem;
+`;
+const SkillItem = styled.div`
+  border-radius: 9999px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--color-slate-200, #e2e8f0);
+  background-color: var(--color-slate-100, #f1f5f9);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  color: var(--color-slate-700, #334155);
+`;
+const SkillName = styled.h3`
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--color-slate-500, #64748b);
+`;
+const ContentList = styled.div`
+  margin-top: 1.25rem;
+`;
+const ContentItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding-bottom: 1.25rem;
+`;
+const ContentSvg = styled.svg`
+  flex: none;
+  fill: var(--color-slate-300, #cbd5e1);
+`;
+const ContentContent = styled.div`
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  font-size: 1rem;
+`;
+const ContentContentName = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--color-text-bold, #0f172a);
+  font-weight: 600;
+`;
+const ContentContentPeriod = styled.p`
+  color: var(--color-text-subtler, #64748b);
+  font-size: 0.875rem;
+  font-weight: 600;
+`;
+const ContentContentAnother = styled.p`
+  margin-top: 0.5rem;
+  white-space: pre-line;
+  font-size: 0.875rem;
+  color: var(--color-text-subtle, #334155);
+  font-weight: 500;
+`;
+const ContentContentLink = styled.div`
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  padding: 0.25rem;
+  color: var(--color-text-subtle, #334155);
+  text-decoration-line: underline;
+`;
+const ContentContentEditBtn = styled.div`
+  border-width: 0;
+`;
+const ContentContentEditSvg = styled.svg`
+  fill: #64748b;
+  stroke: #64748b;
+`;
+const ContentLinkSvg = styled.div`
+  fill: var(--color-slate-700, #334155);
+  flex: none;
+`;
 
 function Profile() {
   const isExistence = false;
   return (
-    <div className="profile-content-container">
-      <div className="profile-content-box">
-        <div className="profile-content-inner">
-          <div className="profile-profile-box">
+    <ProfileContentContainer>
+      <ProfileContentBox>
+        <ProfileContentInner>
+          <ProfileProfileBox>
             <div>
               <div>
                 <div>
                   <div className="profile-profile-inner">
-                    <div className="content-box" aria-label="스킬">
-                      <div className="content-text-box">
+                    <ContentBox>
+                      <ContentTextBox>
                         <div>
-                          <p className="content-text">스킬</p>
+                          <ContentText>스킬</ContentText>
                         </div>
-                        <button type="button" className="content-update-btn">
-                          <svg
+                        <ContentUpdateBtn type="button">
+                          <ContentUpdateSvg
                             width="20"
                             height="20"
                             strokeWidth="0"
                             viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg"
-                            className="content-update-svg"
                           >
                             <g>
                               <g id="style=outline">
@@ -65,40 +177,39 @@ function Profile() {
                                 ></path>
                               </g>
                             </g>
-                          </svg>
-                        </button>
-                      </div>
-                      <div className="skill-list">
-                        <div className="skill-item">
-                          <h3 className="skill-name">React</h3>
-                        </div>
-                        <div className="skill-item">
-                          <h3 className="skill-name">React Native</h3>
-                        </div>
-                        <div className="skill-item">
-                          <h3 className="skill-name">Github</h3>
-                        </div>
-                        <div className="skill-item">
-                          <h3 className="skill-name">typescript</h3>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="content-box">
-                      <div className="content-text-box">
+                          </ContentUpdateSvg>
+                        </ContentUpdateBtn>
+                      </ContentTextBox>
+                      <SkillList>
+                        <SkillItem>
+                          <SkillName>React</SkillName>
+                        </SkillItem>
+                        <SkillItem>
+                          <SkillName>React Native</SkillName>
+                        </SkillItem>
+                        <SkillItem>
+                          <SkillName>Github</SkillName>
+                        </SkillItem>
+                        <SkillItem>
+                          <SkillName>typescript</SkillName>
+                        </SkillItem>
+                      </SkillList>
+                    </ContentBox>
+                    <ContentBox>
+                      <ContentTextBox>
                         <div>
-                          <p className="content-text">
+                          <ContentText>
                             {isExistence ? "경력 ・ 2개월" : "경력"}
-                          </p>
+                          </ContentText>
                         </div>
                         {isExistence && (
-                          <button type="button" className="content-update-btn">
-                            <svg
+                          <ContentUpdateBtn type="button">
+                            <ContentUpdateSvg
                               width="24"
                               height="24"
                               strokeWidth="0"
                               viewBox="0 0 24 24"
                               xmlns="http://www.w3.org/2000/svg"
-                              className="content-update-svg"
                             >
                               <g>
                                 <g id="style=outline">
@@ -110,20 +221,19 @@ function Profile() {
                                   ></path>
                                 </g>
                               </g>
-                            </svg>
-                          </button>
+                            </ContentUpdateSvg>
+                          </ContentUpdateBtn>
                         )}
-                      </div>
+                      </ContentTextBox>
                       {isExistence ? (
-                        <div className="content-list">
-                          <div className="content-item">
-                            <svg
+                        <ContentList>
+                          <ContentItem>
+                            <ContentSvg
                               width="24"
                               height="24"
                               strokeWidth="0"
                               viewBox="0 0 24 24"
                               xmlns="http://www.w3.org/2000/svg"
-                              className="content-svg"
                             >
                               <g>
                                 <g id="style=outline">
@@ -135,49 +245,44 @@ function Profile() {
                                   ></path>
                                 </g>
                               </g>
-                            </svg>
-                            <div className="content-content">
-                              <div className="content-content-name">
+                            </ContentSvg>
+                            <ContentContent>
+                              <ContentContentName>
                                 테스트용 회사 - 프론트엔드 개발자
-                              </div>
-                              <p className="content-content-period">
+                              </ContentContentName>
+                              <ContentContentPeriod>
                                 2021.01 ~ 2021.02
-                              </p>
+                              </ContentContentPeriod>
                               <div>
-                                <p className="content-content-another">
+                                <ContentContentAnother>
                                   산업 분야: 여행
-                                </p>
+                                </ContentContentAnother>
                               </div>
                               <div>
-                                <p className="content-content-another">
+                                <ContentContentAnother>
                                   스킬: React, Github, typescript
-                                </p>
+                                </ContentContentAnother>
                               </div>
                               <div>
-                                <p className="content-content-another">
+                                <ContentContentAnother>
                                   테스트테스트테스트테스트테스트테스트테스트테스트테스트
-                                </p>
+                                </ContentContentAnother>
                               </div>
-                              <a
+                              <ContentContentLink
                                 href="https://github.com/team-npe"
                                 target="_blank"
                                 rel="noreferrer"
-                                className="content-content-link"
                               >
                                 링크 이동
-                              </a>
-                            </div>
-                            <button
-                              type="button"
-                              className="content-content-edit-btn"
-                            >
-                              <svg
+                              </ContentContentLink>
+                            </ContentContent>
+                            <ContentContentEditBtn type="button">
+                              <ContentContentEditSvg
                                 width="20"
                                 height="20"
                                 strokeWidth="0"
                                 viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="content-content-edit-svg"
                               >
                                 <g>
                                   <g id="style=outline">
@@ -189,31 +294,31 @@ function Profile() {
                                     ></path>
                                   </g>
                                 </g>
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
+                              </ContentContentEditSvg>
+                            </ContentContentEditBtn>
+                          </ContentItem>
+                        </ContentList>
                       ) : (
-                        nonExistent(
-                          " 지금 하고 있는 일, 혹은 이전에 한 일을 알려주세요.",
-                          "경력"
-                        )
+                        <NonExistent
+                          partText=" 지금 하고 있는 일, 혹은 이전에 한 일을 알려주세요."
+                          part="경력"
+                          url="/profiles/careers/create"
+                        />
                       )}
-                    </div>
-                    <div className="content-box" aria-label="교육">
-                      <div className="content-text-box">
+                    </ContentBox>
+                    <ContentBox aria-label="교육">
+                      <ContentTextBox>
                         <div>
-                          <p className="content-text">교육</p>
+                          <ContentText>교육</ContentText>
                         </div>
                         {isExistence && (
-                          <button type="button" className="content-update-btn">
-                            <svg
+                          <ContentUpdateBtn type="button">
+                            <ContentUpdateSvg
                               width="24"
                               height="24"
                               strokeWidth="0"
                               viewBox="0 0 24 24"
                               xmlns="http://www.w3.org/2000/svg"
-                              className="content-update-svg"
                             >
                               <g>
                                 <g id="style=outline">
@@ -225,20 +330,19 @@ function Profile() {
                                   ></path>
                                 </g>
                               </g>
-                            </svg>
-                          </button>
+                            </ContentUpdateSvg>
+                          </ContentUpdateBtn>
                         )}
-                      </div>
+                      </ContentTextBox>
                       {isExistence ? (
-                        <div className="content-list">
-                          <div className="content-item">
-                            <svg
+                        <ContentList>
+                          <ContentItem>
+                            <ContentSvg
                               width="24"
                               height="24"
                               strokeWidth="0"
                               viewBox="0 0 24 24"
                               xmlns="http://www.w3.org/2000/svg"
-                              className="content-svg"
                             >
                               <g>
                                 <g id="style=outline">
@@ -252,39 +356,34 @@ function Profile() {
                                   </g>
                                 </g>
                               </g>
-                            </svg>
-                            <div className="content-content">
+                            </ContentSvg>
+                            <ContentContent>
                               <p className="content-content-name">
                                 코리아 IT 아카데미 강남점 - 웹 개발
                               </p>
-                              <p className="content-content-period">
+                              <ContentContentPeriod>
                                 2023.12 ~ 2024.05
-                              </p>
+                              </ContentContentPeriod>
                               <div>
-                                <p className="content-content-another">
+                                <ContentContentAnother>
                                   프로젝트 제작
-                                </p>
+                                </ContentContentAnother>
                               </div>
-                              <a
+                              <ContentContentLink
                                 href="https://github.com/team-npe"
                                 target="_blank"
                                 rel="noreferrer"
-                                className="content-content-link"
                               >
                                 링크 이동
-                              </a>
-                            </div>
-                            <button
-                              type="button"
-                              className="ontent-content-edit-btn"
-                            >
-                              <svg
+                              </ContentContentLink>
+                            </ContentContent>
+                            <ContentContentEditBtn type="button">
+                              <ContentContentEditSvg
                                 width="20"
                                 height="20"
                                 strokeWidth="0"
                                 viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="content-content-edit-svg "
                               >
                                 <g>
                                   <g id="style=outline">
@@ -296,32 +395,31 @@ function Profile() {
                                     ></path>
                                   </g>
                                 </g>
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
+                              </ContentContentEditSvg>
+                            </ContentContentEditBtn>
+                          </ContentItem>
+                        </ContentList>
                       ) : (
-                        nonExistent(
-                          `현재 혹은 이전에 다녔던 학교, 부트캠프 등<br /> 교육
-                      기관을 입력해 주세요.`,
-                          "교육"
-                        )
+                        <NonExistent
+                          partText="현재 혹은 이전에 다녔던 학교, 부트캠프 등 교육
+                      기관을 입력해 주세요."
+                          part="경력"
+                        />
                       )}
-                    </div>
-                    <div className="content-box" aria-label="링크">
-                      <div className="content-text-box">
+                    </ContentBox>
+                    <ContentBox aria-label="링크">
+                      <ContentTextBox>
                         <div>
-                          <p className="content-text">링크</p>
+                          <ContentText>링크</ContentText>
                         </div>
                         {isExistence && (
-                          <button type="button" className="content-update-btn">
-                            <svg
+                          <ContentUpdateBtn type="button">
+                            <ContentUpdateSvg
                               width="24"
                               height="24"
                               strokeWidth="0"
                               viewBox="0 0 24 24"
                               xmlns="http://www.w3.org/2000/svg"
-                              className="content-update-svg"
                             >
                               <g>
                                 <g id="style=outline">
@@ -333,21 +431,20 @@ function Profile() {
                                   ></path>
                                 </g>
                               </g>
-                            </svg>
-                          </button>
+                            </ContentUpdateSvg>
+                          </ContentUpdateBtn>
                         )}
-                      </div>
+                      </ContentTextBox>
                       {isExistence ? (
-                        <div className="content-list">
-                          <div className="content-item">
-                            <svg
+                        <ContentList>
+                          <ContentItem>
+                            <ContentLinkSvg
                               width="24"
                               height="24"
                               strokeWidth="0"
                               viewBox="0 0 24 24"
                               fill="current"
                               xmlns="http://www.w3.org/2000/svg"
-                              className="content-link-svg"
                             >
                               <path
                                 fillRule="evenodd"
@@ -355,8 +452,8 @@ function Profile() {
                                 d="M11.9989 5.72205e-06C5.37328 5.72205e-06 0 5.37257 0 12.0004C0 17.3015 3.43804 21.7996 8.20651 23.3871C8.8069 23.4969 9.02569 23.1263 9.02569 22.8081C9.02569 22.523 9.01538 21.7686 9.00949 20.7675C5.67163 21.4924 4.96738 19.1586 4.96738 19.1586C4.4215 17.7722 3.63474 17.4031 3.63474 17.4031C2.5452 16.6591 3.71725 16.6738 3.71725 16.6738C4.9217 16.7586 5.55524 17.9107 5.55524 17.9107C6.62562 19.7443 8.36417 19.2146 9.0478 18.9074C9.15682 18.1324 9.46696 17.6035 9.80951 17.3037C7.14497 17.0002 4.34342 15.9711 4.34342 11.3728C4.34342 10.0622 4.8112 8.99184 5.57882 8.15277C5.45505 7.84926 5.04325 6.62931 5.69668 4.97696C5.69668 4.97696 6.7037 4.65429 8.99622 6.20646C9.95316 5.94052 10.9801 5.80792 12.0004 5.80276C13.0199 5.80792 14.0461 5.94052 15.0045 6.20646C17.2956 4.65429 18.3011 4.97696 18.3011 4.97696C18.956 6.62931 18.5442 7.84926 18.4212 8.15277C19.1903 8.99184 19.6544 10.0622 19.6544 11.3728C19.6544 15.9828 16.8484 16.9972 14.1758 17.2941C14.606 17.6647 14.9898 18.3969 14.9898 19.5166C14.9898 21.1204 14.975 22.4147 14.975 22.8081C14.975 23.1293 15.1916 23.5028 15.8001 23.3856C20.5649 21.7952 24 17.3007 24 12.0004C24 5.37257 18.6267 5.72205e-06 11.9989 5.72205e-06Z"
                                 fill="inherit"
                               ></path>
-                            </svg>
-                            <div className="content-content">
+                            </ContentLinkSvg>
+                            <ContentContent>
                               <a
                                 href="https://github.com/baek-si-hyun"
                                 target="_blank"
@@ -365,18 +462,14 @@ function Profile() {
                               >
                                 깃헙
                               </a>
-                            </div>
-                            <button
-                              type="button"
-                              className="content-content-edit-btn"
-                            >
-                              <svg
+                            </ContentContent>
+                            <ContentContentEditBtn type="button">
+                              <ContentContentEditSvg
                                 width="20"
                                 height="20"
                                 strokeWidth="0"
                                 viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="content-content-edit-svg"
                               >
                                 <g>
                                   <g id="style=outline">
@@ -388,25 +481,25 @@ function Profile() {
                                     ></path>
                                   </g>
                                 </g>
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
+                              </ContentContentEditSvg>
+                            </ContentContentEditBtn>
+                          </ContentItem>
+                        </ContentList>
                       ) : (
-                        nonExistent(
-                          `블로그, SNS등 다양한 링크로 나를 표현해보세요.`,
-                          "링크"
-                        )
+                        <NonExistent
+                          partText="블로그, SNS등 다양한 링크로 나를 표현해보세요."
+                          part="링크"
+                        />
                       )}
-                    </div>
+                    </ContentBox>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          </ProfileProfileBox>
+        </ProfileContentInner>
+      </ProfileContentBox>
+    </ProfileContentContainer>
   );
 }
 export default Profile;

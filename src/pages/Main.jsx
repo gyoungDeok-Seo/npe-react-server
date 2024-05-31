@@ -4,7 +4,13 @@ import Header from "../components/header/Header";
 import Search from "../components/header/Search";
 import Introduction from "../container/main/Introduction";
 import Landing from "../container/main/Landing";
-import "./main.css";
+import styled from "styled-components";
+
+const Container = styled.div`
+  flex-direction: column;
+  min-width: 1024px;
+`;
+
 function Main() {
   const [search, setSearch] = useState(false);
   return (
@@ -22,11 +28,11 @@ function Main() {
       ></div>
       <div>
         <Header setSearch={setSearch} />
-        {search && <Search setSearch={setSearch}/>}
-        <div className="main-container">
+        {search && <Search setSearch={setSearch} />}
+        <Container>
           <Landing />
           <Introduction />
-        </div>
+        </Container>
         <Footer />
       </div>
     </div>
