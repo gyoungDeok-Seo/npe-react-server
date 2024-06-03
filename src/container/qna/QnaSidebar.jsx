@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import SearchBox from "../../components/qna/SearchBox";
-import CategorySelectBox from "../../components/qna/CategorySelectBox";
-import TapBox from "../../components/qna/TapBox";
+import SearchBox from "../../components/Qna/SearchBox";
+import CategorySelectBox from "../../components/Qna/CategorySelectBox";
+import TapBox from "../../components/Qna/TapBox";
 
 function QnaSidebar() {
     return (

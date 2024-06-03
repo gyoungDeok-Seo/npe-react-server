@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import Header from "../components/header/Header";
+import Header from "../components/Header/Header";
 import styled from "styled-components";
-import NameInput from "../components/profileUpdate/NameInput";
-import ProfileFileInput from "../components/profileUpdate/ProfileFileInput";
-import RefInput from "../components/profileUpdate/RefInput";
-import DescriptionTextarea from "../components/profileUpdate/DescriptionTextarea";
-import AvoidMistakesModal from "../components/profiles/modal/AvoidMistakesModal";
+import NameInput from "../components/ProfileUpdate/NameInput";
+import ProfileFileInput from "../components/ProfileUpdate/ProfileFileInput";
+import RefInput from "../components/ProfileUpdate/RefInput";
+import DescriptionTextarea from "../components/ProfileUpdate/DescriptionTextarea";
+import AvoidMistakesModal from "../components/Profiles/Modal/AvoidMistakesModal";
 import { useNavigate } from "react-router-dom";
 
 const ProfileUpdateBox = styled.div`

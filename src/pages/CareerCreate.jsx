@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import Header from "../components/header/Header";
+import Header from "../components/Header/Header";
 import styled from "styled-components";
-import IndustryModal from "../components/careerCreate/IndustryModal";
-import CareerSkillModal from "../components/careerCreate/CareerSkillModal";
-import AvoidMistakesModal from "../components/profiles/modal/AvoidMistakesModal";
+import IndustryModal from "../components/CareerCreate/IndustryModal";
+import CareerSkillModal from "../components/CareerCreate/CareerSkillModal";
+import AvoidMistakesModal from "../components/Profiles/Modal/AvoidMistakesModal";
 import { useNavigate } from "react-router-dom";
-import CompanyInput from "../components/careerCreate/CompanyInput";
-import TitleInput from "../components/careerCreate/TitleInput";
-import PeriodSelectBox from "../components/careerCreate/CareerPeriod";
-import IndustrySelect from "../components/careerCreate/IndustrySelect";
-import SkillSelect from "../components/careerCreate/SkillSelect";
-import DescriptionTextarea from "../components/careerCreate/DescriptionTextarea";
-import LinkInput from "../components/careerCreate/LinkInput";
+import CompanyInput from "../components/CareerCreate/CompanyInput";
+import TitleInput from "../components/CareerCreate/TitleInput";
+import PeriodSelectBox from "../components/CareerCreate/CareerPeriod";
+import IndustrySelect from "../components/CareerCreate/IndustrySelect";
+import SkillSelect from "../components/CareerCreate/SkillSelect";
+import DescriptionTextarea from "../components/CareerCreate/DescriptionTextarea";
+import LinkInput from "../components/CareerCreate/LinkInput";
 
 export const CareerCreateBox = styled.div`
   padding-left: 1rem;
