@@ -75,7 +75,7 @@ const KakaoJoinBtn = styled(Link)`
   align-items: center;
   gap: 0.25rem;
 `;
-const KakaoImg = styled.div`
+const KakaoImg = styled.img`
   width: 1.25rem;
   height: 1.25rem;
 `;
@@ -145,9 +145,7 @@ function Landing() {
         </span>
         <CommentBox>
           <CommentInner>
-            <TopComment>
-              개발 트렌드부터 Q&amp;A, 네트워킹까지
-            </TopComment>
+            <TopComment>개발 트렌드부터 Q&amp;A, 네트워킹까지</TopComment>
             <BottomComment>
               요즘 개발자들의 <br />
               필수 커뮤니티, 커리어리
@@ -160,9 +158,7 @@ function Landing() {
                 />
                 <span>카카오로 3초만에 가입하기</span>
               </KakaoJoinBtn>
-              <EmailJoinBtn to="/" >
-                이메일로 가입하기
-              </EmailJoinBtn>
+              <EmailJoinBtn to="/">이메일로 가입하기</EmailJoinBtn>
             </JoinBtnsBox>
           </CommentInner>
         </CommentBox>

@@ -25,7 +25,7 @@ const ProfileUpdateTextarea = styled.textarea`
   color: #0f172a;
 `;
 
-function DescriptionTextarea() {
+function DescriptionTextarea({ setAvoidMistakesModal, setIsExit }) {
   const [shortDescription, setShortDescription] = useState("");
   const [shortDescriptionLength, setShortDescriptionLength] = useState(0);
 

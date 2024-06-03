@@ -80,7 +80,7 @@ export const CreateEducationsInput = styled.input`
     color: #9da7b1;
   }
 `;
-function EducationsCreate({ setAvoidMistakesModal, setIsExit }) {
+function EducationsCreate() {
   const navigate = useNavigate(null);
   const [avoidMistakesModal, setAvoidMistakesModal] = useState(false);
   const [isExit, setIsExit] = useState(false);

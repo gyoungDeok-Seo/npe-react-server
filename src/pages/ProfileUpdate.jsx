@@ -71,7 +71,7 @@ export const ProfileUpdateInput = styled.input`
   padding: 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
-  color: var(--color-text-bold, #0f172a);
+  color: #0f172a;
 `;
 
 function ProfileUpdate() {
@@ -100,7 +100,7 @@ function ProfileUpdate() {
           className="global-toaster"
         ></div>
         <div>
-          <Header />
+          <Header setAvoidMistakesModal={setAvoidMistakesModal} />
           <div style={{ height: "3.5rem" }}></div>
           <ProfileUpdateBox>
             <ProfileUpdateInner>
