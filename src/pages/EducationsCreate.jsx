@@ -3,11 +3,11 @@ import Header from "../components/header/Header";
 import styled from "styled-components";
 import AvoidMistakesModal from "../components/profiles/modal/AvoidMistakesModal";
 import { useNavigate } from "react-router-dom";
-import InstitutionInput from "../components/educationsCreate/InstitutionInput";
-import CourseInput from "../components/educationsCreate/CourseInput";
-import EducationsPeriod from "../components/educationsCreate/EducationsPeriod";
-import LinkInput from "../components/educationsCreate/LinkInput";
-import DescriptionTextarea from "../components/educationsCreate/DescriptionTextarea";
+import InstitutionInput from "../components/educations_create/InstitutionInput";
+import CourseInput from "../components/educations_create/CourseInput";
+import EducationsPeriod from "../components/educations_create/EducationsPeriod";
+import LinkInput from "../components/educations_create/LinkInput";
+import DescriptionTextarea from "../components/educations_create/DescriptionTextarea";
 
 const CreateEducationsBox = styled.div`
   padding-left: 1rem;

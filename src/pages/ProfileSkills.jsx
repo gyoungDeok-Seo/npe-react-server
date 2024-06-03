@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/header/Header";
 import AvoidMistakesModal from "../components/profiles/modal/AvoidMistakesModal";
-import SkillSearchInput from "../components/profileSkills/SkillSearchInput";
-import SkillList from "../components/profileSkills/SkillList";
-import SelectSkillItem from "../components/profileSkills/SelectSkillItem";
+import SkillSearchInput from "../components/profile_skills/SkillSearchInput";
+import SkillList from "../components/profile_skills/SkillList";
+import SelectSkillItem from "../components/profile_skills/SelectSkillItem";
 
 const CareerSkillModalBox = styled.div`
   padding-left: 1rem;
