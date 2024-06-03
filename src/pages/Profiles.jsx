@@ -1,7 +1,13 @@
+import styled from "styled-components";
 import Header from "../components/header/Header";
 import Intro from "../container/profiles/Intro";
 import Profile from "../container/profiles/Profile";
-import "./profiles.css";
+
+const MyprofileContainer = styled.div`
+  position: relative;
+  background-color: var(--color-white, #fff);
+  min-height: 100vh;
+`;
 
 function Profiles() {
   return (
@@ -19,12 +25,11 @@ function Profiles() {
         className="global-toaster"
       ></div>
       <div>
-        <div className="myprofile-container">
+        <MyprofileContainer>
           <Header />
           <Intro />
-
           <Profile />
-        </div>
+        </MyprofileContainer>
       </div>
     </div>
   );

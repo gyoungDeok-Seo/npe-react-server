@@ -1,25 +1,101 @@
-import "./introduction.css";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+const SectionItem = styled.section`
+  background-color: #f8fafc;
+  width: 100%;
+`;
+const SectionBox = styled.div`
+  color: #0f172a;
+  min-width: 1024px;
+  width: 100%;
+  height: 100%;
+`;
+const WhiteSection = styled(SectionItem)`
+  background-color: #fff;
+`;
+const SectionInner = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 1280px;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+`;
+const WidthBox = styled.div`
+  width: 8rem;
+`;
+const SectionLeftBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  flex: 1 1 0%;
+  height: 100%;
+`;
+const SectionTitle = styled.div`
+  flex-wrap: nowrap;
+  white-space: pre-line;
+  line-height: 48px;
+  font-weight: 700;
+  font-size: 2.25rem;
+`;
+const LinkBtnBox = styled.div`
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+`;
+const LinkBtn = styled(Link)`
+  --tw-text-opacity: 1;
+  color: rgb(51 65 85 / var(--tw-text-opacity));
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+  border-radius: 0.3rem;
+`;
+const SectionContent = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 297px;
+  height: 333px;
+`;
+const SectionRightBox = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex: 1 1 0%;
+  max-height: 576px;
+  height: 100%;
+`;
 
 function Introduction() {
   return (
     <div>
-      <section className="section-item" style={{ height: "832px" }}>
-        <div className="section-box ">
-          <div className="section-inner">
-            <div className="width-box"></div>
-            <div className="section-left-box">
-              <div className="section-title">
+      <SectionItem style={{ height: "832px" }}>
+        <SectionBox>
+          <SectionInner>
+            <WidthBox />
+            <SectionLeftBox>
+              <SectionTitle>
                 각 분야 TOP 개발자들의
                 <br />
                 실무 개발 이야기
-              </div>
-              <div className="link-btn-box">
-                <button type="button" className="link-btn">
-                  개발자 프로필 보러가기
-                </button>
-              </div>
-            </div>
-            <div className="section-right-box">
+              </SectionTitle>
+              <LinkBtnBox>
+                <LinkBtn to="/">개발자 프로필 보러가기</LinkBtn>
+              </LinkBtnBox>
+            </SectionLeftBox>
+            <SectionRightBox>
               <span
                 style={{
                   boxSizing: "border-box",
@@ -66,27 +142,25 @@ function Introduction() {
                   }}
                 />
               </span>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="section-item" style={{ height: "832px" }}>
-        <div className="section-box white-section">
-          <div className="section-inner">
-            <div className="width-box"></div>
-            <div className="section-left-box">
-              <div className="section-title">
+            </SectionRightBox>
+          </SectionInner>
+        </SectionBox>
+      </SectionItem>
+      <WhiteSection style={{ height: "832px" }}>
+        <SectionBox>
+          <SectionInner>
+            <WidthBox />
+            <SectionLeftBox>
+              <SectionTitle>
                 프로그래밍부터 커리어까지,
                 <br />
                 한국판 스택오버플로우.
-              </div>
-              <div className="link-btn-box">
-                <button type="button" className="link-btn">
-                  개발자 Q&A 보러가기
-                </button>
-              </div>
-            </div>
-            <div className="section-right-box">
+              </SectionTitle>
+              <LinkBtnBox>
+                <LinkBtn to="/">개발자 Q&A 보러가기</LinkBtn>
+              </LinkBtnBox>
+            </SectionLeftBox>
+            <SectionRightBox>
               <span
                 style={{
                   boxSizing: "border-box",
@@ -133,10 +207,10 @@ function Introduction() {
                   }}
                 />
               </span>
-            </div>
-          </div>
-        </div>
-      </section>
+            </SectionRightBox>
+          </SectionInner>
+        </SectionBox>
+      </WhiteSection>
     </div>
   );
 }

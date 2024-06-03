@@ -12,7 +12,6 @@ const Container = styled.div`
 `;
 
 function Main() {
-  const [search, setSearch] = useState(false);
   return (
     <div>
       <div
@@ -27,8 +26,7 @@ function Main() {
         }}
       ></div>
       <div>
-        <Header setSearch={setSearch} />
-        {search && <Search setSearch={setSearch} />}
+        <Header/>
         <Container>
           <Landing />
           <Introduction />

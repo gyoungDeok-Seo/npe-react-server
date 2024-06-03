@@ -1,11 +1,20 @@
 import styled from "styled-components";
 import NonExistent from "../../components/profiles/intro/NonExistent";
+import { Link } from "react-router-dom";
 
 const ProfileContentContainer = styled.div`
   border-color: var(--color-slate-200, #e2e8f0);
   border-width: 0;
   border-style: solid;
   border-top-width: 1px;
+`;
+
+const ProfileContentContainerInner = styled.div`
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
 `;
 const ProfileContentBox = styled.div`
   margin-left: auto;
@@ -49,7 +58,7 @@ const ContentText = styled.p`
   font-size: 1.125rem;
   border-width: 0;
 `;
-const ContentUpdateBtn = styled.button`
+const ContentUpdateBtn = styled(Link)`
   border-width: 0;
 `;
 const ContentUpdateSvg = styled.svg`
@@ -153,13 +162,13 @@ function Profile() {
             <div>
               <div>
                 <div>
-                  <div className="profile-profile-inner">
+                  <ProfileContentContainerInner>
                     <ContentBox>
                       <ContentTextBox>
                         <div>
                           <ContentText>스킬</ContentText>
                         </div>
-                        <ContentUpdateBtn type="button">
+                        <ContentUpdateBtn to="/profiles/skills">
                           <ContentUpdateSvg
                             width="20"
                             height="20"
@@ -403,7 +412,8 @@ function Profile() {
                         <NonExistent
                           partText="현재 혹은 이전에 다녔던 학교, 부트캠프 등 교육
                       기관을 입력해 주세요."
-                          part="경력"
+                          part="교육"
+                          url="/profiles/educations/create"
                         />
                       )}
                     </ContentBox>
@@ -489,10 +499,11 @@ function Profile() {
                         <NonExistent
                           partText="블로그, SNS등 다양한 링크로 나를 표현해보세요."
                           part="링크"
+                          url="/profiles/sites/create"
                         />
                       )}
                     </ContentBox>
-                  </div>
+                  </ProfileContentContainerInner>
                 </div>
               </div>
             </div>
