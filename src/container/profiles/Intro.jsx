@@ -138,7 +138,7 @@ const ProfileTabItem = styled.li`
   flex: 1 1 0%;
 `;
 const ProfileTabBtn = styled.button`
-  color: var(--color-text-subtler, #64748b);
+  color: ${(props) => (props.isprofile ? "#0f172a" : "#64748b")};
   font-weight: 700;
   font-size: 0.875rem;
   padding-top: 1rem;
@@ -155,17 +155,11 @@ const ProfileTabUnderBar = styled.div`
   height: 0.125rem;
   width: 100%;
   background-color: var(--color-slate-900, #0f172a);
-  opacity: 0;
-`;
-
-const ProfileSelectTab = styled.div`
-  color: var(--color-text-bold, #0f172a);
-`;
-const ProfileSelectUnderBar = styled.div`
-  opacity: 1;
+  opacity: ${(props) => (props.isprofile ? 1 : 0)};
 `;
 
 function Intro() {
+  const isProfile = true;
   return (
     <>
       <ProfileTopBox>
@@ -225,19 +219,15 @@ function Intro() {
         <ProfileTabInner>
           <ProfileTabList>
             <ProfileTabItem>
-              <ProfileTabBtn>프로필</ProfileTabBtn>
+              <ProfileTabBtn isprofile={isProfile}>프로필</ProfileTabBtn>
+              <ProfileTabUnderBar isprofile={isProfile}></ProfileTabUnderBar>
+            </ProfileTabItem>
+            <ProfileTabItem>
+              <ProfileTabBtn>게시물 22</ProfileTabBtn>
               <ProfileTabUnderBar></ProfileTabUnderBar>
             </ProfileTabItem>
             <ProfileTabItem>
-              <ProfileTabBtn>
-                게시물 22
-              </ProfileTabBtn>
-              <ProfileTabUnderBar></ProfileTabUnderBar>
-            </ProfileTabItem>
-            <ProfileTabItem>
-              <ProfileTabBtn>
-                Q&amp;A 활동 9
-              </ProfileTabBtn>
+              <ProfileTabBtn>Q&amp;A 활동 9</ProfileTabBtn>
               <ProfileTabUnderBar></ProfileTabUnderBar>
             </ProfileTabItem>
           </ProfileTabList>

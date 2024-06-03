@@ -1,4 +1,105 @@
-import "./search.css";
+import styled from "styled-components";
+
+const ButtonDiv = styled.button`
+  background-color: rgba(0, 0, 0, 0.4);
+  min-width: 1024px;
+  width: 100%;
+  height: 100vh;
+  z-index: 1040;
+  position: fixed;
+`;
+const SearchBarBox = styled.div`
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color),
+    0 2px 4px -2px var(--tw-shadow-color);
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  min-width: 1024px;
+  width: 100%;
+  z-index: 1050;
+  position: fixed;
+`;
+const SearchBarInner = styled.div`
+  padding: 1rem;
+  align-items: center;
+  max-width: 1280px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  @media (min-width: 768px) {
+    & {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+`;
+const SearchBarSvg = styled.svg`
+  stroke-width: 0.5;
+  stroke: #fff;
+  fill: #94a3b8;
+  flex: none;
+  @media (min-width: 768px) {
+    & {
+      width: 2rem;
+    }
+  }
+  @media (min-width: 768px) {
+    & {
+      height: 2rem;
+    }
+  }
+`;
+const SearchInput = styled.input`
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  border-color: #94a3b8;
+  border-width: 1px;
+  border-radius: 0;
+  padding: 0.5rem 0.75rem;
+  padding: 0.875rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  --tw-shadow: 0 0 #0000;
+  color: var(--color-text-bold, #0f172a);
+  font-size: 1.25rem;
+  padding-right: 0;
+  border-width: 0;
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    --tw-ring-inset: var(--tw-empty, /*!*/ /*!*/);
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: #fff;
+    --tw-ring-color: #2563eb;
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
+      var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+      calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+      var(--tw-shadow);
+    border-color: #2563eb;
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
+      var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+      calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+      var(--tw-shadow, 0 0 #0000);
+  }
+  &::placeholder {
+    color: #94a3b8;
+  }
+  @media (min-width: 768px) {
+    & {
+      font-size: 1.5rem;
+    }
+  }
+`;
 
 function Search({ setSearch }) {
   const searchOpenHandler = () => {
@@ -6,21 +107,19 @@ function Search({ setSearch }) {
   };
   return (
     <>
-      <div
+      <ButtonDiv
         role="button"
         aria-hidden="true"
-        className="button-div"
         onClick={searchOpenHandler}
-      ></div>
-      <div className="search-bar-box">
-        <div className="search-bar-inner">
-          <svg
+      ></ButtonDiv>
+      <SearchBarBox>
+        <SearchBarInner>
+          <SearchBarSvg
             width="24"
             height="24"
             strokeWidth="0"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-            className="search-bar-svg"
           >
             <g>
               <g id="style=outline">
@@ -32,15 +131,14 @@ function Search({ setSearch }) {
                 ></path>
               </g>
             </g>
-          </svg>
-          <input
-            className="search-input"
+          </SearchBarSvg>
+          <SearchInput
             placeholder="회사, 사람, 키워드로 검색"
             enterKeyHint="search"
             value=""
           />
-        </div>
-      </div>
+        </SearchBarInner>
+      </SearchBarBox>
     </>
   );
 }
