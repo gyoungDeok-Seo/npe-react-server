@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import NonExistent from "../../components/Profiles/intro/NonExistent";
+import NonExistent from "../../components/Profiles/Intro/NonExistent";
 import { Link } from "react-router-dom";
 
 const ProfileContentContainer = styled.div`

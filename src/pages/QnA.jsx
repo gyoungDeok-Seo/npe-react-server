@@ -1,9 +1,9 @@
 import "./qna.css";
-import QnaMainContents from "../../container/Qna/QnaMainContents";
-import QnaSidebar from "../../container/Qna/QnaSidebar";
+import QnaMainContents from "../container/Qna/QnaMainContents";
+import QnaSidebar from "../container/Qna/QnaSidebar";
 import { styled } from "styled-components";
 import { useState } from "react";
-import Header from "../../components/Header/Header";
+import Header from "../components/Header/Header";
 
 const QnaWrapper = styled.div`
   --elevation-shadow-small: 0px 2px 4px 0px rgba(100, 116, 139, 0.1);

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Header from "../components/header/Header";
-import Intro from "../container/profiles/Intro";
-import Profile from "../container/profiles/Profile";
+import Header from "../components/Header/Header";
+import Intro from "../container/Profiles/Intro";
+import Profile from "../container/Profiles/Profile";
 
 const MyprofileContainer = styled.div`
   position: relative;

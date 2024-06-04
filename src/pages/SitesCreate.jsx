@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Header from "../components/header/Header";
+import Header from "../components/Header/Header";
 import styled from "styled-components";
-import AvoidMistakesModal from "../components/profiles/modal/AvoidMistakesModal";
+import AvoidMistakesModal from "../components/Profiles/Modal/AvoidMistakesModal";
 import { useNavigate } from "react-router-dom";
 
 const SitesCreateaBox = styled.div`

@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Main from "./pages/Main";
 import HomePage from "./pages/Home";
-import QnA from "./pages/qna/QnA";
+import QnA from "./pages/QnA";
 import Profiles from "./pages/Profiles";
 import ProfileUpdate from "./pages/ProfileUpdate";
 import CareerCreate from "./pages/CareerCreate";
