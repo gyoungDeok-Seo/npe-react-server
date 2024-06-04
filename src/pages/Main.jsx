@@ -1,9 +1,7 @@
-import { useState } from "react";
-import Footer from "../components/footer/Footer";
-import Header from "../components/header/Header";
-import Search from "../components/header/Search";
-import Introduction from "../container/main/Introduction";
-import Landing from "../container/main/Landing";
+import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
+import Introduction from "../container/Main/Introduction";
+import Landing from "../container/Main/Landing";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -26,7 +24,7 @@ function Main() {
         }}
       ></div>
       <div>
-        <Header/>
+        <Header />
         <Container>
           <Landing />
           <Introduction />

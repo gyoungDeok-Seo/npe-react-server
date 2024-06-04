@@ -1,8 +1,8 @@
-import SlideButtonBox from "../../components/qna/SlideButtonBox";
-import TodayTopTenSlideBox from "../../components/qna/TodayTopTenSlideBox";
-import BestAnswerSlideBox from "../../components/qna/BestAnswerSlideBox";
-import InterestTopicItem from "../../components/qna/InterestTopicItem";
-import QnaMainItem from "../../components/qna/QnaMainItem";
+import SlideButtonBox from "../../components/Qna/SlideButtonBox";
+import TodayTopTenSlideBox from "../../components/Qna/TodayTopTenSlideBox";
+import BestAnswerSlideBox from "../../components/Qna/BestAnswerSlideBox";
+import InterestTopicItem from "../../components/Qna/InterestTopicItem";
+import QnaMainItem from "../../components/Qna/QnaMainItem";
 import { styled } from "styled-components";
 
 const topics = ["react", "java", "프론트엔드", "백엔드", "취업", "spring", "javascript", "비전공자", "신입", "이직", "python", "next.js", "인공지능", "포트폴리오", "부트캠프", "node.js", "react-native", "ios", "flutter", "연봉"];

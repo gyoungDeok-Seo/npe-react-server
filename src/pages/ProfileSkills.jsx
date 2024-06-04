@@ -5,7 +5,7 @@ import Header from "../components/Header/Header";
 import AvoidMistakesModal from "../components/Profiles/Modal/AvoidMistakesModal";
 import SkillList from "../components/ProfileSkills/SkillList";
 import SelectSkillItem from "../components/ProfileSkills/SelectSkillItem";
-import SkillSearchInput from "../components/profileSkills/SkillSearchInput";
+import SkillSearchInput from "../components/ProfileSkills/SkillSearchInput";
 
 const CareerSkillModalBox = styled.div`
   padding-left: 1rem;
@@ -59,6 +59,7 @@ const CareerSkillModalCraeteItemBox = styled.div`
   flex-wrap: wrap;
   gap: 0.5rem;
 `;
+
 
 function ProfileSkills() {
   const navigate = useNavigate(null);

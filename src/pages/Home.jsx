@@ -1,4 +1,4 @@
-import Header from "../components/header/Header";
+import Header from "../components/Header/Header";
 import "./home.css";
 
 function HomePage() {
@@ -79,7 +79,7 @@ function HomePage() {
                                                         <p className="like-count">좋아요 <b>1</b></p>
                                                     </button>
                                                 </div>
-                                                <a href=""></a>
+                                                <a href="#"></a>
                                             </div>
                                             <div></div>
                                         </div>
