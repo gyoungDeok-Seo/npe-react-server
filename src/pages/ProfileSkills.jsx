@@ -60,7 +60,6 @@ const CareerSkillModalCraeteItemBox = styled.div`
   gap: 0.5rem;
 `;
 
-
 function ProfileSkills() {
   const navigate = useNavigate(null);
   const [avoidMistakesModal, setAvoidMistakesModal] = useState(false);
@@ -138,7 +137,7 @@ function ProfileSkills() {
                 </CareerSkillModalCraeteItemBox>
               )}
               <CareerSkillModalContent>
-                <SkillSearchInput />
+                <SkillSearchInput setSelectedSkills={setSelectedSkills} />
                 <CareerSkillModalRelativeBox></CareerSkillModalRelativeBox>
                 <div>
                   <CareerSkillModalSubTitle>인기 스킬</CareerSkillModalSubTitle>

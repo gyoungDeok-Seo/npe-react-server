@@ -158,7 +158,7 @@ const ProfileTabUnderBar = styled.div`
   opacity: ${(props) => (props.isprofile ? 1 : 0)};
 `;
 
-function Intro() {
+function Intro({ setTab }) {
   const isProfile = true;
   return (
     <>
@@ -219,15 +219,19 @@ function Intro() {
         <ProfileTabInner>
           <ProfileTabList>
             <ProfileTabItem>
-              <ProfileTabBtn isprofile={isProfile}>프로필</ProfileTabBtn>
+              <ProfileTabBtn isprofile={isProfile} onClick={() => setTab(1)}>
+                프로필
+              </ProfileTabBtn>
               <ProfileTabUnderBar isprofile={isProfile}></ProfileTabUnderBar>
             </ProfileTabItem>
             <ProfileTabItem>
-              <ProfileTabBtn>게시물 22</ProfileTabBtn>
+              <ProfileTabBtn onClick={() => setTab(2)}>게시물 22</ProfileTabBtn>
               <ProfileTabUnderBar></ProfileTabUnderBar>
             </ProfileTabItem>
             <ProfileTabItem>
-              <ProfileTabBtn>Q&amp;A 활동 9</ProfileTabBtn>
+              <ProfileTabBtn onClick={() => setTab(3)}>
+                Q&amp;A 활동 9
+              </ProfileTabBtn>
               <ProfileTabUnderBar></ProfileTabUnderBar>
             </ProfileTabItem>
           </ProfileTabList>

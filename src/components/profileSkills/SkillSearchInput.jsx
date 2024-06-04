@@ -75,7 +75,7 @@ const SkillItem = styled.li`
   }
 `;
 
-function SkillSearchInput() {
+function SkillSearchInput({ setSelectedSkills }) {
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
@@ -87,11 +87,10 @@ function SkillSearchInput() {
     setIsFocused(false);
   };
 
-  const handleChange = (e) => {};
-
   const handleClear = () => {
     setInputValue("");
     setIsFocused(false);
+    setShowBox(false);
   };
 
   const skillList = [
@@ -146,10 +145,16 @@ function SkillSearchInput() {
     setInputValue(e.target.value);
     const searchWord = e.target.value.trim().toLowerCase();
     const searching = searchWord
-      ? skillList.filter((item) => item.id.toLowerCase().includes(searchWord))
+      ? skillList.filter((item) => item.id.toLowerCase().startsWith(searchWord))
       : [];
     setSearch(searching);
     setShowBox(searching.length > 0);
+  };
+
+  const handelSearch = (e) => {
+    setSelectedSkills((prev) => [...prev, e.target.innerText]);
+    setShowBox(false);
+    setInputValue("");
   };
 
   return (
@@ -218,7 +223,7 @@ function SkillSearchInput() {
         {showBox && (
           <SkillList>
             {search.map((item) => (
-              <SkillItem>{item.id}</SkillItem>
+              <SkillItem onClick={handelSearch}>{item.id}</SkillItem>
             ))}
           </SkillList>
         )}
