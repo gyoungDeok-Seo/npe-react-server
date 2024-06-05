@@ -7,8 +7,7 @@ const NonExistentContent = styled.div`
 const NonExistentText = styled.p`
   margin-bottom: 1.25rem;
   white-space: pre-line;
-  --tw-text-opacity: 1;
-  color: rgb(71 85 105 / var(--tw-text-opacity));
+  color: rgb(71 85 105 / 1);
 `;
 const NonExistentAddBtn = styled(Link)`
   display: inline-flex;
@@ -18,14 +17,17 @@ const NonExistentAddBtn = styled(Link)`
   border-radius: 9999px;
   border-width: 1px;
   border-style: solid;
-  border-color: var(--color-slate-500, #64748b);
+  border-color: #64748b;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   font-size: 0.875rem;
   font-weight: 700;
-  color: var(--color-text-button-primary, #334155);
+  color: #334155;
+  &:hover {
+    background-color: #f8fafc;
+  }
 `;
 const NonExistentAddSvg = styled.svg`
   fill: #334155;
@@ -39,7 +41,7 @@ const NonExistentAddText = styled.span`
   text-overflow: ellipsis;
 `;
 
-function NonExistent({ partText, part, url='' }) {
+function NonExistent({ partText, part, url = "" }) {
   return (
     <NonExistentContent>
       <NonExistentText>{partText}</NonExistentText>

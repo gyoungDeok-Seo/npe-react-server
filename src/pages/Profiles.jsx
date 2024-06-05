@@ -7,7 +7,7 @@ import Post from "../container/profiles/Post";
 
 const MyprofileContainer = styled.div`
   position: relative;
-  background-color: var(--color-white, #fff);
+  background-color: #fff;
   min-height: 100vh;
 `;
 

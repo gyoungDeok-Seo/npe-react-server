@@ -14,8 +14,8 @@ const HeaderContainer = styled.nav`
   min-width: max-content;
   border-bottom-width: 1px;
   border-style: solid;
-  border-color: var(--color-slate-300, #cbd5e1);
-  background-color: var(--color-white, #fff);
+  border-color: #cbd5e1;
+  background-color: #fff;
 `;
 const HeaderInner = styled.div`
   margin-right: auto;
@@ -26,7 +26,7 @@ const HeaderInner = styled.div`
   min-width: 1024px;
   max-width: 1280px;
   justify-content: space-between;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / 1);
   padding-left: 1rem;
   padding-right: 1rem;
   --tw-bg-opacity: 1;
@@ -54,8 +54,7 @@ const LogoSvg = styled.svg`
   fill: #cbd5e1;
 `;
 const TabLink = styled(Link)`
-  --tw-text-opacity: 1;
-  color: rgb(100 116 139 / var(--tw-text-opacity));
+  color: rgb(100 116 139 / 1);
   line-height: 1;
   font-weight: 500;
   font-size: 0.875rem;
@@ -75,7 +74,7 @@ const SearchBox = styled.div`
   position: relative;
 `;
 const SearchSvg = styled.svg`
-  fill: var(--color-slate-600, #475569);
+  fill: #475569;
   display: block;
 `;
 const LoginBtn = styled(Link)`
@@ -83,20 +82,20 @@ const LoginBtn = styled(Link)`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  color: var(--color-text-button-primary, #334155);
+  color: #334155;
   font-weight: 700;
   font-size: 0.875rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  border-color: var(--color-slate-500, #64748b);
+  border-color: #64748b;
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;
   -webkit-appearance: button;
   &:hover {
-    background-color: var(--color-slate-50, #f8fafc);
+    background-color: #f8fafc;
   }
 `;
 const LoginBtnText = styled.div`
@@ -112,18 +111,15 @@ const JoinBtn = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  color: var(--color-white, #fff);
+  color: #fff;
   font-weight: 700;
   font-size: 0.875rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  background-color: var(
-    --color-background-button-primary-bold-enabled,
-    #334155
-  );
-  border-color: var(--color-slate-700, #334155);
+  background-color: #334155;
+  border-color: #334155;
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;
@@ -150,10 +146,8 @@ const ProfileUpdateHeaderContainer = styled.nav`
   border-right-width: 0;
   border-top-width: 0;
   border-style: solid;
-  --tw-border-opacity: 1;
-  border-color: rgb(203 213 225 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  border-color: rgb(203 213 225 / 1);
+  background-color: rgb(255 255 255 / 1);
   padding-left: 1rem;
   padding-right: 1rem;
 `;
@@ -174,18 +168,15 @@ const SubmitProfileUpdateBtn = styled.button`
   border-radius: 0.25rem;
   border-width: 1px;
   border-style: solid;
-  border-color: var(--color-slate-700, #334155);
-  background-color: var(
-    --color-background-button-primary-bold-enabled,
-    #334155
-  );
+  border-color: #334155;
+  background-color: #334155;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   font-size: 0.875rem;
   font-weight: 700;
-  color: var(--color-white, #fff);
+  color: #fff;
 `;
 const SubmitProfileUpdateBtnText = styled.span`
   -webkit-line-clamp: 1;

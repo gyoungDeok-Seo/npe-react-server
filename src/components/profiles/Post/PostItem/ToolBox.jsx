@@ -23,13 +23,13 @@ const ProfilePostToolLikeBtn = styled.button`
 `;
 
 const ProfilePostToolLikeSvg = styled.svg`
-  fill: ${(props) => (props.isLike ? "#0d9488" : "#64748b")};
+  fill: ${(props) => (props.isOn ? "#0d9488" : "#64748b")};
   width: 1.25rem;
   height: 1.25rem;
 `;
 
 const ProfilePostToolLikeText = styled.p`
-  color: ${(props) => (props.isLike ? "#0d9488" : "#64748b")};
+  color: ${(props) => (props.isOn ? "#0d9488" : "#64748b")};
   font-size: 0.75rem;
   font-weight: 700;
 `;
@@ -54,16 +54,21 @@ const ProfilePostToolSaveShareBtns = styled.button`
 `;
 
 const ProfilePostToolOtherSvg = styled.svg`
-  fill: #64748b;
+  fill: ${(props) => (props.isOn ? "#0d9488" : "#64748b")};
   width: 1.25rem;
   height: 1.25rem;
 `;
 
 function ToolBox() {
   const [isLike, setIsLike] = useState(false);
+  const [isSave, setIsSave] = useState(false);
 
   const handelLike = () => {
     setIsLike((like) => !like);
+  };
+
+  const handelSave = () => {
+    setIsSave((save) => !save);
   };
   return (
     <ProfilePostToolBox>
@@ -75,7 +80,7 @@ function ToolBox() {
             strokeWidth="0"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-            isLike={isLike}
+            isOn={isLike}
           >
             <g>
               <g id="style=solid">
@@ -95,7 +100,7 @@ function ToolBox() {
               </g>
             </g>
           </ProfilePostToolLikeSvg>
-          <ProfilePostToolLikeText isLike={isLike}>
+          <ProfilePostToolLikeText isOn={isLike}>
             좋아요
           </ProfilePostToolLikeText>
         </ProfilePostToolLikeBtn>
@@ -108,6 +113,7 @@ function ToolBox() {
             strokeWidth="0"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
+            isOn={isLike}
           >
             <g>
               <g id="style=outline">
@@ -124,6 +130,8 @@ function ToolBox() {
         <ProfilePostToolSaveShareBtns
           type="button"
           aria-label="게시물 저장하기"
+          onClick={handelSave}
+          isOn={isLike}
         >
           <ProfilePostToolOtherSvg
             width="24"
@@ -134,12 +142,21 @@ function ToolBox() {
           >
             <g>
               <g id="style=outline">
-                <path
-                  id="bookMark"
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M21 3C21 2.44772 20.5523 2 20 2H4C3.44772 2 3 2.44772 3 3V20.1216C3 20.3205 3.05932 20.5149 3.17039 20.6799C3.47875 21.1381 4.10016 21.2596 4.55834 20.9512L11.4417 16.3186C11.7792 16.0915 12.2208 16.0915 12.5583 16.3186L19.4417 20.9512C19.6067 21.0623 19.8011 21.1216 20 21.1216C20.5523 21.1216 21 20.6739 21 20.1216V3ZM5 4H19V18.243L13.675 14.6594L13.4932 14.5462C12.5076 13.9802 11.2781 14.018 10.325 14.6594L5 18.242V4Z"
-                ></path>
+                {isSave ? (
+                  <path
+                    id="bookMark"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M3 3C3 2.44772 3.44772 2 4 2H20C20.5523 2 21 2.44772 21 3V20.1216C21 20.9223 20.1059 21.3983 19.4417 20.9512L12.5583 16.3186C12.2208 16.0915 11.7792 16.0915 11.4417 16.3186L4.55834 20.9512C3.89409 21.3983 3 20.9223 3 20.1216V3Z"
+                  ></path>
+                ) : (
+                  <path
+                    id="bookMark"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M21 3C21 2.44772 20.5523 2 20 2H4C3.44772 2 3 2.44772 3 3V20.1216C3 20.3205 3.05932 20.5149 3.17039 20.6799C3.47875 21.1381 4.10016 21.2596 4.55834 20.9512L11.4417 16.3186C11.7792 16.0915 12.2208 16.0915 12.5583 16.3186L19.4417 20.9512C19.6067 21.0623 19.8011 21.1216 20 21.1216C20.5523 21.1216 21 20.6739 21 20.1216V3ZM5 4H19V18.243L13.675 14.6594L13.4932 14.5462C12.5076 13.9802 11.2781 14.018 10.325 14.6594L5 18.242V4Z"
+                  ></path>
+                )}
               </g>
             </g>
           </ProfilePostToolOtherSvg>
@@ -151,6 +168,7 @@ function ToolBox() {
             strokeWidth="0"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
+            isOn={isLike}
           >
             <g>
               <g id="style=outline">

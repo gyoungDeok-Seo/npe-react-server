@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 const CareerSkillModalSkillList = styled.div`
@@ -7,16 +6,13 @@ const CareerSkillModalSkillList = styled.div`
   gap: 0.5rem;
 `;
 const CareerSkillModalSkillBtn = styled.button`
-  --tw-text-opacity: 1;
-  color: rgb(15 23 42 / var(--tw-text-opacity));
+  color: rgb(15 23 42 / 1);
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  --tw-bg-opacity: 1;
   background-color: ${(props) =>
     props.selected ? "#334155" : "rgb(255 255 255)"};
-  --tw-border-opacity: 1;
   border-color: ${(props) => (props.selected ? "#334155" : "rgb(226 232 240)")};
   border-style: solid;
   border-width: 1px;

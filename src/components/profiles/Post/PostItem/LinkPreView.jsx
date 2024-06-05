@@ -10,10 +10,8 @@ const LinkPreViewBox = styled.div`
 
 const LinkPreViewInner = styled.div`
   display: flex;
-  --tw-bg-opacity: 1;
-  background-color: rgb(248 250 252 / var(--tw-bg-opacity));
-  --tw-border-opacity: 1;
-  border-color: rgb(226 232 240 / var(--tw-border-opacity));
+  background-color: rgb(248 250 252 / 1);
+  border-color: rgb(226 232 240 / 1);
   border-style: solid;
   border-width: 1px;
   border-radius: 0.5rem;
@@ -26,8 +24,7 @@ const LinkPreViewContentBox = styled.div`
 `;
 
 const LinkPreViewTitle = styled.p`
-  --tw-text-opacity: 1;
-  color: rgb(15 23 42 / var(--tw-text-opacity));
+  color: rgb(15 23 42 /1);
   font-weight: 700;
   font-size: 0.875rem;
   overflow: hidden;
@@ -38,8 +35,7 @@ const LinkPreViewTitle = styled.p`
 `;
 
 const LinkPreViewSiteName = styled.div`
-  --tw-text-opacity: 1;
-  color: rgb(51 65 85 / var(--tw-text-opacity));
+  color: rgb(51 65 85 / 1);
   font-size: 0.875rem;
   overflow: hidden;
   display: -webkit-box;
@@ -48,8 +44,7 @@ const LinkPreViewSiteName = styled.div`
 `;
 
 const LinkPreViewImg = styled.img`
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / 1);
   object-fit: cover;
 `;
 

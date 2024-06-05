@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const LikeUserModalTItleBox = styled.div`
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / 1);
   position: sticky;
   top: 0;
 `;
@@ -16,8 +15,7 @@ const LikeUserModalTitleInner = styled.div`
   border-bottom: 1px solid #e2e8f0;
 `;
 const LikeUserModalTItle = styled.p`
-  --tw-text-opacity: 1;
-  color: rgb(15 23 42 / var(--tw-text-opacity));
+  color: rgb(15 23 42 / 1);
   font-weight: 700;
   font-size: 1.125rem;
 `;

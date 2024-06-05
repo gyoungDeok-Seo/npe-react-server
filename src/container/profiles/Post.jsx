@@ -49,8 +49,11 @@ const CreatePostBtn = styled.button`
   padding-bottom: 0.75rem;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-  background-color: var(--color-slate-50, #f8fafc);
+  background-color: #f8fafc;
   border-radius: 9999px;
+  &:hover {
+    background-color: #f1f5f9;
+  }
 `;
 
 const CreatePostProfileImg = styled.img`
@@ -61,10 +64,8 @@ const CreatePostProfileImg = styled.img`
   object-fit: cover;
   border-width: 1px;
   border-style: solid;
-  --tw-border-opacity: 1;
-  border-color: rgb(226 232 240 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  border-color: rgb(226 232 240 / 1);
+  background-color: rgb(255 255 255 / 1);
   height: 2.5rem;
   width: 2.5rem;
 `;
@@ -139,7 +140,7 @@ function Post() {
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => (
                     <>
                       <div>
-                        <PostItem setLikeUsersModal={setLikeUsersModal}/>
+                        <PostItem setLikeUsersModal={setLikeUsersModal} />
                       </div>
                       <Boundary />
                     </>
@@ -149,7 +150,7 @@ function Post() {
             </ProfileColSpanBox>
           </ProfileContentInner>
         </ProfileContentBox>
-      </ProfileContentContainer>{" "}
+      </ProfileContentContainer>
       {likeUsersModal && (
         <LikeUserModal setLikeUsersModal={setLikeUsersModal} />
       )}

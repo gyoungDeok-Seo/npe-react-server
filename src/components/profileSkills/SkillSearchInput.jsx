@@ -2,8 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const CareerSkillModalInputBox = styled.div`
-  --tw-border-opacity: 1;
-  border-color: rgb(226 232 240 / var(--tw-border-opacity));
+  border-color: rgb(226 232 240 / 1);
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;

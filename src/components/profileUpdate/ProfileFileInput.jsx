@@ -24,10 +24,8 @@ const PrevProfileImgBox = styled.div`
   object-fit: cover;
   border-width: 1px;
   border-style: solid;
-  --tw-border-opacity: 1;
-  border-color: rgb(226 232 240 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  border-color: rgb(226 232 240 / 1);
+  background-color: rgb(255 255 255 / 1);
   position: relative;
   @media (min-width: 1024px) {
     & {
@@ -49,8 +47,7 @@ const ProfileAddSvgBox = styled.div`
   bottom: 0.5rem;
   right: 0;
   border-radius: 9999px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / 1);
 `;
 const ProfileAddSvg = styled.svg`
   fill: #94a3b8;

@@ -23,10 +23,8 @@ const CreaterProfileImgBox = styled.div`
   object-fit: cover;
   border-width: 1px;
   border-style: solid;
-  --tw-border-opacity: 1;
-  border-color: rgb(226 232 240 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  border-color: rgb(226 232 240 / 1);
+  background-color: rgb(255 255 255 / 1);
   height: 2.5rem;
   width: 2.5rem;
 `;
@@ -36,19 +34,17 @@ const CreaterContentBox = styled.div`
 const CreaterName = styled.p`
   font-size: 0.875rem;
   font-weight: 700;
-  --tw-text-opacity: 1;
-  color: rgb(15 23 42 / var(--tw-text-opacity));
+  color: rgb(15 23 42 / 1);
 `;
 const CreaterDescription = styled.p`
   font-size: 0.875rem;
   font-weight: 700;
-  --tw-text-opacity: 1;
-  color: rgb(15 23 42 / var(--tw-text-opacity));
+  color: rgb(15 23 42 / 1);
 `;
 
 const CreaterPostCreateAt = styled.p`
   font-size: 0.75rem;
-  color: var(--color-text-subtler, #64748b);
+  color: #64748b;
 `;
 
 function CreaterProfile() {

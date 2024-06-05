@@ -16,13 +16,12 @@ const ProfilePostContentShowAll = styled.div`
 const ProfilePostContentSummary = styled.div`
   white-space: pre-wrap;
   font-size: 1rem;
-  color: var(--color-slate-900, #0f172a);
+  color: #0f172a;
 `;
 
 const ProfilePostContentSummaryMore = styled.div`
   cursor: pointer;
-  --tw-text-opacity: 1;
-  color: rgb(100 116 139 / var(--tw-text-opacity));
+  color: rgb(100 116 139 / 1);
 `;
 
 function PostContent() {

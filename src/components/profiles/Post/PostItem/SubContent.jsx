@@ -24,8 +24,10 @@ const ProfilePostSubLikeBtn = styled.button`
 const ProfilePostSubLikeText = styled.button`
   font-size: 0.75rem;
   text-underline-offset: 2px;
-  --tw-text-opacity: 1;
-  color: rgb(100 116 139 / var(--tw-text-opacity));
+  color: rgb(100 116 139 /1);
+  &:hover {
+    text-decoration-line: underline;
+  }
 `;
 
 const ProfilePostSaveAndCheckLink = styled(Link)`
@@ -37,8 +39,7 @@ const ProfilePostSaveAndCheckLink = styled(Link)`
 
 const ProfilePostSaveAndCheckText = styled.p`
   font-size: 0.75rem;
-  --tw-text-opacity: 1;
-  color: rgb(100 116 139 / var(--tw-text-opacity));
+  color: rgb(100 116 139 / 1);
 `;
 
 function SubContent({ setLikeUsersModal }) {
