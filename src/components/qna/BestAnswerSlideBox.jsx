@@ -43,6 +43,9 @@ const AnswerBox = styled(Link)`
     gap: 0.25rem;
     flex-direction: column;
     display: flex;
+    &:hover {
+        background-color: var(--color-background-hover, #f8fafc);
+    }
 `;
 
 const AnswerQuestion = styled.span`
@@ -66,13 +69,13 @@ const QuestionStat = styled.p`
     font-size: 0.75rem;
 `;
 
-function BestAnswerSlideBox() {
+function BestAnswerSlideBox({ transform }) {
     return (
         <ContentsListBox>
             <QuestionsViewBox>
-                <QuestionsListTrailer>
+                <QuestionsListTrailer style={{ transform }}>
                     <QuestionsListSlide style={{ width: "348px", marginRight: "24px" }}>
-                        <AnswerBox href="">
+                        <AnswerBox to="">
                             <AnswerQuestion>백엔드 입문 - spring VS django</AnswerQuestion>
                             <AnswerContentBox>
                                 <QuestionStat>답변 7</QuestionStat>
@@ -80,7 +83,7 @@ function BestAnswerSlideBox() {
                                 <QuestionStat>답변 좋아요 56</QuestionStat>
                             </AnswerContentBox>
                         </AnswerBox>
-                        <AnswerBox href="">
+                        <AnswerBox to="">
                             <AnswerQuestion>백엔드 입문 - spring VS django</AnswerQuestion>
                             <AnswerContentBox>
                                 <QuestionStat>답변 7</QuestionStat>
@@ -88,7 +91,7 @@ function BestAnswerSlideBox() {
                                 <QuestionStat>답변 좋아요 56</QuestionStat>
                             </AnswerContentBox>
                         </AnswerBox>
-                        <AnswerBox href="">
+                        <AnswerBox to="">
                             <AnswerQuestion>백엔드 입문 - spring VS django</AnswerQuestion>
                             <AnswerContentBox>
                                 <QuestionStat>답변 7</QuestionStat>
@@ -98,7 +101,7 @@ function BestAnswerSlideBox() {
                         </AnswerBox>
                     </QuestionsListSlide>
                     <QuestionsListSlide style={{ width: "348px", marginRight: "24px" }}>
-                        <AnswerBox href="">
+                        <AnswerBox to="">
                             <AnswerQuestion>백엔드 입문 - spring VS django</AnswerQuestion>
                             <AnswerContentBox>
                                 <QuestionStat>답변 7</QuestionStat>
@@ -106,7 +109,7 @@ function BestAnswerSlideBox() {
                                 <QuestionStat>답변 좋아요 56</QuestionStat>
                             </AnswerContentBox>
                         </AnswerBox>
-                        <AnswerBox href="">
+                        <AnswerBox to="">
                             <AnswerQuestion>백엔드 입문 - spring VS django</AnswerQuestion>
                             <AnswerContentBox>
                                 <QuestionStat>답변 7</QuestionStat>
@@ -114,33 +117,7 @@ function BestAnswerSlideBox() {
                                 <QuestionStat>답변 좋아요 56</QuestionStat>
                             </AnswerContentBox>
                         </AnswerBox>
-                        <AnswerBox href="">
-                            <AnswerQuestion>백엔드 입문 - spring VS django</AnswerQuestion>
-                            <AnswerContentBox>
-                                <QuestionStat>답변 7</QuestionStat>
-                                <QuestionStat>•</QuestionStat>
-                                <QuestionStat>답변 좋아요 56</QuestionStat>
-                            </AnswerContentBox>
-                        </AnswerBox>
-                    </QuestionsListSlide>
-                    <QuestionsListSlide style={{ width: "348px", marginRight: "24px" }}>
-                        <AnswerBox href="">
-                            <AnswerQuestion>백엔드 입문 - spring VS django</AnswerQuestion>
-                            <AnswerContentBox>
-                                <QuestionStat>답변 7</QuestionStat>
-                                <QuestionStat>•</QuestionStat>
-                                <QuestionStat>답변 좋아요 56</QuestionStat>
-                            </AnswerContentBox>
-                        </AnswerBox>
-                        <AnswerBox href="">
-                            <AnswerQuestion>백엔드 입문 - spring VS django</AnswerQuestion>
-                            <AnswerContentBox>
-                                <QuestionStat>답변 7</QuestionStat>
-                                <QuestionStat>•</QuestionStat>
-                                <QuestionStat>답변 좋아요 56</QuestionStat>
-                            </AnswerContentBox>
-                        </AnswerBox>
-                        <AnswerBox href="">
+                        <AnswerBox to="">
                             <AnswerQuestion>백엔드 입문 - spring VS django</AnswerQuestion>
                             <AnswerContentBox>
                                 <QuestionStat>답변 7</QuestionStat>
@@ -150,7 +127,7 @@ function BestAnswerSlideBox() {
                         </AnswerBox>
                     </QuestionsListSlide>
                     <QuestionsListSlide style={{ width: "348px", marginRight: "24px" }}>
-                        <AnswerBox href="">
+                        <AnswerBox to="">
                             <AnswerQuestion>백엔드 입문 - spring VS django</AnswerQuestion>
                             <AnswerContentBox>
                                 <QuestionStat>답변 7</QuestionStat>
@@ -158,7 +135,7 @@ function BestAnswerSlideBox() {
                                 <QuestionStat>답변 좋아요 56</QuestionStat>
                             </AnswerContentBox>
                         </AnswerBox>
-                        <AnswerBox href="">
+                        <AnswerBox to="">
                             <AnswerQuestion>백엔드 입문 - spring VS django</AnswerQuestion>
                             <AnswerContentBox>
                                 <QuestionStat>답변 7</QuestionStat>
@@ -166,7 +143,33 @@ function BestAnswerSlideBox() {
                                 <QuestionStat>답변 좋아요 56</QuestionStat>
                             </AnswerContentBox>
                         </AnswerBox>
-                        <AnswerBox href="">
+                        <AnswerBox to="">
+                            <AnswerQuestion>백엔드 입문 - spring VS django</AnswerQuestion>
+                            <AnswerContentBox>
+                                <QuestionStat>답변 7</QuestionStat>
+                                <QuestionStat>•</QuestionStat>
+                                <QuestionStat>답변 좋아요 56</QuestionStat>
+                            </AnswerContentBox>
+                        </AnswerBox>
+                    </QuestionsListSlide>
+                    <QuestionsListSlide style={{ width: "348px", marginRight: "24px" }}>
+                        <AnswerBox to="">
+                            <AnswerQuestion>백엔드 입문 - spring VS django</AnswerQuestion>
+                            <AnswerContentBox>
+                                <QuestionStat>답변 7</QuestionStat>
+                                <QuestionStat>•</QuestionStat>
+                                <QuestionStat>답변 좋아요 56</QuestionStat>
+                            </AnswerContentBox>
+                        </AnswerBox>
+                        <AnswerBox to="">
+                            <AnswerQuestion>백엔드 입문 - spring VS django</AnswerQuestion>
+                            <AnswerContentBox>
+                                <QuestionStat>답변 7</QuestionStat>
+                                <QuestionStat>•</QuestionStat>
+                                <QuestionStat>답변 좋아요 56</QuestionStat>
+                            </AnswerContentBox>
+                        </AnswerBox>
+                        <AnswerBox to="">
                             <AnswerQuestion>백엔드 입문 - spring VS django</AnswerQuestion>
                             <AnswerContentBox>
                                 <QuestionStat>답변 7</QuestionStat>

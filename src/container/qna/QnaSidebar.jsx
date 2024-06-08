@@ -1,20 +1,119 @@
 import { Link } from "react-router-dom";
 import SearchBox from "../../components/Qna/SearchBox";
 import CategorySelectBox from "../../components/Qna/CategorySelectBox";
-import TapBox from "../../components/Qna/TapBox";
+import TapBox from "../../components/Qna/TabBox";
+import { styled } from "styled-components";
+
+const QnaSidebarWrap = styled.div`
+    grid-column: span 3 / span 3;
+`;
+
+const QnaSidebarBox = styled.div`
+    position: sticky;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    overscroll-behavior: contain;
+    overflow: scroll;
+    gap: 2rem;
+    flex-direction: column;
+    height: calc(100vh - 56px);
+    display: flex;
+    top: 3.5rem;
+    scrollbar-width: none;
+`;
+
+const SidebarTopBox = styled.div`
+    gap: 1rem;
+    flex-direction: column;
+    display: flex;
+`;
+
+const QnaActivityBox = styled.div`
+    gap: 1rem;
+    flex-direction: column;
+    display: flex;
+`;
+
+const WriteQnaBtn = styled.button`
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    background-color: var(--color-background-button-primary-bold-enabled, #334155);
+    border-color: var(--color-background-button-primary-bold-enabled, #334155);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.25rem;
+    gap: 0.25rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    display: flex;
+
+    &:hover {
+        background-color: var(--color-background-button-primary-bold-hover, #1e293b);
+        border-color: var(--color-background-button-primary-bold-hover, #1e293b);
+    }
+`;
+
+const QnaWriteSvg = styled.svg`
+    fill: var(--color-text-inverse, #fff);
+    width: 1rem;
+    height: 1rem;
+`;
+
+const Question = styled.span`
+    color: var(--color-text-inverse, #fff);
+    font-weight: 700;
+    font-size: 0.875rem;
+`;
+
+const MyQnaBtn = styled.button`
+    --tw-text-opacity: 1;
+    color: rgb(51 65 85 / var(--tw-text-opacity));
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+    margin: -0.25rem;
+
+    &:hover {
+        --tw-text-opacity: 1;
+        color: rgb(30 41 59 / var(--tw-text-opacity));
+        background-color: var(--color-slate-50, #f8fafc);
+    }
+`;
+
+const MyQna = styled.span`
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    margin-left: 0.125rem;
+`;
+
+const RightArrowSvg = styled.svg`
+    fill: var(--color-slate-700, #334155);
+    width: 1rem;
+    height: 1rem;
+`;
 
 function QnaSidebar() {
     return (
-        <div className="qna-sidebar-wrap">
-            <div className="qna-sidebar-box">
-                <div className="sidebar-top-box">
+        <QnaSidebarWrap>
+            <QnaSidebarBox>
+                <SidebarTopBox>
                     <CategorySelectBox />
                     <SearchBox />
-                </div>
+                </SidebarTopBox>
                 <TapBox />
-                <div className="qna-activity-box">
-                    <button type="button" className="write-qna-btn">
-                        <svg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="qna-write-svg">
+                <QnaActivityBox>
+                    <WriteQnaBtn type="button">
+                        <QnaWriteSvg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <g>
                                 <g id="style=outline">
                                     <path
@@ -25,24 +124,24 @@ function QnaSidebar() {
                                     ></path>
                                 </g>
                             </g>
-                        </svg>
-                        <span className="question">질문하기</span>
-                    </button>
+                        </QnaWriteSvg>
+                        <Question>질문하기</Question>
+                    </WriteQnaBtn>
                     <Link href="">
-                        <button type="button" className="my-qna-btn">
-                            <span className="my-qna">내 Q&A 활동</span>
-                            <svg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="right-arrow-svg">
+                        <MyQnaBtn type="button">
+                            <MyQna>내 Q&A 활동</MyQna>
+                            <RightArrowSvg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <g>
                                     <g id="style=outline">
                                         <path id="arrowRight" fillRule="evenodd" clipRule="evenodd" d="M15.5858 12L7.29289 20.2929C6.90237 20.6834 6.90237 21.3166 7.29289 21.7071C7.68342 22.0976 8.31658 22.0976 8.70711 21.7071L17.7071 12.7071C18.0976 12.3166 18.0976 11.6834 17.7071 11.2929L8.70711 2.29289C8.31658 1.90237 7.68342 1.90237 7.29289 2.29289C6.90237 2.68342 6.90237 3.31658 7.29289 3.70711L15.5858 12Z"></path>
                                     </g>
                                 </g>
-                            </svg>
-                        </button>
+                            </RightArrowSvg>
+                        </MyQnaBtn>
                     </Link>
-                </div>
-            </div>
-        </div>
+                </QnaActivityBox>
+            </QnaSidebarBox>
+        </QnaSidebarWrap>
     );
 }
 export default QnaSidebar;

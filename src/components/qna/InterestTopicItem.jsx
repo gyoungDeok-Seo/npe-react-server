@@ -17,6 +17,9 @@ const InterestTopicItemLink = styled(Link)`
     gap: 0.375rem;
     align-items: center;
     display: flex;
+    &:hover {
+        background-color: var(--color-background-hover, #f8fafc);
+    }
 `;
 
 const InterestTopicItemName = styled.span`
@@ -25,11 +28,11 @@ const InterestTopicItemName = styled.span`
     font-size: 0.75rem;
 `;
 
-function InterestTopicItem({ name }) {
+function InterestTopicItem({ topic }) {
     return (
         <InterestTopicItemLi>
-            <InterestTopicItemLink href="">
-                <InterestTopicItemName>{name}</InterestTopicItemName>
+            <InterestTopicItemLink to="">
+                <InterestTopicItemName>{topic}</InterestTopicItemName>
             </InterestTopicItemLink>
         </InterestTopicItemLi>
     );
