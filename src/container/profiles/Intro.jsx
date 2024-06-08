@@ -135,7 +135,7 @@ const ProfileTabItem = styled.li`
   flex: 1 1 0%;
 `;
 const ProfileTabBtn = styled.button`
-  color: ${(props) => (props.isprofile ? "#0f172a" : "#64748b")};
+  color: ${(props) => (props.tab ? "#0f172a" : "#64748b")};
   font-weight: 700;
   font-size: 0.875rem;
   padding-top: 1rem;
@@ -152,11 +152,11 @@ const ProfileTabUnderBar = styled.div`
   height: 0.125rem;
   width: 100%;
   background-color: #0f172a;
-  opacity: ${(props) => (props.isprofile ? 1 : 0)};
+  opacity: ${(props) => (props.tab ? 1 : 0)};
 `;
 
-function Intro({ setTab }) {
-  const isProfile = true;
+function Intro({ tab, setTab }) {
+  console.log(tab);
   return (
     <>
       <ProfileTopBox>
@@ -216,20 +216,22 @@ function Intro({ setTab }) {
         <ProfileTabInner>
           <ProfileTabList>
             <ProfileTabItem>
-              <ProfileTabBtn isprofile={isProfile} onClick={() => setTab(1)}>
+              <ProfileTabBtn tab={tab === 1} onClick={() => setTab(1)}>
                 프로필
               </ProfileTabBtn>
-              <ProfileTabUnderBar isprofile={isProfile}></ProfileTabUnderBar>
+              <ProfileTabUnderBar tab={tab === 1}></ProfileTabUnderBar>
             </ProfileTabItem>
             <ProfileTabItem>
-              <ProfileTabBtn onClick={() => setTab(2)}>게시물 22</ProfileTabBtn>
-              <ProfileTabUnderBar></ProfileTabUnderBar>
+              <ProfileTabBtn tab={tab === 2} onClick={() => setTab(2)}>
+                게시물 22
+              </ProfileTabBtn>
+              <ProfileTabUnderBar tab={tab === 2}></ProfileTabUnderBar>
             </ProfileTabItem>
             <ProfileTabItem>
-              <ProfileTabBtn onClick={() => setTab(3)}>
+              <ProfileTabBtn tab={tab === 3} onClick={() => setTab(3)}>
                 Q&amp;A 활동 9
               </ProfileTabBtn>
-              <ProfileTabUnderBar></ProfileTabUnderBar>
+              <ProfileTabUnderBar tab={tab === 3}></ProfileTabUnderBar>
             </ProfileTabItem>
           </ProfileTabList>
         </ProfileTabInner>

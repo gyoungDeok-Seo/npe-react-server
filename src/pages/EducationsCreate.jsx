@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../components/Header/Header";
 import styled from "styled-components";
 import AvoidMistakesModal from "../components/Profiles/Modal/AvoidMistakesModal";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +7,7 @@ import CourseInput from "../components/EducationsCreate/CourseInput";
 import EducationsPeriod from "../components/EducationsCreate/EducationsPeriod";
 import LinkInput from "../components/EducationsCreate/LinkInput";
 import DescriptionTextarea from "../components/EducationsCreate/DescriptionTextarea";
+import MainHeader from "../components/Header/MainHeader";
 
 const CreateEducationsBox = styled.div`
   padding-left: 1rem;
@@ -108,7 +108,7 @@ function EducationsCreate() {
             className="global-toaster"
           ></div>
           <div>
-            <Header setAvoidMistakesModal={setAvoidMistakesModal} />
+            <MainHeader setAvoidMistakesModal={setAvoidMistakesModal} />
             <div style={{ height: "3.5rem" }}></div>
             <CreateEducationsBox>
               <InstitutionInput />

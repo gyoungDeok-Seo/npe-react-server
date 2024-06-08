@@ -1,11 +1,11 @@
-import Header from "../components/Header/Header";
+import MainHeader from "../components/Header/MainHeader";
 import "./home.css";
 
 function HomePage() {
     return (
         <div className="wrapper">
             <div>
-                <Header />
+                <MainHeader />
                 <div>
                     <div className="container">
                         <div className="left-content-box">

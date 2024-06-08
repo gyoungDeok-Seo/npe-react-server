@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../components/Header/Header";
 import styled from "styled-components";
 import IndustryModal from "../components/CareerCreate/IndustryModal";
 import CareerSkillModal from "../components/CareerCreate/CareerSkillModal";
@@ -12,6 +11,7 @@ import IndustrySelect from "../components/CareerCreate/IndustrySelect";
 import SkillSelect from "../components/CareerCreate/SkillSelect";
 import DescriptionTextarea from "../components/CareerCreate/DescriptionTextarea";
 import LinkInput from "../components/CareerCreate/LinkInput";
+import MainHeader from "../components/Header/MainHeader";
 
 export const CareerCreateBox = styled.div`
   padding-left: 1rem;
@@ -265,7 +265,7 @@ function CareerCreate() {
           className="global-toaster"
         ></div>
         <div>
-          <Header setAvoidMistakesModal={setAvoidMistakesModal} />
+          <MainHeader setAvoidMistakesModal={setAvoidMistakesModal} />
           <div style={{ height: "3.5rem" }}></div>
           <CareerCreateBox>
             <CompanyInput />

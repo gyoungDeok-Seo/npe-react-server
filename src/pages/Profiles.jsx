@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import Header from "../components/Header/Header";
 import Intro from "../container/profiles/Intro";
 import Profile from "../container/profiles/Profile";
 import { useState } from "react";
 import Post from "../container/profiles/Post";
+import QnaActivity from "../container/profiles/QnaActivity";
+import MainHeader from "../components/Header/MainHeader";
 
 const MyprofileContainer = styled.div`
   position: relative;
@@ -20,6 +21,8 @@ function Profiles() {
         return <Profile />;
       case 2:
         return <Post />;
+      case 3:
+        return <QnaActivity />;
       default:
         return <Profile />;
     }
@@ -41,8 +44,8 @@ function Profiles() {
       ></div>
       <div>
         <MyprofileContainer>
-          <Header />
-          <Intro setTab={setTab} />
+          <MainHeader />
+          <Intro setTab={setTab} tab={tab} />
           {renderContent()}
         </MyprofileContainer>
       </div>

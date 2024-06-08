@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Header from "../components/Header/Header";
 import AvoidMistakesModal from "../components/Profiles/Modal/AvoidMistakesModal";
 import SkillList from "../components/ProfileSkills/SkillList";
 import SelectSkillItem from "../components/ProfileSkills/SelectSkillItem";
 import SkillSearchInput from "../components/ProfileSkills/SkillSearchInput";
+import MainHeader from "../components/Header/MainHeader";
 
 const CareerSkillModalBox = styled.div`
   padding-left: 1rem;
@@ -121,7 +121,7 @@ function ProfileSkills() {
           className="global-toaster"
         ></div>
         <div>
-          <Header setAvoidMistakesModal={setAvoidMistakesModal} />
+          <MainHeader setAvoidMistakesModal={setAvoidMistakesModal} />
           <div style={{ height: "3.5rem" }}></div>
           <CareerSkillModalBox>
             <CareerSkillModalContentBox>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Header from "../components/Header/Header";
 import styled from "styled-components";
 import AvoidMistakesModal from "../components/Profiles/Modal/AvoidMistakesModal";
 import { useNavigate } from "react-router-dom";
+import MainHeader from "../components/Header/MainHeader";
 
 const SitesCreateaBox = styled.div`
   padding-left: 1rem;
@@ -119,7 +119,7 @@ function SitesCreate() {
             className="global-toaster"
           ></div>
           <div>
-            <Header setAvoidMistakesModal={setAvoidMistakesModal} />
+            <MainHeader setAvoidMistakesModal={setAvoidMistakesModal} />
             <div style={{ height: "3.5rem" }}></div>
             <SitesCreateaBox>
               <SitesInputBoxTop>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import PostItem from "../../components/Profiles/Post/PostItem";
-import LikeUserModal from "../../components/Profiles/Post/LikeUserModal";
 import { useState } from "react";
+import LikeUserModal from "../../components/Profiles/Modal/LikeUserModal";
 
 const ProfileContentContainer = styled.div`
   border-color: #e2e8f0;

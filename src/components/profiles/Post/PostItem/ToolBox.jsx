@@ -63,17 +63,17 @@ function ToolBox() {
   const [isLike, setIsLike] = useState(false);
   const [isSave, setIsSave] = useState(false);
 
-  const handelLike = () => {
+  const handleLike = () => {
     setIsLike((like) => !like);
   };
 
-  const handelSave = () => {
+  const handleSave = () => {
     setIsSave((save) => !save);
   };
   return (
     <ProfilePostToolBox>
       <ProfilePostToolLikeBox>
-        <ProfilePostToolLikeBtn type="button" onClick={handelLike}>
+        <ProfilePostToolLikeBtn type="button" onClick={handleLike}>
           <ProfilePostToolLikeSvg
             width="24"
             height="24"
@@ -130,7 +130,7 @@ function ToolBox() {
         <ProfilePostToolSaveShareBtns
           type="button"
           aria-label="게시물 저장하기"
-          onClick={handelSave}
+          onClick={handleSave}
           isOn={isLike}
         >
           <ProfilePostToolOtherSvg

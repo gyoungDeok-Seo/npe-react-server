@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../components/Header/Header";
 import styled from "styled-components";
 import NameInput from "../components/ProfileUpdate/NameInput";
 import ProfileFileInput from "../components/ProfileUpdate/ProfileFileInput";
@@ -7,6 +6,7 @@ import RefInput from "../components/ProfileUpdate/RefInput";
 import DescriptionTextarea from "../components/ProfileUpdate/DescriptionTextarea";
 import AvoidMistakesModal from "../components/Profiles/Modal/AvoidMistakesModal";
 import { useNavigate } from "react-router-dom";
+import MainHeader from "../components/Header/MainHeader";
 
 const ProfileUpdateBox = styled.div`
   padding-left: 1rem;
@@ -100,7 +100,7 @@ function ProfileUpdate() {
           className="global-toaster"
         ></div>
         <div>
-          <Header setAvoidMistakesModal={setAvoidMistakesModal} />
+          <MainHeader setAvoidMistakesModal={setAvoidMistakesModal} />
           <div style={{ height: "3.5rem" }}></div>
           <ProfileUpdateBox>
             <ProfileUpdateInner>

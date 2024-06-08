@@ -76,19 +76,6 @@ const KakaoImg = styled.img`
   width: 1.25rem;
   height: 1.25rem;
 `;
-const EmailJoinBtn = styled(Link)`
-  color: #fff;
-  font-weight: 700;
-  font-size: 1rem;
-  padding: 1rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  background-color: transparent;
-  border-color: #fff;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 0.3rem;
-`;
 
 function Landing() {
   return (
@@ -155,7 +142,6 @@ function Landing() {
                 />
                 <span>카카오로 3초만에 가입하기</span>
               </KakaoJoinBtn>
-              <EmailJoinBtn to="/">이메일로 가입하기</EmailJoinBtn>
             </JoinBtnsBox>
           </CommentInner>
         </CommentBox>
