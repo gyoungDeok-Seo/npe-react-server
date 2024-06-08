@@ -57,12 +57,11 @@ const router = createBrowserRouter([
     children: [],
   },
   {
-    path: "/profiles/skills",
+    path: "/search",
     element: <SearchResult />,
     children: [],
   },
 ]);
-;
 function Router() {
   return <RouterProvider router={router} />;
 }
