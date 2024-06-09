@@ -27,15 +27,6 @@ const QnaContainer = styled.div`
   padding-bottom: 5rem;
 `;
 
-function CloseCategoryList(e) {
-  const categoryListBox = document.querySelector(".category-list-box");
-  const categoryArrowSvg = document.querySelector(".category-arrow-svg");
-  if (!e.target.closest(".category-select-box")) {
-    categoryListBox.classList.add("hidden");
-    categoryArrowSvg.classList.remove("up-down-reversal");
-  }
-}
-
 function QnA() {
   return (
     // useRef 사용처
