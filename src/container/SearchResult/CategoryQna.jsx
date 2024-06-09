@@ -9,6 +9,8 @@ import {
   SearchResultProfilesTitleBar,
 } from "./ResultBox";
 import { Link } from "react-router-dom";
+import NoneResult from "../../components/SearchResult/ResultBox/NoneResult";
+import { useState } from "react";
 
 const SearchResultQnaContentBox = styled.div`
   overflow: auto;
@@ -57,30 +59,42 @@ const CategoryQnaTagText = styled.span`
 `;
 
 function CategoryQna() {
+  const [isResult, setIsResult] = useState(true);
+
   return (
     <SearchResultMainContent>
       <SearchResultProfilesBox>
         <SearchResultProfilesInner>
           <SearchResultProfilesFlexBox>
-            <CategoryQnaTagBox>
-              <CategoryQnaTagLink to="#">
-                <CategoryQnaTag>
-                  <CategoryQnaTagName>#검색</CategoryQnaTagName>
-                  <CategoryQnaTagText>·</CategoryQnaTagText>
-                  <CategoryQnaTagText>질문 3</CategoryQnaTagText>
-                </CategoryQnaTag>
-              </CategoryQnaTagLink>
-            </CategoryQnaTagBox>
-            <SearchResultProfilesTitleBar>
-              <SearchResultProfilesTitle>현직자 Q&A 681</SearchResultProfilesTitle>
-            </SearchResultProfilesTitleBar>
-            <div>
-              <SearchResultQnaContentBox>
-                {[1, 2, 3].map(() => (
-                  <ResultQna />
-                ))}
-              </SearchResultQnaContentBox>
-            </div>
+            {isResult ? (
+              <>
+                <CategoryQnaTagBox>
+                  <CategoryQnaTagLink to="#">
+                    <CategoryQnaTag>
+                      <CategoryQnaTagName>#검색</CategoryQnaTagName>
+                      <CategoryQnaTagText>·</CategoryQnaTagText>
+                      <CategoryQnaTagText>질문 3</CategoryQnaTagText>
+                    </CategoryQnaTag>
+                  </CategoryQnaTagLink>
+                </CategoryQnaTagBox>
+                <SearchResultProfilesTitleBar>
+                  <SearchResultProfilesTitle>
+                    현직자 Q&A 681
+                  </SearchResultProfilesTitle>
+                </SearchResultProfilesTitleBar>
+                <div>
+                  <SearchResultQnaContentBox>
+                    <>
+                      {[1, 2, 3].map(() => (
+                        <ResultQna />
+                      ))}{" "}
+                    </>
+                  </SearchResultQnaContentBox>
+                </div>
+              </>
+            ) : (
+              <NoneResult />
+            )}
           </SearchResultProfilesFlexBox>
         </SearchResultProfilesInner>
       </SearchResultProfilesBox>

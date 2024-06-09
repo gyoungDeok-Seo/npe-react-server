@@ -2,6 +2,7 @@ import styled from "styled-components";
 import PostItem from "../../components/profiles/Post/PostItem";
 import { useState } from "react";
 import LikeUserModal from "../../components/profiles/Modal/LikeUserModal";
+import NonePost from "../../components/profiles/Post/NonePost";
 
 const ProfileContentContainer = styled.div`
   border-color: #e2e8f0;
@@ -93,16 +94,9 @@ const PostList = styled.div`
   flex-direction: column;
   gap: 0.75rem;
 `;
-
-const Boundary = styled.hr`
-  border-color: #e2e8f0;
-  width: 100%;
-  margin-top: 0;
-  margin-bottom: 0;
-`;
-
 function Post() {
   const [likeUsersModal, setLikeUsersModal] = useState(false);
+  const [isPost, setIsPost] = useState(false);
   return (
     <>
       <ProfileContentContainer>
@@ -136,11 +130,15 @@ function Post() {
                 </CreatePostProfileSvg>
               </CreatePostBtn>
               <div>
-                <PostList style={{ height: "auto", overflow: "inherit" }}>
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => (
-                    <PostItem setLikeUsersModal={setLikeUsersModal} />
-                  ))}
-                </PostList>
+                {isPost ? (
+                  <PostList style={{ height: "auto", overflow: "inherit" }}>
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => (
+                      <PostItem setLikeUsersModal={setLikeUsersModal} />
+                    ))}
+                  </PostList>
+                ) : (
+                  <NonePost />
+                )}
               </div>
             </ProfileColSpanBox>
           </ProfileContentInner>
