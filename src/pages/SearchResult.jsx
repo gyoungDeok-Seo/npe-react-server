@@ -6,7 +6,8 @@ import SeachAndCategory from "../container/SearchResult/SeachAndCategory";
 import CategoryProfile from "../container/SearchResult/CategoryProfile";
 import CategoryPost from "../container/SearchResult/CategoryPost";
 import CategoryQna from "../container/SearchResult/CategoryQna";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { InputRefContext } from "../context/inputRefContext";
 
 const SearchResultContainer = styled.div`
   min-height: 100vh;
@@ -31,7 +32,7 @@ const SearchResultContentBox = styled.div`
 `;
 function SearchResult() {
   const [category, setCategory] = useState(1);
-
+  const searchInputRef = useRef(null);
   const renderContent = () => {
     switch (category) {
       case 1:
@@ -47,32 +48,34 @@ function SearchResult() {
     }
   };
   return (
-    <div>
-      <div
-        style={{
-          position: "fixed",
-          zIndex: 9999,
-          top: 16,
-          left: 16,
-          right: 16,
-          bottom: 16,
-          pointerEvents: "none",
-        }}
-        className="global-toaster"
-      />
+    <InputRefContext.Provider value={searchInputRef}>
       <div>
-        <SearchResultContainer>
-          <SearchResultHeaderBox>
-            <MainHeader />
-            <SeachAndCategory category={category} setCategory={setCategory} />
-          </SearchResultHeaderBox>
-          <SearchResultContentBox>
-            {renderContent()}
-            <SideBar />
-          </SearchResultContentBox>
-        </SearchResultContainer>
+        <div
+          style={{
+            position: "fixed",
+            zIndex: 9999,
+            top: 16,
+            left: 16,
+            right: 16,
+            bottom: 16,
+            pointerEvents: "none",
+          }}
+          className="global-toaster"
+        />
+        <div>
+          <SearchResultContainer>
+            <SearchResultHeaderBox>
+              <MainHeader />
+              <SeachAndCategory category={category} setCategory={setCategory} />
+            </SearchResultHeaderBox>
+            <SearchResultContentBox>
+              {renderContent()}
+              <SideBar />
+            </SearchResultContentBox>
+          </SearchResultContainer>
+        </div>
       </div>
-    </div>
+    </InputRefContext.Provider>
   );
 }
 export default SearchResult;

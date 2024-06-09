@@ -21,7 +21,7 @@ const ProfileMiniModalBox = styled.div`
   border-radius: 0.25rem;
   width: 12.5rem;
 `;
-const ProfileMiniModalBtn = styled.button`
+const ProfileMiniModalBtn = styled(Link)`
   color: #0f172a;
   font-size: 0.875rem;
   text-align: left;
@@ -62,18 +62,18 @@ const Boundary = styled.div`
 function ProfileMiniModal({ modalRef }) {
   return (
     <ProfileMiniModalBox ref={modalRef}>
-      <ProfileMiniModalBtn type="button" aria-hidden="true">
+      <ProfileMiniModalBtn to="/profiles">
         <span>내 프로필</span>
       </ProfileMiniModalBtn>
-      <ProfileMiniModalBtn type="button" aria-hidden="true">
+      <ProfileMiniModalBtn to="#">
         <span>저장한 게시물</span>
       </ProfileMiniModalBtn>
-      <ProfileMiniModalBtn type="button" aria-hidden="true">
+      <ProfileMiniModalBtn to="#">
         <span>관심분야 설정</span>
       </ProfileMiniModalBtn>
       <Boundary />
-      <ProfileMiniModaLogout href="/">
-        <span class="tw-text-color-slate-900">로그아웃</span>
+      <ProfileMiniModaLogout to="/">
+        <span>로그아웃</span>
       </ProfileMiniModaLogout>
     </ProfileMiniModalBox>
   );

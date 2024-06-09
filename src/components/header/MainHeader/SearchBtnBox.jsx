@@ -1,4 +1,7 @@
+import { useContext } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { InputRefContext } from "../../../context/inputRefContext";
 
 const Search = styled.div`
   font-size: 0.875rem;
@@ -10,10 +13,13 @@ const SearchSvg = styled.svg`
   fill: #475569;
   display: block;
 `;
-
-function SearchBox({ setSearch }) {
+function SearchBtnBox({ setSearch }) {
+  const searchInputRef = useContext(InputRefContext);
+  const { pathname } = useLocation();
   const searchOpenHandler = () => {
-    setSearch((isOpen) => !isOpen);
+    pathname.includes("/search")
+      ? searchInputRef.current.focus()
+      : setSearch((isOpen) => !isOpen);
   };
   return (
     <Search onClick={searchOpenHandler}>
@@ -38,4 +44,4 @@ function SearchBox({ setSearch }) {
     </Search>
   );
 }
-export default SearchBox;
+export default SearchBtnBox;

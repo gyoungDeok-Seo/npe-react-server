@@ -1,4 +1,8 @@
+import { useContext, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
+import { InputRefContext } from "../../../context/inputRefContext";
+
 const SearchResultSearchInputBox = styled.div`
   background-color: #fff;
   border-color: #e2e8f0;
@@ -37,8 +41,27 @@ const SearchResultSearchInput = styled.input`
   border-color: #94a3b8;
   border-radius: 0;
   line-height: 1.5rem;
+  outline: none;
 `;
+
 function SearchBox() {
+  const [searchParams] = useSearchParams();
+  const searchWord = searchParams.get("query") || "";
+  const navigate = useNavigate();
+  const [query, setQuery] = useState(searchWord);
+
+  const handleInputChange = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.keyCode === 13) {
+      navigate(`/search?query=${query}`);
+    }
+  };
+
+  const searchInputRef = useContext(InputRefContext);
+
   return (
     <SearchResultSearchInputBox>
       <SearchResultSearchInputInner>
@@ -63,7 +86,11 @@ function SearchBox() {
         </SearchResultSearchSvg>
         <SearchResultSearchInput
           placeholder="회사, 사람, 키워드로 검색"
-          defaultValue="검색"
+          ref={searchInputRef}
+          defaultValue={searchWord}
+          value={query}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyPress}
         />
       </SearchResultSearchInputInner>
     </SearchResultSearchInputBox>

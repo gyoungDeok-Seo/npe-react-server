@@ -58,15 +58,6 @@ const LinkBtn = styled(Link)`
   background-color: rgb(226 232 240 /1);
   border-radius: 0.3rem;
 `;
-const SectionContent = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 297px;
-  height: 333px;
-`;
 const SectionRightBox = styled.div`
   position: relative;
   display: flex;
