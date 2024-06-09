@@ -3,15 +3,14 @@ import NonExistent from "../../components/profiles/Intro/NonExistent";
 import { Link } from "react-router-dom";
 
 const ProfileContentContainer = styled.div`
-  border-color: var(--color-slate-200, #e2e8f0);
+  border-color: #e2e8f0;
   border-width: 0;
   border-style: solid;
   border-top-width: 1px;
 `;
 
 const ProfileContentContainerInner = styled.div`
-  --tw-bg-opacity: 1;
-  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+  background-color: rgb(226 232 240 / 1);
   display: flex;
   flex-direction: column;
   gap: 1px;
@@ -43,8 +42,7 @@ const ContentBox = styled.div`
   font-size: 1rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / 1);
   width: 100%;
 `;
 const ContentTextBox = styled.div`
@@ -52,8 +50,7 @@ const ContentTextBox = styled.div`
   justify-content: space-between;
 `;
 const ContentText = styled.p`
-  --tw-text-opacity: 1;
-  color: rgb(15 23 42 / var(--tw-text-opacity));
+  color: rgb(15 23 42 / 1);
   font-weight: 700;
   font-size: 1.125rem;
   border-width: 0;
@@ -76,13 +73,13 @@ const SkillItem = styled.div`
   border-radius: 9999px;
   border-width: 1px;
   border-style: solid;
-  border-color: var(--color-slate-200, #e2e8f0);
-  background-color: var(--color-slate-100, #f1f5f9);
+  border-color: #e2e8f0;
+  background-color: #f1f5f9;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   padding-top: 6px;
   padding-bottom: 6px;
-  color: var(--color-slate-700, #334155);
+  color: #334155;
 `;
 const SkillName = styled.h3`
   margin-top: 0;
@@ -90,7 +87,7 @@ const SkillName = styled.h3`
   font-size: 0.75rem;
   font-weight: 700;
   line-height: 1.5;
-  color: var(--color-slate-500, #64748b);
+  color: #64748b;
 `;
 const ContentList = styled.div`
   margin-top: 1.25rem;
@@ -104,7 +101,7 @@ const ContentItem = styled.div`
 `;
 const ContentSvg = styled.svg`
   flex: none;
-  fill: var(--color-slate-300, #cbd5e1);
+  fill: #cbd5e1;
 `;
 const ContentContent = styled.div`
   display: flex;
@@ -117,11 +114,11 @@ const ContentContentName = styled.div`
   flex-wrap: wrap;
   align-items: center;
   gap: 0.25rem;
-  color: var(--color-text-bold, #0f172a);
+  color: #0f172a;
   font-weight: 600;
 `;
 const ContentContentPeriod = styled.p`
-  color: var(--color-text-subtler, #64748b);
+  color: #64748b;
   font-size: 0.875rem;
   font-weight: 600;
 `;
@@ -129,7 +126,7 @@ const ContentContentAnother = styled.p`
   margin-top: 0.5rem;
   white-space: pre-line;
   font-size: 0.875rem;
-  color: var(--color-text-subtle, #334155);
+  color: #334155;
   font-weight: 500;
 `;
 const ContentContentLink = styled.div`
@@ -137,7 +134,7 @@ const ContentContentLink = styled.div`
   margin-top: 0.5rem;
   font-size: 0.875rem;
   padding: 0.25rem;
-  color: var(--color-text-subtle, #334155);
+  color: #334155;
   text-decoration-line: underline;
 `;
 const ContentContentEditBtn = styled.div`
@@ -148,7 +145,7 @@ const ContentContentEditSvg = styled.svg`
   stroke: #64748b;
 `;
 const ContentLinkSvg = styled.div`
-  fill: var(--color-slate-700, #334155);
+  fill: #334155;
   flex: none;
 `;
 

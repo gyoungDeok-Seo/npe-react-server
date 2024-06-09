@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const ProfileTopBox = styled.div`
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / 1);
 `;
 const ProfileTopInner = styled.div`
   width: 1024px;
@@ -30,10 +30,8 @@ const ProfileDescriptionTop = styled.div`
   justify-content: space-between;
 `;
 const ProfileDescriptionProfileImg = styled.img`
-  --tw-border-opacity: 1;
-  border-color: rgb(226 232 240 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  border-color: rgb(226 232 240 / 1);
+  background-color: rgb(255 255 255 / 1);
   border-radius: 9999px;
   -o-object-fit: cover;
   border-width: 1px;
@@ -47,14 +45,14 @@ const ProfileTopToolBox = styled.div`
   gap: 0.5rem;
 `;
 const ProfileShareBtn = styled.button`
-  color: var(--color-text-button-primary, #334155);
+  color: #334155;
   font-weight: 700;
   font-size: 1rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  border-color: var(--color-slate-500, #64748b);
+  border-color: #64748b;
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;
@@ -63,20 +61,20 @@ const ProfileShareBtn = styled.button`
   display: inline-flex;
 `;
 const ProfileShareSvg = styled.svg`
-  fill: var(--color-slate-700, #334155);
+  fill: #334155;
   width: 1.5rem;
   height: 1.5rem;
   display: block;
 `;
 const ProfileEditBtn = styled(Link)`
-  color: var(--color-text-button-primary, #334155);
+  color: #334155;
   font-weight: 700;
   font-size: 1rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  border-color: var(--color-slate-500, #64748b);
+  border-color: #64748b;
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;
@@ -95,25 +93,24 @@ const ProfileNameBox = styled.div`
   margin-top: 2rem;
 `;
 const ProfileName = styled.span`
-  color: var(--color-text-bold, #0f172a);
+  color: #0f172a;
   font-weight: 600;
   font-size: 1.875rem;
   display: inline;
   margin-bottom: 0;
 `;
 const ProfileJob = styled.p`
-  color: var(--color-text-subtle, #334155);
+  color: #334155;
   font-size: 1rem;
 `;
 const ProfileDescription = styled.p`
-  color: var(--color-text-bold, #0f172a);
+  color: #0f172a;
   line-height: 2;
   font-size: 1rem;
   white-space: pre-line;
 `;
 const ProfileTabBox = styled.div`
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 /1);
 `;
 const ProfileTabInner = styled.div`
   margin-left: auto;
@@ -138,14 +135,14 @@ const ProfileTabItem = styled.li`
   flex: 1 1 0%;
 `;
 const ProfileTabBtn = styled.button`
-  color: ${(props) => (props.isprofile ? "#0f172a" : "#64748b")};
+  color: ${(props) => (props.tab ? "#0f172a" : "#64748b")};
   font-weight: 700;
   font-size: 0.875rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  background-color: var(--color-white, #fff);
+  background-color: #fff;
   width: 100%;
 `;
 const ProfileTabUnderBar = styled.div`
@@ -154,12 +151,12 @@ const ProfileTabUnderBar = styled.div`
   bottom: 0;
   height: 0.125rem;
   width: 100%;
-  background-color: var(--color-slate-900, #0f172a);
-  opacity: ${(props) => (props.isprofile ? 1 : 0)};
+  background-color: #0f172a;
+  opacity: ${(props) => (props.tab ? 1 : 0)};
 `;
 
-function Intro() {
-  const isProfile = true;
+function Intro({ tab, setTab }) {
+  console.log(tab);
   return (
     <>
       <ProfileTopBox>
@@ -219,16 +216,22 @@ function Intro() {
         <ProfileTabInner>
           <ProfileTabList>
             <ProfileTabItem>
-              <ProfileTabBtn isprofile={isProfile}>프로필</ProfileTabBtn>
-              <ProfileTabUnderBar isprofile={isProfile}></ProfileTabUnderBar>
+              <ProfileTabBtn tab={tab === 1} onClick={() => setTab(1)}>
+                프로필
+              </ProfileTabBtn>
+              <ProfileTabUnderBar tab={tab === 1}></ProfileTabUnderBar>
             </ProfileTabItem>
             <ProfileTabItem>
-              <ProfileTabBtn>게시물 22</ProfileTabBtn>
-              <ProfileTabUnderBar></ProfileTabUnderBar>
+              <ProfileTabBtn tab={tab === 2} onClick={() => setTab(2)}>
+                게시물 22
+              </ProfileTabBtn>
+              <ProfileTabUnderBar tab={tab === 2}></ProfileTabUnderBar>
             </ProfileTabItem>
             <ProfileTabItem>
-              <ProfileTabBtn>Q&amp;A 활동 9</ProfileTabBtn>
-              <ProfileTabUnderBar></ProfileTabUnderBar>
+              <ProfileTabBtn tab={tab === 3} onClick={() => setTab(3)}>
+                Q&amp;A 활동 9
+              </ProfileTabBtn>
+              <ProfileTabUnderBar tab={tab === 3}></ProfileTabUnderBar>
             </ProfileTabItem>
           </ProfileTabList>
         </ProfileTabInner>

@@ -48,15 +48,14 @@ const LinkBtnBox = styled.div`
   padding-bottom: 1.75rem;
 `;
 const LinkBtn = styled(Link)`
-  --tw-text-opacity: 1;
-  color: rgb(51 65 85 / var(--tw-text-opacity));
+  color: rgb(51 65 85 / 1);
   font-weight: 700;
   font-size: 1rem;
   padding: 1rem;
   padding-left: 2rem;
   padding-right: 2rem;
   --tw-bg-opacity: 1;
-  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+  background-color: rgb(226 232 240 /1);
   border-radius: 0.3rem;
 `;
 const SectionContent = styled.div`

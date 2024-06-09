@@ -21,8 +21,7 @@ const CareerCreateCheckboxText = styled.label`
   padding-left: 0.5rem;
   font-size: 0.875rem;
   font-weight: 400;
-  --tw-text-opacity: 1;
-  color: rgb(15 23 42 / var(--tw-text-opacity));
+  color: rgb(15 23 42 / 1);
 `;
 
 function CareerPeriod() {

@@ -8,6 +8,7 @@ import CareerCreate from "./pages/CareerCreate";
 import EducationsCreate from "./pages/EducationsCreate";
 import SitesCreate from "./pages/SitesCreate";
 import ProfileSkills from "./pages/ProfileSkills";
+import SearchResult from "./pages/SearchResult";
 
 const router = createBrowserRouter([
   {
@@ -55,8 +56,12 @@ const router = createBrowserRouter([
     element: <ProfileSkills />,
     children: [],
   },
+  {
+    path: "/search",
+    element: <SearchResult />,
+    children: [],
+  },
 ]);
-
 function Router() {
   return <RouterProvider router={router} />;
 }

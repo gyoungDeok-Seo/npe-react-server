@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Header from "../components/Header/Header";
 import AvoidMistakesModal from "../components/profiles/Modal/AvoidMistakesModal";
 import SkillList from "../components/ProfileSkills/SkillList";
 import SelectSkillItem from "../components/ProfileSkills/SelectSkillItem";
 import SkillSearchInput from "../components/ProfileSkills/SkillSearchInput";
+import MainHeader from "../components/Header/MainHeader";
 
 const CareerSkillModalBox = styled.div`
     padding-left: 1rem;
@@ -74,21 +74,41 @@ function ProfileSkills() {
         }
     }, [isExit]);
 
-    return (
-        <>
-            <div>
-                <div
-                    style={{
-                        position: "fixed",
-                        zIndex: 9999,
-                        top: "16px",
-                        left: "16px",
-                        right: "16px",
-                        bottom: "16px",
-                        pointerEvents: "none",
-                    }}
-                    className="global-toaster"
-                ></div>
+
+  return (
+    <>
+      <div>
+        <div
+          style={{
+            position: "fixed",
+            zIndex: 9999,
+            top: "16px",
+            left: "16px",
+            right: "16px",
+            bottom: "16px",
+            pointerEvents: "none",
+          }}
+          className="global-toaster"
+        ></div>
+        <div>
+          <MainHeader setAvoidMistakesModal={setAvoidMistakesModal} />
+          <div style={{ height: "3.5rem" }}></div>
+          <CareerSkillModalBox>
+            <CareerSkillModalContentBox>
+              <CareerSkillModalTitle>
+                내 스킬을 선택해 주세요.
+              </CareerSkillModalTitle>
+              {selectedSkills.length !== 0 && (
+                <CareerSkillModalCraeteItemBox>
+                  <SelectSkillItem
+                    setSelectedSkills={setSelectedSkills}
+                    selectedSkills={selectedSkills}
+                  />
+                </CareerSkillModalCraeteItemBox>
+              )}
+              <CareerSkillModalContent>
+                <SkillSearchInput setSelectedSkills={setSelectedSkills} />
+                <CareerSkillModalRelativeBox></CareerSkillModalRelativeBox>
                 <div>
                     <Header setAvoidMistakesModal={setAvoidMistakesModal} />
                     <div style={{ height: "3.5rem" }}></div>

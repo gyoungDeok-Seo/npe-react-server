@@ -1,15 +1,33 @@
 import styled from "styled-components";
-import Header from "../components/Header/Header";
-import Intro from "../container/Profiles/Intro";
-import Profile from "../container/Profiles/Profile";
+import Intro from "../container/profiles/Intro";
+import Profile from "../container/profiles/Profile";
+import { useState } from "react";
+import Post from "../container/profiles/Post";
+import QnaActivity from "../container/profiles/QnaActivity";
+import MainHeader from "../components/Header/MainHeader";
 
 const MyprofileContainer = styled.div`
   position: relative;
-  background-color: var(--color-white, #fff);
+  background-color: #fff;
   min-height: 100vh;
 `;
 
 function Profiles() {
+  const [tab, setTab] = useState(1);
+
+  const renderContent = () => {
+    switch (tab) {
+      case 1:
+        return <Profile />;
+      case 2:
+        return <Post />;
+      case 3:
+        return <QnaActivity />;
+      default:
+        return <Profile />;
+    }
+  };
+
   return (
     <div>
       <div
@@ -26,9 +44,9 @@ function Profiles() {
       ></div>
       <div>
         <MyprofileContainer>
-          <Header />
-          <Intro />
-          <Profile />
+          <MainHeader />
+          <Intro setTab={setTab} tab={tab} />
+          {renderContent()}
         </MyprofileContainer>
       </div>
     </div>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 const CareerSkillModalCraeteItem = styled.button`
@@ -7,8 +6,7 @@ const CareerSkillModalCraeteItem = styled.button`
   gap: 0.5rem;
   width: -moz-fit-content;
   width: fit-content;
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / 1);
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
   padding-left: 0.75rem;

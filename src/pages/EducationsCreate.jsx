@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../components/Header/Header";
 import styled from "styled-components";
 import AvoidMistakesModal from "../components/profiles/Modal/AvoidMistakesModal";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +7,7 @@ import CourseInput from "../components/EducationsCreate/CourseInput";
 import EducationsPeriod from "../components/EducationsCreate/EducationsPeriod";
 import LinkInput from "../components/EducationsCreate/LinkInput";
 import DescriptionTextarea from "../components/EducationsCreate/DescriptionTextarea";
+import MainHeader from "../components/Header/MainHeader";
 
 const CreateEducationsBox = styled.div`
     padding-left: 1rem;
@@ -91,37 +91,42 @@ function EducationsCreate() {
         }
     }, [isExit]);
 
-    return (
-        <>
-            <div>
-                <div>
-                    <div
-                        style={{
-                            position: "fixed",
-                            zIndex: 9999,
-                            top: "16px",
-                            left: "16px",
-                            right: "16px",
-                            bottom: "16px",
-                            pointerEvents: "none",
-                        }}
-                        className="global-toaster"
-                    ></div>
-                    <div>
-                        <Header setAvoidMistakesModal={setAvoidMistakesModal} />
-                        <div style={{ height: "3.5rem" }}></div>
-                        <CreateEducationsBox>
-                            <InstitutionInput />
-                            <CourseInput />
-                            <EducationsPeriod />
-                            <LinkInput />
-                            <DescriptionTextarea />
-                        </CreateEducationsBox>
-                    </div>
-                </div>
-            </div>
-            {avoidMistakesModal && <AvoidMistakesModal setAvoidMistakesModal={setAvoidMistakesModal} setIsExit={setIsExit} />}
-        </>
-    );
+  return (
+    <>
+      <div>
+        <div>
+          <div
+            style={{
+              position: "fixed",
+              zIndex: 9999,
+              top: "16px",
+              left: "16px",
+              right: "16px",
+              bottom: "16px",
+              pointerEvents: "none",
+            }}
+            className="global-toaster"
+          ></div>
+          <div>
+            <MainHeader setAvoidMistakesModal={setAvoidMistakesModal} />
+            <div style={{ height: "3.5rem" }}></div>
+            <CreateEducationsBox>
+              <InstitutionInput />
+              <CourseInput />
+              <EducationsPeriod />
+              <LinkInput />
+              <DescriptionTextarea />
+            </CreateEducationsBox>
+          </div>
+        </div>
+      </div>
+      {avoidMistakesModal && (
+        <AvoidMistakesModal
+          setAvoidMistakesModal={setAvoidMistakesModal}
+          setIsExit={setIsExit}
+        />
+      )}
+    </>
+  );
 }
 export default EducationsCreate;

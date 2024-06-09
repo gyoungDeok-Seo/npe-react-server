@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../components/Header/Header";
 import styled from "styled-components";
 import IndustryModal from "../components/CareerCreate/IndustryModal";
 import CareerSkillModal from "../components/CareerCreate/CareerSkillModal";
@@ -12,6 +11,7 @@ import IndustrySelect from "../components/CareerCreate/IndustrySelect";
 import SkillSelect from "../components/CareerCreate/SkillSelect";
 import DescriptionTextarea from "../components/CareerCreate/DescriptionTextarea";
 import LinkInput from "../components/CareerCreate/LinkInput";
+import MainHeader from "../components/Header/MainHeader";
 
 export const CareerCreateBox = styled.div`
     padding-left: 1rem;
@@ -249,39 +249,62 @@ function CareerCreate() {
         }
     }, [isExit]);
 
-    return (
-        <>
-            <div>
-                <div
-                    style={{
-                        position: "fixed",
-                        zIndex: 9999,
-                        top: "16px",
-                        left: "16px",
-                        right: "16px",
-                        bottom: "16px",
-                        pointerEvents: "none",
-                    }}
-                    className="global-toaster"
-                ></div>
-                <div>
-                    <Header setAvoidMistakesModal={setAvoidMistakesModal} />
-                    <div style={{ height: "3.5rem" }}></div>
-                    <CareerCreateBox>
-                        <CompanyInput />
-                        <TitleInput />
-                        <PeriodSelectBox />
-                        <IndustrySelect setIndustryModal={setIndustryModal} industry={industry} />
-                        <SkillSelect setCareerSkillModal={setCareerSkillModal} careerSkill={careerSkill} />
-                        <DescriptionTextarea />
-                        <LinkInput />
-                    </CareerCreateBox>
-                </div>
-            </div>
-            {industryModal && <IndustryModal setIndustryModal={setIndustryModal} setIndustry={setIndustry} industry={industry} />}
-            {careerSkillModal && <CareerSkillModal setCareerSkillModal={setCareerSkillModal} setCareerSkill={setCareerSkill} careerSkill={careerSkill} />}
-            {avoidMistakesModal && <AvoidMistakesModal setAvoidMistakesModal={setAvoidMistakesModal} setIsExit={setIsExit} />}
-        </>
-    );
+  return (
+    <>
+      <div>
+        <div
+          style={{
+            position: "fixed",
+            zIndex: 9999,
+            top: "16px",
+            left: "16px",
+            right: "16px",
+            bottom: "16px",
+            pointerEvents: "none",
+          }}
+          className="global-toaster"
+        ></div>
+        <div>
+          <MainHeader setAvoidMistakesModal={setAvoidMistakesModal} />
+          <div style={{ height: "3.5rem" }}></div>
+          <CareerCreateBox>
+            <CompanyInput />
+            <TitleInput />
+            <PeriodSelectBox />
+            <IndustrySelect
+              setIndustryModal={setIndustryModal}
+              industry={industry}
+            />
+            <SkillSelect
+              setCareerSkillModal={setCareerSkillModal}
+              careerSkill={careerSkill}
+            />
+            <DescriptionTextarea />
+            <LinkInput />
+          </CareerCreateBox>
+        </div>
+      </div>
+      {industryModal && (
+        <IndustryModal
+          setIndustryModal={setIndustryModal}
+          setIndustry={setIndustry}
+          industry={industry}
+        />
+      )}
+      {careerSkillModal && (
+        <CareerSkillModal
+          setCareerSkillModal={setCareerSkillModal}
+          setCareerSkill={setCareerSkill}
+          careerSkill={careerSkill}
+        />
+      )}
+      {avoidMistakesModal && (
+        <AvoidMistakesModal
+          setAvoidMistakesModal={setAvoidMistakesModal}
+          setIsExit={setIsExit}
+        />
+      )}
+    </>
+  );
 }
 export default CareerCreate;

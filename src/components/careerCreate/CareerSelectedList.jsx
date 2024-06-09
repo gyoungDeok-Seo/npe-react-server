@@ -15,8 +15,7 @@ const CareerCreateSelected = styled.div`
   padding-bottom: 0.625rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+  background-color: rgb(241 245 249 / 1);
   border-width: 1px;
   border-radius: 9999px;
 `;
@@ -36,11 +35,10 @@ const CareerCreateSelectedBtn = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  color: rgb(51 65 85 / var(--tw-text-opacity));
+  color: rgb(51 65 85 / 1);
   font-weight: 700;
   font-size: 0.875rem;
   padding: 0.25rem;
-  --tw-text-opacity: 1;
   border-radius: 0.25rem;
 `;
 const CareerCreateSelectedBtnSvg = styled.svg`
