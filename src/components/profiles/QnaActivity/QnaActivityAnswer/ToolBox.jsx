@@ -51,7 +51,10 @@ const QnaActivityToolLikeText = styled.span`
 `;
 
 const QnaActivityToolComment = styled(Link)`
-  fill: #64748b;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 `;
 
 const QnaActivityToolCommentSvg = styled.svg`
@@ -59,7 +62,7 @@ const QnaActivityToolCommentSvg = styled.svg`
 `;
 
 const QnaActivityToolCommentText = styled.span`
-  fill: ${(props) => (props.isOn ? "#0d9488" : "#64748b")};
+  color: #64748b;
   font-weight: 700;
   font-size: 0.75rem;
 `;

@@ -1,14 +1,16 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import LikeUserModal from "../Modal/LikeUserModal";
-import { useState } from "react";
 import ToolBox from "./QnaActivityAnswer/ToolBox";
 import AnswerContent from "./QnaActivityAnswer/AnswerContent";
+import LikeUserModal from "../Modal/LikeUserModal";
 
 const QnaActivityAnswerItem = styled.div`
   background-color: #fff;
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid #e2e8f0;
+  &:last-child {
+    border: none;
+  }
 `;
 
 const QnaActivityAnswerContainer = styled.div`

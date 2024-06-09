@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import NonExistent from "../../components/profiles/Intro/NonExistent";
 import { Link } from "react-router-dom";
+import NonExistent from '../../components/profiles/Intro/NonExistent'
 
 const ProfileContentContainer = styled.div`
   border-color: #e2e8f0;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import PostItem from "../../components/Profiles/Post/PostItem";
+import PostItem from "../../components/profiles/Post/PostItem";
 import { useState } from "react";
-import LikeUserModal from "../../components/Profiles/Modal/LikeUserModal";
+import LikeUserModal from "../../components/profiles/Modal/LikeUserModal";
 
 const ProfileContentContainer = styled.div`
   border-color: #e2e8f0;
@@ -138,12 +138,7 @@ function Post() {
               <div>
                 <PostList style={{ height: "auto", overflow: "inherit" }}>
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => (
-                    <>
-                      <div>
-                        <PostItem setLikeUsersModal={setLikeUsersModal} />
-                      </div>
-                      <Boundary />
-                    </>
+                    <PostItem setLikeUsersModal={setLikeUsersModal} />
                   ))}
                 </PostList>
               </div>

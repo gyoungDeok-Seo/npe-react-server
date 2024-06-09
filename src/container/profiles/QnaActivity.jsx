@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import OptionBar from "../../components/Profiles/QnaActivity/OptionBar";
-import QnaActivityAnswer from "../../components/Profiles/QnaActivity/QnaActivityAnswer";
-import QnaActivityQuestion from "../../components/Profiles/QnaActivity/QnaActivityQuestion";
+import OptionBar from "../../components/profiles/QnaActivity/OptionBar";
+import QnaActivityAnswer from "../../components/profiles/QnaActivity/QnaActivityAnswer";
+import QnaActivityQuestion from "../../components/profiles/QnaActivity/QnaActivityQuestion";
 import { useState } from "react";
 
 const QnaActivityContainer = styled.div`
@@ -42,12 +41,6 @@ const QnaActivityAnswerList = styled.div`
   gap: 0.75rem;
 `;
 
-const Boundary = styled.span`
-  border-color: #e2e8f0;
-  width: 100%;
-  margin-top: 0;
-  margin-bottom: 0;
-`;
 function QnaActivity() {
   const [option, setOption] = useState(1);
   const [likeUsersModal, setLikeUsersModal] = useState(false);
@@ -61,15 +54,18 @@ function QnaActivity() {
               <QnaActivityAnswerList
                 style={{ height: "auto", overflow: "inherit" }}
               >
-                {option === 1 ? (
-                  <QnaActivityAnswer
-                    likeUsersModal={likeUsersModal}
-                    setLikeUsersModal={setLikeUsersModal}
-                  />
-                ) : (
-                  <QnaActivityQuestion />
-                )}
-                <Boundary />
+                {[1, 2, 3, 4, 5].map(() => (
+                  <>
+                    {option === 1 ? (
+                      <QnaActivityAnswer
+                        likeUsersModal={likeUsersModal}
+                        setLikeUsersModal={setLikeUsersModal}
+                      />
+                    ) : (
+                      <QnaActivityQuestion />
+                    )}
+                  </>
+                ))}
               </QnaActivityAnswerList>
             </div>
           </QnaActivityInner>

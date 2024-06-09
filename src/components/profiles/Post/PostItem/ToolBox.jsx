@@ -113,7 +113,6 @@ function ToolBox() {
             strokeWidth="0"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-            isOn={isLike}
           >
             <g>
               <g id="style=outline">
@@ -131,7 +130,6 @@ function ToolBox() {
           type="button"
           aria-label="게시물 저장하기"
           onClick={handleSave}
-          isOn={isLike}
         >
           <ProfilePostToolOtherSvg
             width="24"
@@ -139,6 +137,7 @@ function ToolBox() {
             strokeWidth="0"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
+            isOn={isSave}
           >
             <g>
               <g id="style=outline">
@@ -168,7 +167,6 @@ function ToolBox() {
             strokeWidth="0"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-            isOn={isLike}
           >
             <g>
               <g id="style=outline">

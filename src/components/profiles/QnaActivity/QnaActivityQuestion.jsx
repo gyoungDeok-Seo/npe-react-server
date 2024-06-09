@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const QnaActivityQuestionItem = styled.div``;
+const QnaActivityQuestionItem = styled.div`
+  border-bottom: 1px solid #e2e8f0;
+  &:last-child {
+    border: none;
+  }
+`;
 const QnaActivityQuestionContainer = styled.div`
   display: flex;
   flex-direction: column;
