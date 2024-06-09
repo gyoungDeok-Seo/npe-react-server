@@ -43,6 +43,9 @@ const QuestionBox = styled(Link)`
     gap: 0.5rem;
     align-items: flex-start;
     display: flex;
+    &:hover {
+        background-color: var(--color-background-hover, #f8fafc);
+    }
 `;
 
 const RankingBox = styled.div`
@@ -55,15 +58,15 @@ const RankingBox = styled.div`
 const RankingNumber = styled.span`
     font-weight: 700;
     font-size: 0.875rem;
-`
+`;
 
 const HighRankingNumber = styled(RankingNumber)`
     color: var(--color-slate-900, #0f172a);
-`
+`;
 
 const LowRankingNumber = styled(RankingNumber)`
     color: var(--color-slate-400, #94a3b8);
-`
+`;
 
 const QuestionContentBox = styled.div`
     gap: 0.25rem;
@@ -85,7 +88,7 @@ const QuestionStatsBox = styled.div`
     gap: 0.25rem;
     align-items: center;
     display: flex;
-`
+`;
 
 const QuestionStat = styled.span`
     --tw-text-opacity: 1;
@@ -93,13 +96,13 @@ const QuestionStat = styled.span`
     font-size: 0.75rem;
 `;
 
-function TodayTopTenSlideBox() {
+function TodayTopTenSlideBox({ transform }) {
     return (
         <ContentsListBox>
             <QuestionsViewBox>
-                <QuestionsListTrailer>
+                <QuestionsListTrailer style={{ transform }}>
                     <QuestionsListSlide style={{ width: "348px", marginRight: "24px" }}>
-                        <QuestionBox href="">
+                        <QuestionBox to="">
                             <RankingBox>
                                 <HighRankingNumber>1</HighRankingNumber>
                             </RankingBox>
@@ -116,7 +119,7 @@ function TodayTopTenSlideBox() {
                                 </QuestionStatsBox>
                             </QuestionContentBox>
                         </QuestionBox>
-                        <QuestionBox href="">
+                        <QuestionBox to="">
                             <RankingBox>
                                 <HighRankingNumber>2</HighRankingNumber>
                             </RankingBox>
@@ -133,7 +136,7 @@ function TodayTopTenSlideBox() {
                                 </QuestionStatsBox>
                             </QuestionContentBox>
                         </QuestionBox>
-                        <QuestionBox href="">
+                        <QuestionBox to="">
                             <RankingBox>
                                 <HighRankingNumber>3</HighRankingNumber>
                             </RankingBox>
@@ -152,7 +155,7 @@ function TodayTopTenSlideBox() {
                         </QuestionBox>
                     </QuestionsListSlide>
                     <QuestionsListSlide style={{ width: "348px", marginRight: "24px" }}>
-                        <QuestionBox href="">
+                        <QuestionBox to="">
                             <RankingBox>
                                 <LowRankingNumber>4</LowRankingNumber>
                             </RankingBox>
@@ -169,7 +172,7 @@ function TodayTopTenSlideBox() {
                                 </QuestionStatsBox>
                             </QuestionContentBox>
                         </QuestionBox>
-                        <QuestionBox href="">
+                        <QuestionBox to="">
                             <RankingBox>
                                 <LowRankingNumber>5</LowRankingNumber>
                             </RankingBox>
@@ -186,7 +189,7 @@ function TodayTopTenSlideBox() {
                                 </QuestionStatsBox>
                             </QuestionContentBox>
                         </QuestionBox>
-                        <QuestionBox href="">
+                        <QuestionBox to="">
                             <RankingBox>
                                 <LowRankingNumber>6</LowRankingNumber>
                             </RankingBox>
@@ -205,7 +208,7 @@ function TodayTopTenSlideBox() {
                         </QuestionBox>
                     </QuestionsListSlide>
                     <QuestionsListSlide style={{ width: "348px", marginRight: "24px" }}>
-                        <QuestionBox href="">
+                        <QuestionBox to="">
                             <RankingBox>
                                 <LowRankingNumber>7</LowRankingNumber>
                             </RankingBox>
@@ -222,7 +225,7 @@ function TodayTopTenSlideBox() {
                                 </QuestionStatsBox>
                             </QuestionContentBox>
                         </QuestionBox>
-                        <QuestionBox href="">
+                        <QuestionBox to="">
                             <RankingBox>
                                 <LowRankingNumber>8</LowRankingNumber>
                             </RankingBox>
@@ -239,7 +242,7 @@ function TodayTopTenSlideBox() {
                                 </QuestionStatsBox>
                             </QuestionContentBox>
                         </QuestionBox>
-                        <QuestionBox href="">
+                        <QuestionBox to="">
                             <RankingBox>
                                 <LowRankingNumber>9</LowRankingNumber>
                             </RankingBox>
@@ -258,7 +261,7 @@ function TodayTopTenSlideBox() {
                         </QuestionBox>
                     </QuestionsListSlide>
                     <QuestionsListSlide style={{ width: "348px", marginRight: "24px" }}>
-                        <QuestionBox href="">
+                        <QuestionBox to="">
                             <RankingBox>
                                 <LowRankingNumber>10</LowRankingNumber>
                             </RankingBox>

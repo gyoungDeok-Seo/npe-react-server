@@ -4,80 +4,80 @@ import NameInput from "../components/ProfileUpdate/NameInput";
 import ProfileFileInput from "../components/ProfileUpdate/ProfileFileInput";
 import RefInput from "../components/ProfileUpdate/RefInput";
 import DescriptionTextarea from "../components/ProfileUpdate/DescriptionTextarea";
-import AvoidMistakesModal from "../components/Profiles/Modal/AvoidMistakesModal";
+import AvoidMistakesModal from "../components/profiles/Modal/AvoidMistakesModal";
 import { useNavigate } from "react-router-dom";
 import MainHeader from "../components/Header/MainHeader";
 
 const ProfileUpdateBox = styled.div`
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-bottom: 3rem;
-  @media (min-width: 1024px) {
-    & {
-      padding-top: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 3rem;
+    @media (min-width: 1024px) {
+        & {
+            padding-top: 2rem;
+        }
     }
-  }
-  @media (min-width: 1024px) {
-    & {
-      width: 33rem;
+    @media (min-width: 1024px) {
+        & {
+            width: 33rem;
+        }
     }
-  }
-  @media (min-width: 1024px) {
-    & {
-      margin-left: auto;
-      margin-right: auto;
+    @media (min-width: 1024px) {
+        & {
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
-  }
 `;
 const ProfileUpdateInner = styled.div`
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 `;
 export const ProfileUpdateInputBox = styled.div`
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 `;
 export const ProfileUpdateInputInner = styled.div`
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
 `;
 export const ProfileUpdateLabel = styled.label`
-  margin-bottom: 0;
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: #334155;
+    margin-bottom: 0;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #334155;
 `;
 export const ProfileUpdateLabelSub = styled.span`
-  margin-left: 0.25rem;
-  font-weight: 400;
-  color: #64748b;
+    margin-left: 0.25rem;
+    font-weight: 400;
+    color: #64748b;
 `;
 export const InputLengthCountText = styled.p`
-  font-size: 0.875rem;
-  color: #64748b;
+    font-size: 0.875rem;
+    color: #64748b;
 `;
 export const ProfileUpdateInput = styled.input`
-  --tw-shadow: 0 0 #0000;
-  -moz-appearance: none;
-  appearance: none;
-  display: block;
-  width: 100%;
-  border-radius: 0.25rem;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #e2e8f0;
-  background-color: #fff;
-  padding: 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #0f172a;
+    --tw-shadow: 0 0 #0000;
+    -moz-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    border-radius: 0.25rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #e2e8f0;
+    background-color: #fff;
+    padding: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #0f172a;
 `;
 
 function ProfileUpdate() {
-  const navigate = useNavigate(null);
-  const [avoidMistakesModal, setAvoidMistakesModal] = useState(false);
-  const [isExit, setIsExit] = useState(false);
+    const navigate = useNavigate(null);
+    const [avoidMistakesModal, setAvoidMistakesModal] = useState(false);
+    const [isExit, setIsExit] = useState(false);
 
   useEffect(() => {
     if (isExit) {
