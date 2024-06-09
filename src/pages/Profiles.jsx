@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import Intro from "../container/profiles/Intro";
-import Profile from "../container/profiles/Profile";
 import { useState } from "react";
-import Post from "../container/profiles/Post";
-import QnaActivity from "../container/profiles/QnaActivity";
+import Intro from "../container/Profiles/Intro";
+import Profile from "../container/Profiles/Profile";
+import Post from "../container/Profiles/Post";
+import QnaActivity from "../container/Profiles/QnaActivity";
 import MainHeader from "../components/Header/MainHeader";
 
 const MyprofileContainer = styled.div`

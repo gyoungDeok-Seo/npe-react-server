@@ -65,6 +65,7 @@ function DescriptionTextarea() {
                               • 쇼핑라이브 프론트 지면 개발
                               • 프론트 매시업 api 개발"
         onChange={handleDescriptionChange}
+        maxLength={1000}
       ></CareerCreateTextarea>
       <CareerCreateTextareaCount>
         {shortDescriptionLength}/1000
