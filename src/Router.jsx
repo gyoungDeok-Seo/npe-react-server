@@ -10,6 +10,7 @@ import SitesCreate from "./pages/SitesCreate";
 import ProfileSkills from "./pages/ProfileSkills";
 import SearchResult from "./pages/SearchResult";
 import QnaDetail from "./pages/QnaDetail";
+import TaggedSearch from "./pages/TaggedSearch";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
     {
         path: "/qnas/detail",
         element: <QnaDetail />,
+        children: [],
+    },
+    {
+        path: "/qnas/tagged/:tag",
+        element: <TaggedSearch />,
         children: [],
     },
     {
@@ -62,11 +68,11 @@ const router = createBrowserRouter([
         element: <ProfileSkills />,
         children: [],
     },
-  {
-    path: "/search",
-    element: <SearchResult />,
-    children: [],
-  },
+    {
+        path: "/search",
+        element: <SearchResult />,
+        children: [],
+    },
 ]);
 function Router() {
     return <RouterProvider router={router} />;
