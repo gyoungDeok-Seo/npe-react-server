@@ -3,7 +3,7 @@ import QnaMainContents from "../container/Qna/QnaMainContents";
 import QnaSidebar from "../container/Qna/QnaSidebar";
 import { styled } from "styled-components";
 import { useState } from "react";
-import Header from "../components/Header/Header";
+import MainHeader from "../components/Header/MainHeader";
 
 const QnaWrapper = styled.div`
   --elevation-shadow-small: 0px 2px 4px 0px rgba(100, 116, 139, 0.1);
@@ -44,7 +44,7 @@ function QnA() {
         className="global-toaster"
       ></div>
       <div>
-        <Header />
+        <MainHeader />
         <QnaContainer>
           <QnaSidebar />
           <QnaMainContents />

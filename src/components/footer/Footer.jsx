@@ -7,8 +7,8 @@ const FooterContainer = styled.div`
   border-style: solid;
   border-top-width: 1px;
   border-width: 0;
-  border-color: var(--color-slate-300, #cbd5e1);
-  background-color: var(--color-slate-50, #f8fafc);
+  border-color: #cbd5e1;
+  background-color: #f8fafc;
 `;
 const FooterBox = styled.div`
   display: flex;
@@ -35,13 +35,13 @@ const Terms = styled.span`
   display: block;
   text-underline-offset: 2px;
   text-decoration-line: underline;
-  color: var(--color-slate-400, #94a3b8);
+  color: #94a3b8;
   font-size: 0.75rem;
 `;
 const Slate = styled.div`
   width: 1px;
   height: 0.75rem;
-  background-color: var(--color-slate-300, #cbd5e1);
+  background-color: #cbd5e1;
 `;
 const Privacy = styled.div`
   display: block;
@@ -49,7 +49,7 @@ const Privacy = styled.div`
   font-weight: 700;
   text-underline-offset: 2px;
   text-decoration-line: underline;
-  color: var(--color-slate-400, #94a3b8);
+  color: #94a3b8;
 `;
 const FooterMid = styled.div`
   display: flex;
@@ -59,16 +59,16 @@ const FooterMid = styled.div`
   gap: 0.5rem;
   row-gap: 0.25rem;
   font-size: 0.75rem;
-  color: var(--color-text-subtlest, #94a3b8);
+  color: #94a3b8;
 `;
 const FooterBottom = styled.div`
   text-align: center;
   font-size: 0.75rem;
-  color: var(--color-slate-400, #94a3b8);
+  color: #94a3b8;
 `;
 const ConsumerResolutionLink = styled.span`
   font-size: 0.75rem;
-  color: var(--color-slate-400, #94a3b8);
+  color: #94a3b8;
   text-decoration-line: underline;
   text-underline-offset: 2px;
 `;

@@ -5,11 +5,8 @@ import {
   CreateEducationsInputCount,
   CreateEducationsLabel,
   CreateEducationsPartTitleBox,
-  CreateEducationsRelativeBox,
   EducationsInputBox,
-  EducationsInputBoxTop,
 } from "../../pages/EducationsCreate";
-import { Pilsu } from "../../pages/CareerCreate";
 
 function CourseInput() {
   const [course, setCourse] = useState("");

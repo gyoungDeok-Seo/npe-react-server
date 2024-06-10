@@ -65,6 +65,7 @@ function DescriptionTextarea() {
       <CreateEducationsTextarea
         placeholder="직무와 연관된 교육 내용 및 활동을 입력해 주세요."
         onChange={handleDescriptionChange}
+        maxLength={1000}
       ></CreateEducationsTextarea>
     </CreateEducationsTextareaBox>
   );

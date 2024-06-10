@@ -12,8 +12,7 @@ const LandingInner = styled.div`
   position: relative;
 `;
 const CommentBox = styled.div`
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / 1);
   padding-top: 8rem;
   padding-bottom: 8rem;
   padding-left: 1rem;
@@ -58,16 +57,14 @@ const JoinBtnsBox = styled.div`
   gap: 0.75rem;
 `;
 const KakaoJoinBtn = styled(Link)`
-  color: var(--color-text-bold, #0f172a);
+  color: #0f172a;
   font-weight: 700;
   font-size: 1rem;
   padding: 1rem;
   padding-left: 2rem;
   padding-right: 2rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 235 0 / var(--tw-bg-opacity));
-  --tw-border-opacity: 1;
-  border-color: rgb(255 235 0 / var(--tw-border-opacity));
+  background-color: rgb(255 235 0 / 1);
+  border-color: rgb(255 235 0 / 1);
   border-style: solid;
   border-width: 1px;
   border-radius: 0.3rem;
@@ -78,19 +75,6 @@ const KakaoJoinBtn = styled(Link)`
 const KakaoImg = styled.img`
   width: 1.25rem;
   height: 1.25rem;
-`;
-const EmailJoinBtn = styled(Link)`
-  color: var(--color-white, #fff);
-  font-weight: 700;
-  font-size: 1rem;
-  padding: 1rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  background-color: transparent;
-  border-color: var(--color-white, #fff);
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 0.3rem;
 `;
 
 function Landing() {
@@ -158,7 +142,6 @@ function Landing() {
                 />
                 <span>카카오로 3초만에 가입하기</span>
               </KakaoJoinBtn>
-              <EmailJoinBtn to="/">이메일로 가입하기</EmailJoinBtn>
             </JoinBtnsBox>
           </CommentInner>
         </CommentBox>

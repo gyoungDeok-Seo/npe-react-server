@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import Header from "../components/Header/Header";
 import QnaDetailMainContainer from "../container/Qna/QnaDetailMainContainer";
+import MainHeader from "../components/Header/MainHeader";
 
 const QnaDetailWrapper = styled.div`
     margin-left: auto;
@@ -18,7 +18,7 @@ const QnaDetailWrapper = styled.div`
 function QnaDetail() {
     return (
         <div>
-            <Header />
+            <MainHeader />
             <QnaDetailWrapper>
                 <QnaDetailMainContainer />
                 {/* <QnaDetailSideContainer/> */}

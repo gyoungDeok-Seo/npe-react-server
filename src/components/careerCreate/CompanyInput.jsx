@@ -1,5 +1,4 @@
 import { useState } from "react";
-import styled from "styled-components";
 import { CareerCreateInput, CareerCreateInputCount, CareerCreateLabel, CareerCreatePartTitleBox, CareerCreateRelativeBox, CareerInputBox, Pilsu } from "../../pages/CareerCreate";
 
 

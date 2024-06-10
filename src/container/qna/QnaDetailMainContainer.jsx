@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+import AnswerContentBox from "../../components/Qna/Detail/AnswerContentBox";
 
 const DetailContainer = styled.div`
     padding-top: 2rem;
@@ -444,8 +445,136 @@ const WriterPosition = styled.span`
     font-size: 0.75rem;
 `;
 
+const AnswerWriteSector = styled.div`
+    padding: 1rem;
+    background-color: var(--color-white, #fff);
+    border-color: var(--color-slate-200, #e2e8f0);
+    border-style: solid;
+    border-width: 1px;
+    display: flex;
+    margin-bottom: 2.75rem;
+`;
+
+const AnswerWriterProfile = styled.img`
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 1rem;
+    border-width: 1px;
+    border-style: solid;
+    --tw-border-opacity: 1;
+    border-color: rgb(226 232 240 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    flex: none;
+    overflow: hidden;
+    border-radius: 9999px;
+    -o-object-fit: cover;
+    object-fit: cover;
+`;
+
+const AnswerWriteBox = styled.div`
+    width: 100%;
+`;
+
+const AnswerTitle = styled.p`
+    color: var(--color-text-bold, #0f172a);
+    font-weight: 700;
+    font-size: 0.875rem;
+    margin-bottom: 0.375rem;
+`;
+
+const AnswerTextareaWrap = styled.div`
+    background-color: var(--color-white, #fff);
+    position: relative;
+`;
+
+const AnswerTextareaBox = styled.div`
+    overflow-y: auto;
+    max-height: 22.5rem;
+`;
+
+const AnswerTextarea = styled.textarea`
+    color: var(--color-text-bold, #0f172a);
+    padding: 0;
+    border-width: 0;
+    resize: none;
+    width: 100%;
+    min-height: 4.5rem;
+    height: 72px !important;
+    &::placeholder {
+        color: var(--color-text-placeholder, #94a3b8);
+    }
+    &:focus-visible {
+        outline: none;
+        box-shadow: none;
+    }
+`;
+
+const AnswerRegistrationWrap = styled.div`
+    padding-top: 0.75rem;
+    border-color: var(--color-slate-200, #e2e8f0);
+    border-style: solid;
+    border-width: 0;
+    border-top-width: 1px;
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+    margin-top: 0.75rem;
+`;
+
+const AnswerRegistrationBtn = styled.button`
+    color: ${({ isWrite }) => (isWrite ? "var(--color-white, #fff)" : "var(--color-text-button-disabled, #94a3b8)")};
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background-color: ${({ isWrite }) => (isWrite ? "var(--color-background-button-primary-bold-enabled, #334155)" : "var(--color-background-button-disabled, #f1f5f9)")};
+    border-color: ${({ isWrite }) => (isWrite ? "var(--color-slate-700, #334155)" : "var(--color-slate-100, #f1f5f9)")};
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.25rem;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+    &:hover {
+        background-color: ${({ isWrite }) => (isWrite ? "var(--color-background-button-primary-bold-hover, #1e293b)" : "")};
+        cursor: ${({ isWrite }) => (isWrite ? "pointer" : "default")};
+    }
+`;
+
+const AnswerRegistrationText = styled.span`
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+`;
+
+const AnswerListSector = styled.div`
+    gap: 1.25rem;
+    flex-direction: column;
+    display: flex;
+    margin-top: 0.5rem;
+`;
+
+const AnswerListHeader = styled.p`
+    color: var(--color-slate-900, #0f172a);
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+`;
+
+const AnswerListContainer = styled.div`
+    gap: 1.25rem;
+    flex-direction: column;
+    display: flex;
+`;
+
 function QnaDetailMainContainer() {
     const [isQnaService, setIsQnaService] = useState(false);
+    const [textareaValue, setTextareaValue] = useState("");
 
     const handleClickOutside = (e) => {
         setIsQnaService(false);
@@ -470,6 +599,14 @@ function QnaDetailMainContainer() {
     ];
 
     const tags = ["react", "css", "typescript", "javascript"];
+
+    const handleTextareaChange = (e) => {
+        console.log(e.target.value);
+        if (e.target.value) {
+            console.log("트루 들어옴");
+        }
+        setTextareaValue(e.target.value);
+    };
 
     return (
         <DetailContainer>
@@ -673,7 +810,30 @@ function QnaDetailMainContainer() {
                     </RecommendedBox>
                 </DetailContents>
                 <div>
-                    
+                    <AnswerWriteSector>
+                        <AnswerWriterProfile src="https://publy.imgix.net/static/images/img_profile-dummy.png?w=200&h=200&auto=format&fm=png" />
+                        <AnswerWriteBox>
+                            <AnswerTitle>답변하기</AnswerTitle>
+                            <AnswerTextareaWrap>
+                                <AnswerTextareaBox>
+                                    <AnswerTextarea placeholder="답변으로 나누고 싶은 경험이 있으신가요?" onChange={handleTextareaChange}></AnswerTextarea>
+                                </AnswerTextareaBox>
+                            </AnswerTextareaWrap>
+                            <AnswerRegistrationWrap>
+                                <AnswerRegistrationBtn isWrite={textareaValue} disabled={textareaValue}>
+                                    <AnswerRegistrationText>답변 등록</AnswerRegistrationText>
+                                </AnswerRegistrationBtn>
+                            </AnswerRegistrationWrap>
+                        </AnswerWriteBox>
+                    </AnswerWriteSector>
+                    <AnswerListSector>
+                        <div>
+                            <AnswerListHeader>답변 1</AnswerListHeader>
+                            <AnswerListContainer>
+                                <AnswerContentBox />
+                            </AnswerListContainer>
+                        </div>
+                    </AnswerListSector>
                 </div>
                 <QnaListLink>
                     <QnaLinkText>목록으로</QnaLinkText>

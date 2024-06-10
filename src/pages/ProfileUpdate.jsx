@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../components/Header/Header";
 import styled from "styled-components";
 import NameInput from "../components/ProfileUpdate/NameInput";
 import ProfileFileInput from "../components/ProfileUpdate/ProfileFileInput";
@@ -7,6 +6,7 @@ import RefInput from "../components/ProfileUpdate/RefInput";
 import DescriptionTextarea from "../components/ProfileUpdate/DescriptionTextarea";
 import AvoidMistakesModal from "../components/profiles/Modal/AvoidMistakesModal";
 import { useNavigate } from "react-router-dom";
+import MainHeader from "../components/Header/MainHeader";
 
 const ProfileUpdateBox = styled.div`
     padding-left: 1rem;
@@ -79,41 +79,46 @@ function ProfileUpdate() {
     const [avoidMistakesModal, setAvoidMistakesModal] = useState(false);
     const [isExit, setIsExit] = useState(false);
 
-    useEffect(() => {
-        if (isExit) {
-            navigate("/profiles");
-        }
-    }, [isExit]);
-    return (
-        <>
-            <div>
-                <div
-                    style={{
-                        position: "fixed",
-                        zIndex: 9999,
-                        top: "16px",
-                        left: "16px",
-                        right: "16px",
-                        bottom: "16px",
-                        pointerEvents: "none",
-                    }}
-                    className="global-toaster"
-                ></div>
-                <div>
-                    <Header setAvoidMistakesModal={setAvoidMistakesModal} />
-                    <div style={{ height: "3.5rem" }}></div>
-                    <ProfileUpdateBox>
-                        <ProfileUpdateInner>
-                            <ProfileFileInput />
-                            <NameInput />
-                            <RefInput />
-                            <DescriptionTextarea />
-                        </ProfileUpdateInner>
-                    </ProfileUpdateBox>
-                </div>
-            </div>
-            {avoidMistakesModal && <AvoidMistakesModal setAvoidMistakesModal={setAvoidMistakesModal} setIsExit={setIsExit} />}
-        </>
-    );
+  useEffect(() => {
+    if (isExit) {
+      navigate("/profiles");
+    }
+  }, [isExit]);
+  return (
+    <>
+      <div>
+        <div
+          style={{
+            position: "fixed",
+            zIndex: 9999,
+            top: "16px",
+            left: "16px",
+            right: "16px",
+            bottom: "16px",
+            pointerEvents: "none",
+          }}
+          className="global-toaster"
+        ></div>
+        <div>
+          <MainHeader setAvoidMistakesModal={setAvoidMistakesModal} />
+          <div style={{ height: "3.5rem" }}></div>
+          <ProfileUpdateBox>
+            <ProfileUpdateInner>
+              <ProfileFileInput />
+              <NameInput />
+              <RefInput />
+              <DescriptionTextarea />
+            </ProfileUpdateInner>
+          </ProfileUpdateBox>
+        </div>
+      </div>
+      {avoidMistakesModal && (
+        <AvoidMistakesModal
+          setAvoidMistakesModal={setAvoidMistakesModal}
+          setIsExit={setIsExit}
+        />
+      )}
+    </>
+  );
 }
 export default ProfileUpdate;

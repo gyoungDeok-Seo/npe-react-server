@@ -27,8 +27,7 @@ const CareerSkillModalContent = styled.div`
   gap: 0.5rem;
 `;
 const CareerSkillModalInputBox = styled.div`
-  --tw-border-opacity: 1;
-  border-color: rgb(226 232 240 / var(--tw-border-opacity));
+  border-color: rgb(226 232 240 / 1);
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;
@@ -49,7 +48,7 @@ const CareerSkillModalInput = styled.input`
   font-size: 1rem;
   line-height: 1.5rem;
   --tw-shadow: 0 0 #0000;
-  color: var(--color-text-bold, #0f172a);
+  color: #0f172a;
   font-size: 1rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -83,8 +82,7 @@ const CareerSkillModalSkillList = styled.div`
   gap: 0.5rem;
 `;
 const CareerSkillModalSkillBtn = styled.button`
-  --tw-text-opacity: 1;
-  color: rgb(15 23 42 / var(--tw-text-opacity));
+  color: rgb(15 23 42 / 1);
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
   padding-left: 0.75rem;
@@ -112,8 +110,7 @@ const CareerSkillModalBtnBox = styled.div`
   display: flex;
   -moz-column-gap: 1rem;
   column-gap: 1rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / 1);
 `;
 
 const CareerSkillModalSubmitBtn = styled.button`
@@ -152,8 +149,7 @@ const CareerSkillModalCraeteItem = styled.button`
   gap: 0.5rem;
   width: -moz-fit-content;
   width: fit-content;
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / 1);
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
   padding-left: 0.75rem;

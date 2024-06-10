@@ -1,5 +1,5 @@
 import Footer from "../components/Footer/Footer";
-import Header from "../components/Header/Header";
+import MainHeader from "../components/Header/MainHeader";
 import Introduction from "../container/Main/Introduction";
 import Landing from "../container/Main/Landing";
 import styled from "styled-components";
@@ -24,7 +24,7 @@ function Main() {
         }}
       ></div>
       <div>
-        <Header />
+        <MainHeader />
         <Container>
           <Landing />
           <Introduction />

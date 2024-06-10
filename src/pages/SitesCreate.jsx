@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Header from "../components/Header/Header";
 import styled from "styled-components";
 import AvoidMistakesModal from "../components/profiles/Modal/AvoidMistakesModal";
 import { useNavigate } from "react-router-dom";
+import MainHeader from "../components/Header/MainHeader";
 
 const SitesCreateaBox = styled.div`
     padding-left: 1rem;
@@ -102,52 +102,67 @@ function SitesCreate() {
         }
     }, [isExit]);
 
-    return (
-        <>
-            <div>
-                <div>
-                    <div
-                        style={{
-                            position: "fixed",
-                            zIndex: 9999,
-                            top: "16px",
-                            left: "16px",
-                            right: "16px",
-                            bottom: "16px",
-                            pointerEvents: "none",
-                        }}
-                        className="global-toaster"
-                    ></div>
-                    <div>
-                        <Header setAvoidMistakesModal={setAvoidMistakesModal} />
-                        <div style={{ height: "3.5rem" }}></div>
-                        <SitesCreateaBox>
-                            <SitesInputBoxTop>
-                                <SitesCreateaPartTitleBox>
-                                    <SitesCreateaLabel>
-                                        링크 연결
-                                        <Pilsu>(필수)</Pilsu>
-                                    </SitesCreateaLabel>
-                                </SitesCreateaPartTitleBox>
-                                <SitesCreateaRelativeBox>
-                                    <SitesCreateaInput type="text" placeholder="URL을 입력해 주세요." />
-                                </SitesCreateaRelativeBox>
-                            </SitesInputBoxTop>
-                            <SitesInputBox>
-                                <SitesCreateaPartTitleBox>
-                                    <SitesCreateaLabel>
-                                        이름<Pilsu>(필수)</Pilsu>
-                                    </SitesCreateaLabel>
-                                    <SitesCreateaInputCount>{courseLength}/50</SitesCreateaInputCount>
-                                </SitesCreateaPartTitleBox>
-                                <SitesCreateaInput type="text" placeholder="표시할 이름을 입력해 주세요. (예: 포트폴리오)" maxLength="50" onChange={handleCourseChange} />
-                            </SitesInputBox>
-                        </SitesCreateaBox>
-                    </div>
-                </div>
-            </div>
-            {avoidMistakesModal && <AvoidMistakesModal setAvoidMistakesModal={setAvoidMistakesModal} setIsExit={setIsExit} />}
-        </>
-    );
+  return (
+    <>
+      <div>
+        <div>
+          <div
+            style={{
+              position: "fixed",
+              zIndex: 9999,
+              top: "16px",
+              left: "16px",
+              right: "16px",
+              bottom: "16px",
+              pointerEvents: "none",
+            }}
+            className="global-toaster"
+          ></div>
+          <div>
+            <MainHeader setAvoidMistakesModal={setAvoidMistakesModal} />
+            <div style={{ height: "3.5rem" }}></div>
+            <SitesCreateaBox>
+              <SitesInputBoxTop>
+                <SitesCreateaPartTitleBox>
+                  <SitesCreateaLabel>
+                    링크 연결
+                    <Pilsu>(필수)</Pilsu>
+                  </SitesCreateaLabel>
+                </SitesCreateaPartTitleBox>
+                <SitesCreateaRelativeBox>
+                  <SitesCreateaInput
+                    type="text"
+                    placeholder="URL을 입력해 주세요."
+                  />
+                </SitesCreateaRelativeBox>
+              </SitesInputBoxTop>
+              <SitesInputBox>
+                <SitesCreateaPartTitleBox>
+                  <SitesCreateaLabel>
+                    이름<Pilsu>(필수)</Pilsu>
+                  </SitesCreateaLabel>
+                  <SitesCreateaInputCount>
+                    {courseLength}/50
+                  </SitesCreateaInputCount>
+                </SitesCreateaPartTitleBox>
+                <SitesCreateaInput
+                  type="text"
+                  placeholder="표시할 이름을 입력해 주세요. (예: 포트폴리오)"
+                  maxLength="50"
+                  onChange={handleCourseChange}
+                />
+              </SitesInputBox>
+            </SitesCreateaBox>
+          </div>
+        </div>
+      </div>
+      {avoidMistakesModal && (
+        <AvoidMistakesModal
+          setAvoidMistakesModal={setAvoidMistakesModal}
+          setIsExit={setIsExit}
+        />
+      )}
+    </>
+  );
 }
 export default SitesCreate;
