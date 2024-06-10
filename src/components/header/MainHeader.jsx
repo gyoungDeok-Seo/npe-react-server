@@ -8,6 +8,7 @@ import OnLoginNav from "./MainHeader/OnLoginNav";
 import NonLoginNav from "./MainHeader/NonLoginNav";
 import LogoLinkBox from "./MainHeader/LogoLinkBox";
 import TabBox from "./MainHeader/TabBox";
+import CreateQnaHeader from "./CreateQnaHeader";
 
 const HeaderContainer = styled.nav`
   border-width: 0;
@@ -63,6 +64,11 @@ function MainHeader({ setAvoidMistakesModal }) {
     <>
       {path.startsWith("/profiles/") ? (
         <ProfileUpdateHeader
+          navigate={navigate}
+          setAvoidMistakesModal={setAvoidMistakesModal}
+        />
+      ) : path.includes("/create") ? (
+        <CreateQnaHeader
           navigate={navigate}
           setAvoidMistakesModal={setAvoidMistakesModal}
         />

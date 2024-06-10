@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import {
   CreateEducationsInput,
@@ -7,17 +7,21 @@ import {
   CreateEducationsPartTitleBox,
   EducationsInputBox,
 } from "../../pages/EducationsCreate";
+import { CreateEductaionContext } from "../../context/CreateEductaionContext";
 
 function CourseInput() {
-  const [course, setCourse] = useState("");
+  const { datas, setDatas } = useContext(CreateEductaionContext);
   const [courseLength, setCourseLength] = useState(0);
-  const [courseValidation, setCourseValidation] = useState(false);
 
   const handleCourseChange = (e) => {
-    const valueLength = e.target.value.length;
+    const value = e.target.value;
+    const valueLength = value.length;
     setCourseLength(valueLength);
     if (valueLength <= 50) {
-      setCourse(e.target.value);
+      setDatas((prev) => ({
+        ...prev,
+        course: value,
+      }));
     }
   };
 
@@ -33,6 +37,7 @@ function CourseInput() {
         type="text"
         placeholder="전공/과정을 입력해 주세요. (예: 웹 개발 과정)"
         maxLength="50"
+        value={datas.course}
         onChange={handleCourseChange}
       />
     </EducationsInputBox>

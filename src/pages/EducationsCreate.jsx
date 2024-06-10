@@ -8,91 +8,102 @@ import EducationsPeriod from "../components/EducationsCreate/EducationsPeriod";
 import LinkInput from "../components/EducationsCreate/LinkInput";
 import DescriptionTextarea from "../components/EducationsCreate/DescriptionTextarea";
 import MainHeader from "../components/Header/MainHeader";
+import { CreateEductaionContext } from "../context/CreateEductaionContext";
 
 const CreateEducationsBox = styled.div`
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-bottom: 3rem;
-    @media (min-width: 1024px) {
-        & {
-            padding-top: 2rem;
-        }
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 3rem;
+  @media (min-width: 1024px) {
+    & {
+      padding-top: 2rem;
     }
-    @media (min-width: 1024px) {
-        & {
-            width: 33rem;
-        }
+  }
+  @media (min-width: 1024px) {
+    & {
+      width: 33rem;
     }
-    @media (min-width: 1024px) {
-        & {
-            margin-left: auto;
-            margin-right: auto;
-        }
+  }
+  @media (min-width: 1024px) {
+    & {
+      margin-left: auto;
+      margin-right: auto;
     }
+  }
 `;
 export const EducationsInputBoxTop = styled.div`
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 `;
 export const EducationsInputBox = styled.div`
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 `;
 export const CreateEducationsPartTitleBox = styled.div`
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 `;
 export const CreateEducationsLabel = styled.label`
-    margin-bottom: 0;
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: #334155;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #334155;
 `;
 
 export const CreateEducationsInputCount = styled.p`
-    font-size: 0.875rem;
-    color: #64748b;
+  font-size: 0.875rem;
+  color: #64748b;
 `;
 export const CreateEducationsRelativeBox = styled.div`
-    position: relative;
+  position: relative;
 `;
 export const CreateEducationsInput = styled.input`
-    -moz-appearance: none;
-    appearance: none;
-    --tw-shadow: 0 0 #0000;
-    display: block;
-    width: 100%;
-    border-radius: 0.25rem;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #e2e8f0;
-    background-color: #fff;
-    padding: 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #0f172a;
-    &:focus {
-        border-color: #64748b;
-        outline: 1px solid #64748b;
-    }
-    &::placeholder {
-        font-weight: 500;
-        color: #9da7b1;
-    }
+  -moz-appearance: none;
+  appearance: none;
+  --tw-shadow: 0 0 #0000;
+  display: block;
+  width: 100%;
+  border-radius: 0.25rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e2e8f0;
+  background-color: #fff;
+  padding: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #0f172a;
+  &:focus {
+    border-color: #64748b;
+    outline: 1px solid #64748b;
+  }
+  &::placeholder {
+    font-weight: 500;
+    color: #9da7b1;
+  }
 `;
 function EducationsCreate() {
-    const navigate = useNavigate(null);
-    const [avoidMistakesModal, setAvoidMistakesModal] = useState(false);
-    const [isExit, setIsExit] = useState(false);
+  const navigate = useNavigate(null);
+  const [avoidMistakesModal, setAvoidMistakesModal] = useState(false);
+  const [isExit, setIsExit] = useState(false);
+  const [datas, setDatas] = useState({
+    institution: "",
+    course: "",
+    startYear: "",
+    startMonth: "",
+    endYear: "",
+    endMonth: "",
+    link: "",
+    description: "",
+  });
 
-    useEffect(() => {
-        if (isExit) {
-            navigate("/profiles");
-        }
-    }, [isExit]);
+  useEffect(() => {
+    if (isExit) {
+      navigate("/profiles");
+    }
+  }, [isExit]);
 
   return (
-    <>
+    <CreateEductaionContext.Provider value={{ datas, setDatas }}>
       <div>
         <div>
           <div
@@ -126,7 +137,7 @@ function EducationsCreate() {
           setIsExit={setIsExit}
         />
       )}
-    </>
+    </CreateEductaionContext.Provider>
   );
 }
 export default EducationsCreate;

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import { CreateEducationsLabel } from "../../pages/EducationsCreate";
+import { CreateEductaionContext } from "../../context/CreateEductaionContext";
 
 const CreateEducationsTextareaBox = styled.div`
   margin-bottom: 1rem;
@@ -44,14 +45,18 @@ const CreateEducationsTextareaCount = styled.p`
   color: #64748b;
 `;
 function DescriptionTextarea() {
-  const [shortDescription, setShortDescription] = useState("");
-  const [shortDescriptionLength, setShortDescriptionLength] = useState(0);
+  const { datas, setDatas } = useContext(CreateEductaionContext);
+  const [descriptionLength, setDescriptionLength] = useState(0);
 
   const handleDescriptionChange = (e) => {
-    const valueLength = e.target.value.length;
-    setShortDescriptionLength(valueLength);
+    const value = e.target.value;
+    const valueLength = value.length;
+    setDescriptionLength(valueLength);
     if (valueLength <= 1000) {
-      setShortDescription(e.target.value);
+      setDatas((prev) => ({
+        ...prev,
+        description: value,
+      }));
     }
   };
   return (
@@ -59,11 +64,12 @@ function DescriptionTextarea() {
       <CreateEducationsTextareaTextBox>
         <CreateEducationsLabel>어떤 활동을 했나요?</CreateEducationsLabel>
         <CreateEducationsTextareaCount>
-          {shortDescriptionLength}/1000
+          {descriptionLength}/1000
         </CreateEducationsTextareaCount>
       </CreateEducationsTextareaTextBox>
       <CreateEducationsTextarea
         placeholder="직무와 연관된 교육 내용 및 활동을 입력해 주세요."
+        value={datas.description}
         onChange={handleDescriptionChange}
         maxLength={1000}
       ></CreateEducationsTextarea>

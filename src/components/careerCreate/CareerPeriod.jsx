@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import {
   CareerCreateCheckbox,
@@ -11,9 +11,9 @@ import {
   CareerPeriodSelectInner,
   CareerPeriodSelectInner2,
   CareerSelectBox,
-  PeriodValidationMessage,
   Pilsu,
 } from "../../pages/CareerCreate";
+import { CreateCareerContext } from "../../context/CreateCareerContext";
 
 const CareerCreateCheckboxText = styled.label`
   margin-bottom: 0;
@@ -25,44 +25,49 @@ const CareerCreateCheckboxText = styled.label`
 `;
 
 function CareerPeriod() {
-  const [startYear, setStartYear] = useState("");
-  const [startMonth, setStartMonth] = useState("");
-  const [endYear, setEndYear] = useState("");
-  const [endMonth, setEndMonth] = useState("");
+  const { datas, setDatas } = useContext(CreateCareerContext);
   const [endDateDisabled, setEndDateDisabled] = useState(true);
-  const [periodValidation, setPeriodValidation] = useState(false);
+  const [isWorking, setIsworking] = useState(false);
 
   const handleStartChange = (e) => {
-    setStartYear(e.target.value);
-    if (e.target.value && startMonth) {
+    setDatas((prevDatas) => ({
+      ...prevDatas,
+      startYear: e.target.value,
+    }));
+    if (e.target.value && datas.startMonth) {
       setEndDateDisabled(false);
     }
   };
 
   const handleStartMonthChange = (e) => {
-    setStartMonth(e.target.value);
-    if (e.target.value && startYear) {
+    setDatas((prevDatas) => ({
+      ...prevDatas,
+      startMonth: e.target.value,
+    }));
+    if (e.target.value && datas.startYear) {
       setEndDateDisabled(false);
     }
   };
 
-  // 종료연도와 월 변경 이벤트 핸들러
   const handleEndYearChange = (e) => {
-    setEndYear(e.target.value);
+    setDatas((prevDatas) => ({
+      ...prevDatas,
+      endYear: e.target.value,
+    }));
   };
 
   const handleEndMonthChange = (e) => {
-    setEndMonth(e.target.value);
+    setDatas((prevDatas) => ({
+      ...prevDatas,
+      endMonth: e.target.value,
+    }));
   };
 
-  const [isWorking, setIsworking] = useState(false);
   const handleIsWorking = () => {
-    setIsworking((isWorking) => !isWorking);
+    setIsworking((prevIsWorking) => !prevIsWorking);
   };
-
   return (
     <>
-      {" "}
       <CareerSelectBox>
         <CareerCreateLabel>
           재직 기간
@@ -71,9 +76,8 @@ function CareerPeriod() {
         <CareerPeriodSelectBox>
           <CareerPeriodSelectInner>
             <CareerPeriodSelect
-              value={startYear}
+              value={datas.startYear}
               onChange={handleStartChange}
-              validation={periodValidation}
             >
               <option disabled="" value="-1">
                 시작연도
@@ -135,9 +139,8 @@ function CareerPeriod() {
               <option value="1970">1970년</option>
             </CareerPeriodSelect>
             <CareerPeriodSelect
-              value={startMonth}
+              value={datas.startMonth}
               onChange={handleStartMonthChange}
-              validation={periodValidation}
             >
               <option disabled="" value="-1">
                 월
@@ -163,9 +166,8 @@ function CareerPeriod() {
               <CareerPeriodSelectInner2>
                 <CareerPeriodSelect
                   disabled={endDateDisabled}
-                  value={endYear}
+                  value={datas.endYear}
                   onChange={handleEndYearChange}
-                  validation={periodValidation}
                 >
                   <option disabled="" value="-1">
                     종료연도
@@ -228,9 +230,8 @@ function CareerPeriod() {
                 </CareerPeriodSelect>
                 <CareerPeriodSelect
                   disabled={endDateDisabled}
-                  value={endMonth}
+                  value={datas.endMonth}
                   onChange={handleEndMonthChange}
-                  validation={periodValidation}
                 >
                   <option disabled="" value="-1">
                     월
@@ -252,11 +253,6 @@ function CareerPeriod() {
             )}
           </CareerPeriodSelectBox2>
         </CareerPeriodSelectBox>
-        {periodValidation && (
-          <PeriodValidationMessage>
-            기간을 올바르게 입력해 주세요.
-          </PeriodValidationMessage>
-        )}
       </CareerSelectBox>
       <CareerCreateCheckboxBox>
         <CareerCreateCheckbox

@@ -1,15 +1,27 @@
-import { useState } from "react";
-import { InputLengthCountText, ProfileUpdateInput, ProfileUpdateInputBox, ProfileUpdateInputInner, ProfileUpdateLabel, ProfileUpdateLabelSub } from "../../pages/ProfileUpdate";
+import { useContext, useState } from "react";
+import {
+  InputLengthCountText,
+  ProfileUpdateInput,
+  ProfileUpdateInputBox,
+  ProfileUpdateInputInner,
+  ProfileUpdateLabel,
+  ProfileUpdateLabelSub,
+} from "../../pages/ProfileUpdate";
+import { ProfileUpdateContext } from "../../context/ProfileUpdateContext";
 
 function NameInput() {
-  const [name, setName] = useState("");
+  const { datas, setDatas } = useContext(ProfileUpdateContext);
   const [nameLength, setNameLength] = useState(0);
 
   const handleNameChange = (e) => {
-    const valueLength = e.target.value.length;
+    const value = e.target.value;
+    const valueLength = value.length;
     setNameLength(valueLength);
     if (valueLength <= 20) {
-      setName(e.target.value);
+      setDatas((prev) => ({
+        ...prev,
+        name: value,
+      }));
     }
   };
 
@@ -27,6 +39,7 @@ function NameInput() {
         placeholder="이름을 입력해 주세요."
         name="name"
         maxLength="20"
+        value={datas.name}
         onChange={handleNameChange}
       />
     </ProfileUpdateInputBox>

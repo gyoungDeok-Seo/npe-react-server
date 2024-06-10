@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   InputLengthCountText,
   ProfileUpdateInput,
@@ -7,16 +7,21 @@ import {
   ProfileUpdateLabel,
   ProfileUpdateLabelSub,
 } from "../../pages/ProfileUpdate";
+import { ProfileUpdateContext } from "../../context/ProfileUpdateContext";
 
 function RefInput() {
-  const [rep, setRep] = useState("");
+  const { datas, setDatas } = useContext(ProfileUpdateContext);
   const [repLength, setRepLength] = useState(0);
 
   const handleRepChange = (e) => {
-    const valueLength = e.target.value.length;
+    const value = e.target.value;
+    const valueLength = value.length;
     setRepLength(valueLength);
     if (valueLength <= 40) {
-      setRep(e.target.value);
+      setDatas((prev) => ({
+        ...prev,
+        ref: value,
+      }));
     }
   };
 
@@ -34,6 +39,7 @@ function RefInput() {
         placeholder="본인을 대표하는 직함을 입력해 주세요."
         name="title"
         maxLength="40"
+        value={datas.ref}
         onChange={handleRepChange}
       />
     </ProfileUpdateInputBox>

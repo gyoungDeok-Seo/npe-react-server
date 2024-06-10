@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   CreateEducationsInput,
   CreateEducationsInputCount,
@@ -8,17 +8,21 @@ import {
   EducationsInputBoxTop,
 } from "../../pages/EducationsCreate";
 import { Pilsu } from "../../pages/CareerCreate";
+import { CreateEductaionContext } from "../../context/CreateEductaionContext";
 
 function InstitutionInput() {
-  const [institution, setInstitution] = useState("");
+  const { datas, setDatas } = useContext(CreateEductaionContext);
   const [institutionLength, setInstitutionLength] = useState(0);
-  const [itutionValidation, setInstItutionValidation] = useState(false);
 
   const handleInstitutionChange = (e) => {
-    const valueLength = e.target.value.length;
+    const value = e.target.value;
+    const valueLength = value.length;
     setInstitutionLength(valueLength);
     if (valueLength <= 50) {
-      setInstitution(e.target.value);
+      setDatas((prev) => ({
+        ...prev,
+        institution: value,
+      }));
     }
   };
 
@@ -41,6 +45,7 @@ function InstitutionInput() {
           placeholder="교육기관을 입력해 주세요."
           autocomplete="off"
           maxlength="50"
+          value={datas.institution}
           onChange={handleInstitutionChange}
         />
       </CreateEducationsRelativeBox>

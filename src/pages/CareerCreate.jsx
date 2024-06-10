@@ -5,13 +5,14 @@ import IndustryModal from "../components/CareerCreate/IndustryModal";
 import CareerSkillModal from "../components/CareerCreate/CareerSkillModal";
 import IndustrySelect from "../components/CareerCreate/IndustrySelect";
 import CompanyInput from "../components/CareerCreate/CompanyInput";
-import TitleInput from "../components/CareerCreate/TitleInput";
+import JobInput from "../components/CareerCreate/JobInput";
 import PeriodSelectBox from "../components/CareerCreate/CareerPeriod";
 import SkillSelect from "../components/CareerCreate/SkillSelect";
 import DescriptionTextarea from "../components/CareerCreate/DescriptionTextarea";
 import LinkInput from "../components/CareerCreate/LinkInput";
 import MainHeader from "../components/Header/MainHeader";
 import AvoidMistakesModal from "../components/profiles/Modal/AvoidMistakesModal";
+import { CreateCareerContext } from "../context/CreateCareerContext";
 
 export const CareerCreateBox = styled.div`
   padding-left: 1rem;
@@ -239,9 +240,19 @@ function CareerCreate() {
   const [avoidMistakesModal, setAvoidMistakesModal] = useState(false);
   const [isExit, setIsExit] = useState(false);
   const [industryModal, setIndustryModal] = useState(false);
-  const [industry, setIndustry] = useState([]);
   const [careerSkillModal, setCareerSkillModal] = useState(false);
-  const [careerSkill, setCareerSkill] = useState([]);
+  const [datas, setDatas] = useState({
+    company: "",
+    job: "",
+    startYear: "",
+    startMonth: "",
+    endYear: "",
+    endMonth: "",
+    industry: [],
+    skills: [],
+    description: "",
+    link: "",
+  });
 
   useEffect(() => {
     if (isExit) {
@@ -249,8 +260,11 @@ function CareerCreate() {
     }
   }, [isExit]);
 
+  useEffect(() => {
+    console.log(datas);
+  }, [datas]);
   return (
-    <>
+    <CreateCareerContext.Provider value={{ datas, setDatas }}>
       <div>
         <div
           style={{
@@ -269,34 +283,18 @@ function CareerCreate() {
           <div style={{ height: "3.5rem" }}></div>
           <CareerCreateBox>
             <CompanyInput />
-            <TitleInput />
+            <JobInput />
             <PeriodSelectBox />
-            <IndustrySelect
-              setIndustryModal={setIndustryModal}
-              industry={industry}
-            />
-            <SkillSelect
-              setCareerSkillModal={setCareerSkillModal}
-              careerSkill={careerSkill}
-            />
+            <IndustrySelect setIndustryModal={setIndustryModal} />
+            <SkillSelect setCareerSkillModal={setCareerSkillModal} />
             <DescriptionTextarea />
             <LinkInput />
           </CareerCreateBox>
         </div>
       </div>
-      {industryModal && (
-        <IndustryModal
-          setIndustryModal={setIndustryModal}
-          setIndustry={setIndustry}
-          industry={industry}
-        />
-      )}
+      {industryModal && <IndustryModal setIndustryModal={setIndustryModal} />}
       {careerSkillModal && (
-        <CareerSkillModal
-          setCareerSkillModal={setCareerSkillModal}
-          setCareerSkill={setCareerSkill}
-          careerSkill={careerSkill}
-        />
+        <CareerSkillModal setCareerSkillModal={setCareerSkillModal} />
       )}
       {avoidMistakesModal && (
         <AvoidMistakesModal
@@ -304,7 +302,7 @@ function CareerCreate() {
           setIsExit={setIsExit}
         />
       )}
-    </>
+    </CreateCareerContext.Provider>
   );
 }
 export default CareerCreate;

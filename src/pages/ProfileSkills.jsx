@@ -6,6 +6,7 @@ import SkillList from "../components/ProfileSkills/SkillList";
 import SelectSkillItem from "../components/ProfileSkills/SelectSkillItem";
 import SkillSearchInput from "../components/ProfileSkills/SkillSearchInput";
 import MainHeader from "../components/Header/MainHeader";
+import { CreateSkillsContext } from "../context/CreateSkillsContext";
 const CareerSkillModalBox = styled.div`
   padding-left: 1rem;
   padding-right: 1rem;
@@ -63,46 +64,15 @@ function ProfileSkills() {
   const navigate = useNavigate(null);
   const [avoidMistakesModal, setAvoidMistakesModal] = useState(false);
   const [isExit, setIsExit] = useState(false);
-  const [selectedSkills, setSelectedSkills] = useState([]);
-  const popularSkills = [
-    "javascript",
-    "React",
-    "Github",
-    "typescript",
-    "css",
-    "Java",
-    "html",
-    "Next.js",
-    "MySQL",
-    "python",
-    "html5",
-    "Node.js",
-    "UI 디자인",
-    "SpringBoot",
-    "css3",
-    "커뮤니케이션",
-    "UX 디자인",
-    "AWS",
-    "Vue.js",
-    "c언어",
-    "Android",
-    "React Query",
-    "C++",
-    "React Native",
-    "Flutter",
-    "c#",
-    "Kotlin",
-    "swift",
-    "iOS",
-    "Unity",
-  ];
+  const [datas, setDatas] = useState({ skills: [] });
+
   useEffect(() => {
     if (isExit) {
       navigate("/profiles");
     }
   }, [isExit]);
   return (
-    <>
+    <CreateSkillsContext.Provider value={{ datas, setDatas }}>
       <div>
         <div
           style={{
@@ -124,23 +94,17 @@ function ProfileSkills() {
               <CareerSkillModalTitle>
                 내 스킬을 선택해 주세요.
               </CareerSkillModalTitle>
-              {selectedSkills.length !== 0 && (
+              {datas.skills.length !== 0 && (
                 <CareerSkillModalCraeteItemBox>
-                  <SelectSkillItem
-                    setSelectedSkills={setSelectedSkills}
-                    selectedSkills={selectedSkills}
-                  />
+                  <SelectSkillItem />
                 </CareerSkillModalCraeteItemBox>
               )}
               <CareerSkillModalContent>
-                <SkillSearchInput setSelectedSkills={setSelectedSkills} />
+                <SkillSearchInput />
                 <CareerSkillModalRelativeBox></CareerSkillModalRelativeBox>
                 <div>
                   <CareerSkillModalSubTitle>인기 스킬</CareerSkillModalSubTitle>
-                  <SkillList
-                    setSelectedSkills={setSelectedSkills}
-                    selectedSkills={selectedSkills}
-                  />
+                  <SkillList />
                 </div>
               </CareerSkillModalContent>
             </CareerSkillModalContentBox>
@@ -153,7 +117,7 @@ function ProfileSkills() {
           setIsExit={setIsExit}
         />
       )}
-    </>
+    </CreateSkillsContext.Provider>
   );
 }
 export default ProfileSkills;

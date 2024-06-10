@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import { CareerCreateLabel } from "../../pages/CareerCreate";
+import { CreateCareerContext } from "../../context/CreateCareerContext";
 
 const CareerCreateTextareaBox = styled.div`
   margin-bottom: 1rem;
@@ -44,14 +45,18 @@ const CareerCreateTextareaCount = styled.p`
   color: #64748b;
 `;
 function DescriptionTextarea() {
-  const [shortDescription, setShortDescription] = useState("");
-  const [shortDescriptionLength, setShortDescriptionLength] = useState(0);
+  const { datas, setDatas } = useContext(CreateCareerContext);
+  const [descriptionLength, setDescriptionLength] = useState(0);
 
   const handleDescriptionChange = (e) => {
-    const valueLength = e.target.value.length;
-    setShortDescriptionLength(valueLength);
+    const value = e.target.value;
+    const valueLength = value.length;
+    setDescriptionLength(valueLength);
     if (valueLength <= 1000) {
-      setShortDescription(e.target.value);
+      setDatas((prev) => ({
+        ...prev,
+        description: value,
+      }));
     }
   };
   return (
@@ -65,10 +70,11 @@ function DescriptionTextarea() {
                               • 쇼핑라이브 프론트 지면 개발
                               • 프론트 매시업 api 개발"
         onChange={handleDescriptionChange}
+        value={datas.description}
         maxLength={1000}
       ></CareerCreateTextarea>
       <CareerCreateTextareaCount>
-        {shortDescriptionLength}/1000
+        {descriptionLength}/1000
       </CareerCreateTextareaCount>
     </CareerCreateTextareaBox>
   );

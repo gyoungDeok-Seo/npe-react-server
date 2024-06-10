@@ -1,17 +1,28 @@
-import { useState } from "react";
-import { CareerCreateInput, CareerCreateInputCount, CareerCreateLabel, CareerCreatePartTitleBox, CareerCreateRelativeBox, CareerInputBox, Pilsu } from "../../pages/CareerCreate";
-
+import { useContext, useState } from "react";
+import {
+  CareerCreateInput,
+  CareerCreateInputCount,
+  CareerCreateLabel,
+  CareerCreatePartTitleBox,
+  CareerCreateRelativeBox,
+  CareerInputBox,
+  Pilsu,
+} from "../../pages/CareerCreate";
+import { CreateCareerContext } from "../../context/CreateCareerContext";
 
 function CompanyInput() {
-  const [company, setCompany] = useState("");
+  const { datas, setDatas } = useContext(CreateCareerContext);
   const [companyLength, setCompanyLength] = useState(0);
-  const [companyValidation, setCompanyValidation] = useState(false);
 
   const handleNameChange = (e) => {
-    const valueLength = e.target.value.length;
+    const value = e.target.value;
+    const valueLength = value.length;
     setCompanyLength(valueLength);
     if (valueLength <= 50) {
-      setCompany(e.target.value);
+      setDatas((prev) => ({
+        ...prev,
+        company: value,
+      }));
     }
   };
 
@@ -32,8 +43,8 @@ function CompanyInput() {
           placeholder="회사명을 입력해 주세요."
           autoComplete="off"
           maxLength="50"
+          value={datas.company}
           onChange={handleNameChange}
-          validation={companyValidation}
         />
       </CareerCreateRelativeBox>
     </CareerInputBox>

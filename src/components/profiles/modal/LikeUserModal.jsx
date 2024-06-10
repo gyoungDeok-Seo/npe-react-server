@@ -136,7 +136,7 @@ function LikeUserModal({ setLikeUsersModal }) {
         >
           <LikeUserModalTItleBox>
             <LikeUserModalTitleInner>
-              <LikeUserModalTItle>반응</LikeUserModalTItle>
+              <LikeUserModalTItle>좋아요</LikeUserModalTItle>
               <LikeUserModalCancelBtn type="button" onClick={handelCancel}>
                 <LikeUserModalCancelSvg
                   width="24"

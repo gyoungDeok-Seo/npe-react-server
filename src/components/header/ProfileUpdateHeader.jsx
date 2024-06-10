@@ -1,4 +1,11 @@
 import styled from "styled-components";
+import { CreateSiteContext } from "../../context/CreateSiteContext";
+import { useContext, useEffect, useState } from "react";
+import { CreateSkillsContext } from "../../context/CreateSkillsContext";
+import { ProfileUpdateContext } from "../../context/ProfileUpdateContext";
+import { CreateEductaionContext } from "../../context/CreateEductaionContext";
+import { CreateCareerContext } from "../../context/CreateCareerContext";
+import { useLocation } from "react-router-dom";
 
 const ProfileUpdateHeaderContainer = styled.nav`
   position: fixed;
@@ -44,6 +51,9 @@ const SubmitProfileUpdateBtn = styled.button`
   font-size: 0.875rem;
   font-weight: 700;
   color: #fff;
+  &:disabled {
+    opacity: 0.7;
+  }
 `;
 const SubmitProfileUpdateBtnText = styled.span`
   -webkit-line-clamp: 1;
@@ -54,6 +64,52 @@ const SubmitProfileUpdateBtnText = styled.span`
 `;
 
 const ProfileUpdateHeader = ({ navigate, setAvoidMistakesModal }) => {
+  const { datas: sites } = useContext(CreateSiteContext);
+  const { datas: skills } = useContext(CreateSkillsContext);
+  const { datas: profile } = useContext(ProfileUpdateContext);
+  const { datas: eductaion } = useContext(CreateEductaionContext);
+  const { datas: career } = useContext(CreateCareerContext);
+
+  const location = useLocation();
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    let isValid = false;
+
+    if (location.pathname.startsWith("/profiles/update")) {
+      isValid =
+        profile.name !== "" && profile.ref !== "" && profile.description !== "";
+    } else if (location.pathname.startsWith("/profiles/careers/create")) {
+      isValid =
+        career.company !== "" &&
+        career.job !== "" &&
+        career.startYear !== "" &&
+        career.startMonth !== "" &&
+        career.endYear !== "" &&
+        career.endMonth !== "" &&
+        career.industry.length > 0 &&
+        career.skills.length > 0 &&
+        career.description !== "" &&
+        career.link !== "";
+    } else if (location.pathname.startsWith("/profiles/educations/create")) {
+      isValid =
+        eductaion.institution !== "" &&
+        eductaion.course !== "" &&
+        eductaion.startYear !== "" &&
+        eductaion.startMonth !== "" &&
+        eductaion.endYear !== "" &&
+        eductaion.endMonth !== "" &&
+        eductaion.link !== "" &&
+        eductaion.description !== "";
+    } else if (location.pathname.startsWith("/profiles/sites/create")) {
+      isValid = sites.url !== "" && sites.name !== "";
+    } else if (location.pathname.startsWith("/profiles/skills")) {
+      isValid = skills.skills.length > 0;
+    }
+
+    setIsDisabled(!isValid);
+  }, [profile, career, eductaion, sites, skills, location.pathname]);
+
   const handleUpdateProfile = () => {
     navigate("/profiles");
   };
@@ -61,6 +117,7 @@ const ProfileUpdateHeader = ({ navigate, setAvoidMistakesModal }) => {
   const handleAvoidMistakesModal = () => {
     setAvoidMistakesModal(true);
   };
+
   return (
     <ProfileUpdateHeaderContainer>
       <ExitProfileUpdateBtn type="button" onClick={handleAvoidMistakesModal}>
@@ -84,10 +141,15 @@ const ProfileUpdateHeader = ({ navigate, setAvoidMistakesModal }) => {
         </ExitProfileSvg>
       </ExitProfileUpdateBtn>
       <ProfileUpdateHeaderCenterSpace />
-      <SubmitProfileUpdateBtn type="button" onClick={handleUpdateProfile}>
+      <SubmitProfileUpdateBtn
+        type="button"
+        onClick={handleUpdateProfile}
+        disabled={isDisabled}
+      >
         <SubmitProfileUpdateBtnText>완료</SubmitProfileUpdateBtnText>
       </SubmitProfileUpdateBtn>
     </ProfileUpdateHeaderContainer>
   );
 };
+
 export default ProfileUpdateHeader;

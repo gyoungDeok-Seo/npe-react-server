@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   CareerCreateInput,
   CareerCreateInputCount,
@@ -8,17 +8,21 @@ import {
   CareerInputBox,
   Pilsu,
 } from "../../pages/CareerCreate";
+import { CreateCareerContext } from "../../context/CreateCareerContext";
 
-function TitleInput() {
-  const [title, setTitle] = useState("");
-  const [titleLength, setTitleLength] = useState(0);
-  const [titleValidation, setTitleValidation] = useState(false);
+function JobInput() {
+  const { datas, setDatas } = useContext(CreateCareerContext);
+  const [jobLength, setJobLength] = useState(0);
 
   const handleTitleChange = (e) => {
-    const valueLength = e.target.value.length;
-    setTitleLength(valueLength);
+    const value = e.target.value;
+    const valueLength = value.length;
+    setJobLength(valueLength);
     if (valueLength <= 50) {
-      setTitle(e.target.value);
+      setDatas((prev) => ({
+        ...prev,
+        job: value,
+      }));
     }
   };
   return (
@@ -28,7 +32,7 @@ function TitleInput() {
           직함
           <Pilsu>(필수)</Pilsu>
         </CareerCreateLabel>
-        <CareerCreateInputCount>{titleLength} / 50</CareerCreateInputCount>
+        <CareerCreateInputCount>{jobLength} / 50</CareerCreateInputCount>
       </CareerCreatePartTitleBox>
       <CareerCreateRelativeBox>
         <CareerCreateInput
@@ -38,11 +42,11 @@ function TitleInput() {
           placeholder="직함을 입력해 주세요. (예: 프로덕트 매니저)"
           autoComplete="off"
           maxLength="50"
+          value={datas.job}
           onChange={handleTitleChange}
-          validation={titleValidation}
         />
       </CareerCreateRelativeBox>
     </CareerInputBox>
   );
 }
-export default TitleInput;
+export default JobInput;

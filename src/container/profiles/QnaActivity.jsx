@@ -46,8 +46,8 @@ const QnaActivityAnswerList = styled.div`
 function QnaActivity() {
   const [option, setOption] = useState(1);
   const [likeUsersModal, setLikeUsersModal] = useState(false);
-  const [isQuestion, setIsQuestion] = useState(false);
-  const [isAnswer, setIsAnswer] = useState(false);
+  const [isQuestion, setIsQuestion] = useState(true);
+  const [isAnswer, setIsAnswer] = useState(true);
   return (
     <QnaActivityContainer>
       <QnaActivityBox>
