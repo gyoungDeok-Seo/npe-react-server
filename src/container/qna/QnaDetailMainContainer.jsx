@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import AnswerContentBox from "../../components/Qna/Detail/AnswerContentBox";
+import ReportModal from "../../components/Qna/Modal/ReportModal";
+import DeleteModal from "../../components/Qna/Modal/DeleteModal";
 
 const DetailContainer = styled.div`
     padding-top: 2rem;
@@ -368,13 +370,11 @@ const RecommendedBtn = styled.button`
 `;
 
 const RecommendedSvg = styled.svg`
-    fill: var(--color-slate-500, #64748b);
-    /* fill: var(--color-teal-600, #0d9488); */
+    fill: ${({ isRecommend }) => (isRecommend ? "var(--color-teal-600, #0d9488)" : "var(--color-slate-500, #64748b)")};
 `;
 
 const RecommendedText = styled.span`
-    color: var(--color-slate-500, #64748b);
-    /* color: var(--color-teal-600, #0d9488); */
+    color: ${({ isRecommend }) => (isRecommend ? "var(--color-teal-600, #0d9488)" : "var(--color-slate-500, #64748b)")};
     --tw-numeric-spacing: tabular-nums;
     font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
     font-weight: 700;
@@ -572,9 +572,84 @@ const AnswerListContainer = styled.div`
     display: flex;
 `;
 
+const answers = [
+    {
+        answerType: "ai",
+        profileLink: ``,
+        profileImgUrl: "https://publy.imgix.net/user-uploaded/590678/2023.03/49e51bca73ca3d1876ecb63392a5bd4539c7e3ff1a6207eee9d90eef55d5dd4c.png?w=200&h=200&auto=format&fm=png",
+        memberName: "NPE AI 봇",
+        memberPosition: "GPT-4가 달아주는 답변입니다.",
+        writeTime: "2023년 04월 07일",
+        answerText: `
+1. 마우스를 올릴 때 메뉴 스타일 변경하기
+CSS의 :hover 선택자를 사용하여 메뉴에 마우스를 올렸을 때 스타일을 변경할 수 있습니다.
+예를 들어, 다음과 같이 스타일을 지정할 수 있습니다.
+
+.menu-item:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+위 코드는 .menu-item 클래스를 가진 요소에 마우스를 올리면 텍스트 색상이 빨간색으로
+변경되고, 밑줄이 생기도록 스타일을 지정한 것입니다.
+
+
+2. 하위 메뉴 컨트롤하기
+
+하위 메뉴를 컨트롤하기 위해서는 JavaScript를 사용해야 합니다.
+
+예를 들어, 다음과 같은 방법으로 구현할 수 있습니다.
+
+마우스를 올린 메뉴 아이템을 클릭하면 하위 메뉴를 표시합니다.
+마우스를 올린 메뉴 아이템에 하위 메뉴가 표시되는 동안은 텍스트 색상과 밑줄을 유지합니다.
+하위 메뉴가 닫히면 텍스트 색상과 밑줄을 원래대로 돌려 놓습니다.
+예를 들어, 다음과 같은 코드를 사용할 수 있습니다.
+        `,
+    },
+    {
+        answerType: "people",
+        profileLink: ``,
+        profileImgUrl: "https://publy.imgix.net/user-uploaded/484624/2023.06/2469e084238292f177224fc4f1625d262d4bca866f71d1eb1e1d8fda46672d0f.jpeg?w=200&h=200&auto=format&fm=jpeg",
+        memberName: "kevin",
+        memberPosition: "디지털그지",
+        writeTime: "2월 28일",
+        answerText: `삐빅 정상입니다.`,
+    },
+    {
+        answerType: "people",
+        profileLink: ``,
+        profileImgUrl: "https://publy.imgix.net/user-uploaded/484624/2023.06/2469e084238292f177224fc4f1625d262d4bca866f71d1eb1e1d8fda46672d0f.jpeg?w=200&h=200&auto=format&fm=jpeg",
+        memberName: "kevin",
+        memberPosition: "디지털그지",
+        writeTime: "2월 28일",
+        answerText: `삐빅 정상입니다.`,
+    },
+];
+
 function QnaDetailMainContainer() {
+    const type = "질문";
     const [isQnaService, setIsQnaService] = useState(false);
     const [textareaValue, setTextareaValue] = useState("");
+
+    const [reportModal, setReportModal] = useState(false);
+    const [deleteModal, setDeleteModal] = useState(false);
+
+    const [isRecommend, setIsRecommend] = useState(false);
+    const [needSupplementation, setNeedSupplementation] = useState(false);
+
+    const handlerClickRecommendedBtn = () => {
+        if (needSupplementation) {
+            setNeedSupplementation((needSupplementation) => !needSupplementation);
+        }
+        setIsRecommend((isRecommend) => !isRecommend);
+    };
+
+    const handlerClickSupplementBtn = () => {
+        if (isRecommend) {
+            setIsRecommend((isRecommend) => !isRecommend);
+        }
+        setNeedSupplementation((needSupplementation) => !needSupplementation);
+    };
 
     const handleClickOutside = (e) => {
         setIsQnaService(false);
@@ -601,11 +676,15 @@ function QnaDetailMainContainer() {
     const tags = ["react", "css", "typescript", "javascript"];
 
     const handleTextareaChange = (e) => {
-        console.log(e.target.value);
-        if (e.target.value) {
-            console.log("트루 들어옴");
-        }
         setTextareaValue(e.target.value);
+    };
+
+    const handlerClickDeleteBtn = () => {
+        setDeleteModal(true);
+    };
+
+    const handlerClickReportBtn = () => {
+        setReportModal(true);
     };
 
     return (
@@ -676,7 +755,7 @@ function QnaDetailMainContainer() {
                                             </ModifySvg>
                                             <ModifyText>수정</ModifyText>
                                         </ModifyBtn>
-                                        <DeleteBtn>
+                                        <DeleteBtn onClick={handlerClickDeleteBtn}>
                                             <DeleteSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <g>
                                                     <g id="style=outline">
@@ -692,7 +771,7 @@ function QnaDetailMainContainer() {
                                             <DeleteText>삭제</DeleteText>
                                         </DeleteBtn>
                                         {/* 작성자와 로그인 회원의 정보가 다를 경우 */}
-                                        <ReportBtn>
+                                        <ReportBtn onClick={handlerClickReportBtn}>
                                             <ReportSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <g>
                                                     <g id="style=outline">
@@ -774,26 +853,26 @@ function QnaDetailMainContainer() {
                                 </IntroContents>
                             </RecommendedIntroSector>
                             <RecommendedBtnSector>
-                                <RecommendedBtn>
-                                    <RecommendedSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <RecommendedBtn onClick={handlerClickRecommendedBtn}>
+                                    <RecommendedSvg isRecommend={isRecommend} width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <g>
                                             <g id="style=outline">
                                                 <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M19.7071 10.7071C19.3166 11.0976 18.6834 11.0976 18.2929 10.7071L13 5.41423L13 21C13 21.5523 12.5523 22 12 22C11.4478 22 11 21.5523 11 21L11.0001 5.4142L5.7071 10.7071C5.31658 11.0976 4.68341 11.0976 4.29289 10.7071C3.90237 10.3166 3.90237 9.68341 4.29289 9.29289L11.2929 2.29289C11.4805 2.10535 11.7348 2 12.0001 2C12.2653 2 12.5196 2.10536 12.7072 2.2929L19.7071 9.2929C20.0976 9.68342 20.0976 10.3166 19.7071 10.7071Z"></path>
                                             </g>
                                         </g>
                                     </RecommendedSvg>
-                                    <RecommendedText>추천해요 0</RecommendedText>
+                                    <RecommendedText isRecommend={isRecommend}>추천해요 0</RecommendedText>
                                 </RecommendedBtn>
                                 <MiddleLine />
-                                <SupplementBtn>
-                                    <SupplementSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <SupplementBtn onClick={handlerClickSupplementBtn}>
+                                    <SupplementSvg isRecommend={needSupplementation} width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <g>
                                             <g id="style=outline">
                                                 <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M4.2929 13.2929C4.68342 12.9024 5.31659 12.9024 5.70711 13.2929L10.9999 18.5858L10.9999 3C10.9999 2.44772 11.4477 2 11.9999 2C12.5522 2 12.9999 2.44772 12.9999 3L12.9999 18.5858L18.2929 13.2929C18.6834 12.9024 19.3166 12.9024 19.7071 13.2929C20.0976 13.6834 20.0976 14.3166 19.7071 14.7071L12.7071 21.7071C12.5195 21.8946 12.2652 22 11.9999 22C11.7347 22 11.4804 21.8946 11.2928 21.7071L4.29289 14.7071C3.90237 14.3166 3.90237 13.6834 4.2929 13.2929Z"></path>
                                             </g>
                                         </g>
                                     </SupplementSvg>
-                                    <SupplementText>보충이 필요해요 0</SupplementText>
+                                    <SupplementText isRecommend={needSupplementation}>보충이 필요해요 0</SupplementText>
                                 </SupplementBtn>
                             </RecommendedBtnSector>
                         </RecommendedItems>
@@ -828,10 +907,8 @@ function QnaDetailMainContainer() {
                     </AnswerWriteSector>
                     <AnswerListSector>
                         <div>
-                            <AnswerListHeader>답변 1</AnswerListHeader>
-                            <AnswerListContainer>
-                                <AnswerContentBox />
-                            </AnswerListContainer>
+                            <AnswerListHeader>답변 {answers.length}</AnswerListHeader>
+                            <AnswerListContainer>{answers ? answers.map((answer, index) => <AnswerContentBox answer={answer} index={index} />) : <></>}</AnswerListContainer>
                         </div>
                     </AnswerListSector>
                 </div>
@@ -839,6 +916,8 @@ function QnaDetailMainContainer() {
                     <QnaLinkText>목록으로</QnaLinkText>
                 </QnaListLink>
             </DetailBox>
+            {reportModal && <ReportModal setModal={setReportModal} type={type} />}
+            {deleteModal && <DeleteModal setModal={setDeleteModal} />}
         </DetailContainer>
     );
 }
