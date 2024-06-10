@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const ProfileTopBox = styled.div`
-  --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / 1);
 `;
 const ProfileTopInner = styled.div`

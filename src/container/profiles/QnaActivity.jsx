@@ -3,6 +3,8 @@ import OptionBar from "../../components/profiles/QnaActivity/OptionBar";
 import QnaActivityAnswer from "../../components/profiles/QnaActivity/QnaActivityAnswer";
 import QnaActivityQuestion from "../../components/profiles/QnaActivity/QnaActivityQuestion";
 import { useState } from "react";
+import NoneAnswer from "../../components/profiles/QnaActivity/NoneAnswer";
+import NoneQuestion from "../../components/profiles/QnaActivity/NoneQuestion";
 
 const QnaActivityContainer = styled.div`
   border-color: #e2e8f0;
@@ -44,6 +46,8 @@ const QnaActivityAnswerList = styled.div`
 function QnaActivity() {
   const [option, setOption] = useState(1);
   const [likeUsersModal, setLikeUsersModal] = useState(false);
+  const [isQuestion, setIsQuestion] = useState(false);
+  const [isAnswer, setIsAnswer] = useState(false);
   return (
     <QnaActivityContainer>
       <QnaActivityBox>
@@ -54,18 +58,34 @@ function QnaActivity() {
               <QnaActivityAnswerList
                 style={{ height: "auto", overflow: "inherit" }}
               >
-                {[1, 2, 3, 4, 5].map(() => (
+                {option === 1 ? (
                   <>
-                    {option === 1 ? (
-                      <QnaActivityAnswer
-                        likeUsersModal={likeUsersModal}
-                        setLikeUsersModal={setLikeUsersModal}
-                      />
+                    {isAnswer ? (
+                      <>
+                        {[1, 2, 3, 4, 5].map(() => (
+                          <QnaActivityAnswer
+                            likeUsersModal={likeUsersModal}
+                            setLikeUsersModal={setLikeUsersModal}
+                          />
+                        ))}
+                      </>
                     ) : (
-                      <QnaActivityQuestion />
+                      <NoneAnswer />
                     )}
                   </>
-                ))}
+                ) : (
+                  <>
+                    {isQuestion ? (
+                      <>
+                        {[1, 2, 3, 4, 5].map(() => (
+                          <QnaActivityQuestion />
+                        ))}
+                      </>
+                    ) : (
+                      <NoneQuestion />
+                    )}
+                  </>
+                )}
               </QnaActivityAnswerList>
             </div>
           </QnaActivityInner>

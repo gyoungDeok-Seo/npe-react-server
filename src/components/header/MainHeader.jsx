@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Search from "./Search";
 import ProfileUpdateHeader from "./ProfileUpdateHeader";
-import SearchBox from "./MainHeader/SearchBox";
+import SearchBtnBox from "./MainHeader/SearchBtnBox";
 import OnLoginNav from "./MainHeader/OnLoginNav";
 import NonLoginNav from "./MainHeader/NonLoginNav";
 import LogoLinkBox from "./MainHeader/LogoLinkBox";
@@ -75,7 +75,7 @@ function MainHeader({ setAvoidMistakesModal }) {
                 <TabBox />
               </LeftBox>
               <RightBox>
-                <SearchBox setSearch={setSearch} />
+                <SearchBtnBox setSearch={setSearch} />
                 {isLogin ? <OnLoginNav /> : <NonLoginNav />}
               </RightBox>
             </HeaderInner>
