@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { CreateCareerContext } from "../../context/CreateCareerContext";
+import { industryList } from "../../service/dummyData";
 
 const IndustryModalBox = styled.div`
   display: flex;
@@ -157,10 +159,10 @@ const IndustryModalCraeteItemSvg = styled.svg`
   stroke: #fff;
   display: block;
 `;
-
-function IndustryModal({ setIndustryModal, setIndustry, industry }) {
-  const [checkedIndustries, setCheckedIndustries] = useState(
-    industry ? industry : []
+function IndustryModal({ setIndustryModal }) {
+  const { datas, setDatas } = useContext(CreateCareerContext);
+  const [localCheckedIndustries, setLocalCheckedIndustries] = useState(
+    datas.industry ? datas.industry : []
   );
   const checkboxRefs = useRef({});
 
@@ -168,70 +170,41 @@ function IndustryModal({ setIndustryModal, setIndustry, industry }) {
     const { id, checked } = event.target;
     const label = industryList.find((industry) => industry.id === id)?.label;
 
-    setCheckedIndustries((prevState) => {
-      if (checked) return [...prevState, { id, label }];
-      else return prevState.filter((item) => item.id !== id);
+    setLocalCheckedIndustries((prevState) => {
+      if (checked) {
+        return [...prevState, label];
+      } else {
+        return prevState.filter((item) => item !== label);
+      }
     });
   };
 
-  const handleIndustryItemClick = (id) => {
-    setCheckedIndustries((prevState) =>
-      prevState.filter((item) => item.id !== id)
-    );
+  const handleIndustryItemClick = (label) => {
+    setLocalCheckedIndustries((prevState) => {
+      return prevState.filter((item) => item !== label);
+    });
 
+    const id = industryList.find((industry) => industry.label === label)?.id;
     if (checkboxRefs.current[id]) {
       checkboxRefs.current[id].checked = false;
     }
   };
 
   const handleSubmitModal = () => {
-    setIndustry(() => checkedIndustries);
+    setDatas((prevDatas) => ({
+      ...prevDatas,
+      industry: localCheckedIndustries,
+    }));
     setIndustryModal(false);
   };
 
   const handleCancelModal = () => {
     setIndustryModal(false);
   };
+
   useEffect(() => {
-    console.log(industry);
-  }, [industry]);
-  const industryList = [
-    { id: "industry-checkbox-1", label: "B2B" },
-    { id: "industry-checkbox-2", label: "SaaS" },
-    { id: "industry-checkbox-3", label: "플랫폼" },
-    { id: "industry-checkbox-4", label: "이커머스" },
-    { id: "industry-checkbox-5", label: "커뮤니티 / 소셜네트워킹" },
-    { id: "industry-checkbox-6", label: "HR" },
-    { id: "industry-checkbox-7", label: "금융 / 핀테크" },
-    { id: "industry-checkbox-8", label: "교육 / 에듀테크" },
-    { id: "industry-checkbox-9", label: "여행" },
-    { id: "industry-checkbox-10", label: "콘텐츠" },
-    { id: "industry-checkbox-11", label: "라이프스타일" },
-    { id: "industry-checkbox-12", label: "의료 / 헬스케어" },
-    { id: "industry-checkbox-13", label: "패션 / 뷰티" },
-    { id: "industry-checkbox-14", label: "블록체인" },
-    { id: "industry-checkbox-15", label: "AI" },
-    { id: "industry-checkbox-16", label: "모빌리티 / 교통" },
-    { id: "industry-checkbox-17", label: "게임" },
-    { id: "industry-checkbox-18", label: "식음료" },
-    { id: "industry-checkbox-19", label: "반려동물" },
-    { id: "industry-checkbox-20", label: "유아" },
-    { id: "industry-checkbox-21", label: "스포츠" },
-    { id: "industry-checkbox-22", label: "법률" },
-    { id: "industry-checkbox-23", label: "광고 / 마케팅" },
-    { id: "industry-checkbox-24", label: "주거 / 부동산 / 프롭테크" },
-    { id: "industry-checkbox-25", label: "보안" },
-    { id: "industry-checkbox-26", label: "제조" },
-    { id: "industry-checkbox-27", label: "방송 / 엔터테인먼트" },
-    { id: "industry-checkbox-28", label: "농축수산업 / 애그테크" },
-    { id: "industry-checkbox-29", label: "전자제품" },
-    { id: "industry-checkbox-30", label: "정부 / 공공" },
-    { id: "industry-checkbox-31", label: "건설" },
-    { id: "industry-checkbox-32", label: "환경 / 에너지" },
-    { id: "industry-checkbox-33", label: "물류 / 유통" },
-    { id: "industry-checkbox-34", label: "반도체" },
-    { id: "industry-checkbox-35", label: "컨설팅" },
-  ];
+    setLocalCheckedIndustries(datas.industry);
+  }, [datas.industry]);
 
   return (
     <>
@@ -272,16 +245,16 @@ function IndustryModal({ setIndustryModal, setIndustry, industry }) {
                 <IndustryModalTitle>
                   산업 분야를 선택해 주세요
                 </IndustryModalTitle>
-                {checkedIndustries.length !== 0 && (
+                {localCheckedIndustries.length !== 0 && (
                   <IndustryModalCraeteItemBox>
-                    {checkedIndustries.map((item) => (
+                    {localCheckedIndustries.map((label) => (
                       <IndustryModalCraeteItem
-                        key={item.id}
+                        key={label}
                         type="button"
-                        onClick={() => handleIndustryItemClick(item.id)}
+                        onClick={() => handleIndustryItemClick(label)}
                       >
                         <IndustryModalCraeteItemText>
-                          {item.label}
+                          {label}
                         </IndustryModalCraeteItemText>
                         <IndustryModalCraeteItemSvgBox role="presentation">
                           <IndustryModalCraeteItemSvg
@@ -318,9 +291,7 @@ function IndustryModal({ setIndustryModal, setIndustry, industry }) {
                         }
                         onChange={handleCheckboxChange}
                         checked={
-                          checkedIndustries.find(
-                            (item) => item.id === industryItem.id
-                          ) !== undefined
+                          localCheckedIndustries.includes(industryItem.label)
                         }
                       />
                       <IndustryModalLabel htmlFor={industryItem.id}>
@@ -351,4 +322,5 @@ function IndustryModal({ setIndustryModal, setIndustry, industry }) {
     </>
   );
 }
+
 export default IndustryModal;

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import {
   CreateEducationsLabel,
   EducationsInputBox,
 } from "../../pages/EducationsCreate";
 import { Pilsu } from "../../pages/CareerCreate";
+import { CreateEductaionContext } from "../../context/CreateEductaionContext";
 
 const EducationsPeriodSelectBox = styled.div`
   margin-top: 0.5rem;
@@ -130,48 +131,54 @@ const CreateEducationsIsWorking = styled.input`
   }
 `;
 
-const PeriodValidationMessage = styled.div`
-  color: #be1e08;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-`;
+// const PeriodValidationMessage = styled.div`
+//   color: #be1e08;
+//   font-size: 0.875rem;
+//   margin-top: 0.5rem;
+// `;
 
 function EducationsPeriod() {
-  const [startYear, setStartYear] = useState("");
-  const [startMonth, setStartMonth] = useState("");
-  const [endYear, setEndYear] = useState("");
-  const [endMonth, setEndMonth] = useState("");
+  const { datas, setDatas } = useContext(CreateEductaionContext);
   const [endDateDisabled, setEndDateDisabled] = useState(true);
-  const [periodValidation, setPeriodValidation] = useState(false);
+  const [isWorking, setIsworking] = useState(false);
 
   const handleStartChange = (e) => {
-    setStartYear(e.target.value);
-    if (e.target.value && startMonth) {
+    setDatas((prevDatas) => ({
+      ...prevDatas,
+      startYear: e.target.value,
+    }));
+    if (e.target.value && datas.startMonth) {
       setEndDateDisabled(false);
     }
   };
 
   const handleStartMonthChange = (e) => {
-    setStartMonth(e.target.value);
-    if (e.target.value && startYear) {
+    setDatas((prevDatas) => ({
+      ...prevDatas,
+      startMonth: e.target.value,
+    }));
+    if (e.target.value && datas.startYear) {
       setEndDateDisabled(false);
     }
   };
 
-  // 종료연도와 월 변경 이벤트 핸들러
   const handleEndYearChange = (e) => {
-    setEndYear(e.target.value);
+    setDatas((prevDatas) => ({
+      ...prevDatas,
+      endYear: e.target.value,
+    }));
   };
 
   const handleEndMonthChange = (e) => {
-    setEndMonth(e.target.value);
+    setDatas((prevDatas) => ({
+      ...prevDatas,
+      endMonth: e.target.value,
+    }));
   };
 
-  const [isWorking, setIsworking] = useState(false);
   const handleIsWorking = () => {
-    setIsworking((isWorking) => !isWorking);
+    setIsworking((prevIsWorking) => !prevIsWorking);
   };
-
   return (
     <>
       <EducationsInputBox>
@@ -183,7 +190,7 @@ function EducationsPeriod() {
           <EducationsPeriodSelectInner>
             <EducationsPeriodSelect
               onChange={handleStartChange}
-              value={startYear}
+              value={datas.startYear}
             >
               <option disabled="" value="-1">
                 시작연도
@@ -246,7 +253,7 @@ function EducationsPeriod() {
             </EducationsPeriodSelect>
             <EducationsPeriodSelect
               onChange={handleStartMonthChange}
-              value={startMonth}
+              value={datas.startMonth}
             >
               <option disabled="" value="-1">
                 월
@@ -272,7 +279,7 @@ function EducationsPeriod() {
               <EducationsPeriodSelectInner2>
                 <EducationsPeriodSelect
                   disabled={endDateDisabled}
-                  value={endYear}
+                  value={datas.endYear}
                   onChange={handleEndYearChange}
                 >
                   <option disabled="" value="-1">
@@ -336,7 +343,7 @@ function EducationsPeriod() {
                 </EducationsPeriodSelect>
                 <EducationsPeriodSelect
                   disabled={endDateDisabled}
-                  value={endMonth}
+                  value={datas.endMonth}
                   onChange={handleEndMonthChange}
                 >
                   <option disabled="" value="-1">
@@ -359,11 +366,6 @@ function EducationsPeriod() {
             )}
           </EducationsPeriodSelectBox2>
         </EducationsPeriodSelectBox>
-        {periodValidation && (
-          <PeriodValidationMessage>
-            기간을 올바르게 입력해 주세요.
-          </PeriodValidationMessage>
-        )}
       </EducationsInputBox>
       <CreateEducationsCheckboxBox>
         <CreateEducationsCheckbox

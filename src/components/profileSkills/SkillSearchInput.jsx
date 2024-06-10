@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import { CreateSkillsContext } from "../../context/CreateSkillsContext";
+import { skillList } from "../../service/dummyData";
 
 const CareerSkillModalInputBox = styled.div`
   border-color: rgb(226 232 240 / 1);
@@ -74,7 +76,8 @@ const SkillItem = styled.li`
   }
 `;
 
-function SkillSearchInput({ setSelectedSkills }) {
+function SkillSearchInput() {
+  const {setDatas } = useContext(CreateSkillsContext);
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
@@ -92,52 +95,6 @@ function SkillSearchInput({ setSelectedSkills }) {
     setShowBox(false);
   };
 
-  const skillList = [
-    { id: "firebase", value: "firebase" },
-    { id: "React", value: "react" },
-    { id: "React Native", value: "react" },
-    { id: "kotlin", value: "kotlin" },
-    { id: "JetpackCompose", value: "jetpackcompose" },
-    { id: "Next.js", value: "nextdotjs" },
-    { id: "Nuxt.js", value: "nuxtdotjs" },
-    { id: "NestJS", value: "nestjs" },
-    { id: "Vue.js", value: "vuedotjs" },
-    { id: "Node.js", value: "nodedotjs" },
-    { id: "Three.js", value: "threedotjs" },
-    { id: "AngularJS", value: "angularjs" },
-    { id: "JavaScript", value: "javascript" },
-    { id: "TypeScript", value: "typescript" },
-    { id: "Python", value: "python" },
-    { id: "PHP", value: "php" },
-    { id: "Pug", value: "pug" },
-    { id: "Recoil", value: "recoil" },
-    { id: "Redux", value: "redux" },
-    { id: "Prisma", value: "prisma" },
-    { id: "sass", value: "sass" },
-    { id: "Tailwind CSS", value: "tailwindcss" },
-    { id: "styled components", value: "styledcomponents" },
-    { id: "Ruby", value: "ruby" },
-    { id: "Socket.io", value: "socketdotio" },
-    { id: "Spring", value: "spring" },
-    { id: "Spring Boot", value: "springboot" },
-    { id: "Vitess", value: "vitess" },
-    { id: "Oracle", value: "oracle" },
-    { id: "OpenAI", value: "openai" },
-    { id: "Gatsby", value: "gatsby" },
-    { id: "MySQL", value: "mysql" },
-    { id: "PostgresSQL", value: "postgresql" },
-    { id: "MongoDB", value: "mongodb" },
-    { id: "MariaDB", value: "mariadb" },
-    { id: "jQuery", value: "jquery" },
-    { id: "Jest", value: "jest" },
-    { id: "flutter", value: "flutter" },
-    { id: "Dart", value: "dart" },
-    { id: "C", value: "c" },
-    { id: "C#", value: "csharp" },
-    { id: "C++", value: "cplusplus" },
-    { id: "Amazon RDS", value: "amazonrds" },
-    { id: "Amazon EC2", value: "amazonec2" },
-  ];
   const [search, setSearch] = useState([]);
   const [showBox, setShowBox] = useState(false);
   const searchSkills = (e) => {
@@ -151,11 +108,13 @@ function SkillSearchInput({ setSelectedSkills }) {
   };
 
   const handelSearch = (e) => {
-    setSelectedSkills((prev) => [...prev, e.target.innerText]);
+    setDatas((prevDatas) => ({
+      ...prevDatas,
+      skills: [...prevDatas.skills, e.target.innerText],
+    }));
     setShowBox(false);
     setInputValue("");
   };
-
   return (
     <>
       <CareerSkillModalInputBox

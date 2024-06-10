@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import { popularSkills } from "../../service/dummyData";
+import { CreateCareerContext } from "../../context/CreateCareerContext";
 
 const CareerSkillModalBox = styled.div`
   display: flex;
@@ -181,47 +183,11 @@ const CareerSkillModalCraeteItemSvg = styled.svg`
   display: block;
 `;
 
-function CareerSkillModal({
-  setCareerSkillModal,
-  setCareerSkill,
-  careerSkill,
-}) {
+function CareerSkillModal({ setCareerSkillModal }) {
+  const { datas, setDatas } = useContext(CreateCareerContext);
   const [selectedSkills, setSelectedSkills] = useState(
-    careerSkill ? careerSkill : []
+    datas.skills ? datas.skills : []
   );
-
-  const popularSkills = [
-    "javascript",
-    "React",
-    "Github",
-    "typescript",
-    "css",
-    "Java",
-    "html",
-    "Next.js",
-    "MySQL",
-    "python",
-    "html5",
-    "Node.js",
-    "UI 디자인",
-    "SpringBoot",
-    "css3",
-    "커뮤니케이션",
-    "UX 디자인",
-    "AWS",
-    "Vue.js",
-    "c언어",
-    "Android",
-    "React Query",
-    "C++",
-    "React Native",
-    "Flutter",
-    "c#",
-    "Kotlin",
-    "swift",
-    "iOS",
-    "Unity",
-  ];
 
   const handleSkillClick = (skill) => {
     setSelectedSkills((prevSelectedSkills) =>
@@ -232,13 +198,20 @@ function CareerSkillModal({
   };
 
   const handleSubmitModal = () => {
-    setCareerSkill(() => selectedSkills);
+    setDatas((prevDatas) => ({
+      ...prevDatas,
+      skills: selectedSkills,
+    }));
     setCareerSkillModal(false);
   };
 
   const handleCancelModal = () => {
     setCareerSkillModal(false);
   };
+
+  useEffect(() => {
+    setSelectedSkills(datas.skills);
+  }, [datas.skills]);
 
   return (
     <div>

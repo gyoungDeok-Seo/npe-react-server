@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   InputLengthCountText,
   ProfileUpdateInputInner,
   ProfileUpdateLabel,
 } from "../../pages/ProfileUpdate";
 import styled from "styled-components";
+import { ProfileUpdateContext } from "../../context/ProfileUpdateContext";
 
 const ProfileUpdateTextarea = styled.textarea`
   --tw-shadow: 0 0 #0000;
@@ -25,29 +26,32 @@ const ProfileUpdateTextarea = styled.textarea`
   color: #0f172a;
 `;
 
-function DescriptionTextarea({ setAvoidMistakesModal, setIsExit }) {
-  const [shortDescription, setShortDescription] = useState("");
-  const [shortDescriptionLength, setShortDescriptionLength] = useState(0);
+function DescriptionTextarea() {
+  const { datas, setDatas } = useContext(ProfileUpdateContext);
+  const [descriptionLength, setDescriptionLength] = useState(0);
 
   const handleDescriptionChange = (e) => {
-    const valueLength = e.target.value.length;
-    setShortDescriptionLength(valueLength);
+    const value = e.target.value;
+    const valueLength = value.length;
+    setDescriptionLength(valueLength);
     if (valueLength <= 150) {
-      setShortDescription(e.target.value);
+      setDatas((prev) => ({
+        ...prev,
+        description: value,
+      }));
     }
   };
   return (
     <>
       <ProfileUpdateInputInner>
         <ProfileUpdateLabel htmlFor="name">자기소개</ProfileUpdateLabel>
-        <InputLengthCountText>
-          {shortDescriptionLength}/150
-        </InputLengthCountText>
+        <InputLengthCountText>{descriptionLength}/150</InputLengthCountText>
       </ProfileUpdateInputInner>
       <ProfileUpdateTextarea
         placeholder="나를 소개해주세요."
         name="shortDescription"
         maxLength="150"
+        value={datas.description}
         onChange={handleDescriptionChange}
       ></ProfileUpdateTextarea>
     </>

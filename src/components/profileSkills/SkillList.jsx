@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { popularSkills } from "../../service/dummyData";
+import { useContext } from "react";
+import { CreateSkillsContext } from "../../context/CreateSkillsContext";
 
 const CareerSkillModalSkillList = styled.div`
   display: flex;
@@ -26,46 +29,15 @@ const CareerSkillModalSkillBtnText = styled.h3`
   margin-top: 0;
   margin-bottom: 0;
 `;
-function SkillList({setSelectedSkills, selectedSkills}) {
-
-  const popularSkills = [
-    "javascript",
-    "React",
-    "Github",
-    "typescript",
-    "css",
-    "Java",
-    "html",
-    "Next.js",
-    "MySQL",
-    "python",
-    "html5",
-    "Node.js",
-    "UI 디자인",
-    "SpringBoot",
-    "css3",
-    "커뮤니케이션",
-    "UX 디자인",
-    "AWS",
-    "Vue.js",
-    "c언어",
-    "Android",
-    "React Query",
-    "C++",
-    "React Native",
-    "Flutter",
-    "c#",
-    "Kotlin",
-    "swift",
-    "iOS",
-    "Unity",
-  ];
+function SkillList() {
+  const { datas, setDatas } = useContext(CreateSkillsContext);
   const handleSkillClick = (skill) => {
-    setSelectedSkills((prevSelectedSkills) =>
-      prevSelectedSkills.includes(skill)
-        ? prevSelectedSkills.filter((s) => s !== skill)
-        : [...prevSelectedSkills, skill]
-    );
+    setDatas((prevDatas) => ({
+      ...prevDatas,
+      skills: prevDatas.skills.includes(skill)
+        ? prevDatas.skills.filter((s) => s !== skill)
+        : [...prevDatas.skills, skill],
+    }));
   };
 
   return (
@@ -75,11 +47,9 @@ function SkillList({setSelectedSkills, selectedSkills}) {
           key={skill}
           type="button"
           onClick={() => handleSkillClick(skill)}
-          selected={selectedSkills.includes(skill)}
+          selected={datas.skills.includes(skill)}
         >
-          <CareerSkillModalSkillBtnText
-            selected={selectedSkills.includes(skill)}
-          >
+          <CareerSkillModalSkillBtnText selected={datas.skills.includes(skill)}>
             {skill}
           </CareerSkillModalSkillBtnText>
         </CareerSkillModalSkillBtn>

@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { CreateSkillsContext } from "../../context/CreateSkillsContext";
 
 const CareerSkillModalCraeteItem = styled.button`
   display: flex;
@@ -37,18 +39,21 @@ const CareerSkillModalCraeteItemSvg = styled.svg`
   stroke: #fff;
   display: block;
 `;
+function SelectSkillItem() {
+  const { datas, setDatas } = useContext(CreateSkillsContext);
 
-function SelectSkillItem({ setSelectedSkills, selectedSkills }) {
   const handleSkillClick = (skill) => {
-    setSelectedSkills((prevSelectedSkills) =>
-      prevSelectedSkills.includes(skill)
-        ? prevSelectedSkills.filter((s) => s !== skill)
-        : [...prevSelectedSkills, skill]
-    );
+    setDatas((prev) => ({
+      ...prev,
+      skills: prev.skills.includes(skill)
+        ? prev.skills.filter((s) => s !== skill)
+        : [...prev.skills, skill],
+    }));
   };
+
   return (
     <>
-      {selectedSkills.map((item) => (
+      {datas.skills.map((item) => (
         <CareerSkillModalCraeteItem
           key={item}
           type="button"
@@ -82,4 +87,5 @@ function SelectSkillItem({ setSelectedSkills, selectedSkills }) {
     </>
   );
 }
+
 export default SelectSkillItem;

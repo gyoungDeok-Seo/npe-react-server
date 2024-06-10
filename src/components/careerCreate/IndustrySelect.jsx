@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   CareerCreateButtonBox,
   CareerCreateButtonSvg,
@@ -7,8 +8,11 @@ import {
   CareerInputBox,
 } from "../../pages/CareerCreate";
 import CareerSelectedList from "./CareerSelectedList";
+import { CreateCareerContext } from "../../context/CreateCareerContext";
 
-function IndustrySelect({ setIndustryModal, industry }) {
+function IndustrySelect({ setIndustryModal }) {
+  const { datas } = useContext(CreateCareerContext);
+
   const handleIndustryModal = () => {
     setIndustryModal(true);
   };
@@ -18,7 +22,7 @@ function IndustrySelect({ setIndustryModal, industry }) {
         <CareerCreateLabel>산업 분야</CareerCreateLabel>
       </div>
 
-      {industry.length === 0 ? (
+      {datas.industry.length === 0 ? (
         <CareerCreateRelativeBox>
           <CareerCreateButtonBox type="button" onClick={handleIndustryModal}>
             <CareerCreateButtonText>
@@ -46,7 +50,7 @@ function IndustrySelect({ setIndustryModal, industry }) {
         </CareerCreateRelativeBox>
       ) : (
         <CareerSelectedList
-          selectdList={industry.map((item) => item.label)}
+          selectdList={datas.industry.map((item) => item)}
           handleModal={handleIndustryModal}
         />
       )}

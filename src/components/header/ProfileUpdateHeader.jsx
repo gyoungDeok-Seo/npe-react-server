@@ -1,4 +1,10 @@
 import styled from "styled-components";
+import { CreateSiteContext } from "../../context/CreateSiteContext";
+import { useContext } from "react";
+import { CreateSkillsContext } from "../../context/CreateSkillsContext";
+import { ProfileUpdateContext } from "../../context/ProfileUpdateContext";
+import { CreateEductaionContext } from "../../context/CreateEductaionContext";
+import { CreateCareerContext } from "../../context/CreateCareerContext";
 
 const ProfileUpdateHeaderContainer = styled.nav`
   position: fixed;
@@ -54,6 +60,12 @@ const SubmitProfileUpdateBtnText = styled.span`
 `;
 
 const ProfileUpdateHeader = ({ navigate, setAvoidMistakesModal }) => {
+  const { datas: sites } = useContext(CreateSiteContext);
+  const { datas: skills } = useContext(CreateSkillsContext);
+  const { datas: profile } = useContext(ProfileUpdateContext);
+  const { datas: eductaion } = useContext(CreateEductaionContext);
+  const { datas: career } = useContext(CreateCareerContext);
+  
   const handleUpdateProfile = () => {
     navigate("/profiles");
   };
