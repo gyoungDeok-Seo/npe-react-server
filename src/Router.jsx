@@ -9,53 +9,59 @@ import EducationsCreate from "./pages/EducationsCreate";
 import SitesCreate from "./pages/SitesCreate";
 import ProfileSkills from "./pages/ProfileSkills";
 import SearchResult from "./pages/SearchResult";
+import QnaDetail from "./pages/QnaDetail";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Main />,
-    children: [],
-  },
-  {
-    path: "/home",
-    element: <HomePage />,
-    children: [],
-  },
-  {
-    path: "/qnas",
-    element: <QnA />,
-    children: [],
-  },
-  {
-    path: "/profiles",
-    element: <Profiles />,
-    children: [],
-  },
-  {
-    path: "/profiles/update",
-    element: <ProfileUpdate />,
-    children: [],
-  },
-  {
-    path: "/profiles/careers/create",
-    element: <CareerCreate />,
-    children: [],
-  },
-  {
-    path: "/profiles/educations/create",
-    element: <EducationsCreate />,
-    children: [],
-  },
-  {
-    path: "/profiles/sites/create",
-    element: <SitesCreate />,
-    children: [],
-  },
-  {
-    path: "/profiles/skills",
-    element: <ProfileSkills />,
-    children: [],
-  },
+    {
+        path: "/",
+        element: <Main />,
+        children: [],
+    },
+    {
+        path: "/home",
+        element: <HomePage />,
+        children: [],
+    },
+    {
+        path: "/qnas",
+        element: <QnA />,
+        children: [],
+    },
+    {
+        path: "/qnas/detail",
+        element: <QnaDetail />,
+        children: [],
+    },
+    {
+        path: "/profiles",
+        element: <Profiles />,
+        children: [],
+    },
+    {
+        path: "/profiles/update",
+        element: <ProfileUpdate />,
+        children: [],
+    },
+    {
+        path: "/profiles/careers/create",
+        element: <CareerCreate />,
+        children: [],
+    },
+    {
+        path: "/profiles/educations/create",
+        element: <EducationsCreate />,
+        children: [],
+    },
+    {
+        path: "/profiles/sites/create",
+        element: <SitesCreate />,
+        children: [],
+    },
+    {
+        path: "/profiles/skills",
+        element: <ProfileSkills />,
+        children: [],
+    },
   {
     path: "/search",
     element: <SearchResult />,
@@ -63,7 +69,7 @@ const router = createBrowserRouter([
   },
 ]);
 function Router() {
-  return <RouterProvider router={router} />;
+    return <RouterProvider router={router} />;
 }
 
 export default Router;
