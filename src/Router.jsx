@@ -9,6 +9,7 @@ import EducationsCreate from "./pages/EducationsCreate";
 import SitesCreate from "./pages/SitesCreate";
 import ProfileSkills from "./pages/ProfileSkills";
 import SearchResult from "./pages/SearchResult";
+import CreateQna from "./pages/CreateQna";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,11 @@ const router = createBrowserRouter([
   {
     path: "/search",
     element: <SearchResult />,
+    children: [],
+  },
+  {
+    path: "/qna/create",
+    element: <CreateQna />,
     children: [],
   },
 ]);
