@@ -117,3 +117,38 @@ export const industryList = [
   { id: "industry-checkbox-34", label: "반도체" },
   { id: "industry-checkbox-35", label: "컨설팅" },
 ];
+
+export const topics = [
+  "react",
+  "java",
+  "프론트엔드",
+  "백엔드",
+  "취업",
+  "spring",
+  "javascript",
+  "비전공자",
+  "신입",
+  "이직",
+  "python",
+  "next.js",
+  "인공지능",
+  "포트폴리오",
+  "부트캠프",
+  "node.js",
+  "react-native",
+  "ios",
+  "flutter",
+  "연봉",
+];
+export const tags = [
+  "javascript",
+  "react",
+  "java",
+  "spring",
+  "python",
+  "ai",
+  "프론트엔드",
+  "백엔드",
+  "비전공자",
+  "이직",
+];

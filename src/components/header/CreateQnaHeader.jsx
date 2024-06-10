@@ -45,6 +45,9 @@ const SubmitCreateQnaHeaderBtn = styled.button`
   align-items: center;
   justify-content: center;
   margin-left: auto;
+  &:disabled {
+    opacity: 0.7;
+  }
 `;
 const SubmitCreateQnaHeaderBtnText = styled.span`
   -webkit-line-clamp: 1;
@@ -58,14 +61,7 @@ const CreateQnaHeaderCenterDiv = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
-    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  --tw-translate-y: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
-    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  --tw-translate-x: -50%;
+  transform: translate(-50%, -50%);
   position: absolute;
   top: 50%;
   left: 50%;

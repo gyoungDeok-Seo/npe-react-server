@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { CreateQnaPilsu } from "../../../container/CreateQna/CategoryAndTag";
 import { categoryList } from "../../../service/dummyData";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CreateQnaDataContext } from "../../../context/CreateQnaDataContext";
 const CreateQnaCategoryLabel = styled.label`
   font-weight: 700;
@@ -63,9 +63,12 @@ const CategoryItem = styled.li`
 function CategorySelect() {
   const [showBox, setShowBox] = useState(false);
   const { datas, setDatas } = useContext(CreateQnaDataContext);
+  const categoryRef = useRef(null);
+
   const handleSelectOpen = () => {
     setShowBox(true);
   };
+
   const handleSelected = (item) => {
     setDatas((prev) => ({
       ...prev,
@@ -73,12 +76,26 @@ function CategorySelect() {
     }));
     setShowBox(false);
   };
+
+  const handleClickOutside = (event) => {
+    if (categoryRef.current && !categoryRef.current.contains(event.target)) {
+      setShowBox(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <CreateQnaCategoryLabel htmlFor="category">
         카테고리 <CreateQnaPilsu>(필수)</CreateQnaPilsu>
       </CreateQnaCategoryLabel>
-      <CreateQnaCategorySelectBox>
+      <CreateQnaCategorySelectBox ref={categoryRef}>
         <CreateQnaCategorySelectBtn type="button" onClick={handleSelectOpen}>
           <CreateQnaCategorySelectBtnText>
             {datas.category}
@@ -102,19 +119,20 @@ function CategorySelect() {
             </g>
           </CreateQnaCategorySelectBtnSvg>
         </CreateQnaCategorySelectBtn>
-      </CreateQnaCategorySelectBox>
-      <CategoryListBox>
         {showBox && (
-          <CategoryList>
-            {categoryList.map((item) => (
-              <CategoryItem key={item} onClick={() => handleSelected(item)}>
-                {item}
-              </CategoryItem>
-            ))}
-          </CategoryList>
+          <CategoryListBox>
+            <CategoryList>
+              {categoryList.map((item) => (
+                <CategoryItem key={item} onClick={() => handleSelected(item)}>
+                  {item}
+                </CategoryItem>
+              ))}
+            </CategoryList>
+          </CategoryListBox>
         )}
-      </CategoryListBox>
+      </CreateQnaCategorySelectBox>
     </>
   );
 }
+
 export default CategorySelect;

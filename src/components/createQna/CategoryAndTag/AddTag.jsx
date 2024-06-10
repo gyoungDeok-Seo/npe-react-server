@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { CreateQnaPilsu } from "../../../container/CreateQna/CategoryAndTag";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { skillList } from "../../../service/dummyData";
 import { CreateQnaDataContext } from "../../../context/CreateQnaDataContext";
 
@@ -82,6 +82,7 @@ const SkillItem = styled.li`
     background-color: #edf0f5;
   }
 `;
+
 function AddTag() {
   const { datas, setDatas } = useContext(CreateQnaDataContext);
   const [tag, setTag] = useState("");
@@ -89,6 +90,7 @@ function AddTag() {
   const [isFocused, setIsFocused] = useState(false);
   const [search, setSearch] = useState([]);
   const [showBox, setShowBox] = useState(false);
+  const skillListRef = useRef(null);
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -146,6 +148,19 @@ function AddTag() {
     setTagLength(0);
   };
 
+  const handleClickOutside = (event) => {
+    if (skillListRef.current && !skillListRef.current.contains(event.target)) {
+      setShowBox(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <CreateQnaTagInner>
       <CreateQnaTagLabelBox>
@@ -172,7 +187,7 @@ function AddTag() {
           onKeyDown={handleEnter}
         />
       </CreateQnaTagInsertBox>
-      <SkillListBox>
+      <SkillListBox ref={skillListRef}>
         {showBox && (
           <SkillList>
             {search.map((item) => (

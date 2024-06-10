@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const WriteMiniModalBox = styled.div`
@@ -20,7 +21,7 @@ const WriteMiniModalBox = styled.div`
   border-radius: 0.25rem;
   width: 12.5rem;
 `;
-const WriteMiniModalBtn = styled.button`
+const WriteMiniModalBtn = styled(Link)`
   color: #0f172a;
   font-size: 0.875rem;
   text-align: left;
@@ -38,10 +39,10 @@ const WriteMiniModalBtn = styled.button`
 function WriteMiniModal({ modalRef }) {
   return (
     <WriteMiniModalBox ref={modalRef}>
-      <WriteMiniModalBtn type="button">
+      <WriteMiniModalBtn to="#">
         <span>게시물 작성</span>
       </WriteMiniModalBtn>
-      <WriteMiniModalBtn type="button">
+      <WriteMiniModalBtn to="/qna/create">
         <span>Q&amp;A 질문 작성</span>
       </WriteMiniModalBtn>
     </WriteMiniModalBox>

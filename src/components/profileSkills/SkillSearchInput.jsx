@@ -77,9 +77,11 @@ const SkillItem = styled.li`
 `;
 
 function SkillSearchInput() {
-  const {setDatas } = useContext(CreateSkillsContext);
+  const { setDatas } = useContext(CreateSkillsContext);
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [search, setSearch] = useState([]);
+  const [showBox, setShowBox] = useState(false);
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -95,8 +97,6 @@ function SkillSearchInput() {
     setShowBox(false);
   };
 
-  const [search, setSearch] = useState([]);
-  const [showBox, setShowBox] = useState(false);
   const searchSkills = (e) => {
     setInputValue(e.target.value);
     const searchWord = e.target.value.trim().toLowerCase();
@@ -107,7 +107,7 @@ function SkillSearchInput() {
     setShowBox(searching.length > 0);
   };
 
-  const handelSearch = (e) => {
+  const handleSearch = (e) => {
     setDatas((prevDatas) => ({
       ...prevDatas,
       skills: [...prevDatas.skills, e.target.innerText],
@@ -181,7 +181,7 @@ function SkillSearchInput() {
         {showBox && (
           <SkillList>
             {search.map((item) => (
-              <SkillItem onClick={handelSearch}>{item.id}</SkillItem>
+              <SkillItem onClick={handleSearch}>{item.id}</SkillItem>
             ))}
           </SkillList>
         )}
