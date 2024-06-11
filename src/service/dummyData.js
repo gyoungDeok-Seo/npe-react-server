@@ -152,3 +152,61 @@ export const tags = [
   "비전공자",
   "이직",
 ];
+
+
+export const answers = [
+  {
+    answerType: "ai",
+    profileLink: ``,
+    profileImgUrl:
+      "https://publy.imgix.net/user-uploaded/590678/2023.03/49e51bca73ca3d1876ecb63392a5bd4539c7e3ff1a6207eee9d90eef55d5dd4c.png?w=200&h=200&auto=format&fm=png",
+    memberName: "NPE AI 봇",
+    memberPosition: "GPT-4가 달아주는 답변입니다.",
+    writeTime: "2023년 04월 07일",
+    answerText: `
+1. 마우스를 올릴 때 메뉴 스타일 변경하기
+CSS의 :hover 선택자를 사용하여 메뉴에 마우스를 올렸을 때 스타일을 변경할 수 있습니다.
+예를 들어, 다음과 같이 스타일을 지정할 수 있습니다.
+
+.menu-item:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+위 코드는 .menu-item 클래스를 가진 요소에 마우스를 올리면 텍스트 색상이 빨간색으로
+변경되고, 밑줄이 생기도록 스타일을 지정한 것입니다.
+
+
+2. 하위 메뉴 컨트롤하기
+
+하위 메뉴를 컨트롤하기 위해서는 JavaScript를 사용해야 합니다.
+
+예를 들어, 다음과 같은 방법으로 구현할 수 있습니다.
+
+마우스를 올린 메뉴 아이템을 클릭하면 하위 메뉴를 표시합니다.
+마우스를 올린 메뉴 아이템에 하위 메뉴가 표시되는 동안은 텍스트 색상과 밑줄을 유지합니다.
+하위 메뉴가 닫히면 텍스트 색상과 밑줄을 원래대로 돌려 놓습니다.
+예를 들어, 다음과 같은 코드를 사용할 수 있습니다.
+        `,
+  },
+  {
+    answerType: "people",
+    profileLink: ``,
+    profileImgUrl:
+      "https://publy.imgix.net/user-uploaded/484624/2023.06/2469e084238292f177224fc4f1625d262d4bca866f71d1eb1e1d8fda46672d0f.jpeg?w=200&h=200&auto=format&fm=jpeg",
+    memberName: "kevin",
+    memberPosition: "디지털그지",
+    writeTime: "2월 28일",
+    answerText: `삐빅 정상입니다.`,
+  },
+  {
+    answerType: "people",
+    profileLink: ``,
+    profileImgUrl:
+      "https://publy.imgix.net/user-uploaded/484624/2023.06/2469e084238292f177224fc4f1625d262d4bca866f71d1eb1e1d8fda46672d0f.jpeg?w=200&h=200&auto=format&fm=jpeg",
+    memberName: "kevin",
+    memberPosition: "디지털그지",
+    writeTime: "2월 28일",
+    answerText: `삐빅 정상입니다.`,
+  },
+];
