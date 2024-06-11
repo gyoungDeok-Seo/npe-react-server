@@ -86,11 +86,7 @@ const ProfileUpdateHeader = ({ navigate, setAvoidMistakesModal }) => {
         career.startYear !== "" &&
         career.startMonth !== "" &&
         career.endYear !== "" &&
-        career.endMonth !== "" &&
-        career.industry.length > 0 &&
-        career.skills.length > 0 &&
-        career.description !== "" &&
-        career.link !== "";
+        career.endMonth !== "";
     } else if (location.pathname.startsWith("/profiles/educations/create")) {
       isValid =
         eductaion.institution !== "" &&
