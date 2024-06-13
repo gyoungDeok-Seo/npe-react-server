@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer/Footer";
 import MainHeader from "../components/Header/MainHeader";
 import Introduction from "../container/Main/Introduction";
 import Landing from "../container/Main/Landing";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   flex-direction: column;
@@ -10,6 +12,13 @@ const Container = styled.div`
 `;
 
 function Main() {
+  const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    isLogin && navigate('/home')
+  },[isLogin, navigate])
+
   return (
     <div>
       <div
@@ -24,7 +33,7 @@ function Main() {
         }}
       ></div>
       <div>
-        <MainHeader />
+        <MainHeader isLogin={isLogin} setIsLogin={setIsLogin} />
         <Container>
           <Landing />
           <Introduction />
