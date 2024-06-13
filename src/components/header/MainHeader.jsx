@@ -102,7 +102,7 @@ function MainHeader({ setAvoidMistakesModal }) {
               </LeftBox>
               <RightBox>
                 <SearchBtnBox setSearch={setSearch} />
-                {isLoggedIn ? <OnLoginNav /> : <NonLoginNav />}
+                {isLoggedIn ? <OnLoginNav setSearch={setSearch}/> : <NonLoginNav />}
               </RightBox>
             </HeaderInner>
           </HeaderContainer>

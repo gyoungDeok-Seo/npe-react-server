@@ -68,7 +68,7 @@ const WriteOptionBtnSvg = styled.svg`
     skewX(0deg) skewY(0deg) scaleX(1) scaleY(1);
 `;
 
-function OnLoginNav() {
+function OnLoginNav({ setSearch }) {
   const [profileModalOpen, setProfileModalOpen] = useState(false);
   const [writeModalOpen, setWriteModalOpen] = useState(false);
   const profileRef = useRef(null);
@@ -78,10 +78,12 @@ function OnLoginNav() {
 
   const handleProfileModal = () => {
     setProfileModalOpen((open) => !open);
+    setSearch(false);
   };
 
   const handleWriteModal = () => {
     setWriteModalOpen((open) => !open);
+    setSearch(false);
   };
 
   const handleClickOutside = (event) => {
