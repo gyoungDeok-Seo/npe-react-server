@@ -2,8 +2,7 @@ import styled from "styled-components";
 import CategorySelect from "../../components/createQna/CategoryAndTag/CategorySelect";
 import AddTag from "../../components/createQna/CategoryAndTag/AddTag";
 import TagList from "../../components/createQna/CategoryAndTag/TagList";
-import { useContext, useState } from "react";
-import { CreateQnaDataContext } from "../../context/CreateQnaDataContext";
+import { useSelector } from "react-redux";
 
 const CreateQnaCategoryAndTagBox = styled.div`
   display: flex;
@@ -34,7 +33,7 @@ const CreateQnaTagBox = styled.div`
 `;
 
 function CategoryAndTag() {
-  const { datas } = useContext(CreateQnaDataContext);
+  const createQna = useSelector((state) => state.createQna);
 
   return (
     <CreateQnaCategoryAndTagBox>
@@ -44,7 +43,7 @@ function CategoryAndTag() {
         </CreateQnaCategorybox>
         <CreateQnaTagBox>
           <AddTag />
-          {datas.tags.length !== 0 && <TagList />}
+          {createQna.tags.length !== 0 && <TagList />}
         </CreateQnaTagBox>
       </CreateQnaCategoryAndTagInner>
     </CreateQnaCategoryAndTagBox>

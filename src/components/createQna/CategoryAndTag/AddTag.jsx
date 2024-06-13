@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { CreateQnaPilsu } from "../../../container/CreateQna/CategoryAndTag";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { skillList } from "../../../service/dummyData";
-import { CreateQnaDataContext } from "../../../context/CreateQnaDataContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setTags } from "../../../redux/createQna";
 
 const CreateQnaTagInner = styled.div`
   display: flex;
@@ -84,7 +85,8 @@ const SkillItem = styled.li`
 `;
 
 function AddTag() {
-  const { datas, setDatas } = useContext(CreateQnaDataContext);
+  const createQna = useSelector((state) => state.createQna);
+  const dispatch = useDispatch();
   const [tag, setTag] = useState("");
   const [tagLength, setTagLength] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
@@ -118,13 +120,10 @@ function AddTag() {
   const handleEnter = (e) => {
     if (e.keyCode === 13) {
       e.preventDefault();
-      if (datas.tags.length >= 5) return;
+      if (createQna.tags.length >= 5) return;
       const trimmedTag = tag.trim();
-      if (trimmedTag && !datas.tags.includes(trimmedTag)) {
-        setDatas((prev) => ({
-          ...prev,
-          tags: [...prev.tags, trimmedTag],
-        }));
+      if (trimmedTag && !createQna.tags.includes(trimmedTag)) {
+        dispatch(setTags([...createQna.tags, trimmedTag]));
       }
       setTag("");
       setTagLength(0);
@@ -132,16 +131,13 @@ function AddTag() {
   };
 
   const handleSearch = (e) => {
-    if (datas.tags.length >= 5) {
+    if (createQna.tags.length >= 5) {
       setShowBox(false);
       return;
     }
     const selectedTag = e.target.innerText.trim();
-    if (!datas.tags.includes(selectedTag)) {
-      setDatas((prev) => ({
-        ...prev,
-        tags: [...prev.tags, selectedTag],
-      }));
+    if (!createQna.tags.includes(selectedTag)) {
+      dispatch(setTags([...createQna.tags, selectedTag]));
     }
     setShowBox(false);
     setTag("");

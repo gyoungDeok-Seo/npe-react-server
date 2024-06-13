@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import TagItem from "./TagItem";
-import { useContext } from "react";
-import { CreateQnaDataContext } from "../../../context/CreateQnaDataContext";
+import { useSelector } from "react-redux";
 
 const TagListBox = styled.div`
   display: flex;
@@ -19,12 +18,12 @@ const Instructions = styled.p`
 `;
 
 function TagList() {
-  const { datas, setDatas } = useContext(CreateQnaDataContext);
+  const createQna = useSelector((state) => state.createQna);
   return (
     <TagListBox>
       <TagListInner>
-        {datas.tags.map((tag) => (
-          <TagItem tag={tag} setDatas={setDatas} />
+        {createQna.tags.map((tag) => (
+          <TagItem tag={tag} />
         ))}
       </TagListInner>
       <Instructions>태그는 최대 5개까지 입력할 수 있어요.</Instructions>
