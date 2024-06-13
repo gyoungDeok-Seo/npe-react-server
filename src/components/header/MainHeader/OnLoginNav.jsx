@@ -68,7 +68,7 @@ const WriteOptionBtnSvg = styled.svg`
     skewX(0deg) skewY(0deg) scaleX(1) scaleY(1);
 `;
 
-function OnLoginNav({ setSearch }) {
+function OnLoginNav({ member, setSearch }) {
   const [profileModalOpen, setProfileModalOpen] = useState(false);
   const [writeModalOpen, setWriteModalOpen] = useState(false);
   const profileRef = useRef(null);
@@ -144,7 +144,7 @@ function OnLoginNav({ setSearch }) {
         onClick={handleProfileModal}
       >
         <ProfileImg
-          src="https://publy.imgix.net/static/images/img_profile-dummy.png?w=200&h=200&auto=format&fm=png"
+          src={member && member.kakaoProfileUrl}
           alt="백시현님의 프로필 사진"
         />
       </ProfileImgBtn>

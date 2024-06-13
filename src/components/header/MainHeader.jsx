@@ -58,6 +58,8 @@ function MainHeader({ setAvoidMistakesModal }) {
   const [path, setPath] = useState("/");
   const [search, setSearch] = useState(false);
   const isLoggedIn = useSelector((state) => state.loginStatus.status);
+  const [member, setMember] = useState(null);
+
   useEffect(() => {
     setPath(pathname);
     // 서버에서 세션 정보를 가져와 로그인 상태를 설정합니다.
@@ -72,6 +74,7 @@ function MainHeader({ setAvoidMistakesModal }) {
         ); // 서버에서 세션 정보를 가져오는 엔드포인트 설정
         const data = await response.json();
         dispatch(controlRedux(data.loggedIn));
+        setMember(data.member);
       } catch (error) {
         console.error("Error fetching session data", error);
         dispatch(controlRedux(false));
@@ -102,7 +105,11 @@ function MainHeader({ setAvoidMistakesModal }) {
               </LeftBox>
               <RightBox>
                 <SearchBtnBox setSearch={setSearch} />
-                {isLoggedIn ? <OnLoginNav setSearch={setSearch}/> : <NonLoginNav />}
+                {isLoggedIn ? (
+                  <OnLoginNav member={member} setSearch={setSearch} />
+                ) : (
+                  <NonLoginNav />
+                )}
               </RightBox>
             </HeaderInner>
           </HeaderContainer>
