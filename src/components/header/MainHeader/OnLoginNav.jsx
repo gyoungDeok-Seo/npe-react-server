@@ -74,11 +74,6 @@ function OnLoginNav({ member }) {
     const writeOptionRef = useRef(null);
     const writeModalRef = useRef(null);
 
-    // useEffect(() => {
-    //     if (member) {
-    //         console.log(member.kakaoProfileUrl);
-    //     }
-    // }, [member]);
     console.log();
 
     const handleProfileModal = () => {
