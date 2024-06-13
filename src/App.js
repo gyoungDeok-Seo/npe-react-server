@@ -1,9 +1,10 @@
 import Router from "./Router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-// import { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createContext } from "react";
 import { createGlobalStyle } from "styled-components";
+import store from "./redux/store";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -502,15 +503,14 @@ img, svg {
 }
 
 `;
-const InputRefContext = createContext(null);
 function App() {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <Provider store={store}> */}
-      <GlobalStyle />
-      <Router />
-      {/* </Provider> */}
+      <Provider store={store}>
+        <GlobalStyle />
+        <Router />
+      </Provider>
       <ReactQueryDevtools />
     </QueryClientProvider>
   );
