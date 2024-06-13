@@ -1,6 +1,8 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { CreateSkillsContext } from "../../context/CreateSkillsContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setSkills } from "../../redux/createSkills";
 
 const CareerSkillModalCraeteItem = styled.button`
   display: flex;
@@ -40,20 +42,26 @@ const CareerSkillModalCraeteItemSvg = styled.svg`
   display: block;
 `;
 function SelectSkillItem() {
-  const { datas, setDatas } = useContext(CreateSkillsContext);
+  const createSkills = useSelector((state) => state.createSkills);
+  const dispatch = useDispatch();
 
   const handleSkillClick = (skill) => {
-    setDatas((prev) => ({
-      ...prev,
-      skills: prev.skills.includes(skill)
-        ? prev.skills.filter((s) => s !== skill)
-        : [...prev.skills, skill],
-    }));
+    dispatch(
+      setSkills(
+        createSkills.skills.includes(skill)
+          ? createSkills.skills.filter((s) => s !== skill)
+          : [...createSkills.skills, skill]
+      )
+    );
   };
+
+  useEffect(() => {
+    console.log(createSkills);
+  }, [createSkills]);
 
   return (
     <>
-      {datas.skills.map((item) => (
+      {createSkills.skills.map((item) => (
         <CareerSkillModalCraeteItem
           key={item}
           type="button"

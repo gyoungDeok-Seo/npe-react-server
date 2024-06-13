@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import styled from "styled-components";
 import { CreateSkillsContext } from "../../context/CreateSkillsContext";
 import { skillList } from "../../service/dummyData";
+import { useDispatch, useSelector } from "react-redux";
+import { setSkills } from "../../redux/createSkills";
 
 const CareerSkillModalInputBox = styled.div`
   border-color: rgb(226 232 240 / 1);
@@ -77,7 +79,8 @@ const SkillItem = styled.li`
 `;
 
 function SkillSearchInput() {
-  const { setDatas } = useContext(CreateSkillsContext);
+  const createSkills = useSelector((state) => state.createSkills);
+  const dispatch = useDispatch();
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState([]);
@@ -108,10 +111,7 @@ function SkillSearchInput() {
   };
 
   const handleSearch = (e) => {
-    setDatas((prevDatas) => ({
-      ...prevDatas,
-      skills: [...prevDatas.skills, e.target.innerText],
-    }));
+    dispatch(setSkills([...createSkills.skills, e.target.innerText]));
     setShowBox(false);
     setInputValue("");
   };

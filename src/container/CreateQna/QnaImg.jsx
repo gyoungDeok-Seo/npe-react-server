@@ -1,6 +1,7 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { CreateQnaDataContext } from "../../context/CreateQnaDataContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setImages } from "../../redux/createQna";
 
 const QnaImgBox = styled.div`
   display: flex;
@@ -59,9 +60,9 @@ const QnaImgAddBtnText = styled.span`
 `;
 function QnaImg() {
   const fileInputRef = useRef(null);
-  const { datas, setDatas } = useContext(CreateQnaDataContext);
+  const createQna = useSelector((state) => state.createQna);
+  const dispatch = useDispatch();
   const [maxLengthImages, setMaxLengthImages] = useState(false);
-
 
   const handleAddBtn = () => {
     fileInputRef.current.click();
@@ -73,28 +74,23 @@ function QnaImg() {
       file,
       preview: URL.createObjectURL(file),
     }));
-    setDatas((prevDatas) => ({
-      ...prevDatas,
-      images: [...prevDatas.images, ...filePreviews],
-    }));
+    dispatch(setImages([...createQna.images, ...filePreviews]));
     fileInputRef.current.value = "";
   };
 
   const handleRemoveImage = (index) => {
-    setDatas((prevDatas) => ({
-      ...prevDatas,
-      images: prevDatas.images.filter((_, i) => i !== index),
-    }));
+    const updatedImages = createQna.images.filter((_, i) => i !== index);
+    dispatch(setImages(updatedImages));
   };
 
   useEffect(() => {
-    setMaxLengthImages(datas.images.length >= 7);
-  }, [datas.images]);
+    setMaxLengthImages(createQna.images.length >= 7);
+  }, [createQna.images]);
 
   return (
     <QnaImgBox>
       <QnaImgList>
-        {datas.images.map((image, index) => (
+        {createQna.images.map((image, index) => (
           <QnaImgPrevBox key={index}>
             <QnaImgItem src={image.preview} />
             <QnaImgCancelBtn
@@ -108,24 +104,16 @@ function QnaImg() {
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <QnaImgCancelBtnSvg
-                  width={24}
-                  height={24}
-                  strokeWidth={0}
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g>
-                    <g id="style=solid">
-                      <path
-                        id="Vector"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M22 12C22 13.3132 21.7413 14.6136 21.2388 15.8268C20.7362 17.0401 19.9997 18.1425 19.0711 19.0711C18.1425 19.9997 17.0401 20.7362 15.8268 21.2388C14.6136 21.7413 13.3132 22 12 22C10.6868 22 9.38642 21.7413 8.17317 21.2388C6.95991 20.7362 5.85752 19.9997 4.92893 19.0711C4.00035 18.1425 3.26375 17.0401 2.7612 15.8268C2.25866 14.6136 2 13.3132 2 12C2 9.34784 3.05357 6.8043 4.92893 4.92893C6.8043 3.05357 9.34784 2 12 2C14.6522 2 17.1957 3.05357 19.0711 4.92893C20.9464 6.8043 22 9.34784 22 12ZM9.70711 8.29289C9.31658 7.90237 8.68342 7.90237 8.29289 8.29289C7.90237 8.68342 7.90237 9.31658 8.29289 9.70711L10.5858 12L8.29289 14.2929C7.90237 14.6834 7.90237 15.3166 8.29289 15.7071C8.68342 16.0976 9.31658 16.0976 9.70711 15.7071L12 13.4142L14.2929 15.7071C14.6834 16.0976 15.3166 16.0976 15.7071 15.7071C16.0976 15.3166 16.0976 14.6834 15.7071 14.2929L13.4142 12L15.7071 9.70711C16.0976 9.31658 16.0976 8.68342 15.7071 8.29289C15.3166 7.90237 14.6834 7.90237 14.2929 8.29289L12 10.5858L9.70711 8.29289Z"
-                      />
-                    </g>
+                <g>
+                  <g id="style=solid">
+                    <path
+                      id="Vector"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M22 12C22 13.3132 21.7413 14.6136 21.2388 15.8268C20.7362 17.0401 19.9997 18.1425 19.0711 19.0711C18.1425 19.9997 17.0401 20.7362 15.8268 21.2388C14.6136 21.7413 13.3132 22 12 22C10.6868 22 9.38642 21.7413 8.17317 21.2388C6.95991 20.7362 5.85752 19.9997 4.92893 19.0711C4.00035 18.1425 3.26375 17.0401 2.7612 15.8268C2.25866 14.6136 2 13.3132 2 12C2 9.34784 3.05357 6.8043 4.92893 4.92893C6.8043 3.05357 9.34784 2 12 2C14.6522 2 17.1957 3.05357 19.0711 4.92893C20.9464 6.8043 22 9.34784 22 12ZM9.70711 8.29289C9.31658 7.90237 8.68342 7.90237 8.29289 8.29289C7.90237 8.68342 7.90237 9.31658 8.29289 9.70711L10.5858 12L8.29289 14.2929C7.90237 14.6834 7.90237 15.3166 8.29289 15.7071C8.68342 16.0976 9.31658 16.0976 9.70711 15.7071L12 13.4142L14.2929 15.7071C14.6834 16.0976 15.3166 16.0976 15.7071 15.7071C16.0976 15.3166 16.0976 14.6834 15.7071 14.2929L13.4142 12L15.7071 9.70711C16.0976 9.31658 16.0976 8.68342 15.7071 8.29289C15.3166 7.90237 14.6834 7.90237 14.2929 8.29289L12 10.5858L9.70711 8.29289Z"
+                    />
                   </g>
-                </QnaImgCancelBtnSvg>
+                </g>
               </QnaImgCancelBtnSvg>
             </QnaImgCancelBtn>
           </QnaImgPrevBox>
@@ -147,24 +135,16 @@ function QnaImg() {
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <QnaImgAddBtnSvg
-                  width={24}
-                  height={24}
-                  strokeWidth={0}
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g>
-                    <g id="style=outline">
-                      <path
-                        id="Vector (Stroke)"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"
-                      />
-                    </g>
+                <g>
+                  <g id="style=outline">
+                    <path
+                      id="Vector (Stroke)"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"
+                    />
                   </g>
-                </QnaImgAddBtnSvg>
+                </g>
               </QnaImgAddBtnSvg>
               <QnaImgAddBtnText>사진 추가</QnaImgAddBtnText>
             </QnaImgAddBtn>
@@ -174,4 +154,5 @@ function QnaImg() {
     </QnaImgBox>
   );
 }
+
 export default QnaImg;

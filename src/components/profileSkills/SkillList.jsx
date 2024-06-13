@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { popularSkills } from "../../service/dummyData";
-import { useContext } from "react";
-import { CreateSkillsContext } from "../../context/CreateSkillsContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setSkills } from "../../redux/createSkills";
+import { useEffect } from "react";
 
 const CareerSkillModalSkillList = styled.div`
   display: flex;
@@ -29,16 +30,22 @@ const CareerSkillModalSkillBtnText = styled.h3`
   margin-top: 0;
   margin-bottom: 0;
 `;
-function SkillList() {
-  const { datas, setDatas } = useContext(CreateSkillsContext);
+const SkillList = () => {
+  const createSkills = useSelector((state) => state.createSkills);
+  const dispatch = useDispatch();
+
   const handleSkillClick = (skill) => {
-    setDatas((prevDatas) => ({
-      ...prevDatas,
-      skills: prevDatas.skills.includes(skill)
-        ? prevDatas.skills.filter((s) => s !== skill)
-        : [...prevDatas.skills, skill],
-    }));
+    dispatch(
+      setSkills(
+        createSkills.skills.includes(skill)
+          ? createSkills.skills.filter((s) => s !== skill)
+          : [...createSkills.skills, skill]
+      )
+    );
   };
+  useEffect(() => {
+    console.log(createSkills);
+  }, [createSkills]);
 
   return (
     <CareerSkillModalSkillList>
@@ -47,14 +54,17 @@ function SkillList() {
           key={skill}
           type="button"
           onClick={() => handleSkillClick(skill)}
-          selected={datas.skills.includes(skill)}
+          selected={createSkills.skills.includes(skill)}
         >
-          <CareerSkillModalSkillBtnText selected={datas.skills.includes(skill)}>
+          <CareerSkillModalSkillBtnText
+            selected={createSkills.skills.includes(skill)}
+          >
             {skill}
           </CareerSkillModalSkillBtnText>
         </CareerSkillModalSkillBtn>
       ))}
     </CareerSkillModalSkillList>
   );
-}
+};
+
 export default SkillList;

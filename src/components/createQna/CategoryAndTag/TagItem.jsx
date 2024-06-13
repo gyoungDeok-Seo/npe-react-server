@@ -1,4 +1,6 @@
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { setTags } from "../../../redux/createQna";
 
 const TagListContent = styled.div`
   padding-right: 1.75rem;
@@ -42,12 +44,12 @@ const TagCancelSvg = styled.svg`
   display: block;
 `;
 
-function TagItem({ tag, setDatas }) {
+function TagItem({ tag }) {
+  const dispatch = useDispatch();
+  const createQna = useSelector((state) => state.createQna);
   const handleCancel = () => {
-    setDatas((prev) => ({
-      ...prev,
-      tags: prev.tags.filter((item) => item !== tag),
-    }));
+    const updatedTags = createQna.tags.filter((item) => item !== tag);
+    dispatch(setTags(updatedTags));
   };
   return (
     <TagListContent>
