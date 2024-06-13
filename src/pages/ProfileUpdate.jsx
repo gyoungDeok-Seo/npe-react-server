@@ -79,7 +79,6 @@ function ProfileUpdate() {
   const navigate = useNavigate(null);
   const [avoidMistakesModal, setAvoidMistakesModal] = useState(false);
   const [isExit, setIsExit] = useState(false);
-  const [datas, setDatas] = useState({ name: "", ref: "", description: "" });
 
   useEffect(() => {
     if (isExit) {
@@ -87,7 +86,7 @@ function ProfileUpdate() {
     }
   }, [isExit]);
   return (
-    <ProfileUpdateContext.Provider value={{ datas, setDatas }}>
+    <>
       <div>
         <div
           style={{
@@ -120,7 +119,7 @@ function ProfileUpdate() {
           setIsExit={setIsExit}
         />
       )}
-    </ProfileUpdateContext.Provider>
+    </>
   );
 }
 export default ProfileUpdate;

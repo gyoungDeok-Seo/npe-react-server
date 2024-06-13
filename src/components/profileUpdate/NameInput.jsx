@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import {
   InputLengthCountText,
   ProfileUpdateInput,
@@ -7,10 +7,12 @@ import {
   ProfileUpdateLabel,
   ProfileUpdateLabelSub,
 } from "../../pages/ProfileUpdate";
-import { ProfileUpdateContext } from "../../context/ProfileUpdateContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setName } from "../../redux/profileUpdate";
 
 function NameInput() {
-  const { datas, setDatas } = useContext(ProfileUpdateContext);
+  const profileUpdate = useSelector((state) => state.profileUpdate);
+  const dispatch = useDispatch();
   const [nameLength, setNameLength] = useState(0);
 
   const handleNameChange = (e) => {
@@ -18,10 +20,7 @@ function NameInput() {
     const valueLength = value.length;
     setNameLength(valueLength);
     if (valueLength <= 20) {
-      setDatas((prev) => ({
-        ...prev,
-        name: value,
-      }));
+      dispatch(setName(value));
     }
   };
 
@@ -39,7 +38,7 @@ function NameInput() {
         placeholder="이름을 입력해 주세요."
         name="name"
         maxLength="20"
-        value={datas.name}
+        value={profileUpdate.name}
         onChange={handleNameChange}
       />
     </ProfileUpdateInputBox>

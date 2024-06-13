@@ -6,6 +6,7 @@ import { ProfileUpdateContext } from "../../context/ProfileUpdateContext";
 import { CreateEductaionContext } from "../../context/CreateEductaionContext";
 import { CreateCareerContext } from "../../context/CreateCareerContext";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ProfileUpdateHeaderContainer = styled.nav`
   position: fixed;
@@ -66,45 +67,48 @@ const SubmitProfileUpdateBtnText = styled.span`
 const ProfileUpdateHeader = ({ navigate, setAvoidMistakesModal }) => {
   // const { datas: sites } = useContext(CreateSiteContext);
   // const { datas: skills } = useContext(CreateSkillsContext);
-  // const { datas: profile } = useContext(ProfileUpdateContext);
+  const profileUpdate = useSelector((state) => state.profileUpdate);
   // const { datas: eductaion } = useContext(CreateEductaionContext);
   // const { datas: career } = useContext(CreateCareerContext);
 
   const location = useLocation();
   const [isDisabled, setIsDisabled] = useState(true);
 
-  // useEffect(() => {
-  //   let isValid = false;
+  useEffect(() => {
+    let isValid = false;
 
-  //   if (location.pathname.startsWith("/profiles/update")) {
-  //     isValid =
-  //       profile.name !== "" && profile.ref !== "" && profile.description !== "";
-  //   } else if (location.pathname.startsWith("/profiles/careers/create")) {
-  //     isValid =
-  //       career.company !== "" &&
-  //       career.job !== "" &&
-  //       career.startYear !== "" &&
-  //       career.startMonth !== "" &&
-  //       career.endYear !== "" &&
-  //       career.endMonth !== "";
-  //   } else if (location.pathname.startsWith("/profiles/educations/create")) {
-  //     isValid =
-  //       eductaion.institution !== "" &&
-  //       eductaion.course !== "" &&
-  //       eductaion.startYear !== "" &&
-  //       eductaion.startMonth !== "" &&
-  //       eductaion.endYear !== "" &&
-  //       eductaion.endMonth !== "" &&
-  //       eductaion.link !== "" &&
-  //       eductaion.description !== "";
-  //   } else if (location.pathname.startsWith("/profiles/sites/create")) {
-  //     isValid = sites.url !== "" && sites.name !== "";
-  //   } else if (location.pathname.startsWith("/profiles/skills")) {
-  //     isValid = skills.skills.length > 0;
-  //   }
+    if (location.pathname.startsWith("/profiles/update")) {
+      isValid =
+        profileUpdate.name !== "" &&
+        profileUpdate.ref !== "" &&
+        profileUpdate.description !== "";
+    }
+    // else if (location.pathname.startsWith("/profiles/careers/create")) {
+    //   isValid =
+    //     career.company !== "" &&
+    //     career.job !== "" &&
+    //     career.startYear !== "" &&
+    //     career.startMonth !== "" &&
+    //     career.endYear !== "" &&
+    //     career.endMonth !== "";
+    // } else if (location.pathname.startsWith("/profiles/educations/create")) {
+    //   isValid =
+    //     eductaion.institution !== "" &&
+    //     eductaion.course !== "" &&
+    //     eductaion.startYear !== "" &&
+    //     eductaion.startMonth !== "" &&
+    //     eductaion.endYear !== "" &&
+    //     eductaion.endMonth !== "" &&
+    //     eductaion.link !== "" &&
+    //     eductaion.description !== "";
+    // } else if (location.pathname.startsWith("/profiles/sites/create")) {
+    //   isValid = sites.url !== "" && sites.name !== "";
+    // } else if (location.pathname.startsWith("/profiles/skills")) {
+    //   isValid = skills.skills.length > 0;
+    // }
 
-  //   setIsDisabled(!isValid);
-  // }, [profile, career, eductaion, sites, skills, location.pathname]);
+    setIsDisabled(!isValid);
+  }, [profileUpdate, location.pathname]);
 
   const handleUpdateProfile = () => {
     navigate("/profiles");

@@ -6,6 +6,8 @@ import {
 } from "../../pages/ProfileUpdate";
 import styled from "styled-components";
 import { ProfileUpdateContext } from "../../context/ProfileUpdateContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setDescription } from "../../redux/profileUpdate";
 
 const ProfileUpdateTextarea = styled.textarea`
   --tw-shadow: 0 0 #0000;
@@ -27,7 +29,8 @@ const ProfileUpdateTextarea = styled.textarea`
 `;
 
 function DescriptionTextarea() {
-  const { datas, setDatas } = useContext(ProfileUpdateContext);
+  const profileUpdate = useSelector((state) => state.profileUpdate);
+  const dispatch = useDispatch();
   const [descriptionLength, setDescriptionLength] = useState(0);
 
   const handleDescriptionChange = (e) => {
@@ -35,10 +38,7 @@ function DescriptionTextarea() {
     const valueLength = value.length;
     setDescriptionLength(valueLength);
     if (valueLength <= 150) {
-      setDatas((prev) => ({
-        ...prev,
-        description: value,
-      }));
+      dispatch(setDescription(value));
     }
   };
   return (
@@ -51,7 +51,7 @@ function DescriptionTextarea() {
         placeholder="나를 소개해주세요."
         name="shortDescription"
         maxLength="150"
-        value={datas.description}
+        value={profileUpdate.description}
         onChange={handleDescriptionChange}
       ></ProfileUpdateTextarea>
     </>

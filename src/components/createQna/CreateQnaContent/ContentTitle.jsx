@@ -25,7 +25,7 @@ const CreateQnaContentTitleTextarea = styled.textarea`
   resize: none;
   width: 100%;
   outline: none;
-  overflow: hidden; /* Ensure no scrollbar is shown */
+  overflow: hidden; 
 `;
 
 const CreateQnaContentTitleCountBox = styled.div`
