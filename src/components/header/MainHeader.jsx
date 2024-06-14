@@ -55,13 +55,11 @@ function MainHeader({ setAvoidMistakesModal }) {
     const navigate = useNavigate();
     const { pathname } = useLocation();
     const dispatch = useDispatch();
-    const [path, setPath] = useState("/");
     const [search, setSearch] = useState(false);
     const isLoggedIn = useSelector((state) => state.loginStatus.status);
     const [member, setMember] = useState(null);
 
     useEffect(() => {
-        setPath(pathname);
         // 서버에서 세션 정보를 가져와 로그인 상태를 설정합니다.
         const fetchUserSession = async () => {
             try {
@@ -82,9 +80,9 @@ function MainHeader({ setAvoidMistakesModal }) {
 
     return (
         <>
-            {path.startsWith("/profiles/") ? (
+            {pathname.startsWith("/profiles/") ? (
                 <ProfileUpdateHeader navigate={navigate} setAvoidMistakesModal={setAvoidMistakesModal} />
-            ) : path.includes("/create") ? (
+            ) : pathname.includes("/create") ? (
                 <CreateQnaHeader navigate={navigate} setAvoidMistakesModal={setAvoidMistakesModal} />
             ) : (
                 <>

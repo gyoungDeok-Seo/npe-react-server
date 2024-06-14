@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import NonExistent from "../../components/profiles/Intro/NonExistent";
+import { useEffect, useState } from "react";
 
 const ProfileContentContainer = styled.div`
     border-color: #e2e8f0;
@@ -149,8 +150,29 @@ const ContentLinkSvg = styled.div`
     flex: none;
 `;
 
-function Profile() {
+function Profile({ member }) {
     const isExistence = false;
+    const { pathname } = useLocation();
+    const [path, setPath] = useState("/");
+
+    useEffect(() => {
+        const fetchMemberSkill = async () => {
+            try {
+                const response = await fetch("http://localhost:10000/members/api/session", {
+                    method: "GET",
+                    credentials: "include", // 세션 쿠키를 포함하여 요청
+                }); // 서버에서 세션 정보를 가져오는 엔드포인트 설정
+                const data = await response.json();
+                dispatch(controlRedux(data.loggedIn));
+                setMember(data.member);
+            } catch (error) {
+                console.error("Error fetching session data", error);
+                dispatch(controlRedux(false));
+            }
+        };
+        fetchMemberSkill();
+    }, [pathname]);
+
     return (
         <ProfileContentContainer>
             <ProfileContentBox>

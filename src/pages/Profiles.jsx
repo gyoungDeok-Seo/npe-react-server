@@ -47,7 +47,7 @@ function Profiles() {
     const renderContent = () => {
         switch (tab) {
             case 1:
-                return <Profile />;
+                return <Profile member={member} />;
             case 2:
                 return <Post />;
             case 3:
