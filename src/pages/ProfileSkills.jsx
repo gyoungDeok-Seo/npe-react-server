@@ -6,7 +6,7 @@ import SkillList from "../components/ProfileSkills/SkillList";
 import SelectSkillItem from "../components/ProfileSkills/SelectSkillItem";
 import SkillSearchInput from "../components/ProfileSkills/SkillSearchInput";
 import MainHeader from "../components/Header/MainHeader";
-import { CreateSkillsContext } from "../context/CreateSkillsContext";
+import { useSelector } from "react-redux";
 const CareerSkillModalBox = styled.div`
   padding-left: 1rem;
   padding-right: 1rem;
@@ -61,10 +61,10 @@ const CareerSkillModalCraeteItemBox = styled.div`
 `;
 
 function ProfileSkills() {
+  const createSkills = useSelector((state) => state.createSkills);
   const navigate = useNavigate(null);
   const [avoidMistakesModal, setAvoidMistakesModal] = useState(false);
   const [isExit, setIsExit] = useState(false);
-  const [datas, setDatas] = useState({ skills: [] });
 
   useEffect(() => {
     if (isExit) {
@@ -72,7 +72,7 @@ function ProfileSkills() {
     }
   }, [isExit]);
   return (
-    <CreateSkillsContext.Provider value={{ datas, setDatas }}>
+    <>
       <div>
         <div
           style={{
@@ -94,7 +94,7 @@ function ProfileSkills() {
               <CareerSkillModalTitle>
                 내 스킬을 선택해 주세요.
               </CareerSkillModalTitle>
-              {datas.skills.length !== 0 && (
+              {createSkills.length !== 0 && (
                 <CareerSkillModalCraeteItemBox>
                   <SelectSkillItem />
                 </CareerSkillModalCraeteItemBox>
@@ -117,7 +117,7 @@ function ProfileSkills() {
           setIsExit={setIsExit}
         />
       )}
-    </CreateSkillsContext.Provider>
+    </>
   );
 }
 export default ProfileSkills;

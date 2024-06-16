@@ -66,7 +66,7 @@ const WriteOptionBtnSvg = styled.svg`
     transform: translate(0, 0) ${(props) => (props.writeModalOpen ? "rotate(180deg)" : "rotate(0deg)")} skewX(0deg) skewY(0deg) scaleX(1) scaleY(1);
 `;
 
-function OnLoginNav({ member }) {
+function OnLoginNav({ member, setSearch }) {
     const [profileModalOpen, setProfileModalOpen] = useState(false);
     const [writeModalOpen, setWriteModalOpen] = useState(false);
     const profileRef = useRef(null);
@@ -75,13 +75,14 @@ function OnLoginNav({ member }) {
     const writeModalRef = useRef(null);
 
     console.log();
-
     const handleProfileModal = () => {
         setProfileModalOpen((open) => !open);
+        setSearch(false);
     };
 
     const handleWriteModal = () => {
         setWriteModalOpen((open) => !open);
+        setSearch(false);
     };
 
     const handleClickOutside = (event) => {

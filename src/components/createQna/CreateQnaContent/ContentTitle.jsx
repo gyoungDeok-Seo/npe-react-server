@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { CreateQnaDataContext } from "../../../context/CreateQnaDataContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setTitle } from "../../../redux/createQna";
 
 const CreateQnaContentTitlebox = styled.div`
   position: relative;
@@ -24,7 +25,7 @@ const CreateQnaContentTitleTextarea = styled.textarea`
   resize: none;
   width: 100%;
   outline: none;
-  overflow: hidden; /* Ensure no scrollbar is shown */
+  overflow: hidden; 
 `;
 
 const CreateQnaContentTitleCountBox = styled.div`
@@ -39,7 +40,8 @@ const CreateQnaContentTitleCount = styled.p`
 `;
 
 function ContentTitle() {
-  const { datas, setDatas } = useContext(CreateQnaDataContext);
+  const createQna = useSelector((state) => state.createQna);
+  const dispatch = useDispatch();
   const [titleLength, setTitleLength] = useState(0);
   const textareaRef = useRef(null);
 
@@ -48,10 +50,7 @@ function ContentTitle() {
     const valueLength = value.length;
     setTitleLength(valueLength);
     if (valueLength <= 100) {
-      setDatas((prev) => ({
-        ...prev,
-        title: value,
-      }));
+      dispatch(setTitle(value));
     }
   };
 
@@ -60,7 +59,7 @@ function ContentTitle() {
       textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-  }, [datas.title]);
+  }, [createQna.title]);
 
   return (
     <CreateQnaContentTitlebox>
@@ -68,7 +67,7 @@ function ContentTitle() {
         name="title"
         maxLength={100}
         placeholder="제목을 10자 이상 입력해 주세요."
-        value={datas.title}
+        value={createQna.title}
         onChange={handleTitleChange}
         ref={textareaRef}
       />

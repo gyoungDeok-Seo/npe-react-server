@@ -1,6 +1,6 @@
-import { useContext } from "react";
 import styled from "styled-components";
-import { CreateQnaDataContext } from "../../../context/CreateQnaDataContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setQuestion } from "../../../redux/createQna";
 
 const CreateQnaContentQuestion = styled.div`
   position: relative;
@@ -26,14 +26,13 @@ const CreateQnaContentQuestionTextarea = styled.textarea`
 `;
 
 function ContentQuestion() {
-  const { setDatas } = useContext(CreateQnaDataContext);
+  const createQna = useSelector((state) => state.createQna);
+  const dispatch = useDispatch();
   const handleQuestion = (e) => {
     const value = e.target.value;
-    setDatas((prev) => ({
-      ...prev,
-      question: value,
-    }));
+    dispatch(setQuestion(value));
   };
+
   return (
     <CreateQnaContentQuestion>
       <CreateQnaContentQuestionTextarea
@@ -41,7 +40,7 @@ function ContentQuestion() {
         placeholder="궁금한 내용을 적어주세요.
 질문 내용이 구체적일수록 정확한 답변을 받을 수 있어요."
         style={{ height: "48px !important" }}
-        defaultValue={""}
+        value={createQna.question}
         onChange={handleQuestion}
       />
     </CreateQnaContentQuestion>

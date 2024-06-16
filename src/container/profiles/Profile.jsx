@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 import NonExistent from "../../components/profiles/Intro/NonExistent";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setSkills } from "../../redux/createSkills";
 
 const ProfileContentContainer = styled.div`
     border-color: #e2e8f0;
@@ -153,25 +155,26 @@ const ContentLinkSvg = styled.div`
 function Profile({ member }) {
     const isExistence = false;
     const { pathname } = useLocation();
-    const [path, setPath] = useState("/");
+    const dispatch = useDispatch();
+    const memberSkills = useSelector((state) => state.createSkills);
 
     useEffect(() => {
         const fetchMemberSkill = async () => {
-            try {
-                const response = await fetch("http://localhost:10000/members/api/session", {
-                    method: "GET",
-                    credentials: "include", // 세션 쿠키를 포함하여 요청
-                }); // 서버에서 세션 정보를 가져오는 엔드포인트 설정
-                const data = await response.json();
-                dispatch(controlRedux(data.loggedIn));
-                setMember(data.member);
-            } catch (error) {
-                console.error("Error fetching session data", error);
-                dispatch(controlRedux(false));
-            }
+            const response = await fetch(`http://localhost:10000/members/api/skill`, {
+                method: "GET",
+                credentials: "include", // 세션 쿠키를 포함하여 요청
+            });
+            let data = await response.json();
+
+            data = await data.map((skill) => ({
+                id: skill.skillId,
+                skillName: skill.skillName,
+            }));
+
+            dispatch(setSkills(data));
         };
         fetchMemberSkill();
-    }, [pathname]);
+    }, [dispatch]);
 
     return (
         <ProfileContentContainer>
@@ -187,30 +190,29 @@ function Profile({ member }) {
                                                 <div>
                                                     <ContentText>스킬</ContentText>
                                                 </div>
-                                                <ContentUpdateBtn to="/profiles/skills">
-                                                    <ContentUpdateSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                        <g>
-                                                            <g id="style=outline">
-                                                                <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M18.5 3.99976C18.1021 3.99976 17.7205 4.15783 17.4391 4.43919L16.6462 5.23209L18.768 7.35387L19.5609 6.56098C19.8423 6.27961 20.0003 5.898 20.0003 5.50009C20.0003 5.10217 19.8423 4.72056 19.5609 4.43919C19.2795 4.15783 18.8979 3.99976 18.5 3.99976ZM20.9751 7.97519C21.6315 7.31875 22.0003 6.42843 22.0003 5.50009C22.0003 4.57174 21.6315 3.68142 20.9751 3.02498C20.3187 2.36854 19.4283 1.99976 18.5 1.99976C17.5717 1.99976 16.6813 2.36854 16.0249 3.02498L2.29289 16.757C2.10536 16.9445 2 17.1989 2 17.4641V21.0361C2 21.5884 2.44772 22.0361 3 22.0361H6.5C6.76522 22.0361 7.01957 21.9307 7.20711 21.7432L20.9751 7.97519ZM17.3538 8.76808L15.232 6.6463L4 17.8783V20.0361H6.08579L17.3538 8.76808Z"></path>
+                                                {memberSkills && memberSkills.skills.length > 0 && (
+                                                    <ContentUpdateBtn to="/profiles/skills">
+                                                        <ContentUpdateSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <g>
+                                                                <g id="style=outline">
+                                                                    <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M18.5 3.99976C18.1021 3.99976 17.7205 4.15783 17.4391 4.43919L16.6462 5.23209L18.768 7.35387L19.5609 6.56098C19.8423 6.27961 20.0003 5.898 20.0003 5.50009C20.0003 5.10217 19.8423 4.72056 19.5609 4.43919C19.2795 4.15783 18.8979 3.99976 18.5 3.99976ZM20.9751 7.97519C21.6315 7.31875 22.0003 6.42843 22.0003 5.50009C22.0003 4.57174 21.6315 3.68142 20.9751 3.02498C20.3187 2.36854 19.4283 1.99976 18.5 1.99976C17.5717 1.99976 16.6813 2.36854 16.0249 3.02498L2.29289 16.757C2.10536 16.9445 2 17.1989 2 17.4641V21.0361C2 21.5884 2.44772 22.0361 3 22.0361H6.5C6.76522 22.0361 7.01957 21.9307 7.20711 21.7432L20.9751 7.97519ZM17.3538 8.76808L15.232 6.6463L4 17.8783V20.0361H6.08579L17.3538 8.76808Z"></path>
+                                                                </g>
                                                             </g>
-                                                        </g>
-                                                    </ContentUpdateSvg>
-                                                </ContentUpdateBtn>
+                                                        </ContentUpdateSvg>
+                                                    </ContentUpdateBtn>
+                                                )}
                                             </ContentTextBox>
-                                            <SkillList>
-                                                <SkillItem>
-                                                    <SkillName>React</SkillName>
-                                                </SkillItem>
-                                                <SkillItem>
-                                                    <SkillName>React Native</SkillName>
-                                                </SkillItem>
-                                                <SkillItem>
-                                                    <SkillName>Github</SkillName>
-                                                </SkillItem>
-                                                <SkillItem>
-                                                    <SkillName>typescript</SkillName>
-                                                </SkillItem>
-                                            </SkillList>
+                                            {memberSkills && memberSkills.skills.length > 0 ? (
+                                                <SkillList>
+                                                    {memberSkills.skills.map((memberSkill, index) => (
+                                                        <SkillItem key={index}>
+                                                            <SkillName>{memberSkill.skillName}</SkillName>
+                                                        </SkillItem>
+                                                    ))}
+                                                </SkillList>
+                                            ) : (
+                                                <NonExistent partText=" 활용할 수 있는 스킬을 알려주세요." part="경력" url="/profiles/skills" />
+                                            )}
                                         </ContentBox>
                                         <ContentBox>
                                             <ContentTextBox>

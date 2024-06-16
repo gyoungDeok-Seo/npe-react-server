@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { controlRedux } from "../redux/loginStatus";
 import { useLocation } from "react-router-dom";
 
-const MyprofileContainer = styled.div`
+const MyProfileContainer = styled.div`
     position: relative;
     background-color: #fff;
     min-height: 100vh;
@@ -17,7 +17,7 @@ const MyprofileContainer = styled.div`
 
 function Profiles() {
     const [tab, setTab] = useState(1);
-    
+
     const [path, setPath] = useState("/");
     const { pathname } = useLocation();
     const dispatch = useDispatch();
@@ -72,11 +72,11 @@ function Profiles() {
                 className="global-toaster"
             ></div>
             <div>
-                <MyprofileContainer>
+                <MyProfileContainer>
                     <MainHeader />
                     <Intro setTab={setTab} tab={tab} member={member} />
                     {renderContent()}
-                </MyprofileContainer>
+                </MyProfileContainer>
             </div>
         </div>
     );
