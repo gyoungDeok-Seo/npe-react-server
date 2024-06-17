@@ -70,7 +70,7 @@ function Intro({ tab, setTab, member }) {
                         <div>
                             <ProfileDescriptionTop>
                                 <ProfileDescriptionProfileImg width="120" height="120" src={member && member.kakaoProfileUrl} alt="프로필 이미지" />
-                                <ToolBox />
+                                <ToolBox member={member} />
                             </ProfileDescriptionTop>
                             <ProfileNameBox>
                                 <div>

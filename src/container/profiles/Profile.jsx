@@ -174,7 +174,7 @@ function Profile({ member }) {
             dispatch(setSkills(data));
         };
         fetchMemberSkill();
-    }, [dispatch]);
+    }, [dispatch, pathname, memberSkills]);
 
     return (
         <ProfileContentContainer>

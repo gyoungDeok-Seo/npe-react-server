@@ -51,7 +51,7 @@ const ProfileEditText = styled.span`
   -webkit-line-clamp: 1;
 `;
 
-function ToolBox() {
+function ToolBox({member}) {
   const handleShareClick = () => {
     const url = window.location.href;
     navigator.clipboard.writeText(url);

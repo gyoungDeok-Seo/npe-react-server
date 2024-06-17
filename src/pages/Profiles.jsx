@@ -8,6 +8,7 @@ import MainHeader from "../components/Header/MainHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { controlRedux } from "../redux/loginStatus";
 import { useLocation } from "react-router-dom";
+import { setQuestions } from "../redux/memberQuestions";
 
 const MyProfileContainer = styled.div`
     position: relative;
@@ -16,12 +17,12 @@ const MyProfileContainer = styled.div`
 `;
 
 function Profiles() {
-    const [tab, setTab] = useState(1);
+    const memberQuestions = useSelector((state) => state.memberQuestions);
 
-    const [path, setPath] = useState("/");
+    const [tab, setTab] = useState(1);
+    const [path, setPath] = useState();
     const { pathname } = useLocation();
     const dispatch = useDispatch();
-    const isLoggedIn = useSelector((state) => state.loginStatus.status);
     const [member, setMember] = useState(null);
 
     useEffect(() => {
@@ -41,7 +42,19 @@ function Profiles() {
                 dispatch(controlRedux(false));
             }
         };
+
+        const getMemberQuestions = async () => {
+            const response = await fetch("http://localhost:10000/members/api/question", {
+                method: "GET",
+                credentials: "include",
+            });
+            const questions = await response.json();
+            console.log(questions);
+            // dispatch(setQuestions(questions));
+        };
+
         fetchUserSession();
+        getMemberQuestions();
     }, [pathname]);
 
     const renderContent = () => {

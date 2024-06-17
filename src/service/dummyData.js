@@ -70,7 +70,7 @@ export const popularSkills = [
     { id: 20, skillName: "C++" },
     { id: 21, skillName: "c언어" },
     { id: 22, skillName: "데이터 분석" },
-    { id: 23, skillName: "kubernetes" },
+    { id: 23, skillName: "Kubernetes" },
     { id: 24, skillName: "Kotlin" },
     { id: 25, skillName: "c#" },
     { id: 26, skillName: "Vue.js" },
