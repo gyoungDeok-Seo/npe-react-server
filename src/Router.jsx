@@ -34,7 +34,7 @@ function Router() {
           element={isLoggedIn ? <HomePage /> : <Navigate to="/" />}
         />
         <Route path="/qnas" element={<QnA />} />
-        <Route path="/qnas/detail" element={<QnaDetail />} />
+        <Route path="/qnas/detail/:qnaId" element={<QnaDetail />} />
         <Route path="/qnas/tagged/:tag" element={<TaggedSearch />} />
         <Route path="/profiles" element={<Profiles />} />
         <Route path="/profiles/update" element={<ProfileUpdate />} />

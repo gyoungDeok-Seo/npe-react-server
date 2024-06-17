@@ -3,24 +3,27 @@ import { createSlice } from "@reduxjs/toolkit";
 const createQna = createSlice({
   name: "qna",
   initialState: {
-    title: "",
-    question: "",
-    images: [],
-    category: "JAVA",
+    questionTitle: "",
+    questionContent: "",
+    files: [],
+    categoryId: 1,
     tags: [],
   },
   reducers: {
     setTitle: (state, action) => {
-      state.title = action.payload;
+      state.questionTitle = action.payload;
     },
     setQuestion: (state, action) => {
-      state.question = action.payload;
+      state.questionContent = action.payload;
     },
-    setImages: (state, action) => {
-      state.images = action.payload;
+    setMember: (state, action) => {
+      state.memberId = action.payload;
+    },
+    setFiles: (state, action) => {
+      state.files = action.payload;
     },
     setCategory: (state, action) => {
-      state.category = action.payload;
+      state.categoryId = action.payload;
     },
     setTags: (state, action) => {
       state.tags = action.payload;
@@ -31,7 +34,7 @@ const createQna = createSlice({
 export const {
   setTitle,
   setQuestion,
-  setImages,
+  setFiles,
   setCategory,
   setTags,
   setDatas,
