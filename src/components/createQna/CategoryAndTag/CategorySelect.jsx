@@ -4,6 +4,7 @@ import { categoryList } from "../../../service/dummyData";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../../../redux/createQna";
+
 const CreateQnaCategoryLabel = styled.label`
   font-weight: 700;
   font-size: 0.875rem;
@@ -62,7 +63,10 @@ const CategoryItem = styled.li`
 `;
 
 function CategorySelect() {
-  const createQna = useSelector((state) => state.createQna);
+  const [selectCategory, setSelectCategory] = useState({
+    categoryId: 1,
+    categoryName: "Java",
+  });
   const dispatch = useDispatch();
   const categoryRef = useRef(null);
 
@@ -73,7 +77,8 @@ function CategorySelect() {
   };
 
   const handleSelected = (item) => {
-    dispatch(setCategory(item));
+    dispatch(setCategory(item.categoryId));
+    setSelectCategory(item);
     setShowBox(false);
   };
 
@@ -98,7 +103,7 @@ function CategorySelect() {
       <CreateQnaCategorySelectBox ref={categoryRef}>
         <CreateQnaCategorySelectBtn type="button" onClick={handleSelectOpen}>
           <CreateQnaCategorySelectBtnText>
-            {createQna.category}
+            {selectCategory.categoryName}
           </CreateQnaCategorySelectBtnText>
           <CreateQnaCategorySelectBtnSvg
             width={24}
@@ -119,8 +124,11 @@ function CategorySelect() {
           <CategoryListBox>
             <CategoryList>
               {categoryList.map((item) => (
-                <CategoryItem key={item} onClick={() => handleSelected(item)}>
-                  {item}
+                <CategoryItem
+                  key={item.categoryId}
+                  onClick={() => handleSelected(item)}
+                >
+                  {item.categoryName}
                 </CategoryItem>
               ))}
             </CategoryList>

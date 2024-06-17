@@ -1,5 +1,9 @@
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { sendAnswerLikePeople } from "../../../service/answerApi";
+import { sendReplyLikePeople } from "../../../service/answerReplyApi";
+import { useEffect, useState } from "react";
 
 const LikeUserModalTItleBox = styled.div`
   background-color: rgb(255 255 255 / 1);
@@ -99,8 +103,24 @@ const LikeUserJob = styled.p`
   -webkit-line-clamp: 1;
 `;
 
-function LikeUserModal({ setLikeUsersModal }) {
-  const handelCancel = () => {
+function LikeUserModal({ setLikeUsersModal, data }) {
+  console.log(data);
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let listData = [];
+      if (data.answerContent) {
+        listData = await sendAnswerLikePeople(data.id);
+      } else if (data.replayContent) {
+        listData = await sendReplyLikePeople(data.id);
+      }
+      setList(listData.data);
+    };
+    fetchData();
+  }, [data]);
+
+  const handleCancel = () => {
     setLikeUsersModal(false);
   };
   return (
@@ -137,7 +157,7 @@ function LikeUserModal({ setLikeUsersModal }) {
           <LikeUserModalTItleBox>
             <LikeUserModalTitleInner>
               <LikeUserModalTItle>좋아요</LikeUserModalTItle>
-              <LikeUserModalCancelBtn type="button" onClick={handelCancel}>
+              <LikeUserModalCancelBtn type="button" onClick={handleCancel}>
                 <LikeUserModalCancelSvg
                   width="24"
                   height="24"
@@ -162,19 +182,19 @@ function LikeUserModal({ setLikeUsersModal }) {
           <LikeUserModalContentBox>
             <div>
               <div style={{ height: "auto", overflow: "auto" }}>
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => (
-                  <LikeUserModalUserItem>
+                {list?.map((item) => (
+                  <LikeUserModalUserItem key={item.id}>
                     <UserProfileLink to="#">
                       <LikeUserProfileImgBox>
                         <LikeUserProfileImg
-                          src="https://publy.imgix.net/user-uploaded/592419/2024.03/2c45767f073664ae84d963661fc3b80e0b13957827edcf5782650225c27981c1.jpeg?w=200&amp;h=200&amp;auto=format&amp;fm=jpeg"
+                          src={item?.kakaoProfileUrl}
                           alt="profile picture"
                           title="profile picture"
                         />
                       </LikeUserProfileImgBox>
                       <div>
-                        <LikeUserName>민성철</LikeUserName>
-                        <LikeUserJob>개빌자</LikeUserJob>
+                        <LikeUserName>{item?.memberName}</LikeUserName>
+                        <LikeUserJob>{item?.memberPosition}</LikeUserJob>
                       </div>
                     </UserProfileLink>
                   </LikeUserModalUserItem>

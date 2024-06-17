@@ -40,7 +40,7 @@ function ContentQuestion() {
         placeholder="궁금한 내용을 적어주세요.
 질문 내용이 구체적일수록 정확한 답변을 받을 수 있어요."
         style={{ height: "48px !important" }}
-        value={createQna.question}
+        value={createQna.questionContent}
         onChange={handleQuestion}
       />
     </CreateQnaContentQuestion>

@@ -67,7 +67,7 @@ function ContentTitle() {
         name="title"
         maxLength={100}
         placeholder="제목을 10자 이상 입력해 주세요."
-        value={createQna.title}
+        value={createQna.questionTitle}
         onChange={handleTitleChange}
         ref={textareaRef}
       />

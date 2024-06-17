@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { CreateQnaImgContext } from "../../context/CreateQnaImgContext";
 import { useSelector } from "react-redux";
+import { sendCreateQnaData } from "../../service/qnaApi";
 
 const CreateQnaHeaderBox = styled.nav`
   padding-left: 1rem;
@@ -103,15 +104,14 @@ const CreateQnaHeaderAddImgBtnSvg = styled.svg`
 `;
 
 function CreateQnaHeader({ navigate, setAvoidMistakesModal }) {
-  const { title, question, category, tags } = useSelector(
-    (state) => state.createQna
-  );
+  const createQna = useSelector((state) => state.createQna);
   const { showInput, setShowInput } = useContext(CreateQnaImgContext);
   const handleShowInput = () => {
     setShowInput((showInput) => !showInput);
   };
   const handleUpdateProfile = () => {
     navigate("/");
+    sendCreateQnaData(createQna);
   };
 
   const handleAvoidMistakesModal = () => {
@@ -121,10 +121,13 @@ function CreateQnaHeader({ navigate, setAvoidMistakesModal }) {
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
+    const { title, question, category, tags } = createQna;
+
+    console.log(createQna);
     setDisabled(
       title === "" || question === "" || category === "" || tags.length === 0
     );
-  }, [title, question, category, tags]);
+  }, [createQna]);
   return (
     <CreateQnaHeaderBox>
       <ExiCreateQnaHeaderBtn type="button" onClick={handleAvoidMistakesModal}>
