@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const ProfileTabBox = styled.div`
@@ -47,6 +48,9 @@ const ProfileTabUnderBar = styled.div`
 `;
 
 function TabBox({ tab, setTab }) {
+    const memberQuestions = useSelector((state) => state.memberQuestions);
+    const memberAnswers = useSelector((state) => state.memberAnswers);
+
     return (
         <ProfileTabBox>
             <ProfileTabInner>
@@ -65,7 +69,7 @@ function TabBox({ tab, setTab }) {
                     </ProfileTabItem>
                     <ProfileTabItem>
                         <ProfileTabBtn tab={tab === 3} onClick={() => setTab(3)}>
-                            Q&amp;A 활동 9
+                            Q&amp;A 활동 {memberQuestions?.questions[0]?.myQuestionTotalCount + memberAnswers?.answers[0]?.myAnswerTotalCount}
                         </ProfileTabBtn>
                         <ProfileTabUnderBar tab={tab === 3}></ProfileTabUnderBar>
                     </ProfileTabItem>

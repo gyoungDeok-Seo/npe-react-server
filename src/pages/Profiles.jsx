@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { controlRedux } from "../redux/loginStatus";
 import { useLocation } from "react-router-dom";
 import { setQuestions } from "../redux/memberQuestions";
+import { setAnswers } from "../redux/memberAnswers";
+import { setPosts } from "../redux/memberPosts";
 
 const MyProfileContainer = styled.div`
     position: relative;
@@ -18,19 +20,42 @@ const MyProfileContainer = styled.div`
 
 function Profiles() {
     const memberQuestions = useSelector((state) => state.memberQuestions);
+    const memberAnswers = useSelector((state) => state.memberAnswers);
+    const memberPosts = useSelector((state) => state.memberPosts);
+    const [questionPage, setQuestionPage] = useState(1);
+    const [answerPage, setAnswerPage] = useState(1);
+    const [postPage, setPostPage] = useState(1);
 
+    const [option, setOption] = useState(1);
     const [tab, setTab] = useState(1);
-    const [path, setPath] = useState();
+
     const { pathname } = useLocation();
     const dispatch = useDispatch();
     const [member, setMember] = useState(null);
 
+    const fetchData = async (page, endpoint, actionCreator, currentState) => {
+        const response = await fetch(`http://localhost:10000/members/api/${endpoint}?page=${page}`, {
+            method: "GET",
+            credentials: "include",
+        });
+
+        const data = await response.json();
+        const newData = page === 1 ? data : [...currentState, ...data];
+
+        dispatch(actionCreator(newData));
+    };
+
     useEffect(() => {
-        setPath(pathname);
+        // fetchData(postPage, "my-post-list", setPosts, memberPosts.posts);
+        fetchData(answerPage, "my-answer-list", setAnswers, memberAnswers.answers);
+        fetchData(questionPage, "my-question-list", setQuestions, memberQuestions.questions);
+    }, []);
+
+    useEffect(() => {
         // 서버에서 세션 정보를 가져와 로그인 상태를 설정합니다.
         const fetchUserSession = async () => {
             try {
-                const response = await fetch("http://localhost:10000/members/api/session", {
+                const response = await fetch(`http://localhost:10000/members/api/session`, {
                     method: "GET",
                     credentials: "include", // 세션 쿠키를 포함하여 요청
                 }); // 서버에서 세션 정보를 가져오는 엔드포인트 설정
@@ -43,28 +68,46 @@ function Profiles() {
             }
         };
 
-        const getMemberQuestions = async () => {
-            const response = await fetch("http://localhost:10000/members/api/question", {
-                method: "GET",
-                credentials: "include",
-            });
-            const questions = await response.json();
-            console.log(questions);
-            // dispatch(setQuestions(questions));
-        };
-
         fetchUserSession();
-        getMemberQuestions();
     }, [pathname]);
+
+    useEffect(() => {
+        if (tab === 1 || tab === 2) {
+            // fetchData(postPage, "my-post-list", setPosts, memberPosts.posts);
+        } else if (option === 1) {
+            fetchData(answerPage, "my-answer-list", setAnswers, memberAnswers.answers);
+        } else {
+            fetchData(questionPage, "my-question-list", setQuestions, memberQuestions.questions);
+        }
+    }, [tab, option, postPage, answerPage, questionPage]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const { scrollTop, offsetHeight } = document.documentElement;
+            if (window.innerHeight + scrollTop >= offsetHeight) {
+                if (tab === 1 || tab === 2) {
+                    setPostPage((prev) => prev + 1);
+                } else if (option === 1) {
+                    setAnswerPage((prev) => prev + 1);
+                    console.log(answerPage);
+                } else {
+                    setQuestionPage((prev) => prev + 1);
+                    console.log(questionPage);
+                }
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [tab, option]);
 
     const renderContent = () => {
         switch (tab) {
             case 1:
                 return <Profile member={member} />;
             case 2:
-                return <Post />;
+                return <Post setPostPage={setPostPage} />;
             case 3:
-                return <QnaActivity />;
+                return <QnaActivity member={member} option={option} setOption={setOption} setPage={{ setAnswerPage, setQuestionPage }} />;
             default:
                 return <Profile />;
         }

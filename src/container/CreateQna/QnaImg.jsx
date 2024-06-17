@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { setImages } from "../../redux/createQna";
+import { setFiles } from "../../redux/createQna";
 
 const QnaImgBox = styled.div`
   display: flex;
@@ -58,7 +58,7 @@ const QnaImgAddBtnText = styled.span`
   color: #94a3b8;
   font-size: 0.75rem;
 `;
-function QnaImg() {
+const QnaImg = () => {
   const fileInputRef = useRef(null);
   const createQna = useSelector((state) => state.createQna);
   const dispatch = useDispatch();
@@ -71,28 +71,28 @@ function QnaImg() {
   const handleInput = (e) => {
     const files = Array.from(e.target.files);
     const filePreviews = files.map((file) => ({
-      file,
-      preview: URL.createObjectURL(file),
+      fileName: file.name,
+      filePath: URL.createObjectURL(file),
     }));
-    dispatch(setImages([...createQna.images, ...filePreviews]));
+    dispatch(setFiles([...createQna.files, ...filePreviews]));
     fileInputRef.current.value = "";
   };
 
   const handleRemoveImage = (index) => {
-    const updatedImages = createQna.images.filter((_, i) => i !== index);
-    dispatch(setImages(updatedImages));
+    const updatedImages = createQna.files.filter((_, i) => i !== index);
+    dispatch(setFiles(updatedImages));
   };
 
   useEffect(() => {
-    setMaxLengthImages(createQna.images.length >= 7);
-  }, [createQna.images]);
+    setMaxLengthImages(createQna.files.length >= 7);
+  }, [createQna.files]);
 
   return (
     <QnaImgBox>
       <QnaImgList>
-        {createQna.images.map((image, index) => (
+        {createQna.files.map((file, index) => (
           <QnaImgPrevBox key={index}>
-            <QnaImgItem src={image.preview} />
+            <QnaImgItem src={file.filePath} alt={file.fileName} />
             <QnaImgCancelBtn
               type="button"
               onClick={() => handleRemoveImage(index)}
@@ -153,6 +153,6 @@ function QnaImg() {
       </QnaImgList>
     </QnaImgBox>
   );
-}
+};
 
 export default QnaImg;

@@ -23,7 +23,7 @@ function TagList() {
     <TagListBox>
       <TagListInner>
         {createQna.tags.map((tag) => (
-          <TagItem tag={tag} />
+          <> {tag.tagName && <TagItem tag={tag} />}</>
         ))}
       </TagListInner>
       <Instructions>태그는 최대 5개까지 입력할 수 있어요.</Instructions>

@@ -48,9 +48,12 @@ function TagItem({ tag }) {
   const dispatch = useDispatch();
   const createQna = useSelector((state) => state.createQna);
   const handleCancel = () => {
-    const updatedTags = createQna.tags.filter((item) => item !== tag);
+    const updatedTags = createQna.tags.filter(
+      (item) => item.tagName !== tag.tagName
+    );
     dispatch(setTags(updatedTags));
   };
+
   return (
     <TagListContent>
       <TagIcon
@@ -71,7 +74,7 @@ function TagItem({ tag }) {
           </g>
         </g>
       </TagIcon>
-      <TagText>{tag}</TagText>
+      <TagText>{tag.tagName}</TagText>
       <TagCancelBtn type="button" onClick={handleCancel}>
         <TagCancelSvg
           width={24}

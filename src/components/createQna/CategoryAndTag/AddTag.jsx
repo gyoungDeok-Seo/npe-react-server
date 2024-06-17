@@ -84,7 +84,7 @@ const SkillItem = styled.li`
   }
 `;
 
-function AddTag() {
+const AddTag = () => {
   const createQna = useSelector((state) => state.createQna);
   const dispatch = useDispatch();
   const [tag, setTag] = useState("");
@@ -114,7 +114,7 @@ function AddTag() {
       ? skillList.filter((item) => item.id.toLowerCase().startsWith(searchWord))
       : [];
     setSearch(searching);
-    setShowBox(searching.length > 0);
+    setShowBox(searching.length > 0 || valueLength > 0); // Show box if searching or input is not empty
   };
 
   const handleEnter = (e) => {
@@ -122,8 +122,8 @@ function AddTag() {
       e.preventDefault();
       if (createQna.tags.length >= 5) return;
       const trimmedTag = tag.trim();
-      if (trimmedTag && !createQna.tags.includes(trimmedTag)) {
-        dispatch(setTags([...createQna.tags, trimmedTag]));
+      if (trimmedTag && !createQna.tags.some((t) => t.tagName === trimmedTag)) {
+        dispatch(setTags([...createQna.tags, { tagName: trimmedTag }]));
       }
       setTag("");
       setTagLength(0);
@@ -136,8 +136,8 @@ function AddTag() {
       return;
     }
     const selectedTag = e.target.innerText.trim();
-    if (!createQna.tags.includes(selectedTag)) {
-      dispatch(setTags([...createQna.tags, selectedTag]));
+    if (!createQna.tags.some((t) => t.tagName === selectedTag)) {
+      dispatch(setTags([...createQna.tags, { tagName: selectedTag }]));
     }
     setShowBox(false);
     setTag("");
@@ -186,8 +186,8 @@ function AddTag() {
       <SkillListBox ref={skillListRef}>
         {showBox && (
           <SkillList>
-            {search.map((item) => (
-              <SkillItem key={item.id} onClick={handleSearch}>
+            {search.map((item, index) => (
+              <SkillItem key={index} onClick={handleSearch}>
                 {item.id}
               </SkillItem>
             ))}

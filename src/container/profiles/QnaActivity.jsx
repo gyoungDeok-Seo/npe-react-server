@@ -5,6 +5,7 @@ import QnaActivityQuestion from "../../components/profiles/QnaActivity/QnaActivi
 import { useState } from "react";
 import NoneAnswer from "../../components/profiles/QnaActivity/NoneAnswer";
 import NoneQuestion from "../../components/profiles/QnaActivity/NoneQuestion";
+import { useSelector } from "react-redux";
 
 const QnaActivityContainer = styled.div`
     border-color: #e2e8f0;
@@ -43,25 +44,25 @@ const QnaActivityAnswerList = styled.div`
     gap: 0.75rem;
 `;
 
-function QnaActivity() {
-    const [option, setOption] = useState(1);
+function QnaActivity({ member, option, setOption, setPage: { setAnswerPage, setQuestionPage } }) {
+    const memberQuestions = useSelector((state) => state.memberQuestions);
+    const memberAnswers = useSelector((state) => state.memberAnswers);
     const [likeUsersModal, setLikeUsersModal] = useState(false);
-    const [isQuestion, setIsQuestion] = useState(true);
-    const [isAnswer, setIsAnswer] = useState(true);
+
     return (
         <QnaActivityContainer>
             <QnaActivityBox>
                 <QnaActivityColSpanBox>
                     <QnaActivityInner>
-                        <OptionBar option={option} setOption={setOption} />
+                        <OptionBar option={option} setOption={setOption} setPage={{ setAnswerPage, setQuestionPage }} />
                         <div>
                             <QnaActivityAnswerList style={{ height: "auto", overflow: "inherit" }}>
                                 {option === 1 ? (
                                     <>
-                                        {isAnswer ? (
+                                        {memberAnswers?.answers.length > 0 ? (
                                             <>
-                                                {[1, 2, 3, 4, 5].map(() => (
-                                                    <QnaActivityAnswer likeUsersModal={likeUsersModal} setLikeUsersModal={setLikeUsersModal} />
+                                                {memberAnswers?.answers.map((answer) => (
+                                                    <QnaActivityAnswer key={answer.id} answer={answer} member={member} />
                                                 ))}
                                             </>
                                         ) : (
@@ -70,10 +71,10 @@ function QnaActivity() {
                                     </>
                                 ) : (
                                     <>
-                                        {isQuestion ? (
+                                        {memberQuestions?.questions.length > 0 ? (
                                             <>
-                                                {[1, 2, 3, 4, 5].map(() => (
-                                                    <QnaActivityQuestion />
+                                                {memberQuestions?.questions.map((question) => (
+                                                    <QnaActivityQuestion key={question.id} question={question} />
                                                 ))}
                                             </>
                                         ) : (
