@@ -6,7 +6,6 @@ import SkillList from "../components/ProfileSkills/SkillList";
 import SelectSkillItem from "../components/ProfileSkills/SelectSkillItem";
 import SkillSearchInput from "../components/ProfileSkills/SkillSearchInput";
 import MainHeader from "../components/Header/MainHeader";
-import { CreateSkillsContext } from "../context/CreateSkillsContext";
 import { useSelector } from "react-redux";
 const CareerSkillModalBox = styled.div`
   padding-left: 1rem;
@@ -95,7 +94,7 @@ function ProfileSkills() {
               <CareerSkillModalTitle>
                 내 스킬을 선택해 주세요.
               </CareerSkillModalTitle>
-              {createSkills.skills.length !== 0 && (
+              {createSkills.length !== 0 && (
                 <CareerSkillModalCraeteItemBox>
                   <SelectSkillItem />
                 </CareerSkillModalCraeteItemBox>

@@ -1,10 +1,4 @@
-import {
-  BrowserRouter,
-  Navigate,
-  PrivateRoute,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter, Navigate, PrivateRoute, Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
 import HomePage from "./pages/Home";
 import QnA from "./pages/QnA";
