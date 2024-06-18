@@ -5,7 +5,7 @@ import QnA from "./pages/QnA";
 import Profiles from "./pages/Profiles";
 import ProfileUpdate from "./pages/ProfileUpdate";
 import CareerCreate from "./pages/CareerCreate";
-import EducationsCreate from "./pages/EducationsCreate";
+import CreateEducations from "./pages/CreateEducations";
 import SitesCreate from "./pages/SitesCreate";
 import ProfileSkills from "./pages/ProfileSkills";
 import SearchResult from "./pages/SearchResult";
@@ -35,7 +35,7 @@ function Router() {
         <Route path="/profiles/careers/create" element={<CareerCreate />} />
         <Route
           path="/profiles/educations/create"
-          element={<EducationsCreate />}
+          element={<CreateEducations />}
         />
         <Route path="/profiles/sites/create" element={<SitesCreate />} />
         <Route path="/profiles/skills" element={<ProfileSkills />} />

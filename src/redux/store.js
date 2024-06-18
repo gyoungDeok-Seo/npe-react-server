@@ -8,6 +8,8 @@ import qnaDetail from "./qnaDetail";
 import qnaId from "./qnaId";
 import memberPosts from "./memberPosts";
 import memberAnswers from "./memberAnswers";
+import createCareer from "./createCareer";
+import createEducation from "./createEducation";
 
 const store = configureStore({
   reducer: {
@@ -20,6 +22,8 @@ const store = configureStore({
     memberPosts: memberPosts.reducer,
     qnaDetail: qnaDetail.reducer,
     qnaId: qnaId.reducer,
+    createCareer: createCareer.reducer,
+    createEducation: createEducation.reducer
   },
 });
 export default store;

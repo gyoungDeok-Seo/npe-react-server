@@ -1,21 +1,19 @@
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   CreateEducationsInput,
   CreateEducationsLabel,
   CreateEducationsPartTitleBox,
   EducationsInputBox,
-} from "../../pages/EducationsCreate";
-import { CreateCareerContext } from "../../context/CreateCareerContext";
+} from "../../pages/CreateEducations";
+import { setCareerUrl } from "../../redux/createCareer";
 
 function LinkInput() {
-  const { datas, setDatas } = useContext(CreateCareerContext);
+  const createCareer = useSelector((state) => state.createCareer);
+  const dispatch = useDispatch();
 
   const handleLinkChange = (e) => {
     const value = e.target.value;
-    setDatas((prev) => ({
-      ...prev,
-      link: value,
-    }));
+    dispatch(setCareerUrl(value));
   };
   return (
     <EducationsInputBox>
@@ -25,7 +23,7 @@ function LinkInput() {
       <CreateEducationsInput
         type="text"
         placeholder="관련된 웹사이트가 있다면 URL을 추가해주세요."
-        value={datas.link}
+        value={createCareer.careerUrl}
         onChange={handleLinkChange}
       />
     </EducationsInputBox>

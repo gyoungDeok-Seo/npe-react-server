@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import {
   CareerCreateInput,
   CareerCreateInputCount,
@@ -8,21 +8,20 @@ import {
   CareerInputBox,
   Pilsu,
 } from "../../pages/CareerCreate";
-import { CreateCareerContext } from "../../context/CreateCareerContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setCompanyName } from "../../redux/createCareer";
 
 function CompanyInput() {
-  const { datas, setDatas } = useContext(CreateCareerContext);
+  const createCareer = useSelector((state) => state.createCareer);
+  const dispatch = useDispatch();
   const [companyLength, setCompanyLength] = useState(0);
 
-  const handleNameChange = (e) => {
+  const handleCompanyChange = (e) => {
     const value = e.target.value;
     const valueLength = value.length;
     setCompanyLength(valueLength);
     if (valueLength <= 50) {
-      setDatas((prev) => ({
-        ...prev,
-        company: value,
-      }));
+      dispatch(setCompanyName(value));
     }
   };
 
@@ -43,8 +42,8 @@ function CompanyInput() {
           placeholder="회사명을 입력해 주세요."
           autoComplete="off"
           maxLength="50"
-          value={datas.company}
-          onChange={handleNameChange}
+          value={createCareer.companyName}
+          onChange={handleCompanyChange}
         />
       </CareerCreateRelativeBox>
     </CareerInputBox>

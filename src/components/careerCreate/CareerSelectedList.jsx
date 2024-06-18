@@ -61,7 +61,7 @@ const CareerSelectedList = ({ selectdList, handleModal }) => {
       <CareerCreateSelectedList>
         {selectdList.map((item) => (
           <CareerCreateSelected>
-            <CareerCreateSelectedText>{item}</CareerCreateSelectedText>
+            <CareerCreateSelectedText>{item.skillName}</CareerCreateSelectedText>
           </CareerCreateSelected>
         ))}
       </CareerCreateSelectedList>

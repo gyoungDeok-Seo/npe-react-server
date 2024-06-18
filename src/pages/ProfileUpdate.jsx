@@ -7,7 +7,6 @@ import DescriptionTextarea from "../components/ProfileUpdate/DescriptionTextarea
 import AvoidMistakesModal from "../components/profiles/Modal/AvoidMistakesModal";
 import { useNavigate } from "react-router-dom";
 import MainHeader from "../components/Header/MainHeader";
-import { ProfileUpdateContext } from "../context/ProfileUpdateContext";
 import { useDispatch } from "react-redux";
 import { controlRedux } from "../redux/loginStatus";
 

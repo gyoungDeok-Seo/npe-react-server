@@ -85,16 +85,6 @@ function EducationsCreate() {
   const navigate = useNavigate(null);
   const [avoidMistakesModal, setAvoidMistakesModal] = useState(false);
   const [isExit, setIsExit] = useState(false);
-  const [datas, setDatas] = useState({
-    institution: "",
-    course: "",
-    startYear: "",
-    startMonth: "",
-    endYear: "",
-    endMonth: "",
-    link: "",
-    description: "",
-  });
 
   useEffect(() => {
     if (isExit) {
@@ -103,7 +93,7 @@ function EducationsCreate() {
   }, [isExit]);
 
   return (
-    <CreateEductaionContext.Provider value={{ datas, setDatas }}>
+    <>
       <div>
         <div>
           <div
@@ -137,7 +127,7 @@ function EducationsCreate() {
           setIsExit={setIsExit}
         />
       )}
-    </CreateEductaionContext.Provider>
+    </>
   );
 }
 export default EducationsCreate;

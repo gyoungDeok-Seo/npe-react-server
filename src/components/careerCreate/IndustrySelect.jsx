@@ -8,10 +8,10 @@ import {
   CareerInputBox,
 } from "../../pages/CareerCreate";
 import CareerSelectedList from "./CareerSelectedList";
-import { CreateCareerContext } from "../../context/CreateCareerContext";
+import { useSelector } from "react-redux";
 
 function IndustrySelect({ setIndustryModal }) {
-  const { datas } = useContext(CreateCareerContext);
+  const createCareer = useSelector((state) => state.createCareer);
 
   const handleIndustryModal = () => {
     setIndustryModal(true);
@@ -22,7 +22,7 @@ function IndustrySelect({ setIndustryModal }) {
         <CareerCreateLabel>산업 분야</CareerCreateLabel>
       </div>
 
-      {datas.industry.length === 0 ? (
+      {createCareer.industry.length === 0 ? (
         <CareerCreateRelativeBox>
           <CareerCreateButtonBox type="button" onClick={handleIndustryModal}>
             <CareerCreateButtonText>
@@ -50,7 +50,7 @@ function IndustrySelect({ setIndustryModal }) {
         </CareerCreateRelativeBox>
       ) : (
         <CareerSelectedList
-          selectdList={datas.industry.map((item) => item)}
+          selectdList={createCareer.industry.map((item) => item)}
           handleModal={handleIndustryModal}
         />
       )}
