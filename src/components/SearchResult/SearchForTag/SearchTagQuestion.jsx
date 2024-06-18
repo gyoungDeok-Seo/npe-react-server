@@ -124,7 +124,13 @@ const HitsCount = styled.p`
 `;
 
 function SearchTagQuestion({ question, index }) {
-  console.log(question);
+  function formatDate(dateString = null) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    return `${year}년 ${month}월 ${day}일`;
+  }
   return (
     <QuestionLink to={""} key={index}>
       <QuestionInfo>
@@ -156,7 +162,7 @@ function SearchTagQuestion({ question, index }) {
           </g>
         </AnswerSvg>
         <AnswerWrierIntro>
-          <span>{question?.createdDate}</span>
+          <span>{formatDate(question?.createdDate)}</span>
           <span> · </span>
           <span>
             {question?.memberName} 님의 새로운 질문
@@ -167,7 +173,7 @@ function SearchTagQuestion({ question, index }) {
       <QuestionHeaderBox>
         <QuestionHeaderText>{question?.questionTitle}</QuestionHeaderText>
       </QuestionHeaderBox>
-      <QuestionContent>{question?.memberPosition}</QuestionContent>
+      <QuestionContent>{question?.questionContent}</QuestionContent>
       <TagAndCategoryBox>
         <CategoryBox>
           <CategorySvg
@@ -188,7 +194,7 @@ function SearchTagQuestion({ question, index }) {
               </g>
             </g>
           </CategorySvg>
-          <CategoryText>{question?.questionContent}</CategoryText>
+          <CategoryText>{question?.memberPosition}</CategoryText>
         </CategoryBox>
         {question?.tags &&
           question?.tags.map((tag, index) => (
