@@ -153,7 +153,7 @@ const ContentLinkSvg = styled.svg`
 `;
 
 function Profile({ member, same }) {
-    const isExistence = true;
+    const isExistence = false;
     const { pathname } = useLocation();
     const dispatch = useDispatch();
     const memberSkills = useSelector((state) => state.createSkills);

@@ -135,11 +135,7 @@ function SkillSearchInput() {
 
   const searchSkills = (e) => {
     setInputValue(e.target.value);
-    setShowBox(e.target.value);
-    // searchSkillsFetch(searchWord);
-    // const searching = searchWord ? skillList.filter((item) => item.id.toLowerCase().startsWith(searchWord)) : [];
-    // setSearch(searching);
-    // setShowBox(searching.length > 0);
+    setShowBox(true);
   };
 
   const handleSearch = (item) => {
