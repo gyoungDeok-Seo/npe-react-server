@@ -69,21 +69,33 @@ const QnaActivityToolCommentText = styled.span`
 function ToolBox({ answer }) {
     const dispatch = useDispatch();
     const [isLike, setIsLike] = useState(false);
+    const [likeCount, setLikeCount] = useState(answer?.answerLikeCount);
+
+    const modifyAnswerLikeFetch = async () => {
+        const response = await fetch(`http://localhost:10000/members/api/answer-like-modify?answerId=${answer?.id}`, {
+            method: "PATCH",
+            credentials: "include",
+        });
+        const data = await response.json();
+        setIsLike(data.answerLikeVO.status);
+        setLikeCount(data.answerLikeCount);
+    };
+
+    const checkAnswerLike = async () => {
+        const response = await fetch(`http://localhost:10000/members/api/answer-like?answerId=${answer?.id}`, {
+            method: "GET",
+            credentials: "include",
+        });
+        const data = await response.json();
+        setIsLike(data);
+    };
 
     useEffect(() => {
-        const getAnswerLikeFetch = async () => {
-            const response = await fetch(`http://localhost:10000/members/api/answer-like-count?answerId=${answer?.id}`, {
-                method: "GET",
-                credentials: "include",
-            });
-            const data = await response.json();
-            console.log(data);
-        };
-        getAnswerLikeFetch();
-    }, [isLike]);
+        checkAnswerLike();
+    }, []);
 
     const handleLike = () => {
-        setIsLike((like) => !like);
+        modifyAnswerLikeFetch();
     };
 
     return (
@@ -91,7 +103,7 @@ function ToolBox({ answer }) {
             <QnaActivityLikeBtnBox>
                 <QnaActivityLikeBtn style={{ cursor: "default" }}>
                     <QnaActivityLikeText>
-                        좋아요 <b>{answer?.answerLikeCount}</b>
+                        좋아요 <b>{likeCount}</b>
                     </QnaActivityLikeText>
                 </QnaActivityLikeBtn>
             </QnaActivityLikeBtnBox>

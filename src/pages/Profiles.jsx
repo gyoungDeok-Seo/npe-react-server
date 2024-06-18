@@ -89,10 +89,8 @@ function Profiles() {
                     setPostPage((prev) => prev + 1);
                 } else if (option === 1) {
                     setAnswerPage((prev) => prev + 1);
-                    console.log(answerPage);
                 } else {
                     setQuestionPage((prev) => prev + 1);
-                    console.log(questionPage);
                 }
             }
         };
