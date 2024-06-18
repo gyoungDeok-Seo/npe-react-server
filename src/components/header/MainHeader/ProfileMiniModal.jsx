@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { controlRedux } from "../../../redux/loginStatus";
 
@@ -62,6 +62,10 @@ const Boundary = styled.div`
 
 function ProfileMiniModal({ modalRef }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const handleModal = () => {
+        
+    }
 
     const handlerClickLogout = async () => {
         try {
@@ -70,7 +74,11 @@ function ProfileMiniModal({ modalRef }) {
                 credentials: "include", // 세션 쿠키를 포함하여 요청
             }); // 서버에서 세션 정보를 가져오는 엔드포인트 설정
             const data = await response.json();
+            
             dispatch(controlRedux(data.loggedIn));
+            if (!data){
+                navigate("/")
+            }
         } catch (error) {
             console.error("Error fetching session data", error);
             dispatch(controlRedux(false));
@@ -78,13 +86,13 @@ function ProfileMiniModal({ modalRef }) {
     };
     return (
         <ProfileMiniModalBox ref={modalRef}>
-            <ProfileMiniModalBtn to="/profiles">
+            <ProfileMiniModalBtn to="/profiles" onClick={handleModal}>
                 <span>내 프로필</span>
             </ProfileMiniModalBtn>
-            <ProfileMiniModalBtn to="#">
+            <ProfileMiniModalBtn to="#" onClick={handleModal}>
                 <span>저장한 게시물</span>
             </ProfileMiniModalBtn>
-            <ProfileMiniModalBtn to="#">
+            <ProfileMiniModalBtn to="#" onClick={handleModal}>
                 <span>관심분야 설정</span>
             </ProfileMiniModalBtn>
             <Boundary />

@@ -157,7 +157,11 @@ function Profile({ member }) {
     const { pathname } = useLocation();
     const dispatch = useDispatch();
     const memberSkills = useSelector((state) => state.createSkills);
-
+    const arraysEqual = (arr1, arr2) => {
+        const sortedArr1 = arr1.slice().sort((a, b) => a.id - b.id); // id를 기준으로 정렬
+        const sortedArr2 = arr2.slice().sort((a, b) => a.id - b.id); // id를 기준으로 정렬
+        return JSON.stringify(sortedArr1) === JSON.stringify(sortedArr2);
+    };
     useEffect(() => {
         const fetchMemberSkill = async () => {
             const response = await fetch(`http://localhost:10000/members/api/skill`, {
@@ -170,7 +174,9 @@ function Profile({ member }) {
                 id: skill.skillId,
                 skillName: skill.skillName,
             }));
-            dispatch(setSkills(data));
+            if (!arraysEqual(memberSkills.skills, data)) {
+                dispatch(setSkills(data));
+            }
         };
         fetchMemberSkill();
     }, [pathname, memberSkills]);
