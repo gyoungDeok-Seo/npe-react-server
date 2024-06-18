@@ -1,6 +1,5 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { CreateCareerContext } from "../../context/CreateCareerContext";
 import { industryList } from "../../service/dummyData";
 import { useDispatch, useSelector } from "react-redux";
 import { setIndustry } from "../../redux/createCareer";
@@ -164,37 +163,38 @@ const IndustryModalCraeteItemSvg = styled.svg`
 function IndustryModal({ setIndustryModal }) {
   const createCareer = useSelector((state) => state.createCareer);
   const dispatch = useDispatch();
-  const [localCheckedIndustries, setLocalCheckedIndustries] = useState(
-    createCareer.industry ? createCareer.industry : []
+  const [checkedIndustries, setCheckedIndustries] = useState(
+    createCareer.industry || []
   );
   const checkboxRefs = useRef({});
 
   const handleCheckboxChange = (event) => {
     const { id, checked } = event.target;
-    const label = industryList.find((industry) => industry.id === id)?.label;
+    const industry = industryList.find(
+      (industry) => industry.id === parseInt(id)
+    );
 
-    setLocalCheckedIndustries((prevState) => {
+    setCheckedIndustries((prevState) => {
       if (checked) {
-        return [...prevState, label];
+        return [...prevState, industry];
       } else {
-        return prevState.filter((item) => item !== label);
+        return prevState.filter((item) => item.id !== industry.id);
       }
     });
   };
 
-  const handleIndustryItemClick = (label) => {
-    setLocalCheckedIndustries((prevState) => {
-      return prevState.filter((item) => item !== label);
+  const handleIndustryItemClick = (industry) => {
+    setCheckedIndustries((prevState) => {
+      return prevState.filter((item) => item.id !== industry.id);
     });
 
-    const id = industryList.find((industry) => industry.label === label)?.id;
-    if (checkboxRefs.current[id]) {
-      checkboxRefs.current[id].checked = false;
+    if (checkboxRefs.current[industry.id]) {
+      checkboxRefs.current[industry.id].checked = false;
     }
   };
 
   const handleSubmitModal = () => {
-    dispatch(setIndustry(localCheckedIndustries));
+    dispatch(setIndustry(checkedIndustries));
     setIndustryModal(false);
   };
 
@@ -203,7 +203,7 @@ function IndustryModal({ setIndustryModal }) {
   };
 
   useEffect(() => {
-    setLocalCheckedIndustries(createCareer.industry);
+    setCheckedIndustries(createCareer.industry);
   }, [createCareer.industry]);
 
   return (
@@ -245,16 +245,16 @@ function IndustryModal({ setIndustryModal }) {
                 <IndustryModalTitle>
                   산업 분야를 선택해 주세요
                 </IndustryModalTitle>
-                {localCheckedIndustries.length !== 0 && (
+                {checkedIndustries.length !== 0 && (
                   <IndustryModalCraeteItemBox>
-                    {localCheckedIndustries.map((label) => (
+                    {checkedIndustries.map((item) => (
                       <IndustryModalCraeteItem
-                        key={label}
+                        key={item.id}
                         type="button"
-                        onClick={() => handleIndustryItemClick(label)}
+                        onClick={() => handleIndustryItemClick(item)}
                       >
                         <IndustryModalCraeteItemText>
-                          {label}
+                          {item.industryName}
                         </IndustryModalCraeteItemText>
                         <IndustryModalCraeteItemSvgBox role="presentation">
                           <IndustryModalCraeteItemSvg
@@ -281,21 +281,19 @@ function IndustryModal({ setIndustryModal }) {
                   </IndustryModalCraeteItemBox>
                 )}
                 <IndustryModalCheckBoxList>
-                  {industryList.map((industryItem) => (
-                    <IndustryModalCheckBoxItem key={industryItem.id}>
+                  {industryList.map((item) => (
+                    <IndustryModalCheckBoxItem key={item.id}>
                       <IndustryModalCheckBox
                         type="checkbox"
-                        id={industryItem.id}
-                        ref={(ref) =>
-                          (checkboxRefs.current[industryItem.id] = ref)
-                        }
+                        id={item.id.toString()}
+                        ref={(ref) => (checkboxRefs.current[item.id] = ref)}
                         onChange={handleCheckboxChange}
-                        checked={localCheckedIndustries.includes(
-                          industryItem.label
+                        checked={checkedIndustries.some(
+                          (industry) => industry.id === item.id
                         )}
                       />
-                      <IndustryModalLabel htmlFor={industryItem.id}>
-                        {industryItem.label}
+                      <IndustryModalLabel htmlFor={item.id.toString()}>
+                        {item.industryName}
                       </IndustryModalLabel>
                     </IndustryModalCheckBoxItem>
                   ))}

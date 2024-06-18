@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const CareerCreateSelectedBox = styled.div`
@@ -56,14 +57,21 @@ const CareerCreateSelectedBtnText = styled.span`
 `;
 
 const CareerSelectedList = ({ selectdList, handleModal }) => {
+  const [list, setList] = useState([]);
+  useEffect(() => {
+    const normalizedList = selectdList.map((item) => ({
+      id: item.id,
+      name: item.skillName || item.industryName,
+    }));
+    setList(normalizedList);
+  }, [selectdList]);
+
   return (
     <CareerCreateSelectedBox>
       <CareerCreateSelectedList>
-        {selectdList.map((item) => (
+        {list.map((item) => (
           <CareerCreateSelected>
-            <CareerCreateSelectedText>
-              {item.skillName}
-            </CareerCreateSelectedText>
+            <CareerCreateSelectedText>{item.name}</CareerCreateSelectedText>
           </CareerCreateSelected>
         ))}
       </CareerCreateSelectedList>

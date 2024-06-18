@@ -256,13 +256,17 @@ const CareerSkillModal = ({ setCareerSkillModal }) => {
     setShowBox(true);
   };
 
-  const handleSearch = (item) => {
-    console.log(item);
+  const handleSearch = (skill) => {
     const checkSkill = createCareer.skills.some(
-      (skill) => skill.skillName === item.skillName
+      (item) => item.skillName === skill.skillName
     );
 
-    !checkSkill && dispatch(setSkills([...createCareer.skills, item]));
+    !checkSkill &&
+      setSelectedSkills((prevSelectedSkills) =>
+        prevSelectedSkills.find((item) => item.id === skill.id)
+          ? prevSelectedSkills.filter((item) => item.id !== skill.id)
+          : [...prevSelectedSkills, skill]
+      );
 
     setShowBox(false);
     setInputValue("");
@@ -270,8 +274,8 @@ const CareerSkillModal = ({ setCareerSkillModal }) => {
 
   const handleSkillClick = (skill) => {
     setSelectedSkills((prevSelectedSkills) =>
-      prevSelectedSkills.includes(skill)
-        ? prevSelectedSkills.filter((s) => s !== skill)
+      prevSelectedSkills.find((item) => item.id === skill.id)
+        ? prevSelectedSkills.filter((item) => item.id !== skill.id)
         : [...prevSelectedSkills, skill]
     );
   };
@@ -289,6 +293,9 @@ const CareerSkillModal = ({ setCareerSkillModal }) => {
     setSelectedSkills(createCareer.skills);
   }, [createCareer.skills]);
 
+  useEffect(() => {
+    console.log(selectedSkills);
+  }, [selectedSkills]);
   return (
     <div>
       <div
@@ -426,7 +433,10 @@ const CareerSkillModal = ({ setCareerSkillModal }) => {
                   {showBox && (
                     <SkillList>
                       {search.map((item) => (
-                        <SkillItem key={item.id} onClick={() => handleSearch(item)}>
+                        <SkillItem
+                          key={item.id}
+                          onClick={() => handleSearch(item)}
+                        >
                           {item.skillName}
                         </SkillItem>
                       ))}
@@ -442,10 +452,14 @@ const CareerSkillModal = ({ setCareerSkillModal }) => {
                         key={skill.id}
                         type="button"
                         onClick={() => handleSkillClick(skill)}
-                        selected={selectedSkills.includes(skill)}
+                        selected={selectedSkills.find(
+                          (item) => item.id === skill.id
+                        )}
                       >
                         <CareerSkillModalSkillBtnText
-                          selected={selectedSkills.includes(skill)}
+                          selected={selectedSkills.find(
+                            (item) => item.id === skill.id
+                          )}
                         >
                           {skill.skillName}
                         </CareerSkillModalSkillBtnText>
