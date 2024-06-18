@@ -1,16 +1,17 @@
-import { useContext, useState } from "react";
-
+import { useState } from "react";
 import {
   CreateEducationsInput,
   CreateEducationsInputCount,
   CreateEducationsLabel,
   CreateEducationsPartTitleBox,
   EducationsInputBox,
-} from "../../pages/EducationsCreate";
-import { CreateEductaionContext } from "../../context/CreateEductaionContext";
+} from "../../pages/CreateEducations";
+import { useDispatch, useSelector } from "react-redux";
+import { setEducationCourse } from "../../redux/createEducation";
 
 function CourseInput() {
-  const { datas, setDatas } = useContext(CreateEductaionContext);
+  const createEducation = useSelector((state) => state.createEducation);
+  const dispatch = useDispatch();
   const [courseLength, setCourseLength] = useState(0);
 
   const handleCourseChange = (e) => {
@@ -18,10 +19,7 @@ function CourseInput() {
     const valueLength = value.length;
     setCourseLength(valueLength);
     if (valueLength <= 50) {
-      setDatas((prev) => ({
-        ...prev,
-        course: value,
-      }));
+      dispatch(setEducationCourse(value));
     }
   };
 
@@ -37,7 +35,7 @@ function CourseInput() {
         type="text"
         placeholder="전공/과정을 입력해 주세요. (예: 웹 개발 과정)"
         maxLength="50"
-        value={datas.course}
+        value={createEducation.educationCourse}
         onChange={handleCourseChange}
       />
     </EducationsInputBox>

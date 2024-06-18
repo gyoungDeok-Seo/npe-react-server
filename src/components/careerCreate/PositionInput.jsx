@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import {
   CareerCreateInput,
   CareerCreateInputCount,
@@ -8,21 +8,20 @@ import {
   CareerInputBox,
   Pilsu,
 } from "../../pages/CareerCreate";
-import { CreateCareerContext } from "../../context/CreateCareerContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setMemberPosition } from "../../redux/createCareer";
 
 function JobInput() {
-  const { datas, setDatas } = useContext(CreateCareerContext);
-  const [jobLength, setJobLength] = useState(0);
+  const createCareer = useSelector((state) => state.createCareer);
+  const dispatch = useDispatch();
+  const [positionLength, setPositionLength] = useState(0);
 
-  const handleTitleChange = (e) => {
+  const handlePositionChange = (e) => {
     const value = e.target.value;
     const valueLength = value.length;
-    setJobLength(valueLength);
+    setPositionLength(valueLength);
     if (valueLength <= 50) {
-      setDatas((prev) => ({
-        ...prev,
-        job: value,
-      }));
+      dispatch(setMemberPosition(value));
     }
   };
   return (
@@ -32,7 +31,7 @@ function JobInput() {
           직함
           <Pilsu>(필수)</Pilsu>
         </CareerCreateLabel>
-        <CareerCreateInputCount>{jobLength} / 50</CareerCreateInputCount>
+        <CareerCreateInputCount>{positionLength} / 50</CareerCreateInputCount>
       </CareerCreatePartTitleBox>
       <CareerCreateRelativeBox>
         <CareerCreateInput
@@ -42,8 +41,8 @@ function JobInput() {
           placeholder="직함을 입력해 주세요. (예: 프로덕트 매니저)"
           autoComplete="off"
           maxLength="50"
-          value={datas.job}
-          onChange={handleTitleChange}
+          value={createCareer.memberPosition}
+          onChange={handlePositionChange}
         />
       </CareerCreateRelativeBox>
     </CareerInputBox>

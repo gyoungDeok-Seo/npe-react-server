@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import styled from "styled-components";
 import { CareerCreateLabel } from "../../pages/CareerCreate";
 import { CreateCareerContext } from "../../context/CreateCareerContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setDescription } from "../../redux/createCareer";
 
 const CareerCreateTextareaBox = styled.div`
   margin-bottom: 1rem;
@@ -45,7 +47,8 @@ const CareerCreateTextareaCount = styled.p`
   color: #64748b;
 `;
 function DescriptionTextarea() {
-  const { datas, setDatas } = useContext(CreateCareerContext);
+  const createCareer = useSelector((state) => state.createCareer);
+  const dispatch = useDispatch();
   const [descriptionLength, setDescriptionLength] = useState(0);
 
   const handleDescriptionChange = (e) => {
@@ -53,10 +56,7 @@ function DescriptionTextarea() {
     const valueLength = value.length;
     setDescriptionLength(valueLength);
     if (valueLength <= 1000) {
-      setDatas((prev) => ({
-        ...prev,
-        description: value,
-      }));
+      dispatch(setDescription(value));
     }
   };
   return (
@@ -70,7 +70,7 @@ function DescriptionTextarea() {
                               • 쇼핑라이브 프론트 지면 개발
                               • 프론트 매시업 api 개발"
         onChange={handleDescriptionChange}
-        value={datas.description}
+        value={createCareer.description}
         maxLength={1000}
       ></CareerCreateTextarea>
       <CareerCreateTextareaCount>

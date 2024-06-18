@@ -13,7 +13,8 @@ import {
   CareerSelectBox,
   Pilsu,
 } from "../../pages/CareerCreate";
-import { CreateCareerContext } from "../../context/CreateCareerContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setCareerEnd, setCareerStart } from "../../redux/createCareer";
 
 const CareerCreateCheckboxText = styled.label`
   margin-bottom: 0;
@@ -25,47 +26,59 @@ const CareerCreateCheckboxText = styled.label`
 `;
 
 function CareerPeriod() {
-  const { datas, setDatas } = useContext(CreateCareerContext);
+  const createCareer = useSelector((state) => state.createCareer);
+  const dispatch = useDispatch();
   const [endDateDisabled, setEndDateDisabled] = useState(true);
-  const [isWorking, setIsworking] = useState(false);
-
+  const [isWorking, setIsWorking] = useState(false);
   const handleStartChange = (e) => {
-    setDatas((prevDatas) => ({
-      ...prevDatas,
-      startYear: e.target.value,
-    }));
-    if (e.target.value && datas.startMonth) {
+    const newStartYear = e.target.value;
+    const newCareerStart = `${newStartYear}.${
+      createCareer.careerStart.split(".")[1] || ''
+    }`;
+    dispatch(setCareerStart(newCareerStart));
+    if (newStartYear && createCareer.careerStart.split(".")[1]) {
       setEndDateDisabled(false);
     }
   };
 
   const handleStartMonthChange = (e) => {
-    setDatas((prevDatas) => ({
-      ...prevDatas,
-      startMonth: e.target.value,
-    }));
-    if (e.target.value && datas.startYear) {
+    const newStartMonth = e.target.value;
+    const newCareerStart = `${
+      createCareer.careerStart.split(".")[0] || ''
+    }.${newStartMonth}`;
+    dispatch(setCareerStart(newCareerStart));
+    if (newStartMonth && createCareer.careerStart.split(".")[0]) {
       setEndDateDisabled(false);
     }
   };
 
   const handleEndYearChange = (e) => {
-    setDatas((prevDatas) => ({
-      ...prevDatas,
-      endYear: e.target.value,
-    }));
+    const newEndYear = e.target.value;
+    const newCareerEnd = `${newEndYear}.${
+      createCareer.careerEnd.split(".")[1] || ''
+    }`;
+    dispatch(setCareerEnd(newCareerEnd));
   };
 
   const handleEndMonthChange = (e) => {
-    setDatas((prevDatas) => ({
-      ...prevDatas,
-      endMonth: e.target.value,
-    }));
+    const newEndMonth = e.target.value;
+    const newCareerEnd = `${
+      createCareer.careerEnd.split(".")[0] || ''
+    }.${newEndMonth}`;
+    dispatch(setCareerEnd(newCareerEnd));
   };
 
   const handleIsWorking = () => {
-    setIsworking((prevIsWorking) => !prevIsWorking);
+    setIsWorking((prevIsWorking) => !prevIsWorking);
+    if (!isWorking) {
+      setEndDateDisabled(true);
+      dispatch(setCareerEnd("현재"));
+    } else {
+      setEndDateDisabled(false);
+      dispatch(setCareerEnd("")); 
+    }
   };
+
   return (
     <>
       <CareerSelectBox>
@@ -76,7 +89,7 @@ function CareerPeriod() {
         <CareerPeriodSelectBox>
           <CareerPeriodSelectInner>
             <CareerPeriodSelect
-              value={datas.startYear}
+              value={createCareer.careerStart.split(".")[0]}
               onChange={handleStartChange}
             >
               <option disabled="" value="-1">
@@ -139,24 +152,24 @@ function CareerPeriod() {
               <option value="1970">1970년</option>
             </CareerPeriodSelect>
             <CareerPeriodSelect
-              value={datas.startMonth}
+              value={createCareer.careerStart.split(".")[1]}
               onChange={handleStartMonthChange}
             >
               <option disabled="" value="-1">
                 월
               </option>
-              <option value="0">1월</option>
-              <option value="1">2월</option>
-              <option value="2">3월</option>
-              <option value="3">4월</option>
-              <option value="4">5월</option>
-              <option value="5">6월</option>
-              <option value="6">7월</option>
-              <option value="7">8월</option>
-              <option value="8">9월</option>
-              <option value="9">10월</option>
-              <option value="10">11월</option>
-              <option value="11">12월</option>
+              <option value="1">1월</option>
+              <option value="2">2월</option>
+              <option value="3">3월</option>
+              <option value="4">4월</option>
+              <option value="5">5월</option>
+              <option value="6">6월</option>
+              <option value="7">7월</option>
+              <option value="8">8월</option>
+              <option value="9">9월</option>
+              <option value="10">10월</option>
+              <option value="11">11월</option>
+              <option value="12">12월</option>
             </CareerPeriodSelect>
           </CareerPeriodSelectInner>
           <CareerPeriodSelectBox2>
@@ -166,7 +179,7 @@ function CareerPeriod() {
               <CareerPeriodSelectInner2>
                 <CareerPeriodSelect
                   disabled={endDateDisabled}
-                  value={datas.endYear}
+                  value={createCareer.careerEnd.split(".")[0]}
                   onChange={handleEndYearChange}
                 >
                   <option disabled="" value="-1">
@@ -230,24 +243,24 @@ function CareerPeriod() {
                 </CareerPeriodSelect>
                 <CareerPeriodSelect
                   disabled={endDateDisabled}
-                  value={datas.endMonth}
+                  value={createCareer.careerEnd.split(".")[1]}
                   onChange={handleEndMonthChange}
                 >
                   <option disabled="" value="-1">
                     월
                   </option>
-                  <option value="0">1월</option>
-                  <option value="1">2월</option>
-                  <option value="2">3월</option>
-                  <option value="3">4월</option>
-                  <option value="4">5월</option>
-                  <option value="5">6월</option>
-                  <option value="6">7월</option>
-                  <option value="7">8월</option>
-                  <option value="8">9월</option>
-                  <option value="9">10월</option>
-                  <option value="10">11월</option>
-                  <option value="11">12월</option>
+                  <option value="1">1월</option>
+                  <option value="2">2월</option>
+                  <option value="3">3월</option>
+                  <option value="4">4월</option>
+                  <option value="5">5월</option>
+                  <option value="6">6월</option>
+                  <option value="7">7월</option>
+                  <option value="8">8월</option>
+                  <option value="9">9월</option>
+                  <option value="10">10월</option>
+                  <option value="11">11월</option>
+                  <option value="12">12월</option>
                 </CareerPeriodSelect>
               </CareerPeriodSelectInner2>
             )}

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import {
   CreateEducationsInput,
   CreateEducationsInputCount,
@@ -6,12 +6,14 @@ import {
   CreateEducationsPartTitleBox,
   CreateEducationsRelativeBox,
   EducationsInputBoxTop,
-} from "../../pages/EducationsCreate";
+} from "../../pages/CreateEducations";
 import { Pilsu } from "../../pages/CareerCreate";
-import { CreateEductaionContext } from "../../context/CreateEductaionContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setEducationInstitution } from "../../redux/createEducation";
 
 function InstitutionInput() {
-  const { datas, setDatas } = useContext(CreateEductaionContext);
+  const createEducation = useSelector((state) => state.createEducation);
+  const dispatch = useDispatch();
   const [institutionLength, setInstitutionLength] = useState(0);
 
   const handleInstitutionChange = (e) => {
@@ -19,10 +21,7 @@ function InstitutionInput() {
     const valueLength = value.length;
     setInstitutionLength(valueLength);
     if (valueLength <= 50) {
-      setDatas((prev) => ({
-        ...prev,
-        institution: value,
-      }));
+      dispatch(setEducationInstitution(value));
     }
   };
 
@@ -45,7 +44,7 @@ function InstitutionInput() {
           placeholder="교육기관을 입력해 주세요."
           autocomplete="off"
           maxlength="50"
-          value={datas.institution}
+          value={createEducation.educationInstitution}
           onChange={handleInstitutionChange}
         />
       </CreateEducationsRelativeBox>

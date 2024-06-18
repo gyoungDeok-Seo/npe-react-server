@@ -9,6 +9,7 @@ import LinkInput from "../components/EducationsCreate/LinkInput";
 import DescriptionTextarea from "../components/EducationsCreate/DescriptionTextarea";
 import MainHeader from "../components/Header/MainHeader";
 import { CreateEductaionContext } from "../context/CreateEductaionContext";
+import { useSelector } from "react-redux";
 
 const CreateEducationsBox = styled.div`
   padding-left: 1rem;
@@ -85,25 +86,19 @@ function EducationsCreate() {
   const navigate = useNavigate(null);
   const [avoidMistakesModal, setAvoidMistakesModal] = useState(false);
   const [isExit, setIsExit] = useState(false);
-  const [datas, setDatas] = useState({
-    institution: "",
-    course: "",
-    startYear: "",
-    startMonth: "",
-    endYear: "",
-    endMonth: "",
-    link: "",
-    description: "",
-  });
 
   useEffect(() => {
     if (isExit) {
       navigate("/profiles");
     }
   }, [isExit]);
+  const createEducation = useSelector((state) => state.createEducation);
+  useEffect(() => {
+    console.log(createEducation);
+  }, [createEducation]);
 
   return (
-    <CreateEductaionContext.Provider value={{ datas, setDatas }}>
+    <>
       <div>
         <div>
           <div
@@ -137,7 +132,7 @@ function EducationsCreate() {
           setIsExit={setIsExit}
         />
       )}
-    </CreateEductaionContext.Provider>
+    </>
   );
 }
 export default EducationsCreate;

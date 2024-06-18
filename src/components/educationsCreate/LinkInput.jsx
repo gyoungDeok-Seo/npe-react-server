@@ -1,20 +1,18 @@
-import { useContext } from "react";
 import {
   CareerSelectBox,
   CareerCreateLabel,
   CareerCreateInput,
 } from "../../pages/CareerCreate";
-import { CreateEductaionContext } from "../../context/CreateEductaionContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setEducationUrl } from "../../redux/createEducation";
 
 function LinkInput() {
-  const { datas, setDatas } = useContext(CreateEductaionContext);
+  const createEducation = useSelector((state) => state.createEducation);
+  const dispatch = useDispatch();
 
   const handleLinkChange = (e) => {
     const value = e.target.value;
-    setDatas((prev) => ({
-      ...prev,
-      link: value,
-    }));
+    dispatch(setEducationUrl(value));
   };
   return (
     <CareerSelectBox>
@@ -24,7 +22,7 @@ function LinkInput() {
       <CareerCreateInput
         type="text"
         placeholder="관련된 웹사이트가 있다면 URL을 추가해주세요."
-        value={datas.link}
+        value={createEducation.educationUrl}
         onChange={handleLinkChange}
       />
     </CareerSelectBox>

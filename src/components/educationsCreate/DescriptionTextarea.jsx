@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { CreateEducationsLabel } from "../../pages/EducationsCreate";
-import { CreateEductaionContext } from "../../context/CreateEductaionContext";
+import { CreateEducationsLabel } from "../../pages/CreateEducations";
+import { useDispatch, useSelector } from "react-redux";
+import { setDescription } from "../../redux/createEducation";
 
 const CreateEducationsTextareaBox = styled.div`
   margin-bottom: 1rem;
@@ -45,7 +46,8 @@ const CreateEducationsTextareaCount = styled.p`
   color: #64748b;
 `;
 function DescriptionTextarea() {
-  const { datas, setDatas } = useContext(CreateEductaionContext);
+  const createEducation = useSelector((state) => state.createEducation);
+  const dispatch = useDispatch();
   const [descriptionLength, setDescriptionLength] = useState(0);
 
   const handleDescriptionChange = (e) => {
@@ -53,10 +55,7 @@ function DescriptionTextarea() {
     const valueLength = value.length;
     setDescriptionLength(valueLength);
     if (valueLength <= 1000) {
-      setDatas((prev) => ({
-        ...prev,
-        description: value,
-      }));
+      dispatch(setDescription(value));
     }
   };
   return (
@@ -69,7 +68,7 @@ function DescriptionTextarea() {
       </CreateEducationsTextareaTextBox>
       <CreateEducationsTextarea
         placeholder="직무와 연관된 교육 내용 및 활동을 입력해 주세요."
-        value={datas.description}
+        value={createEducation.description}
         onChange={handleDescriptionChange}
         maxLength={1000}
       ></CreateEducationsTextarea>

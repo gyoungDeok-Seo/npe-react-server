@@ -5,14 +5,14 @@ import IndustryModal from "../components/CareerCreate/IndustryModal";
 import CareerSkillModal from "../components/CareerCreate/CareerSkillModal";
 import IndustrySelect from "../components/CareerCreate/IndustrySelect";
 import CompanyInput from "../components/CareerCreate/CompanyInput";
-import JobInput from "../components/CareerCreate/JobInput";
+import PositionInput from "../components/CareerCreate/PositionInput";
 import PeriodSelectBox from "../components/CareerCreate/CareerPeriod";
 import SkillSelect from "../components/CareerCreate/SkillSelect";
 import DescriptionTextarea from "../components/CareerCreate/DescriptionTextarea";
 import LinkInput from "../components/CareerCreate/LinkInput";
 import MainHeader from "../components/Header/MainHeader";
 import AvoidMistakesModal from "../components/profiles/Modal/AvoidMistakesModal";
-import { CreateCareerContext } from "../context/CreateCareerContext";
+import { useSelector } from "react-redux";
 
 export const CareerCreateBox = styled.div`
   padding-left: 1rem;
@@ -241,18 +241,6 @@ function CareerCreate() {
   const [isExit, setIsExit] = useState(false);
   const [industryModal, setIndustryModal] = useState(false);
   const [careerSkillModal, setCareerSkillModal] = useState(false);
-  const [datas, setDatas] = useState({
-    company: "",
-    job: "",
-    startYear: "",
-    startMonth: "",
-    endYear: "",
-    endMonth: "",
-    industry: [],
-    skills: [],
-    description: "",
-    link: "",
-  });
 
   useEffect(() => {
     if (isExit) {
@@ -260,11 +248,8 @@ function CareerCreate() {
     }
   }, [isExit]);
 
-  useEffect(() => {
-    console.log(datas);
-  }, [datas]);
   return (
-    <CreateCareerContext.Provider value={{ datas, setDatas }}>
+    <>
       <div>
         <div
           style={{
@@ -283,7 +268,7 @@ function CareerCreate() {
           <div style={{ height: "3.5rem" }}></div>
           <CareerCreateBox>
             <CompanyInput />
-            <JobInput />
+            <PositionInput />
             <PeriodSelectBox />
             <IndustrySelect setIndustryModal={setIndustryModal} />
             <SkillSelect setCareerSkillModal={setCareerSkillModal} />
@@ -302,7 +287,7 @@ function CareerCreate() {
           setIsExit={setIsExit}
         />
       )}
-    </CreateCareerContext.Provider>
+    </>
   );
 }
 export default CareerCreate;

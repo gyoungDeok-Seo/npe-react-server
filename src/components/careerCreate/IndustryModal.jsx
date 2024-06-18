@@ -2,6 +2,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { CreateCareerContext } from "../../context/CreateCareerContext";
 import { industryList } from "../../service/dummyData";
+import { useDispatch, useSelector } from "react-redux";
+import { setIndustry } from "../../redux/createCareer";
 
 const IndustryModalBox = styled.div`
   display: flex;
@@ -160,9 +162,10 @@ const IndustryModalCraeteItemSvg = styled.svg`
   display: block;
 `;
 function IndustryModal({ setIndustryModal }) {
-  const { datas, setDatas } = useContext(CreateCareerContext);
+  const createCareer = useSelector((state) => state.createCareer);
+  const dispatch = useDispatch();
   const [localCheckedIndustries, setLocalCheckedIndustries] = useState(
-    datas.industry ? datas.industry : []
+    createCareer.industry ? createCareer.industry : []
   );
   const checkboxRefs = useRef({});
 
@@ -191,10 +194,7 @@ function IndustryModal({ setIndustryModal }) {
   };
 
   const handleSubmitModal = () => {
-    setDatas((prevDatas) => ({
-      ...prevDatas,
-      industry: localCheckedIndustries,
-    }));
+    dispatch(setIndustry(localCheckedIndustries));
     setIndustryModal(false);
   };
 
@@ -203,8 +203,8 @@ function IndustryModal({ setIndustryModal }) {
   };
 
   useEffect(() => {
-    setLocalCheckedIndustries(datas.industry);
-  }, [datas.industry]);
+    setLocalCheckedIndustries(createCareer.industry);
+  }, [createCareer.industry]);
 
   return (
     <>
@@ -290,9 +290,9 @@ function IndustryModal({ setIndustryModal }) {
                           (checkboxRefs.current[industryItem.id] = ref)
                         }
                         onChange={handleCheckboxChange}
-                        checked={
-                          localCheckedIndustries.includes(industryItem.label)
-                        }
+                        checked={localCheckedIndustries.includes(
+                          industryItem.label
+                        )}
                       />
                       <IndustryModalLabel htmlFor={industryItem.id}>
                         {industryItem.label}

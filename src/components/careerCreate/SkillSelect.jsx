@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { CreateCareerContext } from "../../context/CreateCareerContext";
+import { useSelector } from "react-redux";
 import {
   CareerCreateButtonBox,
   CareerCreateButtonSvg,
@@ -11,7 +10,7 @@ import {
 import CareerSelectedList from "./CareerSelectedList";
 
 const SkillSelect = ({ setCareerSkillModal }) => {
-  const { datas } = useContext(CreateCareerContext);
+  const createCareer = useSelector((state) => state.createCareer);
   const handleCareerSkillModal = () => {
     setCareerSkillModal(true);
   };
@@ -21,7 +20,7 @@ const SkillSelect = ({ setCareerSkillModal }) => {
       <div className="part-title-box">
         <CareerCreateLabel>스킬</CareerCreateLabel>
       </div>
-      {datas.skills.length === 0 ? (
+      {createCareer.skills.length === 0 ? (
         <CareerCreateRelativeBox>
           <CareerCreateButtonBox type="button" onClick={handleCareerSkillModal}>
             <CareerCreateButtonText>
@@ -49,7 +48,7 @@ const SkillSelect = ({ setCareerSkillModal }) => {
         </CareerCreateRelativeBox>
       ) : (
         <CareerSelectedList
-          selectdList={datas.skills}
+          selectdList={createCareer.skills}
           handleModal={handleCareerSkillModal}
         />
       )}

@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { popularSkills, skillList } from "../../service/dummyData";
 import { CreateCareerContext } from "../../context/CreateCareerContext";
+import { setSkills } from "../../redux/createCareer";
+import { useDispatch, useSelector } from "react-redux";
 
 const CareerSkillModalBox = styled.div`
   display: flex;
@@ -208,12 +210,17 @@ const SkillItem = styled.li`
     background-color: #edf0f5;
   }
 `;
-function CareerSkillModal({ setCareerSkillModal }) {
-  const { datas, setDatas } = useContext(CreateCareerContext);
+const CareerSkillModal = ({ setCareerSkillModal }) => {
+  const createCareer = useSelector((state) => state.createCareer);
+  const dispatch = useDispatch();
+
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState([]);
   const [showBox, setShowBox] = useState(false);
+  const [selectedSkills, setSelectedSkills] = useState(
+    createCareer.skills || []
+  );
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -240,17 +247,10 @@ function CareerSkillModal({ setCareerSkillModal }) {
   };
 
   const handleSearch = (e) => {
-    setDatas((prevDatas) => ({
-      ...prevDatas,
-      skills: [...prevDatas.skills, e.target.innerText],
-    }));
+    dispatch(setSkills([...createCareer.skills, e.target.innerText]));
     setShowBox(false);
     setInputValue("");
   };
-
-  const [selectedSkills, setSelectedSkills] = useState(
-    datas.skills ? datas.skills : []
-  );
 
   const handleSkillClick = (skill) => {
     setSelectedSkills((prevSelectedSkills) =>
@@ -261,10 +261,7 @@ function CareerSkillModal({ setCareerSkillModal }) {
   };
 
   const handleSubmitModal = () => {
-    setDatas((prevDatas) => ({
-      ...prevDatas,
-      skills: selectedSkills,
-    }));
+    dispatch(setSkills(selectedSkills));
     setCareerSkillModal(false);
   };
 
@@ -273,8 +270,8 @@ function CareerSkillModal({ setCareerSkillModal }) {
   };
 
   useEffect(() => {
-    setSelectedSkills(datas.skills);
-  }, [datas.skills]);
+    setSelectedSkills(createCareer.skills);
+  }, [createCareer.skills]);
 
   return (
     <div>
@@ -322,7 +319,7 @@ function CareerSkillModal({ setCareerSkillModal }) {
                       onClick={() => handleSkillClick(item)}
                     >
                       <CareerSkillModalCraeteItemText>
-                        {item}
+                        {item.skillName}
                       </CareerSkillModalCraeteItemText>
                       <CareerSkillModalCraeteItemSvgBox role="presentation">
                         <CareerSkillModalCraeteItemSvg
@@ -433,7 +430,7 @@ function CareerSkillModal({ setCareerSkillModal }) {
                         <CareerSkillModalSkillBtnText
                           selected={selectedSkills.includes(skill)}
                         >
-                          {skill}
+                          {skill.skillName}
                         </CareerSkillModalSkillBtnText>
                       </CareerSkillModalSkillBtn>
                     ))}
@@ -460,6 +457,6 @@ function CareerSkillModal({ setCareerSkillModal }) {
       </div>
     </div>
   );
-}
+};
 
 export default CareerSkillModal;
