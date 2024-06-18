@@ -116,9 +116,7 @@ function QnaActivityAnswer({ answer, member }) {
                         <QnaActivityAnswerBox>
                             <AnswerProfileImg src={member?.kakaoProfileUrl} alt="백시현님의 프로필 사진" />
                             <AnswerUserData>
-                                <AnswerUserName>
-                                    {member?.memberName} {answer?.id}
-                                </AnswerUserName>
+                                <AnswerUserName>{member?.memberName}</AnswerUserName>
                                 <AnswerUserJob>{member?.memberPosition}</AnswerUserJob>
                                 <AnswerUserCreateAt>{timeForToday(answer?.createdDate)}</AnswerUserCreateAt>
                             </AnswerUserData>

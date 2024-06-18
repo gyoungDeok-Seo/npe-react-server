@@ -60,12 +60,10 @@ const Boundary = styled.div`
     margin-right: 1rem;
 `;
 
-function ProfileMiniModal({ modalRef }) {
+function ProfileMiniModal({ modalRef, member }) {
     const dispatch = useDispatch();
-    const navigate = useNavigate()
-    const handleModal = () => {
-        
-    }
+    const navigate = useNavigate();
+    const handleModal = () => {};
 
     const handlerClickLogout = async () => {
         try {
@@ -74,10 +72,10 @@ function ProfileMiniModal({ modalRef }) {
                 credentials: "include", // 세션 쿠키를 포함하여 요청
             }); // 서버에서 세션 정보를 가져오는 엔드포인트 설정
             const data = await response.json();
-            
+
             dispatch(controlRedux(data.loggedIn));
-            if (!data){
-                navigate("/")
+            if (!data) {
+                navigate("/");
             }
         } catch (error) {
             console.error("Error fetching session data", error);
@@ -86,7 +84,7 @@ function ProfileMiniModal({ modalRef }) {
     };
     return (
         <ProfileMiniModalBox ref={modalRef}>
-            <ProfileMiniModalBtn to="/profiles" onClick={handleModal}>
+            <ProfileMiniModalBtn to={`/profile/${member?.id}`} onClick={handleModal}>
                 <span>내 프로필</span>
             </ProfileMiniModalBtn>
             <ProfileMiniModalBtn to="#" onClick={handleModal}>
