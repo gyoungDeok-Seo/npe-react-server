@@ -147,29 +147,31 @@ const ContentContentEditSvg = styled.svg`
     fill: #64748b;
     stroke: #64748b;
 `;
-const ContentLinkSvg = styled.div`
+const ContentLinkSvg = styled.svg`
     fill: #334155;
     flex: none;
 `;
 
-function Profile({ member }) {
-    const isExistence = false;
+function Profile({ member, same }) {
+    const isExistence = true;
     const { pathname } = useLocation();
     const dispatch = useDispatch();
     const memberSkills = useSelector((state) => state.createSkills);
+
     const arraysEqual = (arr1, arr2) => {
         const sortedArr1 = arr1.slice().sort((a, b) => a.id - b.id); // id를 기준으로 정렬
         const sortedArr2 = arr2.slice().sort((a, b) => a.id - b.id); // id를 기준으로 정렬
         return JSON.stringify(sortedArr1) === JSON.stringify(sortedArr2);
     };
+
     useEffect(() => {
         const fetchMemberSkill = async () => {
-            const response = await fetch(`http://localhost:10000/members/api/skill`, {
+            const response = await fetch(`http://localhost:10000/members/api/skill?memberId=${pathname.split("/")[2]}`, {
                 method: "GET",
                 credentials: "include",
             });
             let data = await response.json();
-            
+
             data = await data.map((skill) => ({
                 id: skill.skillId,
                 skillName: skill.skillName,
@@ -177,6 +179,13 @@ function Profile({ member }) {
             if (!arraysEqual(memberSkills.skills, data)) {
                 dispatch(setSkills(data));
             }
+        };
+
+        const getMemberSocialLink = async () => {
+            const response = await fetch(`http://localhost:10000/members/api/my-social-link`, {
+                method: "GET",
+                credentials: "include",
+            });
         };
         fetchMemberSkill();
     }, [pathname, memberSkills]);
@@ -190,35 +199,39 @@ function Profile({ member }) {
                             <div>
                                 <div>
                                     <ProfileContentContainerInner>
-                                        <ContentBox>
-                                            <ContentTextBox>
-                                                <div>
-                                                    <ContentText>스킬</ContentText>
-                                                </div>
-                                                {memberSkills && memberSkills.skills.length > 0 && (
-                                                    <ContentUpdateBtn to="/profiles/skills">
-                                                        <ContentUpdateSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                            <g>
-                                                                <g id="style=outline">
-                                                                    <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M18.5 3.99976C18.1021 3.99976 17.7205 4.15783 17.4391 4.43919L16.6462 5.23209L18.768 7.35387L19.5609 6.56098C19.8423 6.27961 20.0003 5.898 20.0003 5.50009C20.0003 5.10217 19.8423 4.72056 19.5609 4.43919C19.2795 4.15783 18.8979 3.99976 18.5 3.99976ZM20.9751 7.97519C21.6315 7.31875 22.0003 6.42843 22.0003 5.50009C22.0003 4.57174 21.6315 3.68142 20.9751 3.02498C20.3187 2.36854 19.4283 1.99976 18.5 1.99976C17.5717 1.99976 16.6813 2.36854 16.0249 3.02498L2.29289 16.757C2.10536 16.9445 2 17.1989 2 17.4641V21.0361C2 21.5884 2.44772 22.0361 3 22.0361H6.5C6.76522 22.0361 7.01957 21.9307 7.20711 21.7432L20.9751 7.97519ZM17.3538 8.76808L15.232 6.6463L4 17.8783V20.0361H6.08579L17.3538 8.76808Z"></path>
+                                        {!same && memberSkills.skills.length == 0 ? (
+                                            <></>
+                                        ) : (
+                                            <ContentBox>
+                                                <ContentTextBox>
+                                                    <div>
+                                                        <ContentText>스킬</ContentText>
+                                                    </div>
+                                                    {same && memberSkills && memberSkills.skills.length > 0 && (
+                                                        <ContentUpdateBtn to="/profiles/skills">
+                                                            <ContentUpdateSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <g>
+                                                                    <g id="style=outline">
+                                                                        <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M18.5 3.99976C18.1021 3.99976 17.7205 4.15783 17.4391 4.43919L16.6462 5.23209L18.768 7.35387L19.5609 6.56098C19.8423 6.27961 20.0003 5.898 20.0003 5.50009C20.0003 5.10217 19.8423 4.72056 19.5609 4.43919C19.2795 4.15783 18.8979 3.99976 18.5 3.99976ZM20.9751 7.97519C21.6315 7.31875 22.0003 6.42843 22.0003 5.50009C22.0003 4.57174 21.6315 3.68142 20.9751 3.02498C20.3187 2.36854 19.4283 1.99976 18.5 1.99976C17.5717 1.99976 16.6813 2.36854 16.0249 3.02498L2.29289 16.757C2.10536 16.9445 2 17.1989 2 17.4641V21.0361C2 21.5884 2.44772 22.0361 3 22.0361H6.5C6.76522 22.0361 7.01957 21.9307 7.20711 21.7432L20.9751 7.97519ZM17.3538 8.76808L15.232 6.6463L4 17.8783V20.0361H6.08579L17.3538 8.76808Z"></path>
+                                                                    </g>
                                                                 </g>
-                                                            </g>
-                                                        </ContentUpdateSvg>
-                                                    </ContentUpdateBtn>
+                                                            </ContentUpdateSvg>
+                                                        </ContentUpdateBtn>
+                                                    )}
+                                                </ContentTextBox>
+                                                {memberSkills && memberSkills.skills.length > 0 ? (
+                                                    <SkillList>
+                                                        {memberSkills.skills.map((memberSkill, index) => (
+                                                            <SkillItem key={index}>
+                                                                <SkillName>{memberSkill.skillName}</SkillName>
+                                                            </SkillItem>
+                                                        ))}
+                                                    </SkillList>
+                                                ) : (
+                                                    <NonExistent partText=" 활용할 수 있는 스킬을 알려주세요." part="경력" url="/profiles/skills" />
                                                 )}
-                                            </ContentTextBox>
-                                            {memberSkills && memberSkills.skills.length > 0 ? (
-                                                <SkillList>
-                                                    {memberSkills.skills.map((memberSkill, index) => (
-                                                        <SkillItem key={index}>
-                                                            <SkillName>{memberSkill.skillName}</SkillName>
-                                                        </SkillItem>
-                                                    ))}
-                                                </SkillList>
-                                            ) : (
-                                                <NonExistent partText=" 활용할 수 있는 스킬을 알려주세요." part="경력" url="/profiles/skills" />
-                                            )}
-                                        </ContentBox>
+                                            </ContentBox>
+                                        )}
                                         <ContentBox>
                                             <ContentTextBox>
                                                 <div>

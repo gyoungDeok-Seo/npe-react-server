@@ -32,9 +32,10 @@ function Profiles() {
     const { pathname } = useLocation();
     const dispatch = useDispatch();
     const [member, setMember] = useState(null);
+    const [same, setSame] = useState();
 
     const fetchData = async (page, endpoint, actionCreator, currentState) => {
-        const response = await fetch(`http://localhost:10000/members/api/${endpoint}?page=${page}`, {
+        const response = await fetch(`http://localhost:10000/members/api/${endpoint}?page=${page}&memberId=${pathname.split("/")[2]}`, {
             method: "GET",
             credentials: "include",
         });
@@ -54,13 +55,14 @@ function Profiles() {
     useEffect(() => {
         // 서버에서 세션 정보를 가져와 로그인 상태를 설정합니다.
         const fetchUserSession = async () => {
+            console.log(pathname.split("/")[2]);
             try {
-                const response = await fetch(`http://localhost:10000/members/api/session`, {
+                const response = await fetch(`http://localhost:10000/members/api/session?memberId=${pathname.split("/")[2]}`, {
                     method: "GET",
                     credentials: "include", // 세션 쿠키를 포함하여 요청
                 }); // 서버에서 세션 정보를 가져오는 엔드포인트 설정
                 const data = await response.json();
-                dispatch(controlRedux(data.loggedIn));
+                setSame(data.same);
                 setMember(data.member);
             } catch (error) {
                 console.error("Error fetching session data", error);
@@ -101,7 +103,7 @@ function Profiles() {
     const renderContent = () => {
         switch (tab) {
             case 1:
-                return <Profile member={member} />;
+                return <Profile same={same} member={member} />;
             case 2:
                 return <Post setPostPage={setPostPage} />;
             case 3:
@@ -128,7 +130,7 @@ function Profiles() {
             <div>
                 <MyProfileContainer>
                     <MainHeader />
-                    <Intro setTab={setTab} tab={tab} member={member} />
+                    <Intro setTab={setTab} tab={tab} member={member} same={same} />
                     {renderContent()}
                 </MyProfileContainer>
             </div>

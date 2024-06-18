@@ -85,7 +85,7 @@ function MainHeader({ setAvoidMistakesModal }) {
 
   return (
     <>
-      {path.startsWith("/profiles/") ? (
+      {path.includes("/profiles/") ? (
         <ProfileUpdateHeader
           navigate={navigate}
           setAvoidMistakesModal={setAvoidMistakesModal}
