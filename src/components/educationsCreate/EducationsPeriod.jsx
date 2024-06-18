@@ -1,11 +1,12 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import {
   CreateEducationsLabel,
   EducationsInputBox,
 } from "../../pages/CreateEducations";
 import { Pilsu } from "../../pages/CareerCreate";
-import { CreateEductaionContext } from "../../context/CreateEductaionContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setEducationEnd, setEducationStart } from "../../redux/createEducation";
 
 const EducationsPeriodSelectBox = styled.div`
   margin-top: 0.5rem;
@@ -138,46 +139,58 @@ const CreateEducationsIsWorking = styled.input`
 // `;
 
 function EducationsPeriod() {
-  const { datas, setDatas } = useContext(CreateEductaionContext);
+  const createEducation = useSelector((state) => state.createEducation);
+  const dispatch = useDispatch();
   const [endDateDisabled, setEndDateDisabled] = useState(true);
-  const [isWorking, setIsworking] = useState(false);
+  const [isWorking, setIsWorking] = useState(false);
 
   const handleStartChange = (e) => {
-    setDatas((prevDatas) => ({
-      ...prevDatas,
-      startYear: e.target.value,
-    }));
-    if (e.target.value && datas.startMonth) {
+    const newStartYear = e.target.value;
+    const neweDucationStart = `${newStartYear}.${
+      createEducation.educationStart.split(".")[1] || ""
+    }`;
+    dispatch(setEducationStart(neweDucationStart));
+    if (newStartYear && createEducation.educationStart.split(".")[1]) {
       setEndDateDisabled(false);
     }
   };
 
   const handleStartMonthChange = (e) => {
-    setDatas((prevDatas) => ({
-      ...prevDatas,
-      startMonth: e.target.value,
-    }));
-    if (e.target.value && datas.startYear) {
+    const newStartMonth = e.target.value;
+    const neweDucationStart = `${
+      createEducation.educationStart.split(".")[0] || ""
+    }.${newStartMonth}`;
+    dispatch(setEducationStart(neweDucationStart));
+    if (newStartMonth && createEducation.educationStart.split(".")[0]) {
       setEndDateDisabled(false);
     }
   };
 
   const handleEndYearChange = (e) => {
-    setDatas((prevDatas) => ({
-      ...prevDatas,
-      endYear: e.target.value,
-    }));
+    const newEndYear = e.target.value;
+    const newEducationEnd = `${newEndYear}.${
+      createEducation.educationEnd.split(".")[1] || ""
+    }`;
+    dispatch(setEducationEnd(newEducationEnd));
   };
 
   const handleEndMonthChange = (e) => {
-    setDatas((prevDatas) => ({
-      ...prevDatas,
-      endMonth: e.target.value,
-    }));
+    const newEndMonth = e.target.value;
+    const newEducationEnd = `${
+      createEducation.educationEnd.split(".")[0] || ""
+    }.${newEndMonth}`;
+    dispatch(setEducationEnd(newEducationEnd));
   };
 
   const handleIsWorking = () => {
-    setIsworking((prevIsWorking) => !prevIsWorking);
+    setIsWorking((prevIsWorking) => !prevIsWorking);
+    if (!isWorking) {
+      setEndDateDisabled(true);
+      dispatch(setEducationEnd("현재"));
+    } else {
+      setEndDateDisabled(false);
+      dispatch(setEducationEnd(""));
+    }
   };
   return (
     <>
@@ -189,7 +202,7 @@ function EducationsPeriod() {
         <EducationsPeriodSelectBox>
           <EducationsPeriodSelectInner>
             <EducationsPeriodSelect
-              value={createCareer.careerStart.split(".")[0]}
+              value={createEducation.educationStart.split(".")[0]}
               onChange={handleStartChange}
             >
               <option disabled="" value="-1">
@@ -252,7 +265,7 @@ function EducationsPeriod() {
               <option value="1970">1970년</option>
             </EducationsPeriodSelect>
             <EducationsPeriodSelect
-              value={createCareer.careerStart.split(".")[1]}
+              value={createEducation.educationStart.split(".")[1]}
               onChange={handleStartMonthChange}
             >
               <option disabled="" value="-1">
@@ -279,7 +292,7 @@ function EducationsPeriod() {
               <EducationsPeriodSelectInner2>
                 <EducationsPeriodSelect
                   disabled={endDateDisabled}
-                  value={createCareer.careerEnd.split(".")[0]}
+                  value={createEducation.educationEnd.split(".")[0]}
                   onChange={handleEndYearChange}
                 >
                   <option disabled="" value="-1">
@@ -343,7 +356,7 @@ function EducationsPeriod() {
                 </EducationsPeriodSelect>
                 <EducationsPeriodSelect
                   disabled={endDateDisabled}
-                  value={createCareer.careerEnd.split(".")[1]}
+                  value={createEducation.educationEnd.split(".")[1]}
                   onChange={handleEndMonthChange}
                 >
                   <option disabled="" value="-1">

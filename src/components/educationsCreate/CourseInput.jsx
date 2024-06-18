@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 import {
   CreateEducationsInput,
@@ -7,7 +7,6 @@ import {
   CreateEducationsPartTitleBox,
   EducationsInputBox,
 } from "../../pages/CreateEducations";
-import { CreateEductaionContext } from "../../context/CreateEductaionContext";
 import { useDispatch, useSelector } from "react-redux";
 import { setEducationCourse } from "../../redux/createEducation";
 

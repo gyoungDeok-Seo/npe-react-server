@@ -1,7 +1,6 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { CreateEducationsLabel } from "../../pages/CreateEducations";
-import { CreateEductaionContext } from "../../context/CreateEductaionContext";
 import { useDispatch, useSelector } from "react-redux";
 import { setDescription } from "../../redux/createEducation";
 

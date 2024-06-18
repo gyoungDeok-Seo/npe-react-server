@@ -9,6 +9,7 @@ import LinkInput from "../components/EducationsCreate/LinkInput";
 import DescriptionTextarea from "../components/EducationsCreate/DescriptionTextarea";
 import MainHeader from "../components/Header/MainHeader";
 import { CreateEductaionContext } from "../context/CreateEductaionContext";
+import { useSelector } from "react-redux";
 
 const CreateEducationsBox = styled.div`
   padding-left: 1rem;
@@ -91,6 +92,10 @@ function EducationsCreate() {
       navigate("/profiles");
     }
   }, [isExit]);
+  const createEducation = useSelector((state) => state.createEducation);
+  useEffect(() => {
+    console.log(createEducation);
+  }, [createEducation]);
 
   return (
     <>
