@@ -236,6 +236,7 @@ export const PeriodValidationMessage = styled.div`
 `;
 
 function CareerCreate() {
+  const createCareer = useSelector((state) => state.createCareer);
   const navigate = useNavigate(null);
   const [avoidMistakesModal, setAvoidMistakesModal] = useState(false);
   const [isExit, setIsExit] = useState(false);
@@ -248,6 +249,9 @@ function CareerCreate() {
     }
   }, [isExit]);
 
+  useEffect(() => {
+    console.log(createCareer);
+  }, [createCareer]);
   return (
     <>
       <div>

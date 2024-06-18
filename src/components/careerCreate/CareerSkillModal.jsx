@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { popularSkills, skillList } from "../../service/dummyData";
-import { CreateCareerContext } from "../../context/CreateCareerContext";
 import { setSkills } from "../../redux/createCareer";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -213,14 +212,30 @@ const SkillItem = styled.li`
 const CareerSkillModal = ({ setCareerSkillModal }) => {
   const createCareer = useSelector((state) => state.createCareer);
   const dispatch = useDispatch();
-
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState([]);
   const [showBox, setShowBox] = useState(false);
+
   const [selectedSkills, setSelectedSkills] = useState(
     createCareer.skills || []
   );
+  useEffect(() => {
+    const searchSkillsFetch = async (keyword) => {
+      const response = await fetch(
+        `http://localhost:10000/members/api/skillSearch?keyword=${keyword}`
+      );
+      let data = await response.json();
+      data = await data.map((search) => ({
+        id: search.id,
+        skillName: search.skillName,
+      }));
+
+      inputValue && setSearch(data);
+    };
+
+    searchSkillsFetch(inputValue);
+  }, [inputValue]);
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -238,24 +253,29 @@ const CareerSkillModal = ({ setCareerSkillModal }) => {
 
   const searchSkills = (e) => {
     setInputValue(e.target.value);
-    const searchWord = e.target.value.trim().toLowerCase();
-    const searching = searchWord
-      ? skillList.filter((item) => item.id.toLowerCase().startsWith(searchWord))
-      : [];
-    setSearch(searching);
-    setShowBox(searching.length > 0);
+    setShowBox(true);
   };
 
-  const handleSearch = (e) => {
-    dispatch(setSkills([...createCareer.skills, e.target.innerText]));
+  const handleSearch = (skill) => {
+    const checkSkill = createCareer.skills.some(
+      (item) => item.skillName === skill.skillName
+    );
+
+    !checkSkill &&
+      setSelectedSkills((prevSelectedSkills) =>
+        prevSelectedSkills.find((item) => item.id === skill.id)
+          ? prevSelectedSkills.filter((item) => item.id !== skill.id)
+          : [...prevSelectedSkills, skill]
+      );
+
     setShowBox(false);
     setInputValue("");
   };
 
   const handleSkillClick = (skill) => {
     setSelectedSkills((prevSelectedSkills) =>
-      prevSelectedSkills.includes(skill)
-        ? prevSelectedSkills.filter((s) => s !== skill)
+      prevSelectedSkills.find((item) => item.id === skill.id)
+        ? prevSelectedSkills.filter((item) => item.id !== skill.id)
         : [...prevSelectedSkills, skill]
     );
   };
@@ -273,6 +293,9 @@ const CareerSkillModal = ({ setCareerSkillModal }) => {
     setSelectedSkills(createCareer.skills);
   }, [createCareer.skills]);
 
+  useEffect(() => {
+    console.log(selectedSkills);
+  }, [selectedSkills]);
   return (
     <div>
       <div
@@ -314,7 +337,7 @@ const CareerSkillModal = ({ setCareerSkillModal }) => {
                 <CareerSkillModalCraeteItemBox>
                   {selectedSkills.map((item) => (
                     <CareerSkillModalCraeteItem
-                      key={item}
+                      key={item.id}
                       type="button"
                       onClick={() => handleSkillClick(item)}
                     >
@@ -355,7 +378,6 @@ const CareerSkillModal = ({ setCareerSkillModal }) => {
                   <CareerSkillModalInput
                     type="text"
                     placeholder="스킬을 검색해 보세요."
-                    autoComplete="off"
                     value={inputValue}
                     onChange={searchSkills}
                   />
@@ -411,7 +433,12 @@ const CareerSkillModal = ({ setCareerSkillModal }) => {
                   {showBox && (
                     <SkillList>
                       {search.map((item) => (
-                        <SkillItem onClick={handleSearch}>{item.id}</SkillItem>
+                        <SkillItem
+                          key={item.id}
+                          onClick={() => handleSearch(item)}
+                        >
+                          {item.skillName}
+                        </SkillItem>
                       ))}
                     </SkillList>
                   )}
@@ -422,13 +449,17 @@ const CareerSkillModal = ({ setCareerSkillModal }) => {
                   <CareerSkillModalSkillList>
                     {popularSkills.map((skill) => (
                       <CareerSkillModalSkillBtn
-                        key={skill}
+                        key={skill.id}
                         type="button"
                         onClick={() => handleSkillClick(skill)}
-                        selected={selectedSkills.includes(skill)}
+                        selected={selectedSkills.find(
+                          (item) => item.id === skill.id
+                        )}
                       >
                         <CareerSkillModalSkillBtnText
-                          selected={selectedSkills.includes(skill)}
+                          selected={selectedSkills.find(
+                            (item) => item.id === skill.id
+                          )}
                         >
                           {skill.skillName}
                         </CareerSkillModalSkillBtnText>
