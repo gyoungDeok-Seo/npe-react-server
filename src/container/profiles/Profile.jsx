@@ -170,11 +170,10 @@ function Profile({ member }) {
                 id: skill.skillId,
                 skillName: skill.skillName,
             }));
-            console.log(111)
             dispatch(setSkills(data));
         };
         fetchMemberSkill();
-    }, [pathname]);
+    }, [pathname, memberSkills]);
 
     return (
         <ProfileContentContainer>
