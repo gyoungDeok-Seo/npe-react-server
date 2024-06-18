@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 import NonExistent from "../../components/profiles/Intro/NonExistent";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { setSkills } from "../../redux/createSkills";
 
 const ProfileContentContainer = styled.div`
@@ -162,19 +162,19 @@ function Profile({ member }) {
         const fetchMemberSkill = async () => {
             const response = await fetch(`http://localhost:10000/members/api/skill`, {
                 method: "GET",
-                credentials: "include", // 세션 쿠키를 포함하여 요청
+                credentials: "include",
             });
             let data = await response.json();
-
+            
             data = await data.map((skill) => ({
                 id: skill.skillId,
                 skillName: skill.skillName,
             }));
-
+            console.log(111)
             dispatch(setSkills(data));
         };
         fetchMemberSkill();
-    }, [dispatch, pathname, memberSkills]);
+    }, [pathname]);
 
     return (
         <ProfileContentContainer>

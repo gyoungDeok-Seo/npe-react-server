@@ -45,13 +45,8 @@ function SelectSkillItem() {
     const dispatch = useDispatch();
 
     const handleSkillClick = (skill) => {
-        console.log(skill);
         dispatch(setSkills(createSkills.skills.includes(skill) ? createSkills.skills.filter((s) => s !== skill) : [...createSkills.skills, skill]));
     };
-
-    useEffect(() => {
-        console.log(createSkills);
-    }, [createSkills]);
 
     return (
         <>
