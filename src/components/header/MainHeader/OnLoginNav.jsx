@@ -129,7 +129,7 @@ function OnLoginNav({ member, setSearch }) {
                     </g>
                 </WriteOptionBtnSvg>
             </WriteOptionBtn>
-            {profileModalOpen && <ProfileMiniModal modalRef={profileModalRef} />}
+            {profileModalOpen && <ProfileMiniModal member={member} modalRef={profileModalRef} />}
             {writeModalOpen && <WriteMiniModal modalRef={writeModalRef} />}
         </div>
     );

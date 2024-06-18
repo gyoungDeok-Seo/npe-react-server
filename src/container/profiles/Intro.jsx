@@ -61,7 +61,7 @@ const ProfileDescription = styled.p`
     white-space: pre-line;
 `;
 
-function Intro({ tab, setTab, member }) {
+function Intro({ tab, setTab, member, same }) {
     return (
         <>
             <ProfileTopBox>
@@ -70,7 +70,7 @@ function Intro({ tab, setTab, member }) {
                         <div>
                             <ProfileDescriptionTop>
                                 <ProfileDescriptionProfileImg width="120" height="120" src={member && member.kakaoProfileUrl} alt="프로필 이미지" />
-                                <ToolBox member={member} />
+                                <ToolBox same={same} />
                             </ProfileDescriptionTop>
                             <ProfileNameBox>
                                 <div>
