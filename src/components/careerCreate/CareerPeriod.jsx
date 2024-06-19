@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import styled from "styled-components";
 import {
   CareerCreateCheckbox,
@@ -34,9 +34,7 @@ function CareerPeriod() {
   const [endDateDisabled, setEndDateDisabled] = useState(
     createCareer?.careerEnd === "1111-11-11"
   );
-  const asd = { ...createCareer };
-  asd["id"] = 1;
-  console.log(asd);
+
   useEffect(() => {
     const bool = createCareer.careerEnd === "1111-11-11" ? true : false;
     setIsWorking(bool);

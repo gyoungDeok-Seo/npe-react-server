@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { setProfileReset } from "../../../redux/profileUpdate";
 import { setCareerReset } from "../../../redux/createCareer";
 import { setEducationReset } from "../../../redux/createEducation";
 import { useLocation } from "react-router-dom";

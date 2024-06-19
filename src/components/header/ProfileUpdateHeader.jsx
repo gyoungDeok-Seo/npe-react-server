@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSkills } from "../../redux/createSkills";
-import { setCareerState } from "../../redux/createCareer";
-import { setProfileState } from "../../redux/profileUpdate";
-import { setEducationState } from "../../redux/createEducation";
 
 const ProfileUpdateHeaderContainer = styled.nav`
   position: fixed;
@@ -73,6 +70,7 @@ const ProfileUpdateHeader = ({ member, navigate, setAvoidMistakesModal }) => {
   const profileUpdate = useSelector((state) => state.profileUpdate);
   const createSkills = useSelector((state) => state.createSkills);
   const createCareer = useSelector((state) => state.createCareer);
+  const memberCareer = useSelector((state) => state.careerList);
 
   const getMemberSkillsListFetch = async () => {
     const response = await fetch(`http://localhost:10000/members/api/skill`, {
@@ -98,6 +96,20 @@ const ProfileUpdateHeader = ({ member, navigate, setAvoidMistakesModal }) => {
           "Content-Type": "application/json; charset=utf-8",
         },
         body: JSON.stringify(careerInfo),
+      }
+    );
+  };
+
+  const updateCareerFetch = async (createCareer, listInfo) => {
+    const response = await fetch(
+      `http://localhost:10000/members/api/update-career`,
+      {
+        method: "PATCH",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        body: JSON.stringify({ createCareer, listInfo }),
       }
     );
   };
@@ -180,6 +192,68 @@ const ProfileUpdateHeader = ({ member, navigate, setAvoidMistakesModal }) => {
         createCareerFetch(createCareer);
         navigate(`/profile/${member.id}`);
       } else {
+        const careerId = parseInt(location.pathname.split("/")[4]);
+
+        const getDiffLists = (originalList, modifiedList, key) => {
+          const addList = modifiedList.filter(
+            (modifiedItem) =>
+              !originalList.some(
+                (originalItem) => originalItem[key] === modifiedItem[key]
+              )
+          );
+          const removeList = originalList.filter(
+            (originalItem) =>
+              !modifiedList.some(
+                (modifiedItem) => modifiedItem[key] === originalItem[key]
+              )
+          );
+
+          return { addList, removeList };
+        };
+
+        const {
+          careerIndustries: memberCareerIndustries,
+          careerSkills: memberCareerSkills,
+        } = memberCareer.careers.find((item) => item.id === careerId) || {};
+        const {
+          careerIndustries: modifyCareerIndustries,
+          careerSkills: modifyCareerSkills,
+        } = createCareer;
+
+        const {
+          addList: addIndustryList,
+          removeList: removeIndustryList,
+        } = getDiffLists(
+          memberCareerIndustries,
+          modifyCareerIndustries,
+          "industryId"
+        );
+        const {
+          addList: addSkillList,
+          removeList: removeSkillList,
+        } = getDiffLists(memberCareerSkills, modifyCareerSkills, "skillId");
+
+        const mapWithCareerId = (list, key) =>
+          list.map((item) => ({
+            careerId,
+            ...item,
+          }));
+
+        const formattedAddIndustryList = mapWithCareerId(
+          addIndustryList,
+          "industryId"
+        );
+        const formattedAddSkillList = mapWithCareerId(addSkillList, "skillId");
+
+        const listInfo = {
+          addIndustryList: formattedAddIndustryList,
+          removeIndustryList: removeIndustryList,
+          addSkillList: formattedAddSkillList,
+          removeSkillList: removeSkillList,
+        };
+
+        console.log(createCareer);
+        updateCareerFetch(createCareer, listInfo);
         navigate(`/profile/${member.id}`);
       }
     } else if (location.pathname.startsWith("/profiles/skills")) {

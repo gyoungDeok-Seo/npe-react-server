@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 import NonExistent from "../../components/profiles/Intro/NonExistent";
-import { useEffect, useState } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { setSkills } from "../../redux/createSkills";
 import { setCareers } from "../../redux/careerList";
 
@@ -338,7 +338,7 @@ function Profile({ member, same }) {
                                   </ContentContentName>
                                   <ContentContentPeriod>
                                     {formatDate(career.careerStart)} ~{" "}
-                                    {career.careerEnd === '1111-11-11'
+                                    {career.careerEnd === "1111-11-11"
                                       ? "현재"
                                       : formatDate(career.careerEnd)}
                                   </ContentContentPeriod>

@@ -9,7 +9,6 @@ import PositionInput from "../components/CareerCreate/PositionInput";
 import CareerPeriod from "../components/CareerCreate/CareerPeriod";
 import SkillSelect from "../components/CareerCreate/SkillSelect";
 import DescriptionTextarea from "../components/CareerCreate/DescriptionTextarea";
-import LinkInput from "../components/CareerCreate/LinkInput";
 import MainHeader from "../components/Header/MainHeader";
 import AvoidMistakesModal from "../components/profiles/Modal/AvoidMistakesModal";
 import { useDispatch, useSelector } from "react-redux";

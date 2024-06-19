@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  id: 0,
   companyName: "",
   memberPosition: "",
   careerStart: "",
@@ -18,6 +19,7 @@ const createCareer = createSlice({
     setCareerReset: (state) => ({ ...initialState }),
     setCareerState: (state, action) => {
       const newState = action.payload || {};
+      state.id = newState.id ?? 0;
       state.companyName = newState.companyName ?? "";
       state.memberPosition = newState.memberPosition ?? "";
       state.careerStart = newState.careerStart ?? "";
