@@ -1,4 +1,10 @@
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { setProfileReset } from "../../../redux/profileUpdate";
+import { setCareerReset } from "../../../redux/createCareer";
+import { setEducationReset } from "../../../redux/createEducation";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const AvoidMistakesModalContainer = styled.div`
   display: flex;
@@ -97,12 +103,29 @@ const AvoidMistakesModalExitBtn = styled(AvoidMistakesModalCancelBtn)`
 `;
 
 function AvoidMistakesModal({ setAvoidMistakesModal, setIsExit }) {
+  const { pathname } = useLocation();
+  const dispatch = useDispatch();
   const handleAvoidMistakesModal = () => {
     setAvoidMistakesModal(false);
   };
   const handleIsExit = () => {
     setIsExit(true);
   };
+  useEffect(() => {
+    if (pathname.startsWith("/profiles/update")) {
+      dispatch(setEducationReset());
+    } else if (
+      pathname.startsWith("/profiles/careers/create") ||
+      pathname.startsWith("/profiles/careers/update")
+    ) {
+      dispatch(setCareerReset());
+    } else if (
+      pathname.startsWith("/profiles/educations/create") ||
+      pathname.startsWith("/profiles/educations/update")
+    ) {
+      dispatch(setEducationReset());
+    }
+  }, [pathname]);
   return (
     <AvoidMistakesModalContainer style={{ overflowY: "auto" }}>
       <AvoidMistakesModalBox

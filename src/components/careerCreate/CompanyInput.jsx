@@ -27,6 +27,8 @@ function CompanyInput() {
         }
     };
 
+    useEffect(()=>{},[])
+
     return (
         <CareerInputBox>
             <CareerCreatePartTitleBox>

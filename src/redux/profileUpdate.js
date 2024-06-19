@@ -1,9 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = { name: "", ref: "", description: "" };
 const profileUpdate = createSlice({
   name: "profile",
-  initialState: { name: "", ref: "", description: "" },
+  initialState,
   reducers: {
+    setProfileReset: () => {
+      return initialState;
+    },
+    setProfileState: (state, action) => {
+      const newState = action.payload;
+      state.name = newState.name;
+      state.ref = newState.ref;
+      state.description = newState.description;
+    },
     setName: (state, action) => {
       state.name = action.payload;
     },
@@ -16,6 +26,12 @@ const profileUpdate = createSlice({
   },
 });
 
-export const { setName, setRef, setDescription } = profileUpdate.actions;
+export const {
+  setProfileReset,
+  setProfileState,
+  setName,
+  setRef,
+  setDescription,
+} = profileUpdate.actions;
 
 export default profileUpdate;

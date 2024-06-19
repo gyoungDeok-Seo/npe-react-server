@@ -33,7 +33,7 @@ function IndustrySelect({ setIndustryModal }) {
                     </CareerCreateButtonBox>
                 </CareerCreateRelativeBox>
             ) : (
-                <CareerSelectedList selectedList={createCareer.careerIndustries.map((item) => item)} handleModal={handleIndustryModal} />
+                <CareerSelectedList selectedList={createCareer.careerIndustries?.map((item) => item)} handleModal={handleIndustryModal} />
             )}
         </CareerInputBox>
     );
