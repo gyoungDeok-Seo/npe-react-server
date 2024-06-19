@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSkills } from "../../redux/createSkills";
 import { setCareers } from "../../redux/careerList";
+import { setEducations } from "../../redux/educationList";
 
 const ProfileContentContainer = styled.div`
     border-color: #e2e8f0;
@@ -159,6 +160,7 @@ function Profile({ member, same }) {
     const dispatch = useDispatch();
     const memberSkills = useSelector((state) => state.createSkills);
     const memberCareer = useSelector((state) => state.careerList);
+    const memberEducation = useSelector((state) => state.educationList);
 
     const arraysEqual = (arr1, arr2) => {
         const sortedArr1 = arr1.slice().sort((a, b) => a.id - b.id); // id를 기준으로 정렬
@@ -196,9 +198,24 @@ function Profile({ member, same }) {
                 dispatch(setCareers(data));
             }
         };
+
+        const fetchMemberEducation = async () => {
+            const response = await fetch(`http://localhost:10000/members/api/education-list?memberId=${pathname.split("/")[2]}`, {
+                method: "GET",
+                credentials: "include",
+            });
+
+            let data = await response.json();
+
+            if (!arraysEqual(memberEducation?.educations, data)) {
+                dispatch(setEducations(data));
+            }
+        };
+
         fetchMemberSkill();
         fetchMemberCareer();
-    }, [pathname, memberSkills, memberCareer]);
+        fetchMemberEducation();
+    }, [pathname, memberSkills, memberCareer, memberEducation]);
 
     const formatDate = (dateString) => {
         if (!dateString) return ""; // dateString이 없는 경우 빈 문자열 반환
@@ -330,17 +347,19 @@ function Profile({ member, same }) {
                                                                     )}
                                                                     {/* <ContentContentLink href="https://github.com/team-npe" target="_blank" rel="noreferrer">
                                                                         링크 이동
-                                                                    </ContentContentLink> */}
+                                                                        </ContentContentLink> */}
                                                                 </ContentContent>
-                                                                {same && (<ContentContentEditBtn to={`/profiles/careers/update/${career.id}`}>
-                                                                    <ContentContentEditSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                        <g>
-                                                                            <g id="style=outline">
-                                                                                <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M18.5 3.99976C18.1021 3.99976 17.7205 4.15783 17.4391 4.43919L16.6462 5.23209L18.768 7.35387L19.5609 6.56098C19.8423 6.27961 20.0003 5.898 20.0003 5.50009C20.0003 5.10217 19.8423 4.72056 19.5609 4.43919C19.2795 4.15783 18.8979 3.99976 18.5 3.99976ZM20.9751 7.97519C21.6315 7.31875 22.0003 6.42843 22.0003 5.50009C22.0003 4.57174 21.6315 3.68142 20.9751 3.02498C20.3187 2.36854 19.4283 1.99976 18.5 1.99976C17.5717 1.99976 16.6813 2.36854 16.0249 3.02498L2.29289 16.757C2.10536 16.9445 2 17.1989 2 17.4641V21.0361C2 21.5884 2.44772 22.0361 3 22.0361H6.5C6.76522 22.0361 7.01957 21.9307 7.20711 21.7432L20.9751 7.97519ZM17.3538 8.76808L15.232 6.6463L4 17.8783V20.0361H6.08579L17.3538 8.76808Z"></path>
+                                                                {same && (
+                                                                    <ContentContentEditBtn to={`/profiles/careers/update/${career.id}`}>
+                                                                        <ContentContentEditSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                            <g>
+                                                                                <g id="style=outline">
+                                                                                    <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M18.5 3.99976C18.1021 3.99976 17.7205 4.15783 17.4391 4.43919L16.6462 5.23209L18.768 7.35387L19.5609 6.56098C19.8423 6.27961 20.0003 5.898 20.0003 5.50009C20.0003 5.10217 19.8423 4.72056 19.5609 4.43919C19.2795 4.15783 18.8979 3.99976 18.5 3.99976ZM20.9751 7.97519C21.6315 7.31875 22.0003 6.42843 22.0003 5.50009C22.0003 4.57174 21.6315 3.68142 20.9751 3.02498C20.3187 2.36854 19.4283 1.99976 18.5 1.99976C17.5717 1.99976 16.6813 2.36854 16.0249 3.02498L2.29289 16.757C2.10536 16.9445 2 17.1989 2 17.4641V21.0361C2 21.5884 2.44772 22.0361 3 22.0361H6.5C6.76522 22.0361 7.01957 21.9307 7.20711 21.7432L20.9751 7.97519ZM17.3538 8.76808L15.232 6.6463L4 17.8783V20.0361H6.08579L17.3538 8.76808Z"></path>
+                                                                                </g>
                                                                             </g>
-                                                                        </g>
-                                                                    </ContentContentEditSvg>
-                                                                </ContentContentEditBtn>)}
+                                                                        </ContentContentEditSvg>
+                                                                    </ContentContentEditBtn>
+                                                                )}
                                                             </ContentItem>
                                                         ))}
                                                     </ContentList>
@@ -349,61 +368,77 @@ function Profile({ member, same }) {
                                                 )}
                                             </ContentBox>
                                         )}
-                                        <ContentBox aria-label="교육">
-                                            <ContentTextBox>
-                                                <div>
-                                                    <ContentText>교육</ContentText>
-                                                </div>
-                                                {isExistence && (
-                                                    <ContentUpdateBtn type="button">
-                                                        <ContentUpdateSvg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                            <g>
-                                                                <g id="style=outline">
-                                                                    <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"></path>
-                                                                </g>
-                                                            </g>
-                                                        </ContentUpdateSvg>
-                                                    </ContentUpdateBtn>
-                                                )}
-                                            </ContentTextBox>
-                                            {isExistence ? (
-                                                <ContentList>
-                                                    <ContentItem>
-                                                        <ContentSvg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                            <g>
-                                                                <g id="style=outline">
-                                                                    <g id="Union">
-                                                                        <path d="M12 10C12.5523 10 13 9.55229 13 9C13 8.44771 12.5523 8 12 8C11.4477 8 11 8.44771 11 9C11 9.55229 11.4477 10 12 10Z"></path>
-                                                                        <path fillRule="evenodd" clipRule="evenodd" d="M11.5939 4.08619C11.8524 3.97127 12.1476 3.97127 12.4061 4.08619L21.4061 8.08619C21.7673 8.24669 22 8.60481 22 9C22 9.39519 21.7673 9.75331 21.4061 9.91381L18.0786 11.3927L18.8968 15.4838C18.9646 15.6515 19 15.824 19 16C19 17.6568 15.866 19 12 19C8.13401 19 5 17.6568 5 16C5 15.824 5.03538 15.6515 5.10325 15.4838L5.92145 11.3927L2.59386 9.91381C2.23273 9.75331 2 9.39519 2 9C2 8.60481 2.23273 8.24669 2.59386 8.08619L11.5939 4.08619ZM12.4061 13.9138L16.2054 12.2252L16.9302 15.8488C16.7869 15.9644 16.542 16.1201 16.1619 16.283C15.1987 16.6958 13.7286 17 12 17C10.2714 17 8.8013 16.6958 7.83809 16.283C7.458 16.1201 7.21313 15.9644 7.06984 15.8488L7.79456 12.2252L11.5939 13.9138C11.8524 14.0287 12.1476 14.0287 12.4061 13.9138ZM5.46221 9L12 11.9057L18.5378 9L12 6.09432L5.46221 9Z"></path>
-                                                                    </g>
-                                                                </g>
-                                                            </g>
-                                                        </ContentSvg>
-                                                        <ContentContent>
-                                                            <p className="content-content-name">코리아 IT 아카데미 강남점 - 웹 개발</p>
-                                                            <ContentContentPeriod>2023.12 ~ 2024.05</ContentContentPeriod>
-                                                            <div>
-                                                                <ContentContentAnother>프로젝트 제작</ContentContentAnother>
-                                                            </div>
-                                                            <ContentContentLink href="https://github.com/team-npe" target="_blank" rel="noreferrer">
-                                                                링크 이동
-                                                            </ContentContentLink>
-                                                        </ContentContent>
-                                                        <ContentContentEditBtn type="button">
-                                                            <ContentContentEditSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        {!same && memberEducation?.educations.length == 0 ? (
+                                            <></>
+                                        ) : (
+                                            <ContentBox aria-label="교육">
+                                                <ContentTextBox>
+                                                    <div>
+                                                        <ContentText>교육</ContentText>
+                                                    </div>
+                                                    {same && memberEducation && memberEducation?.educations.length > 0 && (
+                                                        <ContentUpdateBtn to={"/profiles/educations/create"}>
+                                                            <ContentUpdateSvg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                 <g>
                                                                     <g id="style=outline">
-                                                                        <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M18.5 3.99976C18.1021 3.99976 17.7205 4.15783 17.4391 4.43919L16.6462 5.23209L18.768 7.35387L19.5609 6.56098C19.8423 6.27961 20.0003 5.898 20.0003 5.50009C20.0003 5.10217 19.8423 4.72056 19.5609 4.43919C19.2795 4.15783 18.8979 3.99976 18.5 3.99976ZM20.9751 7.97519C21.6315 7.31875 22.0003 6.42843 22.0003 5.50009C22.0003 4.57174 21.6315 3.68142 20.9751 3.02498C20.3187 2.36854 19.4283 1.99976 18.5 1.99976C17.5717 1.99976 16.6813 2.36854 16.0249 3.02498L2.29289 16.757C2.10536 16.9445 2 17.1989 2 17.4641V21.0361C2 21.5884 2.44772 22.0361 3 22.0361H6.5C6.76522 22.0361 7.01957 21.9307 7.20711 21.7432L20.9751 7.97519ZM17.3538 8.76808L15.232 6.6463L4 17.8783V20.0361H6.08579L17.3538 8.76808Z"></path>
+                                                                        <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"></path>
                                                                     </g>
                                                                 </g>
-                                                            </ContentContentEditSvg>
-                                                        </ContentContentEditBtn>
-                                                    </ContentItem>
-                                                </ContentList>
-                                            ) : (
-                                                <NonExistent partText="현재 혹은 이전에 다녔던 학교, 부트캠프 등 교육기관을 입력해 주세요." part="교육" url="/profiles/educations/create" />
-                                            )}
-                                        </ContentBox>
+                                                            </ContentUpdateSvg>
+                                                        </ContentUpdateBtn>
+                                                    )}
+                                                </ContentTextBox>
+                                                {memberEducation && memberEducation?.educations.length > 0 ? (
+                                                    <ContentList>
+                                                        {memberEducation?.educations.map((education, index) => (
+                                                            <ContentItem ket={index}>
+                                                                <ContentSvg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                    <g>
+                                                                        <g id="style=outline">
+                                                                            <g id="Union">
+                                                                                <path d="M12 10C12.5523 10 13 9.55229 13 9C13 8.44771 12.5523 8 12 8C11.4477 8 11 8.44771 11 9C11 9.55229 11.4477 10 12 10Z"></path>
+                                                                                <path fillRule="evenodd" clipRule="evenodd" d="M11.5939 4.08619C11.8524 3.97127 12.1476 3.97127 12.4061 4.08619L21.4061 8.08619C21.7673 8.24669 22 8.60481 22 9C22 9.39519 21.7673 9.75331 21.4061 9.91381L18.0786 11.3927L18.8968 15.4838C18.9646 15.6515 19 15.824 19 16C19 17.6568 15.866 19 12 19C8.13401 19 5 17.6568 5 16C5 15.824 5.03538 15.6515 5.10325 15.4838L5.92145 11.3927L2.59386 9.91381C2.23273 9.75331 2 9.39519 2 9C2 8.60481 2.23273 8.24669 2.59386 8.08619L11.5939 4.08619ZM12.4061 13.9138L16.2054 12.2252L16.9302 15.8488C16.7869 15.9644 16.542 16.1201 16.1619 16.283C15.1987 16.6958 13.7286 17 12 17C10.2714 17 8.8013 16.6958 7.83809 16.283C7.458 16.1201 7.21313 15.9644 7.06984 15.8488L7.79456 12.2252L11.5939 13.9138C11.8524 14.0287 12.1476 14.0287 12.4061 13.9138ZM5.46221 9L12 11.9057L18.5378 9L12 6.09432L5.46221 9Z"></path>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </ContentSvg>
+                                                                <ContentContent>
+                                                                    <p className="content-content-name">
+                                                                        {education.educationInstitution} - {education.educationCourse}
+                                                                    </p>
+                                                                    <ContentContentPeriod>
+                                                                        {formatDate(education.educationStart)} ~ {education.educationEnd === "1111-11-11" ? "현재" : formatDate(education.educationEnd)}
+                                                                    </ContentContentPeriod>
+                                                                    {education.description ? (
+                                                                        <div>
+                                                                            <ContentContentAnother>{education.description}</ContentContentAnother>
+                                                                        </div>
+                                                                    ) : (
+                                                                        <></>
+                                                                    )}
+                                                                    {/* <ContentContentLink href="https://github.com/team-npe" target="_blank" rel="noreferrer">
+                                                                        링크 이동
+                                                                        </ContentContentLink> */}
+                                                                </ContentContent>
+                                                                {same && (
+                                                                    <ContentContentEditBtn to={`/profiles/educations/update/${education.id}`}>
+                                                                        <ContentContentEditSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                            <g>
+                                                                                <g id="style=outline">
+                                                                                    <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M18.5 3.99976C18.1021 3.99976 17.7205 4.15783 17.4391 4.43919L16.6462 5.23209L18.768 7.35387L19.5609 6.56098C19.8423 6.27961 20.0003 5.898 20.0003 5.50009C20.0003 5.10217 19.8423 4.72056 19.5609 4.43919C19.2795 4.15783 18.8979 3.99976 18.5 3.99976ZM20.9751 7.97519C21.6315 7.31875 22.0003 6.42843 22.0003 5.50009C22.0003 4.57174 21.6315 3.68142 20.9751 3.02498C20.3187 2.36854 19.4283 1.99976 18.5 1.99976C17.5717 1.99976 16.6813 2.36854 16.0249 3.02498L2.29289 16.757C2.10536 16.9445 2 17.1989 2 17.4641V21.0361C2 21.5884 2.44772 22.0361 3 22.0361H6.5C6.76522 22.0361 7.01957 21.9307 7.20711 21.7432L20.9751 7.97519ZM17.3538 8.76808L15.232 6.6463L4 17.8783V20.0361H6.08579L17.3538 8.76808Z"></path>
+                                                                                </g>
+                                                                            </g>
+                                                                        </ContentContentEditSvg>
+                                                                    </ContentContentEditBtn>
+                                                                )}
+                                                            </ContentItem>
+                                                        ))}
+                                                    </ContentList>
+                                                ) : (
+                                                    <NonExistent partText="현재 혹은 이전에 다녔던 학교, 부트캠프 등 교육기관을 입력해 주세요." part="교육" url="/profiles/educations/create" />
+                                                )}
+                                            </ContentBox>
+                                        )}
                                         {/* <ContentBox aria-label="링크">
                                             <ContentTextBox>
                                                 <div>
