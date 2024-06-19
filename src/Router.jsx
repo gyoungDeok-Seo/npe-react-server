@@ -27,6 +27,7 @@ function Router() {
                 <Route path="/profile/:memberId" element={<Profiles />} />
                 <Route path="/profiles/update" element={<ProfileUpdate />} />
                 <Route path="/profiles/careers/create" element={<CareerCreate />} />
+                <Route path="/profiles/careers/update/:careerId" element={<CareerCreate />} />
                 <Route path="/profiles/educations/create" element={<CreateEducations />} />
                 <Route path="/profiles/sites/create" element={<SitesCreate />} />
                 <Route path="/profiles/skills" element={<ProfileSkills />} />

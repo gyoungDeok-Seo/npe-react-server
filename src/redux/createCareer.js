@@ -1,10 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const careerList = createSlice({
-  name: "career",
-  initialState: {
-    key: [
-      {
+const createCareer = createSlice({
+    name: "career",
+    initialState: {
         companyName: "",
         memberPosition: "",
         careerStart: "",
@@ -13,50 +11,46 @@ const careerList = createSlice({
         careerSkills: [],
         description: "",
         careerUrl: "",
-      },
-    ],
-  },
-  reducers: {
-    setKey: (state, action) => {
-      state.key = action.payload;
     },
-    setCompanyName: (state, action) => {
-      state.key.companyName = action.payload;
+    reducers: {
+        setState: (state, action) => {
+            const newState = action.payload;
+            state.companyName = newState.companyName;
+            state.memberPosition = newState.memberPosition;
+            state.careerStart = newState.careerStart;
+            state.careerEnd = newState.careerEnd;
+            state.careerIndustries = newState.careerIndustries;
+            state.careerSkills = newState.careerSkills;
+            state.description = newState.description;
+            state.careerUrl = newState.careerUrl;
+        },
+        setCompanyName: (state, action) => {
+            state.companyName = action.payload;
+        },
+        setMemberPosition: (state, action) => {
+            state.memberPosition = action.payload;
+        },
+        setCareerStart: (state, action) => {
+            state.careerStart = action.payload;
+        },
+        setCareerEnd: (state, action) => {
+            state.careerEnd = action.payload;
+        },
+        setIndustry: (state, action) => {
+            state.careerIndustries = action.payload;
+        },
+        setSkills: (state, action) => {
+            state.careerSkills = action.payload;
+        },
+        setDescription: (state, action) => {
+            state.description = action.payload;
+        },
+        setCareerUrl: (state, action) => {
+            state.careerUrl = action.payload;
+        },
     },
-    setMemberPosition: (state, action) => {
-      state.key.memberPosition = action.payload;
-    },
-    setCareerStart: (state, action) => {
-      state.key.careerStart = action.payload;
-    },
-    setCareerEnd: (state, action) => {
-      state.key.careerEnd = action.payload;
-    },
-    setIndustry: (state, action) => {
-      state.key.industry = action.payload;
-    },
-    setSkills: (state, action) => {
-      state.key.skills = action.payload;
-    },
-    setDescription: (state, action) => {
-      state.key.description = action.payload;
-    },
-    setCareerUrl: (state, action) => {
-      state.key.careerUrl = action.payload;
-    },
-  },
 });
 
-export const {
-  setKey,
-  setCompanyName,
-  setMemberPosition,
-  setCareerStart,
-  setCareerEnd,
-  setIndustry,
-  setSkills,
-  setDescription,
-  setCareerUrl,
-} = careerList.actions;
+export const { setState, setCompanyName, setMemberPosition, setCareerStart, setCareerEnd, setIndustry, setSkills, setDescription, setCareerUrl } = createCareer.actions;
 
 export default careerList;
