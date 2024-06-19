@@ -29,7 +29,7 @@ function Router() {
                 <Route path="/profiles/careers/create" element={<CareerCreate />} />
                 <Route path="/profiles/careers/update/:careerId" element={<CareerCreate />} />
                 <Route path="/profiles/educations/create" element={<CreateEducations />} />
-                <Route path="/profiles/educations/update/educationId:" element={<CreateEducations />} />
+                <Route path="/profiles/educations/update/:educationId" element={<CreateEducations />} />
                 <Route path="/profiles/sites/create" element={<SitesCreate />} />
                 <Route path="/profiles/skills" element={<ProfileSkills />} />
                 <Route path="/search" element={<SearchResult />} />
