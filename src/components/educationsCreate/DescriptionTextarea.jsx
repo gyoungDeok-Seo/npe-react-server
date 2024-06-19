@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { CreateEducationsLabel } from "../../pages/CreateEducations";
 import { useDispatch, useSelector } from "react-redux";
 import { setDescription } from "../../redux/createEducation";
+import { useLocation } from "react-router-dom";
 
 const CreateEducationsTextareaBox = styled.div`
   margin-bottom: 1rem;
@@ -49,6 +50,15 @@ function DescriptionTextarea() {
   const createEducation = useSelector((state) => state.createEducation);
   const dispatch = useDispatch();
   const [descriptionLength, setDescriptionLength] = useState(0);
+  const [condition, setCondition] = useState(false);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setDescriptionLength(createEducation?.description?.length);
+    if (pathname.split("/")[4]) {
+        setCondition(true);
+    }
+}, [condition]);
 
   const handleDescriptionChange = (e) => {
     const value = e.target.value;
@@ -68,7 +78,7 @@ function DescriptionTextarea() {
       </CreateEducationsTextareaTextBox>
       <CreateEducationsTextarea
         placeholder="직무와 연관된 교육 내용 및 활동을 입력해 주세요."
-        value={createEducation.description}
+        value={createEducation?.description}
         onChange={handleDescriptionChange}
         maxLength={1000}
       ></CreateEducationsTextarea>
