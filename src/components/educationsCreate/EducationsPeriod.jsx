@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
   CreateEducationsLabel,
@@ -145,11 +145,17 @@ function EducationsPeriod() {
   const createEducation = useSelector((state) => state.createEducation);
   const dispatch = useDispatch();
   const [isWorking, setIsWorking] = useState(
-    createEducation.educationEnd === "1111-11-11" ?? false
+    createEducation?.educationEnd === "1111-11-11" ?? false
   );
   const [endDateDisabled, setEndDateDisabled] = useState(
-    createEducation.educationEnd === "1111-11-11" ?? true
+    createEducation?.educationEnd === "1111-11-11" ?? true
   );
+
+  useEffect(() => {
+    const bool = createEducation?.educationEnd === "1111-11-11" ? true : false;
+    setIsWorking(bool);
+    setEndDateDisabled(bool);
+  }, [createEducation]);
 
   const handleStartChange = (e) => {
     const newStartYear = e.target.value;
@@ -278,15 +284,15 @@ function EducationsPeriod() {
               <option disabled="true" value="-1">
                 월
               </option>
-              <option value="1">1월</option>
-              <option value="2">2월</option>
-              <option value="3">3월</option>
-              <option value="4">4월</option>
-              <option value="5">5월</option>
-              <option value="6">6월</option>
-              <option value="7">7월</option>
-              <option value="8">8월</option>
-              <option value="9">9월</option>
+              <option value="01">1월</option>
+              <option value="02">2월</option>
+              <option value="03">3월</option>
+              <option value="04">4월</option>
+              <option value="05">5월</option>
+              <option value="06">6월</option>
+              <option value="07">7월</option>
+              <option value="08">8월</option>
+              <option value="09">9월</option>
               <option value="10">10월</option>
               <option value="11">11월</option>
               <option value="12">12월</option>
@@ -298,7 +304,7 @@ function EducationsPeriod() {
             ) : (
               <EducationsPeriodSelectInner2>
                 <EducationsPeriodSelect
-                  disabled={endDateDisabled}
+                  disabled={!createEducation.educationStart?.split("-")[0] || !createEducation.educationStart?.split("-")[1]}
                   value={createEducation.educationEnd?.split("-")[0] || -1}
                   onChange={handleEndYearChange}
                 >
@@ -362,22 +368,22 @@ function EducationsPeriod() {
                   <option value="1970">1970년</option>
                 </EducationsPeriodSelect>
                 <EducationsPeriodSelect
-                  disabled={endDateDisabled}
+                  disabled={!createEducation.educationStart?.split("-")[0] || !createEducation.educationStart?.split("-")[1]}
                   value={createEducation.educationEnd?.split("-")[1] || -1}
                   onChange={handleEndMonthChange}
                 >
                   <option disabled="true" value="-1">
                     월
                   </option>
-                  <option value="1">1월</option>
-                  <option value="2">2월</option>
-                  <option value="3">3월</option>
-                  <option value="4">4월</option>
-                  <option value="5">5월</option>
-                  <option value="6">6월</option>
-                  <option value="7">7월</option>
-                  <option value="8">8월</option>
-                  <option value="9">9월</option>
+                  <option value="01">1월</option>
+                  <option value="02">2월</option>
+                  <option value="03">3월</option>
+                  <option value="04">4월</option>
+                  <option value="05">5월</option>
+                  <option value="06">6월</option>
+                  <option value="07">7월</option>
+                  <option value="08">8월</option>
+                  <option value="09">9월</option>
                   <option value="10">10월</option>
                   <option value="11">11월</option>
                   <option value="12">12월</option>

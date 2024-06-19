@@ -189,7 +189,7 @@ function CareerPeriod() {
             ) : (
               <CareerPeriodSelectInner2>
                 <CareerPeriodSelect
-                  disabled={endDateDisabled}
+                  disabled={!createCareer.careerStart?.split("-")[0] || !createCareer.careerStart?.split("-")[1]}
                   value={createCareer.careerEnd?.split("-")[0] || -1}
                   onChange={handleEndYearChange}
                 >
@@ -253,7 +253,7 @@ function CareerPeriod() {
                   <option value="1970">1970년</option>
                 </CareerPeriodSelect>
                 <CareerPeriodSelect
-                  disabled={endDateDisabled}
+                  disabled={!createCareer.careerStart?.split("-")[0] || !createCareer.careerStart?.split("-")[1]}
                   value={createCareer.careerEnd?.split("-")[1] || -1}
                   onChange={handleEndMonthChange}
                 >
