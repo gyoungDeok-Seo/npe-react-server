@@ -37,16 +37,13 @@ const SkillList = () => {
   const handleSkillClick = (item) => {
     dispatch(
       setSkills(
-        createSkills.skills.find((s) => s.id === item.id)
+        createSkills.skills.some((s) => s.id === item.id)
           ? createSkills.skills.filter((s) => s.id !== item.id)
           : [...createSkills.skills, item]
       )
     );
   };
 
-  useEffect(() => {
-    console.log(createSkills);
-  }, [createSkills]);
 
   return (
     <CareerSkillModalSkillList>

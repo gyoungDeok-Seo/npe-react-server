@@ -13,3 +13,4 @@ const createSkills = createSlice({
 export const { setSkills } = createSkills.actions;
 
 export default createSkills;
+
