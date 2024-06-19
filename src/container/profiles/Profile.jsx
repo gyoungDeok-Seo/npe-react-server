@@ -183,12 +183,13 @@ function Profile({ member, same }) {
         id: skill.skillId,
         skillName: skill.skillName,
       }));
-
       if (!arraysEqual(memberSkills.skills, data)) {
         dispatch(setSkills(data));
       }
     };
-
+    fetchMemberSkill();
+  }, [pathname, memberSkills]);
+  useEffect(() => {
     const fetchMemberCareer = async () => {
       const response = await fetch(
         `http://localhost:10000/members/api/career-list?memberId=${
@@ -207,10 +208,12 @@ function Profile({ member, same }) {
       }
       console.log(memberCareer);
     };
-    fetchMemberSkill();
-    fetchMemberCareer();
-  }, [pathname, memberSkills, memberCareer]);
 
+    fetchMemberCareer();
+  }, [pathname, memberCareer]);
+  // useEffect(() => {
+  //   console.log(createSkills);
+  // }, [createSkills]);
   const formatDate = (dateString) => {
     if (!dateString) return ""; // dateString이 없는 경우 빈 문자열 반환
     const [year, month] = dateString.split("-");

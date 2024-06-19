@@ -1,10 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { CreateSkillsContext } from "../../context/CreateSkillsContext";
-import { skillList } from "../../service/dummyData";
 import { useDispatch, useSelector } from "react-redux";
 import { setSkills } from "../../redux/createSkills";
-import { useQuery } from "@tanstack/react-query";
 
 const CareerSkillModalInputBox = styled.div`
   border-color: rgb(226 232 240 / 1);
@@ -80,8 +77,7 @@ const SkillItem = styled.li`
 `;
 
 const SearchNothing = styled.p`
-  --tw-text-opacity: 1;
-  color: rgb(100 116 139 / var(--tw-text-opacity));
+  color: rgb(100 116 139 / 1);
   font-size: 0.875rem;
   text-align: center;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
@@ -108,7 +104,7 @@ function SkillSearchInput() {
         `http://localhost:10000/members/api/skillSearch?keyword=${keyword}`
       );
       let data = await response.json();
-      data = await data.map((search) => ({
+      data = data.map((search) => ({
         id: search.id,
         skillName: search.skillName,
       }));
@@ -116,7 +112,9 @@ function SkillSearchInput() {
       inputValue && setSearch(data);
     };
 
-    searchSkillsFetch(inputValue);
+    if (inputValue) {
+      searchSkillsFetch(inputValue);
+    }
   }, [inputValue]);
 
   const handleFocus = () => {
@@ -139,17 +137,18 @@ function SkillSearchInput() {
   };
 
   const handleSearch = (item) => {
-    console.log(item);
-    const checkSkill = createSkills.skills.some(
-      (skill) => skill.skillName === item.skillName
+    const skillExists = createSkills.skills.some(
+      (skill) => skill.id === item.id
     );
 
-    !checkSkill && dispatch(setSkills([...createSkills.skills, item]));
+    if (!skillExists) {
+      const updatedSkills = [...createSkills.skills, item];
+      dispatch(setSkills(updatedSkills));
+    }
 
     setShowBox(false);
     setInputValue("");
   };
-
   return (
     <>
       <CareerSkillModalInputBox
@@ -218,7 +217,7 @@ function SkillSearchInput() {
             {search.length > 0 ? (
               <>
                 {search.map((item) => (
-                  <SkillItem onClick={() => handleSearch(item)}>
+                  <SkillItem key={item.id} onClick={() => handleSearch(item)}>
                     {item.skillName}
                   </SkillItem>
                 ))}

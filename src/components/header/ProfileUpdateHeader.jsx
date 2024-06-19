@@ -73,7 +73,7 @@ const ProfileUpdateHeader = ({ member, navigate, setAvoidMistakesModal }) => {
   const memberCareer = useSelector((state) => state.careerList);
 
   const getMemberSkillsListFetch = async () => {
-    const response = await fetch(`http://localhost:10000/members/api/skill`, {
+    const response = await fetch(`http://localhost:10000/members/api/skill?memberId=${member.id}`, {
       method: "GET",
       credentials: "include", // 세션 쿠키를 포함하여 요청
     });
@@ -83,6 +83,7 @@ const ProfileUpdateHeader = ({ member, navigate, setAvoidMistakesModal }) => {
       id: skill.skillId,
       skillName: skill.skillName,
     }));
+    console.log(await data);
     return data;
   };
 
@@ -146,17 +147,17 @@ const ProfileUpdateHeader = ({ member, navigate, setAvoidMistakesModal }) => {
   };
 
   const dispatch = useDispatch();
-  const location = useLocation();
+  const { pathname } = useLocation();
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
     let isValid = false;
 
-    if (location.pathname.startsWith("/profiles/update")) {
+    if (pathname.startsWith("/profiles/update")) {
       isValid = profileUpdate.name !== "" && profileUpdate.ref !== "";
     } else if (
-      location.pathname.startsWith("/profiles/careers/create") ||
-      location.pathname.startsWith("/profiles/careers/update")
+      pathname.startsWith("/profiles/careers/create") ||
+      pathname.startsWith("/profiles/careers/update")
     ) {
       isValid =
         createCareer.companyName !== "" &&
@@ -164,7 +165,7 @@ const ProfileUpdateHeader = ({ member, navigate, setAvoidMistakesModal }) => {
         createCareer.careerStart !== "" &&
         createCareer.careerEnd !== "";
     }
-    // else if (location.pathname.startsWith("/profiles/educations/create")) {
+    // else if (pathname.startsWith("/profiles/educations/create")) {
     //   isValid =
     //     eductaion.institution !== "" &&
     //     eductaion.course !== "" &&
@@ -174,25 +175,25 @@ const ProfileUpdateHeader = ({ member, navigate, setAvoidMistakesModal }) => {
     //     eductaion.endMonth !== "" &&
     //     eductaion.link !== "" &&
     //     eductaion.description !== "";
-    // } else if (location.pathname.startsWith("/profiles/sites/create")) {
+    // } else if (pathname.startsWith("/profiles/sites/create")) {
     //   isValid = sites.url !== "" && sites.name !== "";
     // }
-    else if (location.pathname.startsWith("/profiles/skills")) {
+    else if (pathname.startsWith("/profiles/skills")) {
       isValid = createSkills.skills.length > 0;
     }
     setIsDisabled(!isValid);
-  }, [profileUpdate, createSkills, createCareer, location.pathname]);
+  }, [profileUpdate, createSkills, createCareer, pathname]);
 
-  const handleUpdateProfile = () => {
-    if (location.pathname.startsWith("/profiles/update")) {
+  const handleUpdateProfile = async () => {
+    if (pathname.startsWith("/profiles/update")) {
       memberInfoModify();
       navigate(`/profile/${member.id}`);
-    } else if (location.pathname.startsWith("/profiles/careers")) {
-      if (location.pathname.includes("/create")) {
+    } else if (pathname.startsWith("/profiles/careers")) {
+      if (pathname.includes("/create")) {
         createCareerFetch(createCareer);
         navigate(`/profile/${member.id}`);
       } else {
-        const careerId = parseInt(location.pathname.split("/")[4]);
+        const careerId = parseInt(pathname.split("/")[4]);
 
         const getDiffLists = (originalList, modifiedList, key) => {
           const addList = modifiedList.filter(
@@ -252,48 +253,43 @@ const ProfileUpdateHeader = ({ member, navigate, setAvoidMistakesModal }) => {
           removeSkillList: removeSkillList,
         };
 
-        console.log(createCareer);
         updateCareerFetch(createCareer, listInfo);
         navigate(`/profile/${member.id}`);
       }
-    } else if (location.pathname.startsWith("/profiles/skills")) {
-      getMemberSkillsListFetch()
-        .then((skillList) => {
-          const memberSkillsSet = new Set(
-            skillList.map((skill) => skill.skillName)
-          );
-          const createSkillsSet = new Set(
-            createSkills.skills.map((skill) => skill.skillName)
-          );
-          const filteredCreateSkills = createSkills.skills.filter(
-            (skill) => !memberSkillsSet.has(skill.skillName)
-          );
-          const filteredRemoveSkills = skillList.filter(
-            (skill) => !createSkillsSet.has(skill.skillName)
-          );
+    } else if (pathname.startsWith("/profiles/skills")) {
+      const skillList = await getMemberSkillsListFetch();
+      console.log(await skillList);
 
-          return {
-            addList: filteredCreateSkills,
-            removeList: filteredRemoveSkills,
-          };
-        })
-        .then((modifyInfo) => {
-          memberSkillListModifyFetch(modifyInfo);
+      const filteredCreateSkills = createSkills.skills.filter(
+        (createSkill) => !skillList.some((skill) => skill.id === createSkill.id)
+      );
 
-          const updateSkills = [
-            ...createSkills.skills,
-            ...modifyInfo.addList,
-            ...createSkills.skills.filter(
-              (skill) =>
-                !modifyInfo.removeList.some(
-                  (removeSkill) => removeSkill.skillName === skill.skillName
-                )
-            ),
-          ];
+      const filteredRemoveSkills = skillList.filter(
+        (skill) =>
+          !createSkills.skills.some(
+            (createSkill) => createSkill.id === skill.id
+          )
+      );
 
-          dispatch(setSkills(updateSkills));
-          navigate(`/profile/${member.id}`);
-        });
+      const modifyInfo = {
+        addList: filteredCreateSkills,
+        removeList: filteredRemoveSkills,
+      };
+
+      await memberSkillListModifyFetch(modifyInfo);
+
+      const updateSkills = [
+        ...createSkills.skills.filter(
+          (skill) =>
+            !filteredRemoveSkills.some(
+              (removeSkill) => removeSkill.id === skill.id
+            )
+        ),
+        ...filteredCreateSkills,
+      ];
+
+      dispatch(setSkills(updateSkills));
+      navigate(`/profile/${member.id}`);
     }
   };
 
