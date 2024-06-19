@@ -1,16 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+const initialState = {
+  id: 0,
+  educationInstitution: "",
+  educationCourse: "",
+  educationStart: "",
+  educationEnd: "",
+  description: "",
+  educationUrl: "",
+};
 const createEducation = createSlice({
   name: "education",
-  initialState: {
-    educationInstitution: "",
-    educationCourse: "",
-    educationStart: "",
-    educationEnd: "",
-    description: "",
-    educationUrl: "",
-  },
+  initialState,
   reducers: {
+    setEducationReset: (state) => ({ ...initialState }),
+    setEducationState: (state, action) => {
+      const newState = action.payload;
+      state.id = newState.id ?? 0;
+      state.educationInstitution = newState.educationInstitution ?? "";
+      state.educationCourse = newState.educationCourse ?? "";
+      state.educationStart = newState.educationStart ?? "";
+      state.educationEnd = newState.educationEnd ?? "";
+      state.description = newState.description ?? "";
+      state.educationUrl = newState.educationUrl ?? "";
+    },
     setEducationInstitution: (state, action) => {
       state.educationInstitution = action.payload;
     },
@@ -33,6 +45,8 @@ const createEducation = createSlice({
 });
 
 export const {
+  setEducationReset,
+  setEducationState,
   setEducationInstitution,
   setEducationCourse,
   setEducationStart,

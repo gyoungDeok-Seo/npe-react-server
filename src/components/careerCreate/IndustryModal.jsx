@@ -178,14 +178,18 @@ function IndustryModal({ setIndustryModal }) {
       if (checked) {
         return [...prevState, industry];
       } else {
-        return prevState.filter((item) => item.industryId !== industry.industryId);
+        return prevState.filter(
+          (item) => item.industryId !== industry.industryId
+        );
       }
     });
   };
 
   const handleIndustryItemClick = (industry) => {
     setCheckedIndustries((prevState) => {
-      return prevState.filter((item) => item.industryId !== industry.industryId);
+      return prevState.filter(
+        (item) => item.industryId !== industry.industryId
+      );
     });
 
     if (checkboxRefs.current[industry.industryId]) {
@@ -286,7 +290,9 @@ function IndustryModal({ setIndustryModal }) {
                       <IndustryModalCheckBox
                         type="checkbox"
                         id={item.industryId.toString()}
-                        ref={(ref) => (checkboxRefs.current[item.industryId] = ref)}
+                        ref={(ref) =>
+                          (checkboxRefs.current[item.industryId] = ref)
+                        }
                         onChange={handleCheckboxChange}
                         checked={checkedIndustries.some(
                           (industry) => industry.industryId === item.industryId

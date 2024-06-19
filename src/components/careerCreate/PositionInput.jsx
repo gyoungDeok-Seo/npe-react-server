@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMemberPosition } from "../../redux/createCareer";
 import { useLocation } from "react-router-dom";
 
-function JobInput() {
+function PositionInput() {
     const createCareer = useSelector((state) => state.createCareer);
     const dispatch = useDispatch();
     const [positionLength, setPositionLength] = useState(0);
@@ -42,4 +42,4 @@ function JobInput() {
         </CareerInputBox>
     );
 }
-export default JobInput;
+export default PositionInput;

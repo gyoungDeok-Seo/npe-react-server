@@ -6,7 +6,10 @@ import {
 } from "../../pages/CreateEducations";
 import { Pilsu } from "../../pages/CareerCreate";
 import { useDispatch, useSelector } from "react-redux";
-import { setEducationEnd, setEducationStart } from "../../redux/createEducation";
+import {
+  setEducationEnd,
+  setEducationStart,
+} from "../../redux/createEducation";
 
 const EducationsPeriodSelectBox = styled.div`
   margin-top: 0.5rem;
@@ -141,44 +144,47 @@ const CreateEducationsIsWorking = styled.input`
 function EducationsPeriod() {
   const createEducation = useSelector((state) => state.createEducation);
   const dispatch = useDispatch();
-  const [endDateDisabled, setEndDateDisabled] = useState(true);
-  const [isWorking, setIsWorking] = useState(false);
+  const [isWorking, setIsWorking] = useState(
+    createEducation.educationEnd === "1111-11-11" ?? false
+  );
+  const [endDateDisabled, setEndDateDisabled] = useState(
+    createEducation.educationEnd === "1111-11-11" ?? true
+  );
 
   const handleStartChange = (e) => {
     const newStartYear = e.target.value;
-    const neweDucationStart = `${newStartYear}.${
-      createEducation.educationStart.split(".")[1] || ""
-    }`;
-    dispatch(setEducationStart(neweDucationStart));
-    if (newStartYear && createEducation.educationStart.split(".")[1]) {
+    const newEducationStart = `${newStartYear}-${
+      createEducation.educationStart.split("-")[1] || ""
+    }-01`;
+    dispatch(setEducationStart(newEducationStart));
+    if (newStartYear && createEducation.educationStart.split("-")[1]) {
       setEndDateDisabled(false);
     }
   };
 
   const handleStartMonthChange = (e) => {
     const newStartMonth = e.target.value;
-    const neweDucationStart = `${
-      createEducation.educationStart.split(".")[0] || ""
-    }.${newStartMonth}`;
-    dispatch(setEducationStart(neweDucationStart));
-    if (newStartMonth && createEducation.educationStart.split(".")[0]) {
+    const newEducationStart = `${
+      createEducation.educationStart.split("-")[0] || ""
+    }-${newStartMonth}-01`;
+    dispatch(setEducationStart(newEducationStart));
+    if (newStartMonth && createEducation.educationStart.split("-")[0]) {
       setEndDateDisabled(false);
     }
   };
-
   const handleEndYearChange = (e) => {
     const newEndYear = e.target.value;
-    const newEducationEnd = `${newEndYear}.${
-      createEducation.educationEnd.split(".")[1] || ""
-    }`;
+    const newEducationEnd = `${newEndYear}-${
+      createEducation.educationEnd.split("-")[1] || ""
+    }-01`;
     dispatch(setEducationEnd(newEducationEnd));
   };
 
   const handleEndMonthChange = (e) => {
     const newEndMonth = e.target.value;
     const newEducationEnd = `${
-      createEducation.educationEnd.split(".")[0] || ""
-    }.${newEndMonth}`;
+      createEducation.educationEnd.split("-")[0] || ""
+    }-${newEndMonth}-01`;
     dispatch(setEducationEnd(newEducationEnd));
   };
 
@@ -186,12 +192,13 @@ function EducationsPeriod() {
     setIsWorking((prevIsWorking) => !prevIsWorking);
     if (!isWorking) {
       setEndDateDisabled(true);
-      dispatch(setEducationEnd("현재"));
+      dispatch(setEducationEnd("1111-11-11"));
     } else {
       setEndDateDisabled(false);
       dispatch(setEducationEnd(""));
     }
   };
+
   return (
     <>
       <EducationsInputBox>
@@ -202,10 +209,10 @@ function EducationsPeriod() {
         <EducationsPeriodSelectBox>
           <EducationsPeriodSelectInner>
             <EducationsPeriodSelect
-              value={createEducation.educationStart.split(".")[0]}
+              value={createEducation.educationStart?.split("-")[0] || -1}
               onChange={handleStartChange}
             >
-              <option disabled="" value="-1">
+              <option disabled="true" value="-1">
                 시작연도
               </option>
               <option value="2024">2024년</option>
@@ -265,10 +272,10 @@ function EducationsPeriod() {
               <option value="1970">1970년</option>
             </EducationsPeriodSelect>
             <EducationsPeriodSelect
-              value={createEducation.educationStart.split(".")[1]}
+              value={createEducation.educationStart?.split("-")[1] || -1}
               onChange={handleStartMonthChange}
             >
-              <option disabled="" value="-1">
+              <option disabled="true" value="-1">
                 월
               </option>
               <option value="1">1월</option>
@@ -292,10 +299,10 @@ function EducationsPeriod() {
               <EducationsPeriodSelectInner2>
                 <EducationsPeriodSelect
                   disabled={endDateDisabled}
-                  value={createEducation.educationEnd.split(".")[0]}
+                  value={createEducation.educationEnd?.split("-")[0] || -1}
                   onChange={handleEndYearChange}
                 >
-                  <option disabled="" value="-1">
+                  <option disabled="true" value="-1">
                     종료연도
                   </option>
                   <option value="2024">2024년</option>
@@ -356,10 +363,10 @@ function EducationsPeriod() {
                 </EducationsPeriodSelect>
                 <EducationsPeriodSelect
                   disabled={endDateDisabled}
-                  value={createEducation.educationEnd.split(".")[1]}
+                  value={createEducation.educationEnd?.split("-")[1] || -1}
                   onChange={handleEndMonthChange}
                 >
-                  <option disabled="" value="-1">
+                  <option disabled="true" value="-1">
                     월
                   </option>
                   <option value="1">1월</option>
@@ -385,6 +392,7 @@ function EducationsPeriod() {
           type="checkbox"
           id="is-current-Educations"
           onClick={handleIsWorking}
+          checked={createEducation.careerEnd === "1111-11-11"}
         />
         <CreateEducationsCheckboxText htmlFor="is-current-Educations">
           재학 중

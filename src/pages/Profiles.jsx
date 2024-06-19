@@ -10,7 +10,6 @@ import { controlRedux } from "../redux/loginStatus";
 import { useLocation } from "react-router-dom";
 import { setQuestions } from "../redux/memberQuestions";
 import { setAnswers } from "../redux/memberAnswers";
-import { setPosts } from "../redux/memberPosts";
 
 const MyProfileContainer = styled.div`
     position: relative;
