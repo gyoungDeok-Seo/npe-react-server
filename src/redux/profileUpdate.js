@@ -5,14 +5,12 @@ const profileUpdate = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    setProfileReset: () => {
-      return initialState;
-    },
+    setProfileReset: (state) => ({ ...initialState }),
     setProfileState: (state, action) => {
       const newState = action.payload;
-      state.name = newState.name;
-      state.ref = newState.ref;
-      state.description = newState.description;
+      state.name = newState.name ?? "";
+      state.ref = newState.ref ?? "";
+      state.description = newState.description ?? "";
     },
     setName: (state, action) => {
       state.name = action.payload;
