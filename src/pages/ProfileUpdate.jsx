@@ -85,22 +85,16 @@ function ProfileUpdate() {
 
     useEffect(() => {
         const fetchUserSession = async () => {
-            try {
-                const response = await fetch("http://localhost:10000/members/api/session", {
-                    method: "GET",
-                    credentials: "include", // 세션 쿠키를 포함하여 요청
-                }); // 서버에서 세션 정보를 가져오는 엔드포인트 설정
-                const data = await response.json();
-                dispatch(controlRedux(data.loggedIn));
-                setMember(data.member);
-            } catch (error) {
-                console.error("Error fetching session data", error);
-                dispatch(controlRedux(false));
-            }
+            const response = await fetch("http://localhost:10000/members/api/session", {
+                method: "GET",
+                credentials: "include", // 세션 쿠키를 포함하여 요청
+            }); // 서버에서 세션 정보를 가져오는 엔드포인트 설정
+            const data = await response.json();
+            setMember(data.member);
         };
         fetchUserSession();
         if (isExit) {
-            navigate("/profiles");
+            navigate(`/profile/${member.id}`);
         }
     }, [isExit]);
     return (

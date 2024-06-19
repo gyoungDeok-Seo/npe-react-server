@@ -164,32 +164,32 @@ function IndustryModal({ setIndustryModal }) {
   const createCareer = useSelector((state) => state.createCareer);
   const dispatch = useDispatch();
   const [checkedIndustries, setCheckedIndustries] = useState(
-    createCareer.industry || []
+    createCareer.careerIndustries || []
   );
   const checkboxRefs = useRef({});
 
   const handleCheckboxChange = (event) => {
     const { id, checked } = event.target;
     const industry = industryList.find(
-      (industry) => industry.id === parseInt(id)
+      (industry) => industry.industryId === parseInt(id)
     );
 
     setCheckedIndustries((prevState) => {
       if (checked) {
         return [...prevState, industry];
       } else {
-        return prevState.filter((item) => item.id !== industry.id);
+        return prevState.filter((item) => item.industryId !== industry.industryId);
       }
     });
   };
 
   const handleIndustryItemClick = (industry) => {
     setCheckedIndustries((prevState) => {
-      return prevState.filter((item) => item.id !== industry.id);
+      return prevState.filter((item) => item.industryId !== industry.industryId);
     });
 
-    if (checkboxRefs.current[industry.id]) {
-      checkboxRefs.current[industry.id].checked = false;
+    if (checkboxRefs.current[industry.industryId]) {
+      checkboxRefs.current[industry.industryId].checked = false;
     }
   };
 
@@ -203,8 +203,8 @@ function IndustryModal({ setIndustryModal }) {
   };
 
   useEffect(() => {
-    setCheckedIndustries(createCareer.industry);
-  }, [createCareer.industry]);
+    setCheckedIndustries(createCareer.careerIndustries);
+  }, [createCareer.careerIndustries]);
 
   return (
     <>
@@ -249,7 +249,7 @@ function IndustryModal({ setIndustryModal }) {
                   <IndustryModalCraeteItemBox>
                     {checkedIndustries.map((item) => (
                       <IndustryModalCraeteItem
-                        key={item.id}
+                        key={item.industryId}
                         type="button"
                         onClick={() => handleIndustryItemClick(item)}
                       >
@@ -282,17 +282,17 @@ function IndustryModal({ setIndustryModal }) {
                 )}
                 <IndustryModalCheckBoxList>
                   {industryList.map((item) => (
-                    <IndustryModalCheckBoxItem key={item.id}>
+                    <IndustryModalCheckBoxItem key={item.industryId}>
                       <IndustryModalCheckBox
                         type="checkbox"
-                        id={item.id.toString()}
-                        ref={(ref) => (checkboxRefs.current[item.id] = ref)}
+                        id={item.industryId.toString()}
+                        ref={(ref) => (checkboxRefs.current[item.industryId] = ref)}
                         onChange={handleCheckboxChange}
                         checked={checkedIndustries.some(
-                          (industry) => industry.id === item.id
+                          (industry) => industry.industryId === item.industryId
                         )}
                       />
-                      <IndustryModalLabel htmlFor={item.id.toString()}>
+                      <IndustryModalLabel htmlFor={item.industryId.toString()}>
                         {item.industryName}
                       </IndustryModalLabel>
                     </IndustryModalCheckBoxItem>
