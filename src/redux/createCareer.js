@@ -1,46 +1,54 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const createCareer = createSlice({
+const careerList = createSlice({
   name: "career",
   initialState: {
-    companyName: "",
-    memberPosition: "",
-    careerStart: "",
-    careerEnd: "",
-    industry: [],
-    skills: [],
-    description: "",
-    careerUrl: "",
+    key: [
+      {
+        companyName: "",
+        memberPosition: "",
+        careerStart: "",
+        careerEnd: "",
+        careerIndustries: [],
+        careerSkills: [],
+        description: "",
+        careerUrl: "",
+      },
+    ],
   },
   reducers: {
+    setKey: (state, action) => {
+      state.key = action.payload;
+    },
     setCompanyName: (state, action) => {
-      state.companyName = action.payload;
+      state.key.companyName = action.payload;
     },
     setMemberPosition: (state, action) => {
-      state.memberPosition = action.payload;
+      state.key.memberPosition = action.payload;
     },
     setCareerStart: (state, action) => {
-      state.careerStart = action.payload;
+      state.key.careerStart = action.payload;
     },
     setCareerEnd: (state, action) => {
-      state.careerEnd = action.payload;
+      state.key.careerEnd = action.payload;
     },
     setIndustry: (state, action) => {
-      state.industry = action.payload;
+      state.key.industry = action.payload;
     },
     setSkills: (state, action) => {
-      state.skills = action.payload;
+      state.key.skills = action.payload;
     },
     setDescription: (state, action) => {
-      state.description = action.payload;
+      state.key.description = action.payload;
     },
     setCareerUrl: (state, action) => {
-      state.careerUrl = action.payload;
+      state.key.careerUrl = action.payload;
     },
   },
 });
 
 export const {
+  setKey,
   setCompanyName,
   setMemberPosition,
   setCareerStart,
@@ -49,6 +57,6 @@ export const {
   setSkills,
   setDescription,
   setCareerUrl,
-} = createCareer.actions;
+} = careerList.actions;
 
-export default createCareer;
+export default careerList;

@@ -60,7 +60,7 @@ const CareerSelectedList = ({ selectdList, handleModal }) => {
   const [list, setList] = useState([]);
   useEffect(() => {
     const normalizedList = selectdList.map((item) => ({
-      id: item.id,
+      id: item.skillId || item.industryId,
       name: item.skillName || item.industryName,
     }));
     setList(normalizedList);
