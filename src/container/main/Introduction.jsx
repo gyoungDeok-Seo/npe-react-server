@@ -81,9 +81,9 @@ function Introduction() {
                 <br />
                 실무 개발 이야기
               </SectionTitle>
-              <LinkBtnBox>
+              {/* <LinkBtnBox>
                 <LinkBtn to="/">개발자 프로필 보러가기</LinkBtn>
-              </LinkBtnBox>
+              </LinkBtnBox> */}
             </SectionLeftBox>
             <SectionRightBox>
               <span
@@ -147,7 +147,7 @@ function Introduction() {
                 한국판 스택오버플로우.
               </SectionTitle>
               <LinkBtnBox>
-                <LinkBtn to="/">개발자 Q&A 보러가기</LinkBtn>
+                <LinkBtn to="/qnas">개발자 Q&A 보러가기</LinkBtn>
               </LinkBtnBox>
             </SectionLeftBox>
             <SectionRightBox>
