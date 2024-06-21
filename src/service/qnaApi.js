@@ -1,4 +1,4 @@
-import { setQnaDetailData } from "../redux/qnaDetail";
+
 
 export const sendCreateQnaData = async (qnaData) => {
   const reponse = await fetch("http://localhost:10000/qnas/api/create", {
@@ -28,9 +28,61 @@ export const readQnaDetail = async (qnaId) => {
   return json;
 };
 
-export const readQnaList = async (startPage, pageSize, tag) => {
+export const categoryListApi = async () => {
   const response = await fetch(
-    `http://localhost:10000/qnas/api/list?startPage=${startPage}&pageSize=${pageSize}&tag=${tag}`
+    `http://localhost:10000/qnas/api/category/list`,
+    {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const json = await response.json();
+  return json;
+};
+
+export const topTenListApi = async () => {
+  const response = await fetch(
+    `http://localhost:10000/qnas/api/top-ten/list`,
+    {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const json = await response.json();
+  return json;
+};
+
+export const bestAnswerListApi = async () => {
+  const response = await fetch(
+    `http://localhost:10000/qnas/api/best-answer/list`,
+    {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const json = await response.json();
+  return json;
+};
+
+export const qnaListApi = async () => {
+  const response = await fetch(
+    `http://localhost:10000/qnas/api/list`,
+    {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
   );
   const json = await response.json();
   return json;

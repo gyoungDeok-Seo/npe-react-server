@@ -29,7 +29,7 @@ const ContentsHeaderBox = styled.div`
 `;
 
 const ContentsTitle = styled.h3`
-  color: var(--color-text-bold, #0f172a);
+  color: #0f172a;
   font-size: 1.125rem;
   width: 100%;
   margin-bottom: 0;
@@ -49,7 +49,7 @@ const SectionTitleBox = styled.div`
 `;
 
 const SectionTitleHeadline = styled.h3`
-  color: var(--color-text-bold, #0f172a);
+  color: #0f172a;
   font-weight: 700;
   font-size: 1.125rem;
   margin: 0;
@@ -62,7 +62,7 @@ const InterestTopicList = styled.ul`
 `;
 
 const MainContentsHeadline = styled.h3`
-  color: var(--color-text-bold, #0f172a);
+  color: #0f172a;
   font-size: 1.125rem;
   padding-top: 0.75rem;
   padding-bottom: 1.5rem;
@@ -73,8 +73,8 @@ const MainContentsHeadline = styled.h3`
 const TagFilterWrap = styled.div`
   padding-top: 1rem;
   padding-bottom: 1rem;
-  background-color: var(--color-white, #fff);
-  border-color: var(--color-slate-200, #e2e8f0);
+  background-color: #fff;
+  border-color: #e2e8f0;
   border-style: solid;
   border-width: 1px;
   border-top-width: 0;
@@ -112,7 +112,7 @@ const TagFilterItems = styled.div`
 `;
 
 const TagFilterTitle = styled.span`
-  color: var(--color-text-subtle, #334155);
+  color: #334155;
   font-weight: 700;
   font-size: 0.75rem;
 `;
@@ -128,19 +128,19 @@ const TagBtn = styled.button`
   padding-bottom: 0.375rem;
   padding-left: 0.625rem;
   padding-right: 0.625rem;
-  border-color: var(--color-slate-200, #e2e8f0);
+  border-color: #e2e8f0;
   border-style: solid;
   border-width: 1px;
   border-radius: 9999px;
   align-items: center;
   display: flex;
   &:hover {
-    background-color: var(--color-slate-50, #f8fafc);
+    background-color: #f8fafc;
   }
 `;
 
 const TagSpan = styled.span`
-  color: var(--color-text-bold, #0f172a);
+  color: #0f172a;
   font-weight: 700;
   font-size: 0.75rem;
 `;
@@ -215,7 +215,6 @@ function QnaMainContents() {
   };
 
   const handleTagReset = () => {};
-
   return (
     <QnaMainWrap>
       {tab === "newest" ? (

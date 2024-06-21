@@ -2,10 +2,8 @@ import { styled } from "styled-components";
 import SearchTagHeadLine from "./SearchTagHeadLine";
 import SearchTagQuestion from "./SearchTagQuestion";
 import SearchTagQuestionNone from "./SearchTagQuestionNone";
-import { questions } from "../../../service/dummyData";
 import { useQuery } from "@tanstack/react-query";
-import { readQnaList } from "../../../service/qnaApi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const SearchTagWrap = styled.div`
@@ -31,24 +29,11 @@ const SearchTagContainer = styled.div`
 function SearchTagComponent() {
   const { pathname } = useLocation();
   const match = pathname.split("/")[3];
-  const [startPage, setStartPage] = useState(0);
-  const pageSize = 20;
-
-  const { data: qnaListData, isLoading } = useQuery(
-    ["qnaList", match],
-    () => readQnaList(startPage, pageSize, match),
-    { enabled: !!match }
-  );
-
-  // useEffect(() => {
-  //   console.log(qnaListData);
-  //   console.log(isLoading);
-  // }, [isLoading]);
 
   return (
     <SearchTagWrap>
       <SearchTagContainer>
-        {!isLoading && (
+        {/* {!isLoading && (
           <>
             <SearchTagHeadLine />
             {qnaListData ? (
@@ -63,7 +48,7 @@ function SearchTagComponent() {
               <SearchTagQuestionNone />
             )}
           </>
-        )}
+        )} */}
       </SearchTagContainer>
     </SearchTagWrap>
   );
