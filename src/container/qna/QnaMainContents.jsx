@@ -4,9 +4,10 @@ import BestAnswerSlideBox from "../../components/Qna/BestAnswerSlideBox";
 import InterestTopicItem from "../../components/Qna/InterestTopicItem";
 import QnaMainItem from "../../components/Qna/QnaMainItem";
 import { styled } from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { tags, topics } from "../../service/dummyData";
+import { qnaListApi } from "../../service/qnaApi";
 
 const QnaMainWrap = styled.div`
   padding-top: 2rem;
@@ -178,6 +179,7 @@ function QnaMainContents() {
   const category = searchParams.get("category") || "JAVA";
   const tag = searchParams.get("tag") || "";
 
+
   const [topTenTransform, setTopTenTransform] = useState(
     "translate3d(0px, 0px, 0px)"
   );
@@ -214,8 +216,8 @@ function QnaMainContents() {
     }
   };
 
-  const handleTagReset = () => {};
 
+  const handleTagReset = () => {};
   return (
     <QnaMainWrap>
       {tab === "newest" ? (
