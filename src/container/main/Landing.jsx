@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -78,6 +79,7 @@ const KakaoImg = styled.img`
 `;
 
 function Landing() {
+    const isLoggedIn = useSelector((state) => state.loginStatus.status);
     const handlerClickLogin = async () => {
         window.location.href = "http://localhost:10000/kakao/login/end-point";
     };
@@ -138,7 +140,7 @@ function Landing() {
                             요즘 개발자들의 <br />
                             필수 커뮤니티, 커리어리
                         </BottomComment>
-                        <JoinBtnsBox>
+                        <JoinBtnsBox style={{ visibility: isLoggedIn ? "hidden" : "visible" }}>
                             <KakaoJoinBtn onClick={handlerClickLogin}>
                                 <KakaoImg src="https://careerly.co.kr/_next/static/images/img_symbol-kakao-b1fe6197135e5beead71b1a90f8e2b7d.png" alt="kakao_icon" />
                                 <span>카카오로 3초만에 가입하기</span>

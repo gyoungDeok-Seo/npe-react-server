@@ -19,8 +19,8 @@ function Router() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={isLoggedIn ? <Navigate to="/home" /> : <Main />} />
-                <Route path="/home" element={isLoggedIn ? <HomePage /> : <Navigate to="/" />} />
+                <Route path="/" element={<Main />} />
+                {/* <Route path="/home" element={isLoggedIn ? <HomePage /> : <Navigate to="/" />} /> */}
                 <Route path="/qnas" element={<QnA />} />
                 <Route path="/qnas/detail/:qnaId" element={<QnaDetail />} />
                 <Route path="/qnas/tagged/:tag" element={<TaggedSearch />} />
