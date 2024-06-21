@@ -39,9 +39,9 @@ function TabBox() {
 
     return (
         <>
-            <TabLink to="/">
+            {/* <TabLink to="/">
                 <p>커리어리 트렌드</p>
-            </TabLink>
+            </TabLink> */}
             <TabLink isThis={isThis} to="/qnas">
                 현직자 Q&A
             </TabLink>
