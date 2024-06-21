@@ -32,3 +32,4 @@ const store = configureStore({
     educationList: educationList.reducer,
   },
 });
+export default store;
