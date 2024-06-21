@@ -12,6 +12,7 @@ import createCareer from "./createCareer";
 import createEducation from "./createEducation";
 import careerList from "./careerList";
 import categoryList from "./categoryList";
+import educationList from "./educationList";
 
 const store = configureStore({
   reducer: {
@@ -28,6 +29,6 @@ const store = configureStore({
     createEducation: createEducation.reducer,
     careerList: careerList.reducer,
     categoryList: categoryList.reducer,
+    educationList: educationList.reducer,
   },
 });
-export default store;

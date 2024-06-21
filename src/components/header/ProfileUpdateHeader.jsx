@@ -68,6 +68,8 @@ const ProfileUpdateHeader = ({ member, navigate, setAvoidMistakesModal }) => {
     const createSkills = useSelector((state) => state.createSkills);
     const createCareer = useSelector((state) => state.createCareer);
     const memberCareer = useSelector((state) => state.careerList);
+    const createEducation = useSelector((state) => state.createEducation);
+    const educationList = useSelector((state) => state.educationList);
 
     const getMemberSkillsListFetch = async () => {
         const response = await fetch(`http://localhost:10000/members/api/skill?memberId=${member.id}`, {
@@ -139,6 +141,28 @@ const ProfileUpdateHeader = ({ member, navigate, setAvoidMistakesModal }) => {
         });
     };
 
+    const createEducationFetch = async () => {
+        const response = await fetch(`http://localhost:10000/members/api/create-education`, {
+            method: "POST",
+            credentials: "include", // 세션 쿠키를 포함하여 요청,
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(createEducation),
+        });
+    };
+
+    const updateEducationFetch = async () => {
+        const response = await fetch(`http://localhost:10000/members/api/update-education`, {
+            method: "PATCH",
+            credentials: "include", // 세션 쿠키를 포함하여 요청,
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(createEducation),
+        });
+    };
+
     const dispatch = useDispatch();
     const { pathname } = useLocation();
     const [isDisabled, setIsDisabled] = useState(true);
@@ -150,33 +174,21 @@ const ProfileUpdateHeader = ({ member, navigate, setAvoidMistakesModal }) => {
             isValid = profileUpdate.name !== "" && profileUpdate.ref !== "";
         } else if (pathname.startsWith("/profiles/careers/create") || pathname.startsWith("/profiles/careers/update")) {
             isValid = createCareer.companyName !== "" && createCareer.memberPosition !== "" && createCareer.careerStart !== "" && createCareer.careerEnd !== "";
-        }
-        // else if (pathname.startsWith("/profiles/educations/create")) {
-        //   isValid =
-        //     eductaion.institution !== "" &&
-        //     eductaion.course !== "" &&
-        //     eductaion.startYear !== "" &&
-        //     eductaion.startMonth !== "" &&
-        //     eductaion.endYear !== "" &&
-        //     eductaion.endMonth !== "" &&
-        //     eductaion.link !== "" &&
-        //     eductaion.description !== "";
-        // } else if (pathname.startsWith("/profiles/sites/create")) {
-        //   isValid = sites.url !== "" && sites.name !== "";
-        // }
-        else if (pathname.startsWith("/profiles/skills")) {
+        } else if (pathname.startsWith("/profiles/educations/create") || pathname.startsWith("/profiles/educations/update")) {
+            isValid = createEducation.educationInstitution !== "" && createEducation.educationStart !== "" && createEducation.educationEnd !== "";
+        } else if (pathname.startsWith("/profiles/skills")) {
             isValid = createSkills.skills.length > 0;
         }
         setIsDisabled(!isValid);
-    }, [profileUpdate, createSkills, createCareer, pathname]);
+    }, [profileUpdate, createSkills, createCareer, createEducation, pathname]);
 
     const handleUpdateProfile = async () => {
         if (pathname.startsWith("/profiles/update")) {
-            memberInfoModify();
+            await memberInfoModify();
             navigate(`/profile/${member.id}`);
         } else if (pathname.startsWith("/profiles/careers")) {
             if (pathname.includes("/create")) {
-                createCareerFetch(createCareer);
+                await createCareerFetch(createCareer);
                 navigate(`/profile/${member.id}`);
             } else {
                 const careerId = parseInt(pathname.split("/")[4]);
@@ -210,7 +222,7 @@ const ProfileUpdateHeader = ({ member, navigate, setAvoidMistakesModal }) => {
                     removeSkillList: removeSkillList,
                 };
 
-                updateCareerFetch(createCareer, listInfo);
+                await updateCareerFetch(createCareer, listInfo);
             }
         } else if (pathname.startsWith("/profiles/skills")) {
             const skillList = await getMemberSkillsListFetch();
@@ -229,6 +241,14 @@ const ProfileUpdateHeader = ({ member, navigate, setAvoidMistakesModal }) => {
 
             dispatch(setSkills(updateSkills));
             navigate(`/profile/${member.id}`);
+        } else if (pathname.startsWith("/profiles/educations")) {
+            if (pathname.includes("/create")) {
+                await createEducationFetch();
+                navigate(`/profile/${member.id}`);
+            } else {
+                await updateEducationFetch();
+                navigate(`/profile/${member.id}`);
+            }
         }
     };
 
