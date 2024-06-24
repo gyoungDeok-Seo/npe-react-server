@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import {
-  SitesCreateaInput,
   SitesCreateaLabel,
   SitesCreateaPartTitleBox,
 } from "../../pages/SitesCreate";
 import { Pilsu } from "../../pages/CareerCreate";
-import { useContext, useState } from "react";
-import { CreateSiteContext } from "../../context/CreateSiteContext";
+import { useState } from "react";
 
 const SitesInputBox = styled.div`
   margin-bottom: 1rem;
@@ -17,19 +15,18 @@ const SitesCreateaInputCount = styled.p`
 `;
 
 function LinkNamebox() {
-  const { datas, setDatas } = useContext(CreateSiteContext);
   const [nameLength, setNameLength] = useState(0);
 
   const handleNameChange = (e) => {
-    const value = e.target.value;
-    const valueLength = value.length;
-    setNameLength(valueLength);
-    if (valueLength <= 50) {
-      setDatas((prev) => ({
-        ...prev,
-        name: value,
-      }));
-    }
+    // const value = e.target.value;
+    // const valueLength = value.length;
+    // setNameLength(valueLength);
+    // if (valueLength <= 50) {
+    //   setDatas((prev) => ({
+    //     ...prev,
+    //     name: value,
+    //   }));
+    // }
   };
 
   return (
@@ -40,13 +37,13 @@ function LinkNamebox() {
         </SitesCreateaLabel>
         <SitesCreateaInputCount>{nameLength}/50</SitesCreateaInputCount>
       </SitesCreateaPartTitleBox>
-      <SitesCreateaInput
+      {/* <SitesCreateaInput
         type="text"
         placeholder="표시할 이름을 입력해 주세요. (예: 포트폴리오)"
         maxLength="50"
         value={datas.name}
         onChange={handleNameChange}
-      />
+      /> */}
     </SitesInputBox>
   );
 }

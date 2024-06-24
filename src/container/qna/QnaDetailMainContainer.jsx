@@ -451,9 +451,7 @@ function QnaDetailMainContainer() {
   const qnaId = match ? match[1] : null;
   const [qna, setQna] = useState({});
   const [answerList, setAnswerList] = useState([]);
-  useEffect(() => {
-    console.log(answerList);
-  }, [answerList]);
+
   const handleSendAnswer = async () => {
     const response = await createAnswerApi({
       answerContent: textareaValue,

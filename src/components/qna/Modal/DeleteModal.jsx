@@ -1,9 +1,8 @@
 import { styled } from "styled-components";
 import { deleteAnswerApi } from "../../../service/answerApi";
-import { deleteQnaApi, readQnaDetail } from "../../../service/qnaApi";
-import { useDispatch, useSelector } from "react-redux";
-import { setQnaDetailData } from "../../../redux/qnaDetail";
-import { useLocation, useNavigate } from "react-router-dom";
+import { deleteQnaApi } from "../../../service/qnaApi";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { deleteReplyApi } from "../../../service/answerReplyApi";
 
 const ModalWrap = styled.div`
@@ -111,7 +110,6 @@ const CancelBtn = styled(DeleteBtn)`
 `;
 
 function ReplyDeleteModal({ setModal, data, setAnswerList, qnaId }) {
-  console.log(data);
   const navigator = useNavigate();
   const dispatch = useDispatch();
   const handlerClickDeleteBtn = async () => {
@@ -123,7 +121,6 @@ function ReplyDeleteModal({ setModal, data, setAnswerList, qnaId }) {
       const response = await deleteAnswerApi(request);
       setAnswerList(response);
     } else if (data.replayContent) {
-      console.log(qnaId);
       const request = { id: data.id, questionId: qnaId };
       const response = await deleteReplyApi(request);
       setAnswerList(response);

@@ -344,7 +344,6 @@ function AnswerReplyComponent({ reply, index, setAnswerList, qnaId }) {
       questionId: qnaId,
     };
     const response = await replyLikeApi(request);
-    console.log(response);
     setAnswerList(response);
   };
 

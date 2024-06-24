@@ -58,9 +58,6 @@ function SearchTagComponent() {
     }
   }, [data]);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
   return (
     <SearchTagWrap>
       <SearchTagContainer>

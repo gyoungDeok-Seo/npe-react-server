@@ -5,10 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import InstitutionInput from "../components/EducationsCreate/InstitutionInput";
 import CourseInput from "../components/EducationsCreate/CourseInput";
 import EducationsPeriod from "../components/EducationsCreate/EducationsPeriod";
-import LinkInput from "../components/EducationsCreate/LinkInput";
 import DescriptionTextarea from "../components/EducationsCreate/DescriptionTextarea";
 import MainHeader from "../components/Header/MainHeader";
-import { CreateEductaionContext } from "../context/CreateEductaionContext";
 import { useDispatch, useSelector } from "react-redux";
 import { setEducationReset, setEducationState } from "../redux/createEducation";
 

@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import PopularPosts from "../../components/SearchResult/SideBar/PopularPosts";
 import { useEffect, useState } from "react";
@@ -50,7 +49,6 @@ function SideBar() {
     const getQuestionTopTen = async () => {
         const data = await weekTopTenQuestionFetch();
         setTopTenQuestion(data);
-        console.log(data);
     };
 
     useEffect(() => {

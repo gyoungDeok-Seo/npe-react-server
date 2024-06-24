@@ -1,8 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const LikeUserModalTItleBox = styled.div`
   background-color: rgb(255 255 255 / 1);
@@ -103,7 +101,6 @@ const LikeUserJob = styled.p`
 `;
 
 function LikeUserModal({ setLikeUsersModal, data }) {
-  console.log(data);
   const [list, setList] = useState([]);
 
   // useEffect(() => {

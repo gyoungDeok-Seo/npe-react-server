@@ -1,7 +1,6 @@
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import ResultProfile from "../../components/SearchResult/ResultBox/ResultProfile";
-import ResultPost from "../../components/SearchResult/ResultBox/ResultPost";
 import { useEffect, useState } from "react";
 import NoneResult from "../../components/SearchResult/ResultBox/NoneResult";
 import ResultQna from "../../components/SearchResult/ResultBox/ResultQna";
@@ -127,11 +126,9 @@ function ResultBox() {
     const getMemberProfile = async (keyword) => {
         const data = await searchMemberProfileFetch(keyword, profilePage);
         setSearchMemberProfileList(data);
-        console.log(data);
     };
     const getQuestion = async (keyword) => {
         const data = await searchQuestionFetch(keyword, questionPage);
-        console.log(data);
         setSearchQuestionList((item) => [...item, ...data]);
     };
 
@@ -142,10 +139,6 @@ function ResultBox() {
             getQuestion(query);
         }
     }, [query, profilePage, questionPage]);
-
-    useEffect(() => {
-        console.log(searchMemberProfileList);
-    }, [searchMemberProfileList]);
 
     useEffect(() => {
         const handleScroll = () => {

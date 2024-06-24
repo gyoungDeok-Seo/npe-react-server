@@ -64,10 +64,6 @@ const QnaImg = () => {
   const dispatch = useDispatch();
   const [maxLengthImages, setMaxLengthImages] = useState(false);
 
-  useEffect(() => {
-    console.log(createQna);
-  }, [createQna]);
-
   const handleAddBtn = () => {
     fileInputRef.current.click();
   };

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import MainHeader from "../components/Header/MainHeader";
 import LinkUrlBox from "../components/SitesCreate/LinkUrlBox";
 import LinkNamebox from "../components/SitesCreate/LinkNamebox";
-import { CreateSiteContext } from "../context/CreateSiteContext";
 
 const SitesCreateaBox = styled.div`
     padding-left: 1rem;
@@ -71,7 +70,6 @@ function SitesCreate() {
     const navigate = useNavigate(null);
     const [avoidMistakesModal, setAvoidMistakesModal] = useState(false);
     const [isExit, setIsExit] = useState(false);
-    const [datas, setDatas] = useState({ url: "", name: "" });
 
     useEffect(() => {
         if (isExit) {
@@ -80,7 +78,7 @@ function SitesCreate() {
     }, [isExit]);
 
     return (
-        <CreateSiteContext.Provider value={{ datas, setDatas }}>
+        <>
             <div>
                 <div>
                     <div
@@ -106,7 +104,7 @@ function SitesCreate() {
                 </div>
             </div>
             {avoidMistakesModal && <AvoidMistakesModal setAvoidMistakesModal={setAvoidMistakesModal} setIsExit={setIsExit} />}
-        </CreateSiteContext.Provider>
+        </>
     );
 }
 export default SitesCreate;

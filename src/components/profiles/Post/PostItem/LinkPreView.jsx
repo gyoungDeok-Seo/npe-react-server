@@ -88,9 +88,6 @@ function LinkPreView() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    console.log(previewData);
-  }, [previewData]);
   return (
     <LinkPreViewBox>
       <a href={previewData.url} target="_blank" rel="noopener">

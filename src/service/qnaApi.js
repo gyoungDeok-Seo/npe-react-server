@@ -100,7 +100,6 @@ export const bestAnswerListApi = async () => {
 };
 
 export const qnaListApi = async (categoryValue, tagsParams, pages) => {
-  console.log(categoryValue, tagsParams, pages);
   const response = await fetch(
     `http://localhost:10000/qnas/api/list?category=${categoryValue}&page=${pages}&tags=${tagsParams}`,
     {
@@ -112,7 +111,6 @@ export const qnaListApi = async (categoryValue, tagsParams, pages) => {
     }
   );
   const json = await response.json();
-  console.log(json);
   return json;
 };
 
