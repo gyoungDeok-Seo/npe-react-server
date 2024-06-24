@@ -8,11 +8,11 @@ import QnaImg from "../container/CreateQna/QnaImg";
 import AvoidMistakesModal from "../components/profiles/Modal/AvoidMistakesModal";
 import { useNavigate } from "react-router-dom";
 
-const TopSpaceDiv = styled.div`
+export const TopSpaceDiv = styled.div`
   height: 3.5rem;
 `;
 
-const CreateQnaContentBox = styled.div`
+export const CreateQnaContentBox = styled.div`
   padding-top: 2rem;
   padding-bottom: 10rem;
   margin-left: auto;
@@ -26,7 +26,7 @@ const CreateQnaContentBox = styled.div`
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 `;
-const CreateQnaContentInner = styled.div`
+export const CreateQnaContentInner = styled.div`
   grid-column: span 8 / span 8;
   grid-column-start: 3;
   display: flex;
@@ -41,7 +41,7 @@ function CreateQna() {
 
   useEffect(() => {
     if (isExit) {
-      navigate("/");
+      navigate("/qnas");
     }
   }, [isExit]);
 

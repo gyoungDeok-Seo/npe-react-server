@@ -4,9 +4,10 @@ import BestAnswerSlideBox from "../../components/Qna/BestAnswerSlideBox";
 import InterestTopicItem from "../../components/Qna/InterestTopicItem";
 import QnaMainItem from "../../components/Qna/QnaMainItem";
 import { styled } from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { tags, topics } from "../../service/dummyData";
+import { qnaListApi } from "../../service/qnaApi";
 
 const QnaMainWrap = styled.div`
   padding-top: 2rem;
@@ -175,9 +176,10 @@ const TagResetSvg = styled.svg`
 function QnaMainContents() {
   const [searchParams, setSearchParams] = useSearchParams();
   const tab = searchParams.get("tab") || "newest";
-  const category = searchParams.get("category") || "JAVA";
-  const tag = searchParams.get("tag") || "";
-
+  const categoryValue = searchParams.get("category") || "java";
+  const tagsParams = searchParams.get("tag") || "";
+  const [qnaList, setQnaList] = useState();
+  const [pages, setPages] = useState(1);
   const [topTenTransform, setTopTenTransform] = useState(
     "translate3d(0px, 0px, 0px)"
   );
@@ -194,24 +196,57 @@ function QnaMainContents() {
     next: false,
   });
 
+  useEffect(() => {
+    setPages(1);
+    window.scrollTo({
+      top: 0,
+    });
+    const fetchQnas = async () => {
+      const qnas = await qnaListApi(categoryValue, tagsParams, pages);
+      setQnaList(qnas);
+    };
+
+    fetchQnas();
+  }, [tagsParams, categoryValue, tab]);
+
+  useEffect(() => {
+    const fetchQnas = async () => {
+      const qnas = await qnaListApi(categoryValue, tagsParams, pages);
+      setQnaList((prev) => (prev ? [...prev, ...qnas] : qnas));
+    };
+
+    fetchQnas();
+  }, [pages]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const { scrollTop, offsetHeight } = document.documentElement;
+      const innerHeight = window.innerHeight;
+      if (innerHeight + scrollTop >= offsetHeight) {
+        setPages((prev) => prev + 1);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [tab, qnaList]);
+
   const handleTagClick = (selectedTag) => {
-    // if (!tag) {
-    //     setSearchParams(searchParams.toString() + "&tag=" + selectedTag);
-    //     console.log("태그 비었다");
-    // }
-    // if (!searchParams.toString().includes("&tag=")) {
-    //     console.log("&tag= 없다");
-    // }
-    // if (searchParams.toString().includes(selectedTag)) {
-    //     setSearchParams(searchParams.toString().replace(selectedTag, ""));
-    // }
-    if (!searchParams.toString().includes("&tag=")) {
-      setSearchParams(searchParams.toString() + "&tag=" + selectedTag);
-    } else if (searchParams.toString().includes(selectedTag)) {
-      setSearchParams(searchParams.toString().replace(selectedTag, ""));
+    const currentTags = searchParams.get("tag")
+      ? searchParams.get("tag").split(",")
+      : [];
+    const tagIndex = currentTags.indexOf(selectedTag);
+    if (tagIndex > -1) {
+      currentTags.splice(tagIndex, 1);
     } else {
-      setSearchParams(searchParams.toString() + "," + selectedTag);
+      currentTags.push(selectedTag);
     }
+    const updatedTags = currentTags.join(",");
+    if (updatedTags) {
+      searchParams.set("tag", updatedTags);
+    } else {
+      searchParams.delete("tag");
+    }
+    setSearchParams(searchParams);
   };
 
   const handleTagReset = () => {};
@@ -319,7 +354,7 @@ function QnaMainContents() {
             </InterestTopicList>
           </InterestTopicSection>
           <MainContentsHeadline>최신 질문</MainContentsHeadline>
-          <QnaMainItem />
+          <QnaMainItem qnaList={qnaList} />
         </>
       ) : (
         <>
@@ -330,7 +365,7 @@ function QnaMainContents() {
                   <TagFilterTitle>태그 필터</TagFilterTitle>
                   <TagsBox>
                     {tags.map((tag, index) => (
-                      <TagBtn index={index} onClick={() => handleTagClick(tag)}>
+                      <TagBtn key={index} index={index} onClick={() => handleTagClick(tag)}>
                         <TagSpan>{tag}</TagSpan>
                       </TagBtn>
                     ))}
@@ -338,7 +373,7 @@ function QnaMainContents() {
                 </TagFilterItems>
               </TagFilterBox>
             </TagFilterContainer>
-            {tag && (
+            {tagsParams && (
               <TagResetContainer>
                 <VerticalDividingLine></VerticalDividingLine>
                 <TagResetBtn type="button" onClick={handleTagReset}>
@@ -364,18 +399,14 @@ function QnaMainContents() {
           </TagFilterWrap>
           <div>
             <div
-              style={{ height: "15851px", width: "100%", position: "relative" }}
+              style={{ minHeight: "100%", width: "100%", position: "relative" }}
             >
               <div
                 style={{
-                  position: "absolute",
-                  top: "0px",
-                  left: "0px",
                   width: "100%",
-                  transform: "translateY(0px)",
                 }}
               >
-                <QnaMainItem />
+                <QnaMainItem qnaList={qnaList} />
               </div>
             </div>
           </div>
