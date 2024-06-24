@@ -71,12 +71,12 @@ const SearchResultSideBarLinkTitle = styled.p`
   -webkit-box-orient: vertical;
 `;
 
-function PopularPosts({ num }) {
+function PopularPosts({ item, index }) {
   return (
-    <SearchResultSideBarLink to="#">
+    <SearchResultSideBarLink to={`/qnas/detail/${item?.id}`}>
       <SearchResultSideBarLinkInner>
         <SearchResultSideBarLinkNumBox>
-          <SearchResultSideBarLinkNum>{num}</SearchResultSideBarLinkNum>
+          <SearchResultSideBarLinkNum>{index + 1}</SearchResultSideBarLinkNum>
         </SearchResultSideBarLinkNumBox>
         <SearchResultSideBarLinkContent>
           <SearchResultSideBarCreater>
@@ -130,7 +130,7 @@ function PopularPosts({ num }) {
                 </span>
                 <SearchResultSideBarCreaterImg
                   alt=""
-                  src="https://publy.imgix.net/static/images/img_profile-dummy.png?w=200&h=200&auto=format&fm=png"
+                  src={item?.kakaoProfileUrl}
                   decoding="async"
                   data-nimg="intrinsic"
                   style={{
@@ -154,14 +154,14 @@ function PopularPosts({ num }) {
             <SearchResultSideBarCreaterNameBox>
               <SearchResultSideBarCreaterNameInner>
                 <SearchResultSideBarCreaterName>
-                  하조은
+                  {item?.memberName}
                 </SearchResultSideBarCreaterName>
-                <span> Software Engineer</span>
+                <span> {item?.memberPosition}</span>
               </SearchResultSideBarCreaterNameInner>
             </SearchResultSideBarCreaterNameBox>
           </SearchResultSideBarCreater>
           <SearchResultSideBarLinkTitle>
-            개발자의 이름 짓는 법, 네이밍 컨벤션
+            {item?.questionTitle}
           </SearchResultSideBarLinkTitle>
         </SearchResultSideBarLinkContent>
       </SearchResultSideBarLinkInner>
