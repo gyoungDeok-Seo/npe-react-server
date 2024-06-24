@@ -14,12 +14,12 @@ const AiAnswerRecommendedSector = styled.div`
 `;
 
 const AiAnswerRecommendedTitle = styled.p`
-  color: var(--color-slate-500, #64748b);
+  color: #64748b;
   font-size: 0.875rem;
 `;
 
 const AiAnswerRecommendedBox = styled.div`
-  border-color: var(--color-slate-200, #e2e8f0);
+  border-color: #e2e8f0;
   border-style: solid;
   border-width: 1px;
   border-radius: 9999px;
@@ -35,7 +35,7 @@ const AiAnswerRecommend = styled.div`
 const AiAnswerRecommendBtn = styled.button`
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
-  background-color: var(--color-white, #fff);
+  background-color: #fff;
   border-top-left-radius: 9999px;
   border-bottom-left-radius: 9999px;
   overflow: hidden;
@@ -45,7 +45,7 @@ const AiAnswerRecommendBtn = styled.button`
   width: 6rem;
   display: flex;
   &:hover {
-    background-color: var(--color-slate-50, #f8fafc);
+    background-color: #f8fafc;
   }
 `;
 

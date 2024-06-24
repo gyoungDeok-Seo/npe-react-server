@@ -29,10 +29,8 @@ const AnswerReplyWriterProfileImg = styled.img`
   aspect-ratio: 1 / 1;
   border-width: 1px;
   border-style: solid;
-  --tw-border-opacity: 1;
-  border-color: rgb(226 232 240 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  border-color: rgb(226 232 240 / 1);
+  background-color: rgb(255 255 255 / 1);
   flex: none;
   overflow: hidden;
 `;
@@ -46,7 +44,7 @@ const AnswerReplyWriterNameBox = styled.div`
 `;
 
 const AnswerReplyWriterName = styled.p`
-  color: var(--color-slate-900, #0f172a);
+  color: #0f172a;
   font-weight: 700;
   font-size: 0.75rem;
   word-break: break-all;
@@ -61,7 +59,7 @@ const AnswerReplyWriterDisplayBox = styled.div`
   padding-bottom: 1.5px;
   padding-left: 0.375rem;
   padding-right: 0.375rem;
-  background-color: var(--color-slate-500, #64748b);
+  background-color: #64748b;
   border-radius: 0.25rem;
   gap: 0.25rem;
   align-items: center;
@@ -70,13 +68,13 @@ const AnswerReplyWriterDisplayBox = styled.div`
 `;
 
 const AnswerReplyWriterDisplay = styled.p`
-  color: var(--color-white, #fff);
+  color:#fff;
   font-weight: 700;
   font-size: 10px;
 `;
 
 const AnswerReplyWriterPositionTime = styled.p`
-  color: var(--color-slate-700, #334155);
+  color: #334155;
   font-size: 0.75rem;
   word-break: break-all;
 `;
@@ -86,13 +84,13 @@ const AnswerReplyContentBox = styled.div`
   margin-left: 2.75rem;
 `;
 const AnswerReplyContentItem = styled.div`
-  color: var(--color-slate-900, #0f172a);
+  color: #0f172a;
   font-size: 0.875rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  background-color: var(--color-slate-50, #f8fafc);
+  background-color:  #f8fafc;
   border-radius: 0.25rem;
 `;
 
@@ -101,7 +99,7 @@ const AnswerReplyContentModifyBox = styled.div`
   padding-bottom: 0.5rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  border-color: var(--color-slate-200, #e2e8f0);
+  border-color: #e2e8f0;
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;
@@ -112,14 +110,14 @@ const AnswerReplyContentModifyBox = styled.div`
 `;
 
 const AnswerReplyContentModifyTextarea = styled.textarea`
-  color: var(--color-slate-900, #0f172a);
+  color: #0f172a;
   font-size: 1rem;
   padding: 0;
   border-width: 0;
   resize: none;
   width: 100%;
   &::placeholder {
-    color: var(--color-text-placeholder, #94a3b8);
+    color: #94a3b8;
   }
   &:focus-visible {
     outline: none;
@@ -130,8 +128,8 @@ const AnswerReplyContentModifyTextarea = styled.textarea`
 const AnswerReplyContentModifyBtn = styled.button`
   color: ${({ isWrite }) =>
     isWrite
-      ? "var(--color-white, #fff)"
-      : "var(--color-text-button-disabled, #94a3b8)"};
+      ? "#fff"
+      : "#94a3b8"};
   font-weight: 700;
   font-size: 0.75rem;
   padding-top: 0.375rem;
@@ -140,12 +138,12 @@ const AnswerReplyContentModifyBtn = styled.button`
   padding-right: 0.5rem;
   background-color: ${({ isWrite }) =>
     isWrite
-      ? "var(--color-background-button-primary-bold-enabled, #334155)"
-      : "var(--color-background-button-disabled, #f1f5f9)"};
+      ? "#334155"
+      : "#f1f5f9"};
   border-color: ${({ isWrite }) =>
     isWrite
-      ? "var(--color-slate-700, #334155)"
-      : "var(--color-slate-100, #f1f5f9)"};
+      ? "#334155"
+      : "#f1f5f9"};
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;
@@ -155,7 +153,7 @@ const AnswerReplyContentModifyBtn = styled.button`
   &:hover {
     background-color: ${({ isWrite }) =>
       isWrite
-        ? "var(--color-background-button-primary-bold-hover, #1e293b)"
+        ? "#1e293b"
         : ""};
     cursor: ${({ isWrite }) => (isWrite ? "pointer" : "default")};
   }

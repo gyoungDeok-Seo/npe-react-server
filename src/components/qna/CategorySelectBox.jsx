@@ -18,7 +18,7 @@ const CategoryBtn = styled.button`
 `;
 
 const SelectedCategoryName = styled.span`
-  color: var(--color-text-bold, #0f172a);
+  color: #0f172a;
   line-height: 1.25;
   font-weight: 700;
   font-size: 1.5rem;
@@ -27,7 +27,7 @@ const SelectedCategoryName = styled.span`
 `;
 
 const CategoryArrowSvg = styled.svg`
-  fill: var(--color-text-bold, #0f172a);
+  fill: #0f172a;
   width: 1.25rem;
   height: 1.25rem;
   display: block;
@@ -44,8 +44,8 @@ const CategoryListBox = styled.div`
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  background-color: var(--color-white, #fff);
-  border-color: var(--color-slate-300, #cbd5e1);
+  background-color: #fff;
+  border-color: #cbd5e1;
   border-style: solid;
   border-width: 1px;
   border-radius: 0.5rem;
@@ -68,7 +68,7 @@ const CategoryItemLink = styled(Link)`
   display: flex;
   position: relative;
   &:hover {
-    background-color: var(--color-background-hover, #f8fafc);
+    background-color: #f8fafc;
   }
 `;
 
@@ -81,10 +81,7 @@ const SelectedSvg = styled.svg`
 `;
 
 const CategoryName = styled.span`
-  color: ${({ selected }) =>
-    selected
-      ? "var(--color-text-bold, #0f172a)"
-      : "var(--color-text-subtler, #64748b)"};
+  color: ${({ selected }) => (selected ? "#0f172a" : "#64748b")};
   font-weight: ${({ selected }) => (selected ? "700" : "")};
   font-size: 1rem;
 `;

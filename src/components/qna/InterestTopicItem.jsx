@@ -10,7 +10,7 @@ const InterestTopicItemLink = styled(Link)`
   padding-bottom: 0.375rem;
   padding-left: 0.625rem;
   padding-right: 0.625rem;
-  border-color: var(--color-slate-200, #e2e8f0);
+  border-color: #e2e8f0;
   border-style: solid;
   border-width: 1px;
   border-radius: 9999px;
@@ -18,12 +18,12 @@ const InterestTopicItemLink = styled(Link)`
   align-items: center;
   display: flex;
   &:hover {
-    background-color: var(--color-background-hover, #f8fafc);
+    background-color: #f8fafc;
   }
 `;
 
 const InterestTopicItemName = styled.span`
-  color: var(--color-text-bold, #0f172a);
+  color: #0f172a;
   font-weight: 700;
   font-size: 0.75rem;
 `;

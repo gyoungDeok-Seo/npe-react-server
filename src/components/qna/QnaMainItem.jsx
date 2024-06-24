@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 const QnaMainItemLink = styled(Link)`
   padding: 1rem;
-  border-color: var(--color-slate-200, #e2e8f0);
+  border-color: #e2e8f0;
   border-style: solid;
   border-width: 0;
   border-bottom-width: 1px;
@@ -14,7 +14,7 @@ const QnaMainItemLink = styled(Link)`
   min-width: 0;
   display: flex;
   &:hover {
-    background-color: var(--color-slate-50, #f8fafc);
+    background-color: #f8fafc;
   }
 `;
 
@@ -26,13 +26,13 @@ const QnaHeader = styled.div`
 `;
 
 const AnswerSvg = styled.svg`
-  fill: var(--color-slate-500, #64748b);
+  fill: #64748b;
   width: 1rem;
   height: 1rem;
 `;
 
 const TimeWriterType = styled.p`
-  color: var(--color-slate-500, #64748b);
+  color:#64748b;
   font-weight: 700;
   font-size: 0.75rem;
   word-break: break-all;
@@ -53,11 +53,11 @@ const QnaTitle = styled.p`
 `;
 
 const QnaTitleInside = styled.span`
-  color: var(--color-slate-900, #0f172a);
+  color: #0f172a;
 `;
 
 const QnaContent = styled.p`
-  color: var(--color-slate-900, #0f172a);
+  color: #0f172a;
   font-size: 0.875rem;
   -webkit-line-clamp: 2;
   overflow: hidden;
@@ -76,7 +76,7 @@ const QnaTagBox = styled.div`
 `;
 
 const TagName = styled.p`
-  color: var(--color-slate-500, #64748b);
+  color: #64748b;
   font-size: 0.875rem;
 `;
 
@@ -86,12 +86,12 @@ const QnaStatBox = styled.div`
 `;
 
 const AnswerCount = styled.p`
-  color: var(--color-slate-900, #0f172a);
+  color:#0f172a;
   font-size: 0.75rem;
 `;
 
 const ReplyCount = styled.p`
-  color: var(--color-slate-500, #64748b);
+  color: #64748b;
   font-size: 0.75rem;
 `;
 

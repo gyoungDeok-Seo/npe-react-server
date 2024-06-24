@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { CreateQnaImgContext } from "../../context/CreateQnaImgContext";
 import { useDispatch, useSelector } from "react-redux";
 import { a, sendCreateQnaData } from "../../service/qnaApi";
-import { setFiles, setTags } from "../../redux/createQna";
-import { useLocation } from "react-router-dom";
+import { setFiles } from "../../redux/createQna";
 
 
 const CreateQnaHeaderBox = styled.nav`

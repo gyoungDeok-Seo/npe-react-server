@@ -92,7 +92,7 @@ function MainHeader({ setAvoidMistakesModal, qnaId }) {
     };
 
     fetchCategories();
-  }, [dispatch]);
+  }, [pathname]);
 
   return (
     <>

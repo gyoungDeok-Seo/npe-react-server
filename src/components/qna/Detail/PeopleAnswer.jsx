@@ -33,7 +33,7 @@ const AnswerLikePeopleViewBtn = styled.button`
 `;
 
 const AnswerLikeCount = styled.span`
-  color: var(--color-text-subtler, #64748b);
+  color:#64748b;
   font-size: 0.75rem;
 `;
 
@@ -58,15 +58,15 @@ const LikeBtn = styled.button`
 const LikeSvg = styled.svg`
   fill: ${({ isLike }) =>
     isLike
-      ? "var(--color-teal-600, #0d9488)"
-      : "var(--color-slate-500, #64748b)"};
+      ? "#0d9488"
+      : "#64748b"};
 `;
 
 const LikeText = styled.span`
   color: ${({ isLike }) =>
     isLike
-      ? "var(--color-teal-600, #0d9488)"
-      : "var(--color-slate-500, #64748b)"};
+      ? "#0d9488"
+      : "#64748b"};
   --tw-numeric-spacing: tabular-nums;
   font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero)
     var(--tw-numeric-figure) var(--tw-numeric-spacing)
@@ -78,11 +78,11 @@ const LikeText = styled.span`
 const ReplyBtn = styled(LikeBtn)``;
 
 const ReplySvg = styled.svg`
-  fill: var(--color-slate-500, #64748b);
+  fill: #64748b;
 `;
 
 const ReplyText = styled.span`
-  color: var(--color-slate-500, #64748b);
+  color: #64748b;
   --tw-numeric-spacing: tabular-nums;
   font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero)
     var(--tw-numeric-figure) var(--tw-numeric-spacing)
@@ -100,7 +100,7 @@ const MoreBtn = styled.button`
 `;
 
 const MoreSvg = styled.svg`
-  fill: var(--color-slate-400, #94a3b8);
+  fill: #94a3b8;
   display: block;
 `;
 
@@ -114,8 +114,8 @@ const MoreActionBox = styled.div`
   font-size: 1rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  background-color: var(--color-white, #fff);
-  border-color: var(--color-slate-200, #e2e8f0);
+  background-color:#fff;
+  border-color: #e2e8f0;
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;
@@ -133,22 +133,22 @@ const AnswerReportBtn = styled.button`
   padding-bottom: 0.5rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  background-color: var(--color-white, #fff);
+  background-color: #fff;
   gap: 0.5rem;
   align-items: center;
   width: 100%;
   display: flex;
   &:hover {
-    background-color: var(--color-background-hover, #f8fafc);
+    background-color: #f8fafc;
   }
 `;
 
 const AnswerReportSvg = styled.svg`
-  fill: var(--color-text-button-destructive, #ef4444);
+  fill: #ef4444;
 `;
 
 const AnswerReportText = styled.p`
-  color: var(--color-text-button-destructive, #ef4444);
+  color:#ef4444;
   font-size: 0.875rem;
   white-space: nowrap;
 `;
@@ -156,11 +156,11 @@ const AnswerReportText = styled.p`
 const AnswerModifyBtn = styled(AnswerReportBtn)``;
 
 const AnswerModifySvg = styled.svg`
-  fill: var(--color-slate-400, #94a3b8);
+  fill: #94a3b8;
 `;
 
 const AnswerModifyText = styled(AnswerReportText)`
-  color: var(--color-text-bold, #0f172a);
+  color:  #0f172a;
 `;
 
 const AnswerDeleteBtn = styled(AnswerReportBtn)``;
@@ -171,7 +171,7 @@ const AnswerDeleteText = styled(AnswerReportText)``;
 
 const AnswerReplyWriteSector = styled.div`
   padding: 1rem;
-  border-color: var(--color-slate-200, #e2e8f0);
+  border-color: #e2e8f0;
   border-style: solid;
   border-bottom-width: 0;
   border-left-width: 0;
@@ -183,9 +183,8 @@ const AnswerReplyWriteSector = styled.div`
 
 const MemberProfileImg = styled.img`
   object-fit: cover;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  border-color: var(--color-slate-200, #e2e8f0);
+  background-color: rgb(255 255 255 / 1);
+  border-color:#e2e8f0;
   border-style: solid;
   border-width: 1px;
   border-radius: 9999px;
@@ -205,14 +204,14 @@ const AnswerReplyRegistrationBox = styled.div`
 
 const AnswerReplyTextarea = styled.textarea`
   height: 24px !important;
-  color: var(--color-slate-900, #0f172a);
+  color: #0f172a;
   font-size: 1rem;
   padding: 0;
   border-width: 0;
   resize: none;
   width: 100%;
   &::placeholder {
-    color: var(--color-text-placeholder, #94a3b8);
+    color: #94a3b8;
   }
   &:focus-visible {
     outline: none;
@@ -223,8 +222,8 @@ const AnswerReplyTextarea = styled.textarea`
 const AnswerReplyRegistrationBtn = styled.button`
   color: ${({ isWrite }) =>
     isWrite
-      ? "var(--color-white, #fff)"
-      : "var(--color-text-button-disabled, #94a3b8)"};
+      ? "#fff"
+      : " #94a3b8"};
   font-weight: 700;
   font-size: 0.75rem;
   padding-top: 0.375rem;
@@ -233,12 +232,12 @@ const AnswerReplyRegistrationBtn = styled.button`
   padding-right: 0.5rem;
   background-color: ${({ isWrite }) =>
     isWrite
-      ? "var(--color-background-button-primary-bold-enabled, #334155)"
-      : "var(--color-background-button-disabled, #f1f5f9)"};
+      ? "#334155"
+      : "#f1f5f9"};
   border-color: ${({ isWrite }) =>
     isWrite
-      ? "var(--color-slate-700, #334155)"
-      : "var(--color-slate-100, #f1f5f9)"};
+      ? "#334155"
+      : "#f1f5f9"};
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;
@@ -248,7 +247,7 @@ const AnswerReplyRegistrationBtn = styled.button`
   &:hover {
     background-color: ${({ isWrite }) =>
       isWrite
-        ? "var(--color-background-button-primary-bold-hover, #1e293b)"
+        ? "#1e293b"
         : ""};
     cursor: ${({ isWrite }) => (isWrite ? "pointer" : "default")};
   }

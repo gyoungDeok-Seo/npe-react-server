@@ -214,7 +214,7 @@ const ReportSvg = styled(DeleteSvg)``;
 const ReportText = styled(DeleteText)``;
 
 const QnaDetailContent = styled.p`
-  color: var(--color-text-bold, #0f172a);
+  color: #0f172a;
   font-size: 1rem;
   white-space: pre-wrap;
   min-height: 120px;
@@ -385,7 +385,7 @@ const AnswerRegistrationBtn = styled.button`
   &:hover {
     background-color: ${({ isWrite }) =>
       isWrite
-        ? "var(--color-background-button-primary-bold-hover, #1e293b)"
+        ? "#1e293b"
         : ""};
     cursor: ${({ isWrite }) => (isWrite ? "pointer" : "default")};
   }
