@@ -50,6 +50,7 @@ const ProfileTabUnderBar = styled.div`
 function TabBox({ tab, setTab }) {
     const memberQuestions = useSelector((state) => state.memberQuestions);
     const memberAnswers = useSelector((state) => state.memberAnswers);
+    console.log(memberQuestions);
 
     return (
         <ProfileTabBox>
@@ -69,7 +70,7 @@ function TabBox({ tab, setTab }) {
                     </ProfileTabItem>
                     <ProfileTabItem>
                         <ProfileTabBtn tab={tab === 3} onClick={() => setTab(3)}>
-                            Q&amp;A 활동 {memberQuestions?.questions[0]?.myQuestionTotalCount + memberAnswers?.answers[0]?.myAnswerTotalCount}
+                            Q&amp;A 활동 {(memberQuestions?.questions.length > 0 ? memberQuestions?.questions[0]?.myQuestionTotalCount : 0) + (memberAnswers?.answers.length > 0 ? memberAnswers?.answers[0]?.myAnswerTotalCount : 0)}
                         </ProfileTabBtn>
                         <ProfileTabUnderBar tab={tab === 3}></ProfileTabUnderBar>
                     </ProfileTabItem>
