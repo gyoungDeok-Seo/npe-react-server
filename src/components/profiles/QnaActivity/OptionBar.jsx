@@ -48,12 +48,12 @@ function OptionBar({ setOption, option, setPage: { setAnswerPage, setQuestionPag
         <OptionBarBox>
             <OptionBtn type="button" onClick={handleAnswer} option={option === 1}>
                 <OptionBtnText>
-                    답변 <span>{memberAnswers?.answers[0]?.myAnswerTotalCount}</span>
+                    답변 <span>{memberAnswers?.answers.length > 0 ? memberAnswers?.answers[0]?.myAnswerTotalCount : 0}</span>
                 </OptionBtnText>
             </OptionBtn>
             <OptionBtn type="button" onClick={handleQuestion} option={option === 2}>
                 <OptionBtnText>
-                    질문 <span>{memberQuestions?.questions[0]?.myQuestionTotalCount}</span>
+                    질문 <span>{memberQuestions?.questions.length > 0 ? memberQuestions?.questions[0]?.myQuestionTotalCount : 0}</span>
                 </OptionBtnText>
             </OptionBtn>
         </OptionBarBox>
