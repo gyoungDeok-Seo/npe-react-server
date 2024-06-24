@@ -74,7 +74,6 @@ function OnLoginNav({ member, setSearch }) {
     const writeOptionRef = useRef(null);
     const writeModalRef = useRef(null);
 
-    console.log();
     const handleProfileModal = () => {
         setProfileModalOpen((open) => !open);
         setSearch(false);

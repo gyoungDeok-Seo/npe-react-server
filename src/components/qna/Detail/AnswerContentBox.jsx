@@ -6,10 +6,9 @@ import ReportModal from "../Modal/ReportModal";
 import DeleteModal from "../Modal/DeleteModal";
 import AiAnswer from "./AiAnswer";
 import PeopleAnswer from "./PeopleAnswer";
-import { updateAnswer } from "../../../service/answerApi";
-import { useDispatch, useSelector } from "react-redux";
-import { setQnaDetailData } from "../../../redux/qnaDetail";
-import { readQnaDetail } from "../../../service/qnaApi";
+import { updateAnswerApi } from "../../../service/answerApi";
+
+import { timeForToday } from "../../profiles/QnaActivity/QnaActivityAnswer";
 
 const AnswerListBox = styled.div`
   background-color: var(--color-white, #fff);
@@ -179,23 +178,26 @@ const AnswerContentModifyText = styled.span`
   -webkit-line-clamp: 1;
 `;
 
-function AnswerContentBox({ answer, index }) {
+function AnswerContentBox({ answer, index, setAnswerList }) {
   const type = "답글";
   const [likeModal, setLikeModal] = useState(false);
   const [modifyValue, setModifyValue] = useState(answer.answerContent || "");
   const [reportModal, setReportModal] = useState(false);
   const [isModify, setIsModify] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
-  const qnaId = useSelector((state) => state.qnaId);
-  const dispatch = useDispatch();
   const handlerChangeValue = (e) => {
     setModifyValue(e.target.value);
   };
 
   const handlerClickModifyDoneBtn = async () => {
-    await updateAnswer(answer.id, modifyValue);
-    dispatch(setQnaDetailData(await readQnaDetail(qnaId.id)));
+    const data = {
+      id: answer.id,
+      answerContent: modifyValue,
+      questionId: answer.questionId,
+    };
+    const response = await updateAnswerApi(data);
     setIsModify(false);
+    setAnswerList(response);
   };
 
   return (
@@ -203,15 +205,17 @@ function AnswerContentBox({ answer, index }) {
       <AnswerListBox key={index}>
         <AnswerMains>
           <AnswerWriterInfoBox>
-            <ProfileLink to={`/pofiles/${answer?.member_id}`}>
-              <AnswerWriterImage src={answer?.kakao_profile_url} />
+            <ProfileLink to={`/pofiles/${answer?.memberId}`}>
+              <AnswerWriterImage src={answer?.kakaoProfileUrl} />
             </ProfileLink>
             <ProfileBtn>
-              <AnswerWriterName>{answer?.member_name}</AnswerWriterName>
+              <AnswerWriterName>{answer?.memberName}</AnswerWriterName>
               <AnswerWriterPosition>
-                {answer?.member_position}
+                {answer?.memberPosition}
               </AnswerWriterPosition>
-              <AnswerWriteTime>{answer?.created_date}</AnswerWriteTime>
+              <AnswerWriteTime>
+                {timeForToday(answer?.createdDate)}
+              </AnswerWriteTime>
             </ProfileBtn>
           </AnswerWriterInfoBox>
           {isModify ? (
@@ -249,10 +253,11 @@ function AnswerContentBox({ answer, index }) {
             </div>
           )}
         </AnswerMains>
-        {answer.answerType === "ai" ? (
+        {answer?.answerType === "ai" ? (
           <AiAnswer />
         ) : (
           <PeopleAnswer
+            setAnswerList={setAnswerList}
             setReportModal={setReportModal}
             setIsModify={setIsModify}
             setDeleteModal={setDeleteModal}
@@ -265,7 +270,13 @@ function AnswerContentBox({ answer, index }) {
         <LikeUserModal setLikeUsersModal={setLikeModal} data={answer} />
       )}
       {reportModal && <ReportModal setModal={setReportModal} type={type} />}
-      {deleteModal && <DeleteModal setModal={setDeleteModal} data={answer} />}
+      {deleteModal && (
+        <DeleteModal
+          setModal={setDeleteModal}
+          data={answer}
+          setAnswerList={setAnswerList}
+        />
+      )}
     </>
   );
 }

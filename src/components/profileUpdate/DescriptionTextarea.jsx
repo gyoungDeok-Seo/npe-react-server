@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { InputLengthCountText, ProfileUpdateInputInner, ProfileUpdateLabel } from "../../pages/ProfileUpdate";
 import styled from "styled-components";
-import { ProfileUpdateContext } from "../../context/ProfileUpdateContext";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setDescription } from "../../redux/profileUpdate";
 
 const ProfileUpdateTextarea = styled.textarea`

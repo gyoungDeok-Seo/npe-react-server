@@ -16,7 +16,6 @@ function Main() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(isLogin);
     isLogin && navigate("/home");
   }, [isLogin, navigate]);
 

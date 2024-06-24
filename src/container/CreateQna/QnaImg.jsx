@@ -69,12 +69,13 @@ const QnaImg = () => {
   };
 
   const handleInput = (e) => {
-    const files = Array.from(e.target.files);
-    const filePreviews = files.map((file) => ({
+    const file = e.target.files[0];
+    const filePreviews = {
+      file: file,
       fileName: file.name,
       filePath: URL.createObjectURL(file),
-    }));
-    dispatch(setFiles([...createQna.files, ...filePreviews]));
+    };
+    dispatch(setFiles([...createQna.files, filePreviews]));
     fileInputRef.current.value = "";
   };
 
@@ -125,7 +126,7 @@ const QnaImg = () => {
               style={{ display: "none" }}
               ref={fileInputRef}
               onChange={handleInput}
-              multiple
+              multiple="false"
             />
             <QnaImgAddBtn type="button" onClick={handleAddBtn}>
               <QnaImgAddBtnSvg

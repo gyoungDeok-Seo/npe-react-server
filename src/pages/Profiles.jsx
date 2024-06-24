@@ -54,7 +54,6 @@ function Profiles() {
     useEffect(() => {
         // 서버에서 세션 정보를 가져와 로그인 상태를 설정합니다.
         const fetchUserSession = async () => {
-            console.log(pathname.split("/")[2]);
             try {
                 const response = await fetch(`http://localhost:10000/members/api/session?memberId=${pathname.split("/")[2]}`, {
                     method: "GET",

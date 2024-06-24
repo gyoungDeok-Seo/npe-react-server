@@ -1,17 +1,20 @@
-export const createReply = async (data) => {
-  await fetch("http://localhost:10000/replies/api/create", {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+export const replyListApi = async (qnaId) => {
+  const response = await fetch(
+    `http://localhost:10000/answers/api/list?id=${qnaId}`,
+    {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const json = response.json();
+  return json;
 };
 
-export const updateReply = async (replyId, content) => {
-  const data = { id: replyId, replayContent: content };
-  await fetch("http://localhost:10000/replies/api/update", {
+export const createReplyApi = async (data) => {
+  const response = await fetch("http://localhost:10000/replies/api/create", {
     method: "POST",
     credentials: "include",
     headers: {
@@ -19,11 +22,12 @@ export const updateReply = async (replyId, content) => {
     },
     body: JSON.stringify(data),
   });
+  const json = response.json();
+  return json;
 };
 
-export const deleteReply = async (replyId) => {
-  const data = { id: replyId };
-  await fetch("http://localhost:10000/replies/api/delete", {
+export const updateReplyApi = async (data) => {
+  const response = await fetch("http://localhost:10000/replies/api/update", {
     method: "POST",
     credentials: "include",
     headers: {
@@ -31,6 +35,21 @@ export const deleteReply = async (replyId) => {
     },
     body: JSON.stringify(data),
   });
+  const json = response.json();
+  return json;
+};
+
+export const deleteReplyApi = async (data) => {
+  const response = await fetch("http://localhost:10000/replies/api/delete", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const json = response.json();
+  return json;
 };
 
 export const sendReplyLikePeople = async (answerId) => {
@@ -47,10 +66,9 @@ export const sendReplyLikePeople = async (answerId) => {
   return json;
 };
 
-export const snedReplyLike = async (answerId) => {
-  const data = { id: answerId };
+export const replyLikeApi = async (data) => {
   const response = await fetch(
-    "http://localhost:10000/replies/api/replyLike",
+    "http://localhost:10000/replies/api/reply-like",
     {
       method: "POST",
       credentials: "include",

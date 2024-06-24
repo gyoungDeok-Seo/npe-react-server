@@ -13,6 +13,7 @@ import CreateQna from "./pages/CreateQna";
 import QnaDetail from "./pages/QnaDetail";
 import TaggedSearch from "./pages/TaggedSearch";
 import { useSelector } from "react-redux";
+import UpdateQna from "./pages/UpdateQna";
 
 function Router() {
     const isLoggedIn = useSelector((state) => state.loginStatus.status);
@@ -23,6 +24,7 @@ function Router() {
                 {/* <Route path="/home" element={isLoggedIn ? <HomePage /> : <Navigate to="/" />} /> */}
                 <Route path="/qnas" element={<QnA />} />
                 <Route path="/qnas/detail/:qnaId" element={<QnaDetail />} />
+                <Route path="/qnas/update/:qnaId" element={<UpdateQna />} />
                 <Route path="/qnas/tagged/:tag" element={<TaggedSearch />} />
                 <Route path="/profile/:memberId" element={<Profiles />} />
                 <Route path="/profiles/update" element={<ProfileUpdate />} />

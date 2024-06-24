@@ -1,12 +1,9 @@
 import styled from "styled-components";
 import { Pilsu } from "../../pages/CareerCreate";
 import {
-  SitesCreateaInput,
   SitesCreateaLabel,
   SitesCreateaPartTitleBox,
 } from "../../pages/SitesCreate";
-import { useContext } from "react";
-import { CreateSiteContext } from "../../context/CreateSiteContext";
 
 const SitesInputBoxTop = styled.div`
   margin-bottom: 1.5rem;
@@ -17,15 +14,14 @@ const SitesCreateaRelativeBox = styled.div`
 `;
 
 function LinkUrlBox() {
-  const { datas, setDatas } = useContext(CreateSiteContext);
 
-  const handleUrlChange = (e) => {
-    const value = e.target.value;
-    setDatas((prev) => ({
-      ...prev,
-      url: value,
-    }));
-  };
+  // const handleUrlChange = (e) => {
+  //   const value = e.target.value;
+  //   setDatas((prev) => ({
+  //     ...prev,
+  //     url: value,
+  //   }));
+  // };
   return (
     <SitesInputBoxTop>
       <SitesCreateaPartTitleBox>
@@ -35,12 +31,12 @@ function LinkUrlBox() {
         </SitesCreateaLabel>
       </SitesCreateaPartTitleBox>
       <SitesCreateaRelativeBox>
-        <SitesCreateaInput
+        {/* <SitesCreateaInput
           type="text"
           placeholder="URL을 입력해 주세요."
           value={datas.url}
           onChange={handleUrlChange}
-        />
+        /> */}
       </SitesCreateaRelativeBox>
     </SitesInputBoxTop>
   );

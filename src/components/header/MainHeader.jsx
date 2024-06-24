@@ -53,7 +53,7 @@ const RightBox = styled.div`
   gap: 0.25rem;
 `;
 
-function MainHeader({ setAvoidMistakesModal }) {
+function MainHeader({ setAvoidMistakesModal, qnaId }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
@@ -102,7 +102,7 @@ function MainHeader({ setAvoidMistakesModal }) {
           navigate={navigate}
           setAvoidMistakesModal={setAvoidMistakesModal}
         />
-      ) : path.includes("/create") ? (
+      ) : path.includes("create") || path.includes("update") ? (
         <CreateQnaHeader
           navigate={navigate}
           setAvoidMistakesModal={setAvoidMistakesModal}

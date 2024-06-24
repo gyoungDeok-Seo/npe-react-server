@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import PopularPosts from "../../components/SearchResult/SideBar/PopularPosts";
 

@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+import { timeForToday } from "../../profiles/QnaActivity/QnaActivityAnswer";
 
 const QuestionLink = styled(Link)`
   padding: 1rem;
-  border-color: var(--color-slate-200, #e2e8f0);
+  border-color: #e2e8f0;
   border-style: solid;
   border-width: 0;
   border-bottom-width: 1px;
@@ -11,7 +12,7 @@ const QuestionLink = styled(Link)`
   min-width: 0;
   display: flex;
   &:hover {
-    background-color: var(--color-slate-50, #f8fafc);
+    background-color: #f8fafc;
   }
 `;
 
@@ -23,13 +24,13 @@ const QuestionInfo = styled.div`
 `;
 
 const AnswerSvg = styled.svg`
-  fill: var(--color-slate-500, #64748b);
+  fill: #64748b;
   width: 1rem;
   height: 1rem;
 `;
 
 const AnswerWrierIntro = styled.p`
-  color: var(--color-slate-500, #64748b);
+  color: #64748b;
   font-weight: 700;
   font-size: 0.75rem;
   word-break: break-all;
@@ -50,11 +51,11 @@ const QuestionHeaderBox = styled.p`
 `;
 
 const QuestionHeaderText = styled.span`
-  color: var(--color-slate-900, #0f172a);
+  color: #0f172a;
 `;
 
 const QuestionContent = styled.p`
-  color: var(--color-slate-900, #0f172a);
+  color: #0f172a;
   font-size: 0.875rem;
   -webkit-line-clamp: 2;
   overflow: hidden;
@@ -77,7 +78,7 @@ const CategoryBox = styled.div`
   padding-bottom: 0.375rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  background-color: var(--color-slate-100, #f1f5f9);
+  background-color: #f1f5f9;
   border-radius: 0.25rem;
   gap: 0.375rem;
   align-items: center;
@@ -86,19 +87,19 @@ const CategoryBox = styled.div`
 `;
 
 const CategorySvg = styled.svg`
-  fill: var(--color-green-600, #16a34a);
+  fill: #16a34a;
   display: block;
 `;
 
 const CategoryText = styled.p`
-  color: var(--color-slate-500, #64748b);
+  color: #64748b;
   line-height: 1;
   font-weight: 700;
   font-size: 0.75rem;
 `;
 
 const TagText = styled.p`
-  color: var(--color-slate-500, #64748b);
+  color: #64748b;
   font-size: 0.875rem;
 `;
 
@@ -108,31 +109,24 @@ const StateCountBox = styled.div`
 `;
 
 const AnswerCount = styled.p`
-  color: var(--color-slate-900, #0f172a);
+  color: #0f172a;
   font-size: 0.75rem;
 `;
 
 const ReplyCount = styled.p`
-  color: var(--color-slate-500, #64748b);
+  color: #64748b;
   font-size: 0.75rem;
 `;
 
 const HitsCount = styled.p`
-  color: var(--color-slate-500, #64748b);
+  color: #64748b;
   font-size: 0.75rem;
   margin-left: auto;
 `;
 
 function SearchTagQuestion({ question, index }) {
-  function formatDate(dateString = null) {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
-    return `${year}년 ${month}월 ${day}일`;
-  }
   return (
-    <QuestionLink to={""} key={index}>
+    <QuestionLink to={`/qnas/detail/${question?.id}`} key={index}>
       <QuestionInfo>
         <AnswerSvg
           width="24"
@@ -162,12 +156,9 @@ function SearchTagQuestion({ question, index }) {
           </g>
         </AnswerSvg>
         <AnswerWrierIntro>
-          <span>{formatDate(question?.createdDate)}</span>
+          <span>{timeForToday(question?.createdDate)}</span>
           <span> · </span>
-          <span>
-            {question?.memberName} 님의 새로운 질문
-            {/* {question.type === "answer" ? "답변 업데이트" : "새로운 질문"} */}
-          </span>
+          <span>{question?.memberName} 님의 새로운 질문</span>
         </AnswerWrierIntro>
       </QuestionInfo>
       <QuestionHeaderBox>
@@ -194,10 +185,10 @@ function SearchTagQuestion({ question, index }) {
               </g>
             </g>
           </CategorySvg>
-          <CategoryText>{question?.memberPosition}</CategoryText>
+          <CategoryText>{question?.categoryName}</CategoryText>
         </CategoryBox>
         {question?.tags &&
-          question?.tags.map((tag, index) => (
+          question?.tags?.map((tag, index) => (
             <TagText key={index}>#{tag}</TagText>
           ))}
       </TagAndCategoryBox>
@@ -209,7 +200,7 @@ function SearchTagQuestion({ question, index }) {
           댓글 <span>{question?.replyCnt}</span>
         </ReplyCount>
         <HitsCount>
-          조회 <span>118</span>
+          조회 <span>{question?.hits}</span>
         </HitsCount>
       </StateCountBox>
     </QuestionLink>

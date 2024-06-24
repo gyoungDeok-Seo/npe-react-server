@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import styled from "styled-components";
 import { CareerCreateLabel } from "../../pages/CareerCreate";
-import { CreateCareerContext } from "../../context/CreateCareerContext";
 import { useDispatch, useSelector } from "react-redux";
 import { setDescription } from "../../redux/createCareer";
 import { useLocation } from "react-router-dom";

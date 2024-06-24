@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { popularSkills, skillList } from "../../service/dummyData";
+import { popularSkills } from "../../service/dummyData";
 import { setSkills } from "../../redux/createCareer";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -277,9 +277,6 @@ const CareerSkillModal = ({ setCareerSkillModal }) => {
         setSelectedSkills(createCareer.careerSkills);
     }, [createCareer.careerSkills]);
 
-    useEffect(() => {
-        console.log(selectedSkills);
-    }, [selectedSkills]);
     return (
         <div>
             <div

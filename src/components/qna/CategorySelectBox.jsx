@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { styled } from "styled-components";
-import { categoryList } from "../../service/qnaApi";
+import { categoryList, qnaListApi } from "../../service/qnaApi";
 import { useSelector } from "react-redux";
 
 const CategorySelectBoxDiv = styled.div`
@@ -95,7 +95,7 @@ function CategorySelectBox() {
   const arrowSvgRef = useRef(null);
   const [searchParams] = useSearchParams();
   const tab = searchParams.get("tab") || "newest";
-  const qsCategory = searchParams.get("category") || "JAVA";
+  const qsCategory = searchParams.get("category") || "java";
   const { categories } = useSelector((state) => state.categoryList);
 
   const handleClickOutside = (e) => {
@@ -118,7 +118,13 @@ function CategorySelectBox() {
     <CategorySelectBoxDiv>
       {/* useRef 사용처 */}
       <CategoryBtn type="button" onClick={ClickCategory}>
-        <SelectedCategoryName>{qsCategory}</SelectedCategoryName>
+        <SelectedCategoryName>
+          {categories?.map(
+            (item) =>
+              item.categoryName.toLowerCase() === qsCategory &&
+              item.categoryName
+          )}
+        </SelectedCategoryName>
         <CategoryArrowSvg
           ref={arrowSvgRef}
           isReversed={isOpen}
@@ -145,7 +151,7 @@ function CategorySelectBox() {
           categories?.map((category, index) => (
             <CategoryItemLink
               key={index}
-              to={`?category=${category.categoryName.replace(
+              to={`?category=${category.categoryValue.replace(
                 /\+/g,
                 "%2B"
               )}&tab=${tab}`}

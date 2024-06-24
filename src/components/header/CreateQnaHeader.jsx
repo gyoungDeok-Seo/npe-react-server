@@ -1,8 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { CreateQnaImgContext } from "../../context/CreateQnaImgContext";
-import { useSelector } from "react-redux";
-import { sendCreateQnaData } from "../../service/qnaApi";
+import { useDispatch, useSelector } from "react-redux";
+import { a, sendCreateQnaData } from "../../service/qnaApi";
+import { setFiles, setTags } from "../../redux/createQna";
+import { useLocation } from "react-router-dom";
+
 
 const CreateQnaHeaderBox = styled.nav`
   padding-left: 1rem;
@@ -106,13 +109,24 @@ const CreateQnaHeaderAddImgBtnSvg = styled.svg`
 function CreateQnaHeader({ navigate, setAvoidMistakesModal }) {
   const createQna = useSelector((state) => state.createQna);
   const { showInput, setShowInput } = useContext(CreateQnaImgContext);
+  const dispatch = useDispatch();
+
   const handleShowInput = () => {
     setShowInput((showInput) => !showInput);
   };
-  const handleUpdateProfile = () => {
-    navigate("/");
-    sendCreateQnaData(createQna);
+  const handleUpdateProfile = async () => {
+    const asd = await a.b(createQna);
+    if (asd) {
+      const updatedFiles = createQna.files.map((file, i) => ({
+        ...file,
+        fileName: `${asd[i]}_${file.fileName}`,
+      }));
+      dispatch(setFiles(updatedFiles));
+      sendCreateQnaData(createQna);
+      navigate("/qnas");
+    }
   };
+
 
   const handleAvoidMistakesModal = () => {
     setAvoidMistakesModal(true);
@@ -121,11 +135,10 @@ function CreateQnaHeader({ navigate, setAvoidMistakesModal }) {
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
-    const { title, question, category, tags } = createQna;
+    const { questionTitle, questionContent, categoryId, tags } = createQna;
 
-    console.log(createQna);
     setDisabled(
-      title === "" || question === "" || category === "" || tags.length === 0
+      questionTitle === "" || questionContent === "" || categoryId === "" || tags?.length === 0
     );
   }, [createQna]);
   return (

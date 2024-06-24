@@ -2,9 +2,10 @@ import { styled } from "styled-components";
 import SearchTagHeadLine from "./SearchTagHeadLine";
 import SearchTagQuestion from "./SearchTagQuestion";
 import SearchTagQuestionNone from "./SearchTagQuestionNone";
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { tagQnaListApi } from "../../../service/qnaApi";
 
 const SearchTagWrap = styled.div`
   padding-bottom: 5rem;
@@ -25,30 +26,49 @@ const SearchTagContainer = styled.div`
   grid-column: span 10 / span 10;
   grid-column-start: 2;
 `;
-
 function SearchTagComponent() {
   const { pathname } = useLocation();
   const match = pathname.split("/")[3];
+  const [qnaList, setQnaList] = useState([]);
+  const [pages, setPages] = useState(1); // 현재 페이지 번호
+  const { data, isLoading, isError } = useQuery(
+    ["searchTag", match, pages],
+    () => tagQnaListApi(match, pages),
+    {
+      enabled: !!match,
+    }
+  );
+
+  const handleScroll = () => {
+    const { scrollTop, offsetHeight } = document.documentElement;
+    const innerHeight = window.innerHeight;
+    if (innerHeight + scrollTop >= offsetHeight) {
+      setPages((prev) => prev + 1);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [match, qnaList]);
+
+  useEffect(() => {
+    if (data) {
+      setQnaList((prevQnaList) => [...prevQnaList, ...data.list]);
+    }
+  }, [data]);
 
   return (
     <SearchTagWrap>
       <SearchTagContainer>
-        {/* {!isLoading && (
-          <>
-            <SearchTagHeadLine />
-            {qnaListData ? (
-              qnaListData?.list.map((question, index) => (
-                <SearchTagQuestion
-                  key={index}
-                  question={question}
-                  index={index}
-                />
-              ))
-            ) : (
-              <SearchTagQuestionNone />
-            )}
-          </>
-        )} */}
+        <SearchTagHeadLine listCount={data?.listCount} />
+        {qnaList?.length !== 0 ? (
+          qnaList?.map((question, index) => (
+            <SearchTagQuestion key={index} question={question} index={index} />
+          ))
+        ) : (
+          <SearchTagQuestionNone />
+        )}
       </SearchTagContainer>
     </SearchTagWrap>
   );

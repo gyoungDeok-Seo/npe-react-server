@@ -1,10 +1,9 @@
 import { styled } from "styled-components";
-import { deleteAnswer } from "../../../service/answerApi";
-import { readQnaDetail } from "../../../service/qnaApi";
-import { useDispatch, useSelector } from "react-redux";
-import { setQnaDetailData } from "../../../redux/qnaDetail";
-import { useLocation } from "react-router-dom";
-import { deleteReply } from "../../../service/answerReplyApi";
+import { deleteAnswerApi } from "../../../service/answerApi";
+import { deleteQnaApi } from "../../../service/qnaApi";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { deleteReplyApi } from "../../../service/answerReplyApi";
 
 const ModalWrap = styled.div`
   align-items: center;
@@ -110,17 +109,23 @@ const CancelBtn = styled(DeleteBtn)`
   margin: 0;
 `;
 
-function ReplyDeleteModal({ setModal, data }) {
+function ReplyDeleteModal({ setModal, data, setAnswerList, qnaId }) {
+  const navigator = useNavigate();
   const dispatch = useDispatch();
-  const qnaId = useSelector((state) => state.qnaId);
   const handlerClickDeleteBtn = async () => {
-    if (data.answerContent) {
-      await deleteAnswer(data.id);
+    if (data.questionContent) {
+      await deleteQnaApi(data.id);
+      navigator("/qnas");
+    } else if (data.answerContent) {
+      const request = { id: data.id, questionId: data.questionId };
+      const response = await deleteAnswerApi(request);
+      setAnswerList(response);
     } else if (data.replayContent) {
-      await deleteReply(data.id);
+      const request = { id: data.id, questionId: qnaId };
+      const response = await deleteReplyApi(request);
+      setAnswerList(response);
+      setModal(false);
     }
-    // dispatch(setQnaDetailData(await readQnaDetail(qnaId.id)));
-    setModal(false);
   };
   const handlerClickCancelBtn = () => {
     setModal(false);
