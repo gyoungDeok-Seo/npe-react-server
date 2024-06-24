@@ -126,7 +126,7 @@ function Post() {
                                         ))}
                                     </PostList>
                                 ) : (
-                                    <NonePost />
+                                    <NonePost target={"게시물"} />
                                 )}
                             </div>
                         </ProfileColSpanBox>

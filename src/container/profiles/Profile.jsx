@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSkills } from "../../redux/createSkills";
 import { setCareers } from "../../redux/careerList";
 import { setEducations } from "../../redux/educationList";
+import NonePost from "../../components/profiles/Post/NonePost";
 
 const ProfileContentContainer = styled.div`
     border-color: #e2e8f0;
@@ -231,215 +232,216 @@ function Profile({ member, same }) {
                         <div>
                             <div>
                                 <div>
-                                    <ProfileContentContainerInner>
-                                        {!same && memberSkills.skills.length == 0 ? (
-                                            <></>
-                                        ) : (
-                                            <ContentBox>
-                                                <ContentTextBox>
-                                                    <div>
-                                                        <ContentText>스킬</ContentText>
-                                                    </div>
-                                                    {same && memberSkills && memberSkills.skills.length > 0 && (
-                                                        <ContentUpdateBtn to="/profiles/skills">
-                                                            <ContentUpdateSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <g>
-                                                                    <g id="style=outline">
-                                                                        <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M18.5 3.99976C18.1021 3.99976 17.7205 4.15783 17.4391 4.43919L16.6462 5.23209L18.768 7.35387L19.5609 6.56098C19.8423 6.27961 20.0003 5.898 20.0003 5.50009C20.0003 5.10217 19.8423 4.72056 19.5609 4.43919C19.2795 4.15783 18.8979 3.99976 18.5 3.99976ZM20.9751 7.97519C21.6315 7.31875 22.0003 6.42843 22.0003 5.50009C22.0003 4.57174 21.6315 3.68142 20.9751 3.02498C20.3187 2.36854 19.4283 1.99976 18.5 1.99976C17.5717 1.99976 16.6813 2.36854 16.0249 3.02498L2.29289 16.757C2.10536 16.9445 2 17.1989 2 17.4641V21.0361C2 21.5884 2.44772 22.0361 3 22.0361H6.5C6.76522 22.0361 7.01957 21.9307 7.20711 21.7432L20.9751 7.97519ZM17.3538 8.76808L15.232 6.6463L4 17.8783V20.0361H6.08579L17.3538 8.76808Z"></path>
-                                                                    </g>
-                                                                </g>
-                                                            </ContentUpdateSvg>
-                                                        </ContentUpdateBtn>
-                                                    )}
-                                                </ContentTextBox>
-                                                {memberSkills && memberSkills.skills.length > 0 ? (
-                                                    <SkillList>
-                                                        {memberSkills.skills.map((memberSkill, index) => (
-                                                            <SkillItem key={index}>
-                                                                <SkillName>{memberSkill.skillName}</SkillName>
-                                                            </SkillItem>
-                                                        ))}
-                                                    </SkillList>
-                                                ) : (
-                                                    <NonExistent partText=" 활용할 수 있는 스킬을 알려주세요." part="경력" url="/profiles/skills" />
-                                                )}
-                                            </ContentBox>
-                                        )}
-                                        {!same && memberCareer.careers.length == 0 ? (
-                                            <></>
-                                        ) : (
-                                            <ContentBox>
-                                                <ContentTextBox>
-                                                    <div>
-                                                        <ContentText>경력</ContentText>
-                                                    </div>
-                                                    {same && memberCareer && memberCareer.careers.length > 0 && (
-                                                        <ContentUpdateBtn to={"/profiles/careers/create"}>
-                                                            <ContentUpdateSvg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <g>
-                                                                    <g id="style=outline">
-                                                                        <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"></path>
-                                                                    </g>
-                                                                </g>
-                                                            </ContentUpdateSvg>
-                                                        </ContentUpdateBtn>
-                                                    )}
-                                                </ContentTextBox>
-                                                {memberCareer && memberCareer.careers.length > 0 ? (
-                                                    <ContentList>
-                                                        {memberCareer.careers.map((career, index) => (
-                                                            <ContentItem ket={index}>
-                                                                <ContentSvg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    {memberSkills.skills.length != 0 || memberCareer.careers.length != 0 || memberEducation?.educations.length != 0 ? (
+                                        <ProfileContentContainerInner>
+                                            {!same && memberSkills.skills.length == 0 ? (
+                                                <></>
+                                            ) : (
+                                                <ContentBox>
+                                                    <ContentTextBox>
+                                                        <div>
+                                                            <ContentText>스킬</ContentText>
+                                                        </div>
+                                                        {same && memberSkills && memberSkills.skills.length > 0 && (
+                                                            <ContentUpdateBtn to="/profiles/skills">
+                                                                <ContentUpdateSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                     <g>
                                                                         <g id="style=outline">
-                                                                            <path
-                                                                                id="Vector (Stroke)"
-                                                                                fillRule="evenodd"
-                                                                                clipRule="evenodd"
-                                                                                d="M7.8787 1.87868C8.44131 1.31607 9.20437 1 10 1H14C14.7957 1 15.5587 1.31607 16.1213 1.87868C16.6839 2.44129 17 3.20435 17 4V5H19C19.7957 5 20.5587 5.31607 21.1213 5.87868C21.684 6.44129 22 7.20435 22 8V13.2317C22.0004 13.247 22.0004 13.2624 22 13.2776V18C22 18.7957 21.684 19.5587 21.1213 20.1213C20.5587 20.6839 19.7957 21 19 21H5.00002C4.20437 21 3.44131 20.6839 2.8787 20.1213C2.31609 19.5587 2.00002 18.7957 2.00002 18V13.2776C1.99967 13.2623 1.99967 13.247 2.00002 13.2317V8C2.00002 7.20435 2.31609 6.44129 2.8787 5.87868C3.44131 5.31607 4.20437 5 5.00002 5H7.00002V4C7.00002 3.20435 7.31609 2.44129 7.8787 1.87868ZM9.00002 5H15V4C15 3.73478 14.8947 3.48043 14.7071 3.29289C14.5196 3.10536 14.2652 3 14 3H10C9.7348 3 9.48045 3.10536 9.29291 3.29289C9.10538 3.48043 9.00002 3.73478 9.00002 4V5ZM5.00002 7C4.7348 7 4.48045 7.10536 4.29291 7.29289C4.10538 7.48043 4.00002 7.73478 4.00002 8V12.5703C6.49099 13.4944 9.18498 14 12 14L12.0012 14C14.7331 14.0033 17.4418 13.5185 20 12.5701V8C20 7.73478 19.8947 7.48043 19.7071 7.29289C19.5196 7.10536 19.2652 7 19 7H5.00002ZM20 14.6915C17.4255 15.5602 14.7231 16.0033 11.9994 16C9.20278 15.9999 6.51277 15.54 4.00002 14.6918V18C4.00002 18.2652 4.10538 18.5196 4.29291 18.7071C4.48045 18.8946 4.7348 19 5.00002 19H19C19.2652 19 19.5196 18.8946 19.7071 18.7071C19.8947 18.5196 20 18.2652 20 18V14.6915ZM11 12C11 11.4477 11.4477 11 12 11H12.01C12.5623 11 13.01 11.4477 13.01 12C13.01 12.5523 12.5623 13 12.01 13H12C11.4477 13 11 12.5523 11 12Z"
-                                                                            ></path>
+                                                                            <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M18.5 3.99976C18.1021 3.99976 17.7205 4.15783 17.4391 4.43919L16.6462 5.23209L18.768 7.35387L19.5609 6.56098C19.8423 6.27961 20.0003 5.898 20.0003 5.50009C20.0003 5.10217 19.8423 4.72056 19.5609 4.43919C19.2795 4.15783 18.8979 3.99976 18.5 3.99976ZM20.9751 7.97519C21.6315 7.31875 22.0003 6.42843 22.0003 5.50009C22.0003 4.57174 21.6315 3.68142 20.9751 3.02498C20.3187 2.36854 19.4283 1.99976 18.5 1.99976C17.5717 1.99976 16.6813 2.36854 16.0249 3.02498L2.29289 16.757C2.10536 16.9445 2 17.1989 2 17.4641V21.0361C2 21.5884 2.44772 22.0361 3 22.0361H6.5C6.76522 22.0361 7.01957 21.9307 7.20711 21.7432L20.9751 7.97519ZM17.3538 8.76808L15.232 6.6463L4 17.8783V20.0361H6.08579L17.3538 8.76808Z"></path>
                                                                         </g>
                                                                     </g>
-                                                                </ContentSvg>
-                                                                <ContentContent>
-                                                                    <ContentContentName>
-                                                                        {career.companyName} - {career.memberPosition}
-                                                                    </ContentContentName>
-                                                                    <ContentContentPeriod>
-                                                                        {formatDate(career.careerStart)} ~ {career.careerEnd === "1111-11-11" ? "현재" : formatDate(career.careerEnd)}
-                                                                    </ContentContentPeriod>
-                                                                    {career.careerIndustries.length > 0 ? (
-                                                                        <div>
-                                                                            <ContentContentAnother>
-                                                                                산업 분야:{" "}
-                                                                                {career.careerIndustries.map((careerIndustry, index) => (
-                                                                                    <>
-                                                                                        {careerIndustry.industryName}
-                                                                                        {index < career.careerIndustries.length - 1 && ", "}
-                                                                                    </>
-                                                                                ))}
-                                                                            </ContentContentAnother>
-                                                                        </div>
-                                                                    ) : (
-                                                                        <></>
-                                                                    )}
-                                                                    {career.careerSkills.length > 0 ? (
-                                                                        <div>
-                                                                            <ContentContentAnother>
-                                                                                스킬:{" "}
-                                                                                {career.careerSkills.map((careerSkill, index) => (
-                                                                                    <>
-                                                                                        {careerSkill.skillName}
-                                                                                        {index < career.careerSkills.length - 1 && ", "}
-                                                                                    </>
-                                                                                ))}
-                                                                            </ContentContentAnother>
-                                                                        </div>
-                                                                    ) : (
-                                                                        <></>
-                                                                    )}
-                                                                    {career.description ? (
-                                                                        <div>
-                                                                            <ContentContentAnother>{career.description}</ContentContentAnother>
-                                                                        </div>
-                                                                    ) : (
-                                                                        <></>
-                                                                    )}
-                                                                    {/* <ContentContentLink href="https://github.com/team-npe" target="_blank" rel="noreferrer">
-                                                                        링크 이동
-                                                                        </ContentContentLink> */}
-                                                                </ContentContent>
-                                                                {same && (
-                                                                    <ContentContentEditBtn to={`/profiles/careers/update/${career.id}`}>
-                                                                        <ContentContentEditSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                            <g>
-                                                                                <g id="style=outline">
-                                                                                    <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M18.5 3.99976C18.1021 3.99976 17.7205 4.15783 17.4391 4.43919L16.6462 5.23209L18.768 7.35387L19.5609 6.56098C19.8423 6.27961 20.0003 5.898 20.0003 5.50009C20.0003 5.10217 19.8423 4.72056 19.5609 4.43919C19.2795 4.15783 18.8979 3.99976 18.5 3.99976ZM20.9751 7.97519C21.6315 7.31875 22.0003 6.42843 22.0003 5.50009C22.0003 4.57174 21.6315 3.68142 20.9751 3.02498C20.3187 2.36854 19.4283 1.99976 18.5 1.99976C17.5717 1.99976 16.6813 2.36854 16.0249 3.02498L2.29289 16.757C2.10536 16.9445 2 17.1989 2 17.4641V21.0361C2 21.5884 2.44772 22.0361 3 22.0361H6.5C6.76522 22.0361 7.01957 21.9307 7.20711 21.7432L20.9751 7.97519ZM17.3538 8.76808L15.232 6.6463L4 17.8783V20.0361H6.08579L17.3538 8.76808Z"></path>
-                                                                                </g>
-                                                                            </g>
-                                                                        </ContentContentEditSvg>
-                                                                    </ContentContentEditBtn>
-                                                                )}
-                                                            </ContentItem>
-                                                        ))}
-                                                    </ContentList>
-                                                ) : (
-                                                    <NonExistent partText=" 지금 하고 있는 일, 혹은 이전에 한 일을 알려주세요." part="경력" url="/profiles/careers/create" />
-                                                )}
-                                            </ContentBox>
-                                        )}
-                                        {!same && memberEducation?.educations.length == 0 ? (
-                                            <></>
-                                        ) : (
-                                            <ContentBox aria-label="교육">
-                                                <ContentTextBox>
-                                                    <div>
-                                                        <ContentText>교육</ContentText>
-                                                    </div>
-                                                    {same && memberEducation && memberEducation?.educations.length > 0 && (
-                                                        <ContentUpdateBtn to={"/profiles/educations/create"}>
-                                                            <ContentUpdateSvg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <g>
-                                                                    <g id="style=outline">
-                                                                        <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"></path>
-                                                                    </g>
-                                                                </g>
-                                                            </ContentUpdateSvg>
-                                                        </ContentUpdateBtn>
+                                                                </ContentUpdateSvg>
+                                                            </ContentUpdateBtn>
+                                                        )}
+                                                    </ContentTextBox>
+                                                    {memberSkills && memberSkills.skills.length > 0 ? (
+                                                        <SkillList>
+                                                            {memberSkills.skills.map((memberSkill, index) => (
+                                                                <SkillItem key={index}>
+                                                                    <SkillName>{memberSkill.skillName}</SkillName>
+                                                                </SkillItem>
+                                                            ))}
+                                                        </SkillList>
+                                                    ) : (
+                                                        <NonExistent partText=" 활용할 수 있는 스킬을 알려주세요." part="경력" url="/profiles/skills" />
                                                     )}
-                                                </ContentTextBox>
-                                                {memberEducation && memberEducation?.educations.length > 0 ? (
-                                                    <ContentList>
-                                                        {memberEducation?.educations.map((education, index) => (
-                                                            <ContentItem ket={index}>
-                                                                <ContentSvg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                </ContentBox>
+                                            )}
+                                            {!same && memberCareer.careers.length == 0 ? (
+                                                <></>
+                                            ) : (
+                                                <ContentBox>
+                                                    <ContentTextBox>
+                                                        <div>
+                                                            <ContentText>경력</ContentText>
+                                                        </div>
+                                                        {same && memberCareer && memberCareer.careers.length > 0 && (
+                                                            <ContentUpdateBtn to={"/profiles/careers/create"}>
+                                                                <ContentUpdateSvg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                     <g>
                                                                         <g id="style=outline">
-                                                                            <g id="Union">
-                                                                                <path d="M12 10C12.5523 10 13 9.55229 13 9C13 8.44771 12.5523 8 12 8C11.4477 8 11 8.44771 11 9C11 9.55229 11.4477 10 12 10Z"></path>
-                                                                                <path fillRule="evenodd" clipRule="evenodd" d="M11.5939 4.08619C11.8524 3.97127 12.1476 3.97127 12.4061 4.08619L21.4061 8.08619C21.7673 8.24669 22 8.60481 22 9C22 9.39519 21.7673 9.75331 21.4061 9.91381L18.0786 11.3927L18.8968 15.4838C18.9646 15.6515 19 15.824 19 16C19 17.6568 15.866 19 12 19C8.13401 19 5 17.6568 5 16C5 15.824 5.03538 15.6515 5.10325 15.4838L5.92145 11.3927L2.59386 9.91381C2.23273 9.75331 2 9.39519 2 9C2 8.60481 2.23273 8.24669 2.59386 8.08619L11.5939 4.08619ZM12.4061 13.9138L16.2054 12.2252L16.9302 15.8488C16.7869 15.9644 16.542 16.1201 16.1619 16.283C15.1987 16.6958 13.7286 17 12 17C10.2714 17 8.8013 16.6958 7.83809 16.283C7.458 16.1201 7.21313 15.9644 7.06984 15.8488L7.79456 12.2252L11.5939 13.9138C11.8524 14.0287 12.1476 14.0287 12.4061 13.9138ZM5.46221 9L12 11.9057L18.5378 9L12 6.09432L5.46221 9Z"></path>
-                                                                            </g>
+                                                                            <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"></path>
                                                                         </g>
                                                                     </g>
-                                                                </ContentSvg>
-                                                                <ContentContent>
-                                                                    <p className="content-content-name">
-                                                                        {education.educationInstitution} - {education.educationCourse}
-                                                                    </p>
-                                                                    <ContentContentPeriod>
-                                                                        {formatDate(education.educationStart)} ~ {education.educationEnd === "1111-11-11" ? "현재" : formatDate(education.educationEnd)}
-                                                                    </ContentContentPeriod>
-                                                                    {education.description ? (
-                                                                        <div>
-                                                                            <ContentContentAnother>{education.description}</ContentContentAnother>
-                                                                        </div>
-                                                                    ) : (
-                                                                        <></>
-                                                                    )}
-                                                                    {/* <ContentContentLink href="https://github.com/team-npe" target="_blank" rel="noreferrer">
+                                                                </ContentUpdateSvg>
+                                                            </ContentUpdateBtn>
+                                                        )}
+                                                    </ContentTextBox>
+                                                    {memberCareer && memberCareer.careers.length > 0 ? (
+                                                        <ContentList>
+                                                            {memberCareer.careers.map((career, index) => (
+                                                                <ContentItem ket={index}>
+                                                                    <ContentSvg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                        <g>
+                                                                            <g id="style=outline">
+                                                                                <path
+                                                                                    id="Vector (Stroke)"
+                                                                                    fillRule="evenodd"
+                                                                                    clipRule="evenodd"
+                                                                                    d="M7.8787 1.87868C8.44131 1.31607 9.20437 1 10 1H14C14.7957 1 15.5587 1.31607 16.1213 1.87868C16.6839 2.44129 17 3.20435 17 4V5H19C19.7957 5 20.5587 5.31607 21.1213 5.87868C21.684 6.44129 22 7.20435 22 8V13.2317C22.0004 13.247 22.0004 13.2624 22 13.2776V18C22 18.7957 21.684 19.5587 21.1213 20.1213C20.5587 20.6839 19.7957 21 19 21H5.00002C4.20437 21 3.44131 20.6839 2.8787 20.1213C2.31609 19.5587 2.00002 18.7957 2.00002 18V13.2776C1.99967 13.2623 1.99967 13.247 2.00002 13.2317V8C2.00002 7.20435 2.31609 6.44129 2.8787 5.87868C3.44131 5.31607 4.20437 5 5.00002 5H7.00002V4C7.00002 3.20435 7.31609 2.44129 7.8787 1.87868ZM9.00002 5H15V4C15 3.73478 14.8947 3.48043 14.7071 3.29289C14.5196 3.10536 14.2652 3 14 3H10C9.7348 3 9.48045 3.10536 9.29291 3.29289C9.10538 3.48043 9.00002 3.73478 9.00002 4V5ZM5.00002 7C4.7348 7 4.48045 7.10536 4.29291 7.29289C4.10538 7.48043 4.00002 7.73478 4.00002 8V12.5703C6.49099 13.4944 9.18498 14 12 14L12.0012 14C14.7331 14.0033 17.4418 13.5185 20 12.5701V8C20 7.73478 19.8947 7.48043 19.7071 7.29289C19.5196 7.10536 19.2652 7 19 7H5.00002ZM20 14.6915C17.4255 15.5602 14.7231 16.0033 11.9994 16C9.20278 15.9999 6.51277 15.54 4.00002 14.6918V18C4.00002 18.2652 4.10538 18.5196 4.29291 18.7071C4.48045 18.8946 4.7348 19 5.00002 19H19C19.2652 19 19.5196 18.8946 19.7071 18.7071C19.8947 18.5196 20 18.2652 20 18V14.6915ZM11 12C11 11.4477 11.4477 11 12 11H12.01C12.5623 11 13.01 11.4477 13.01 12C13.01 12.5523 12.5623 13 12.01 13H12C11.4477 13 11 12.5523 11 12Z"
+                                                                                ></path>
+                                                                            </g>
+                                                                        </g>
+                                                                    </ContentSvg>
+                                                                    <ContentContent>
+                                                                        <ContentContentName>
+                                                                            {career.companyName} - {career.memberPosition}
+                                                                        </ContentContentName>
+                                                                        <ContentContentPeriod>
+                                                                            {formatDate(career.careerStart)} ~ {career.careerEnd === "1111-11-11" ? "현재" : formatDate(career.careerEnd)}
+                                                                        </ContentContentPeriod>
+                                                                        {career.careerIndustries.length > 0 ? (
+                                                                            <div>
+                                                                                <ContentContentAnother>
+                                                                                    산업 분야:{" "}
+                                                                                    {career.careerIndustries.map((careerIndustry, index) => (
+                                                                                        <>
+                                                                                            {careerIndustry.industryName}
+                                                                                            {index < career.careerIndustries.length - 1 && ", "}
+                                                                                        </>
+                                                                                    ))}
+                                                                                </ContentContentAnother>
+                                                                            </div>
+                                                                        ) : (
+                                                                            <></>
+                                                                        )}
+                                                                        {career.careerSkills.length > 0 ? (
+                                                                            <div>
+                                                                                <ContentContentAnother>
+                                                                                    스킬:{" "}
+                                                                                    {career.careerSkills.map((careerSkill, index) => (
+                                                                                        <>
+                                                                                            {careerSkill.skillName}
+                                                                                            {index < career.careerSkills.length - 1 && ", "}
+                                                                                        </>
+                                                                                    ))}
+                                                                                </ContentContentAnother>
+                                                                            </div>
+                                                                        ) : (
+                                                                            <></>
+                                                                        )}
+                                                                        {career.description ? (
+                                                                            <div>
+                                                                                <ContentContentAnother>{career.description}</ContentContentAnother>
+                                                                            </div>
+                                                                        ) : (
+                                                                            <></>
+                                                                        )}
+                                                                        {/* <ContentContentLink href="https://github.com/team-npe" target="_blank" rel="noreferrer">
                                                                         링크 이동
                                                                         </ContentContentLink> */}
-                                                                </ContentContent>
-                                                                {same && (
-                                                                    <ContentContentEditBtn to={`/profiles/educations/update/${education.id}`}>
-                                                                        <ContentContentEditSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                            <g>
-                                                                                <g id="style=outline">
-                                                                                    <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M18.5 3.99976C18.1021 3.99976 17.7205 4.15783 17.4391 4.43919L16.6462 5.23209L18.768 7.35387L19.5609 6.56098C19.8423 6.27961 20.0003 5.898 20.0003 5.50009C20.0003 5.10217 19.8423 4.72056 19.5609 4.43919C19.2795 4.15783 18.8979 3.99976 18.5 3.99976ZM20.9751 7.97519C21.6315 7.31875 22.0003 6.42843 22.0003 5.50009C22.0003 4.57174 21.6315 3.68142 20.9751 3.02498C20.3187 2.36854 19.4283 1.99976 18.5 1.99976C17.5717 1.99976 16.6813 2.36854 16.0249 3.02498L2.29289 16.757C2.10536 16.9445 2 17.1989 2 17.4641V21.0361C2 21.5884 2.44772 22.0361 3 22.0361H6.5C6.76522 22.0361 7.01957 21.9307 7.20711 21.7432L20.9751 7.97519ZM17.3538 8.76808L15.232 6.6463L4 17.8783V20.0361H6.08579L17.3538 8.76808Z"></path>
+                                                                    </ContentContent>
+                                                                    {same && (
+                                                                        <ContentContentEditBtn to={`/profiles/careers/update/${career.id}`}>
+                                                                            <ContentContentEditSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                                <g>
+                                                                                    <g id="style=outline">
+                                                                                        <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M18.5 3.99976C18.1021 3.99976 17.7205 4.15783 17.4391 4.43919L16.6462 5.23209L18.768 7.35387L19.5609 6.56098C19.8423 6.27961 20.0003 5.898 20.0003 5.50009C20.0003 5.10217 19.8423 4.72056 19.5609 4.43919C19.2795 4.15783 18.8979 3.99976 18.5 3.99976ZM20.9751 7.97519C21.6315 7.31875 22.0003 6.42843 22.0003 5.50009C22.0003 4.57174 21.6315 3.68142 20.9751 3.02498C20.3187 2.36854 19.4283 1.99976 18.5 1.99976C17.5717 1.99976 16.6813 2.36854 16.0249 3.02498L2.29289 16.757C2.10536 16.9445 2 17.1989 2 17.4641V21.0361C2 21.5884 2.44772 22.0361 3 22.0361H6.5C6.76522 22.0361 7.01957 21.9307 7.20711 21.7432L20.9751 7.97519ZM17.3538 8.76808L15.232 6.6463L4 17.8783V20.0361H6.08579L17.3538 8.76808Z"></path>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </ContentContentEditSvg>
+                                                                        </ContentContentEditBtn>
+                                                                    )}
+                                                                </ContentItem>
+                                                            ))}
+                                                        </ContentList>
+                                                    ) : (
+                                                        <NonExistent partText=" 지금 하고 있는 일, 혹은 이전에 한 일을 알려주세요." part="경력" url="/profiles/careers/create" />
+                                                    )}
+                                                </ContentBox>
+                                            )}
+                                            {!same && memberEducation?.educations.length == 0 ? (
+                                                <></>
+                                            ) : (
+                                                <ContentBox aria-label="교육">
+                                                    <ContentTextBox>
+                                                        <div>
+                                                            <ContentText>교육</ContentText>
+                                                        </div>
+                                                        {same && memberEducation && memberEducation?.educations.length > 0 && (
+                                                            <ContentUpdateBtn to={"/profiles/educations/create"}>
+                                                                <ContentUpdateSvg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                    <g>
+                                                                        <g id="style=outline">
+                                                                            <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"></path>
+                                                                        </g>
+                                                                    </g>
+                                                                </ContentUpdateSvg>
+                                                            </ContentUpdateBtn>
+                                                        )}
+                                                    </ContentTextBox>
+                                                    {memberEducation && memberEducation?.educations.length > 0 ? (
+                                                        <ContentList>
+                                                            {memberEducation?.educations.map((education, index) => (
+                                                                <ContentItem ket={index}>
+                                                                    <ContentSvg width="24" height="24" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                        <g>
+                                                                            <g id="style=outline">
+                                                                                <g id="Union">
+                                                                                    <path d="M12 10C12.5523 10 13 9.55229 13 9C13 8.44771 12.5523 8 12 8C11.4477 8 11 8.44771 11 9C11 9.55229 11.4477 10 12 10Z"></path>
+                                                                                    <path fillRule="evenodd" clipRule="evenodd" d="M11.5939 4.08619C11.8524 3.97127 12.1476 3.97127 12.4061 4.08619L21.4061 8.08619C21.7673 8.24669 22 8.60481 22 9C22 9.39519 21.7673 9.75331 21.4061 9.91381L18.0786 11.3927L18.8968 15.4838C18.9646 15.6515 19 15.824 19 16C19 17.6568 15.866 19 12 19C8.13401 19 5 17.6568 5 16C5 15.824 5.03538 15.6515 5.10325 15.4838L5.92145 11.3927L2.59386 9.91381C2.23273 9.75331 2 9.39519 2 9C2 8.60481 2.23273 8.24669 2.59386 8.08619L11.5939 4.08619ZM12.4061 13.9138L16.2054 12.2252L16.9302 15.8488C16.7869 15.9644 16.542 16.1201 16.1619 16.283C15.1987 16.6958 13.7286 17 12 17C10.2714 17 8.8013 16.6958 7.83809 16.283C7.458 16.1201 7.21313 15.9644 7.06984 15.8488L7.79456 12.2252L11.5939 13.9138C11.8524 14.0287 12.1476 14.0287 12.4061 13.9138ZM5.46221 9L12 11.9057L18.5378 9L12 6.09432L5.46221 9Z"></path>
                                                                                 </g>
                                                                             </g>
-                                                                        </ContentContentEditSvg>
-                                                                    </ContentContentEditBtn>
-                                                                )}
-                                                            </ContentItem>
-                                                        ))}
-                                                    </ContentList>
-                                                ) : (
-                                                    <NonExistent partText="현재 혹은 이전에 다녔던 학교, 부트캠프 등 교육기관을 입력해 주세요." part="교육" url="/profiles/educations/create" />
-                                                )}
-                                            </ContentBox>
-                                        )}
-                                        {/* <ContentBox aria-label="링크">
+                                                                        </g>
+                                                                    </ContentSvg>
+                                                                    <ContentContent>
+                                                                        <p className="content-content-name">
+                                                                            {education.educationInstitution} - {education.educationCourse}
+                                                                        </p>
+                                                                        <ContentContentPeriod>
+                                                                            {formatDate(education.educationStart)} ~ {education.educationEnd === "1111-11-11" ? "현재" : formatDate(education.educationEnd)}
+                                                                        </ContentContentPeriod>
+                                                                        {education.description ? (
+                                                                            <div>
+                                                                                <ContentContentAnother>{education.description}</ContentContentAnother>
+                                                                            </div>
+                                                                        ) : (
+                                                                            <></>
+                                                                        )}
+                                                                        {/* <ContentContentLink href="https://github.com/team-npe" target="_blank" rel="noreferrer">
+                                                                        링크 이동
+                                                                        </ContentContentLink> */}
+                                                                    </ContentContent>
+                                                                    {same && (
+                                                                        <ContentContentEditBtn to={`/profiles/educations/update/${education.id}`}>
+                                                                            <ContentContentEditSvg width="20" height="20" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                                <g>
+                                                                                    <g id="style=outline">
+                                                                                        <path id="Vector (Stroke)" fillRule="evenodd" clipRule="evenodd" d="M18.5 3.99976C18.1021 3.99976 17.7205 4.15783 17.4391 4.43919L16.6462 5.23209L18.768 7.35387L19.5609 6.56098C19.8423 6.27961 20.0003 5.898 20.0003 5.50009C20.0003 5.10217 19.8423 4.72056 19.5609 4.43919C19.2795 4.15783 18.8979 3.99976 18.5 3.99976ZM20.9751 7.97519C21.6315 7.31875 22.0003 6.42843 22.0003 5.50009C22.0003 4.57174 21.6315 3.68142 20.9751 3.02498C20.3187 2.36854 19.4283 1.99976 18.5 1.99976C17.5717 1.99976 16.6813 2.36854 16.0249 3.02498L2.29289 16.757C2.10536 16.9445 2 17.1989 2 17.4641V21.0361C2 21.5884 2.44772 22.0361 3 22.0361H6.5C6.76522 22.0361 7.01957 21.9307 7.20711 21.7432L20.9751 7.97519ZM17.3538 8.76808L15.232 6.6463L4 17.8783V20.0361H6.08579L17.3538 8.76808Z"></path>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </ContentContentEditSvg>
+                                                                        </ContentContentEditBtn>
+                                                                    )}
+                                                                </ContentItem>
+                                                            ))}
+                                                        </ContentList>
+                                                    ) : (
+                                                        <NonExistent partText="현재 혹은 이전에 다녔던 학교, 부트캠프 등 교육기관을 입력해 주세요." part="교육" url="/profiles/educations/create" />
+                                                    )}
+                                                </ContentBox>
+                                            )}
+                                            {/* <ContentBox aria-label="링크">
                                             <ContentTextBox>
                                                 <div>
                                                     <ContentText>링크</ContentText>
@@ -487,7 +489,10 @@ function Profile({ member, same }) {
                                                 <NonExistent partText="블로그, SNS등 다양한 링크로 나를 표현해보세요." part="링크" url="/profiles/sites/create" />
                                             )}
                                         </ContentBox> */}
-                                    </ProfileContentContainerInner>
+                                        </ProfileContentContainerInner>
+                                    ) : (
+                                        <NonePost target={"등록된 회원 정보"} />
+                                    )}
                                 </div>
                             </div>
                         </div>
