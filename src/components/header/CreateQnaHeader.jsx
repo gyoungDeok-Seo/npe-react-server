@@ -2,9 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { CreateQnaImgContext } from "../../context/CreateQnaImgContext";
 import { useDispatch, useSelector } from "react-redux";
-import { a, sendCreateQnaData } from "../../service/qnaApi";
+import { a, createQnaApi } from "../../service/qnaApi";
 import { setFiles } from "../../redux/createQna";
-
 
 const CreateQnaHeaderBox = styled.nav`
   padding-left: 1rem;
@@ -121,12 +120,13 @@ function CreateQnaHeader({ navigate, setAvoidMistakesModal }) {
         fileName: `${asd[i]}_${file.fileName}`,
       }));
       dispatch(setFiles(updatedFiles));
-      sendCreateQnaData(createQna);
       navigate("/qnas");
+      await createQnaApi(createQna);
     }
   };
+  useEffect(() => {
 
-
+  }, [createQna]);
   const handleAvoidMistakesModal = () => {
     setAvoidMistakesModal(true);
   };
@@ -137,7 +137,10 @@ function CreateQnaHeader({ navigate, setAvoidMistakesModal }) {
     const { questionTitle, questionContent, categoryId, tags } = createQna;
 
     setDisabled(
-      questionTitle === "" || questionContent === "" || categoryId === "" || tags?.length === 0
+      questionTitle === "" ||
+        questionContent === "" ||
+        categoryId === "" ||
+        tags?.length === 0
     );
   }, [createQna]);
   return (

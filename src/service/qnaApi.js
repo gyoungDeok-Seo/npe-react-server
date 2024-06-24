@@ -19,7 +19,7 @@ export const a = (() => {
   return { b: b };
 })();
 
-export const sendCreateQnaData = async (qnaData) => {
+export const createQnaApi = async (qnaData) => {
   const response = await fetch("http://localhost:10000/qnas/api/create", {
     method: "POST",
     credentials: "include",
