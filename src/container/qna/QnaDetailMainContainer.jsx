@@ -9,6 +9,7 @@ import { setId } from "../../redux/qnaId";
 import { answerListApi, createAnswerApi } from "../../service/answerApi";
 import { qnaDetailApi } from "../../service/qnaApi";
 
+
 const DetailContainer = styled.div`
   padding-top: 2rem;
   padding-bottom: 5rem;
@@ -214,7 +215,7 @@ const ReportSvg = styled(DeleteSvg)``;
 const ReportText = styled(DeleteText)``;
 
 const QnaDetailContent = styled.p`
-  color: var(--color-text-bold, #0f172a);
+  color: #0f172a;
   font-size: 1rem;
   white-space: pre-wrap;
   min-height: 120px;
@@ -383,10 +384,7 @@ const AnswerRegistrationBtn = styled.button`
   align-items: center;
   display: inline-flex;
   &:hover {
-    background-color: ${({ isWrite }) =>
-      isWrite
-        ? "var(--color-background-button-primary-bold-hover, #1e293b)"
-        : ""};
+    background-color: ${({ isWrite }) => (isWrite ? "#1e293b" : "")};
     cursor: ${({ isWrite }) => (isWrite ? "pointer" : "default")};
   }
 `;
@@ -684,7 +682,7 @@ function QnaDetailMainContainer() {
                     // srcSet={`/upload/${item.filePath}/${item.fileName}&w=1200&q=100 1x, /upload/${item.filePath}/${item.fileName}&w=3840&q=100 2x`}
                     // src={`${process.env.PUBLIC_URL}/upload/${item.filePath}/${item.fileName}`}
                     // src={`${process.env.PUBLIC_URL}/upload/${item.filePath}/${item.fileName}`}
-                    src={`C:/npe-react/src/upload/${item.filePath}/${item.fileName}`}
+                    src={require(`../../../upload/${item.filePath}/${item.fileName}`)}
                     decoding="async"
                   />
                 </ImageWrapper>

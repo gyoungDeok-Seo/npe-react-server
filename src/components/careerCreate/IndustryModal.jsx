@@ -77,8 +77,7 @@ const IndustryModalLabel = styled.label`
   padding-left: 0.5rem;
   font-size: 0.875rem;
   font-weight: 400;
-  --tw-text-opacity: 1;
-  color: rgb(15 23 42 / var(--tw-text-opacity));
+  color: rgb(15 23 42 / 1);
 `;
 
 const IndustryModalBtnBox = styled.div`
@@ -87,9 +86,8 @@ const IndustryModalBtnBox = styled.div`
   display: flex;
   -moz-column-gap: 1rem;
   column-gap: 1rem;
-  --tw-bg-opacity: 1;
   padding-bottom: 1.25rem;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 /1);
 `;
 
 const IndustryModalSubmitBtn = styled.button`
@@ -128,8 +126,7 @@ const IndustryModalCraeteItem = styled.button`
   gap: 0.5rem;
   width: -moz-fit-content;
   width: fit-content;
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / 1);
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
   padding-left: 0.75rem;

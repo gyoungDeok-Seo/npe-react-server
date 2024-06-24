@@ -129,19 +129,20 @@ const TagBtn = styled.button`
   padding-bottom: 0.375rem;
   padding-left: 0.625rem;
   padding-right: 0.625rem;
-  border-color: #e2e8f0;
   border-style: solid;
   border-width: 1px;
   border-radius: 9999px;
   align-items: center;
   display: flex;
+  background-color: ${(props) => (props.selected ? "#475569" : "transparent")};
+  border-color: ${(props) => (props.selected ? "#475569" : " #e2e8f0")};
+  color: ${(props) => (props.selected ? "#fff" : "#0f172a")};
   &:hover {
-    background-color: #f8fafc;
+    ${(props) => !props.selected && " background-color: #f8fafc;"};
   }
 `;
 
 const TagSpan = styled.span`
-  color: #0f172a;
   font-weight: 700;
   font-size: 0.75rem;
 `;
@@ -149,15 +150,14 @@ const TagSpan = styled.span`
 const TagResetContainer = styled.div`
   padding-right: 0.75rem;
   padding-left: 0.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / 1);
   gap: 0.5rem;
   align-items: center;
   display: flex;
 `;
 
 const VerticalDividingLine = styled.div`
-  background-color: var(--color-slate-200, #e2e8f0);
+  background-color: #e2e8f0;
   align-self: stretch;
   width: 1px;
 `;
@@ -167,10 +167,29 @@ const TagResetBtn = styled.button`
 `;
 
 const TagResetSvg = styled.svg`
-  fill: var(--color-slate-600, #475569);
+  fill: #475569;
   width: 1.5rem;
   height: 1.5rem;
   display: block;
+`;
+
+const NoneResultBox = styled.div`
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.25rem;
+`;
+const NoneResultImg = styled.img`
+  width: 72px;
+  height: 72px;
+`;
+
+const NoneResultText = styled.p`
+  color: #64748b;
+  text-align: center;
+  white-space: pre-line;
 `;
 
 function QnaMainContents() {
@@ -178,7 +197,7 @@ function QnaMainContents() {
   const tab = searchParams.get("tab") || "newest";
   const categoryValue = searchParams.get("category") || "java";
   const tagsParams = searchParams.get("tag") || "";
-  const [qnaList, setQnaList] = useState();
+  const [qnaList, setQnaList] = useState([]);
   const [pages, setPages] = useState(1);
   const [topTenTransform, setTopTenTransform] = useState(
     "translate3d(0px, 0px, 0px)"
@@ -249,7 +268,11 @@ function QnaMainContents() {
     setSearchParams(searchParams);
   };
 
-  const handleTagReset = () => {};
+  const handleTagReset = () => {
+    searchParams.delete("tag");
+    setSearchParams(searchParams);
+  };
+
   return (
     <QnaMainWrap>
       {tab === "newest" ? (
@@ -365,7 +388,16 @@ function QnaMainContents() {
                   <TagFilterTitle>태그 필터</TagFilterTitle>
                   <TagsBox>
                     {tags.map((tag, index) => (
-                      <TagBtn key={index} index={index} onClick={() => handleTagClick(tag)}>
+                      <TagBtn
+                        key={index}
+                        index={index}
+                        selected={
+                          tagsParams
+                            .split(",")
+                            .findIndex((item) => item === tag) !== -1
+                        }
+                        onClick={() => handleTagClick(tag)}
+                      >
                         <TagSpan>{tag}</TagSpan>
                       </TagBtn>
                     ))}
@@ -406,7 +438,19 @@ function QnaMainContents() {
                   width: "100%",
                 }}
               >
-                <QnaMainItem qnaList={qnaList} />
+                {qnaList?.length !== 0 ? (
+                  <QnaMainItem qnaList={qnaList} />
+                ) : (
+                  <NoneResultBox>
+                    <NoneResultImg
+                      src="https://careerly.co.kr/_next/static/images/img_no-comment-6b8dfb6445f9546f6abecab5919622b1.png"
+                      alt=""
+                    />
+                    <NoneResultText>
+                      답변을 기다리는 질문이 없어요.
+                    </NoneResultText>
+                  </NoneResultBox>
+                )}
               </div>
             </div>
           </div>

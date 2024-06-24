@@ -11,8 +11,8 @@ import { updateAnswerApi } from "../../../service/answerApi";
 import { timeForToday } from "../../profiles/QnaActivity/QnaActivityAnswer";
 
 const AnswerListBox = styled.div`
-  background-color: var(--color-white, #fff);
-  border-color: var(--color-slate-200, #e2e8f0);
+  background-color: #fff;
+  border-color: #e2e8f0;
   border-style: solid;
   border-width: 1px;
 `;
@@ -46,10 +46,8 @@ const AnswerWriterImage = styled.img`
   aspect-ratio: 1 / 1;
   border-width: 1px;
   border-style: solid;
-  --tw-border-opacity: 1;
-  border-color: rgb(226 232 240 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  border-color: rgb(226 232 240 /1);
+  background-color: rgb(255 255 255 / 1);
   overflow: hidden;
 `;
 
@@ -68,28 +66,28 @@ const ProfileBtnTextDefault = styled.p`
 `;
 
 const AnswerWriterName = styled(ProfileBtnTextDefault)`
-  color: var(--color-text-bold, #0f172a);
+  color: #0f172a;
   font-weight: 700;
   font-size: 0.875rem;
 `;
 
 const AnswerWriterPosition = styled(ProfileBtnTextDefault)`
-  color: var(--color-text-subtle, #334155);
+  color: #334155;
   font-size: 0.75rem;
 `;
 
 const AnswerWriteTime = styled(ProfileBtnTextDefault)`
-  color: var(--color-text-subtler, #64748b);
+  color:#64748b;
   font-size: 0.75rem;
 `;
 
 const AnswerText = styled.p`
-  color: var(--color-slate-900, #0f172a);
+  color: #0f172a;
   font-size: 1rem;
 `;
 
 const AnswerContentModifyWrap = styled.div`
-  border-color: var(--color-slate-200, #e2e8f0);
+  border-color:#e2e8f0;
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;
@@ -100,7 +98,7 @@ const AnswerContentModifyContainer = styled.div`
 `;
 
 const AnswerContentModifyBox = styled.div`
-  background-color: var(--color-white, #fff);
+  background-color: #fff;
   position: relative;
 `;
 
@@ -110,14 +108,14 @@ const AnswerContentModifyItem = styled.div`
 `;
 
 const AnswerContentModifyTextarea = styled.textarea`
-  color: var(--color-text-bold, #0f172a);
+  color:#0f172a;
   padding: 0;
   border-width: 0;
   resize: none;
   width: 100%;
   min-height: 4.5rem;
   &::placeholder {
-    color: var(--color-text-placeholder, #94a3b8);
+    color: #94a3b8;
   }
   &:focus-visible {
     outline: none;
@@ -127,7 +125,7 @@ const AnswerContentModifyTextarea = styled.textarea`
 
 const AnswerContentModifyBtnBox = styled.div`
   padding: 0.75rem;
-  border-color: var(--color-slate-200, #e2e8f0);
+  border-color:#e2e8f0;
   border-style: solid;
   border-width: 0;
   border-top-width: 1px;
@@ -139,8 +137,8 @@ const AnswerContentModifyBtnBox = styled.div`
 const AnswerContentModifyBtn = styled.button`
   color: ${({ isWrite }) =>
     isWrite
-      ? "var(--color-white, #fff)"
-      : "var(--color-text-button-disabled, #94a3b8)"};
+      ? "#fff"
+      : "#94a3b8"};
   font-weight: 700;
   font-size: 0.75rem;
   padding-top: 0.375rem;
@@ -149,12 +147,12 @@ const AnswerContentModifyBtn = styled.button`
   padding-right: 0.5rem;
   background-color: ${({ isWrite }) =>
     isWrite
-      ? "var(--color-background-button-primary-bold-enabled, #334155)"
-      : "var(--color-background-button-disabled, #f1f5f9)"};
+      ? "#334155"
+      : "#f1f5f9"};
   border-color: ${({ isWrite }) =>
     isWrite
-      ? "var(--color-slate-700, #334155)"
-      : "var(--color-slate-100, #f1f5f9)"};
+      ? "#334155"
+      : "#f1f5f9"};
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;
@@ -164,7 +162,7 @@ const AnswerContentModifyBtn = styled.button`
   &:hover {
     background-color: ${({ isWrite }) =>
       isWrite
-        ? "var(--color-background-button-primary-bold-hover, #1e293b)"
+        ? "#1e293b"
         : ""};
     cursor: ${({ isWrite }) => (isWrite ? "pointer" : "default")};
   }
