@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -83,6 +83,7 @@ const SearchInput = styled.input`
 function Search({ setSearch }) {
     const navigate = useNavigate();
     const [query, setQuery] = useState("");
+    const [shouldNavigate, setShouldNavigate] = useState(false);
 
     const searchOpenHandler = () => {
         setSearch((isOpen) => (isOpen = false));
@@ -94,10 +95,17 @@ function Search({ setSearch }) {
 
     const handleKeyPress = (e) => {
         if (e.keyCode === 13 && query !== "") {
+            setShouldNavigate(true);
             setQuery(query.trim());
-            navigate(`/search?query=${query}`);
         }
     };
+
+    useEffect(() => {
+        if (shouldNavigate) {
+            navigate(`/search?query=${query}`);
+            setShouldNavigate(false);
+        }
+    }, [query, shouldNavigate, navigate]);
 
     return (
         <>

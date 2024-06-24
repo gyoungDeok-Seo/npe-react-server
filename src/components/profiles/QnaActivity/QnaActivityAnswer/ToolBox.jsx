@@ -102,9 +102,11 @@ function ToolBox({ answer }) {
         <QnaActivitySubContentBox>
             <QnaActivityLikeBtnBox>
                 <QnaActivityLikeBtn style={{ cursor: "default" }}>
-                    <QnaActivityLikeText>
-                        좋아요 <b>{likeCount}</b>
-                    </QnaActivityLikeText>
+                    {likeCount != 0 && (
+                        <QnaActivityLikeText>
+                            좋아요 <b>{likeCount}</b>
+                        </QnaActivityLikeText>
+                    )}
                 </QnaActivityLikeBtn>
             </QnaActivityLikeBtnBox>
             <QnaActivityToolBox>

@@ -33,20 +33,22 @@ const SearchResultContentBox = styled.div`
 function SearchResult() {
     const [category, setCategory] = useState(1);
     const searchInputRef = useRef(null);
-    const renderContent = () => {
-        switch (category) {
-            case 1:
-                return <ResultBox />;
-            case 2:
-                return <CategoryProfile />;
-            case 3:
-                return <CategoryPost />;
-            case 4:
-                return <CategoryQna />;
-            default:
-                return <ResultBox />;
-        }
-    };
+
+    // const renderContent = () => {
+    //     switch (category) {
+    //         case 1:
+    //             return <ResultBox />;
+    //         case 2:
+    //             return <CategoryProfile />;
+    //         case 3:
+    //             return <CategoryPost />;
+    //         case 4:
+    //             return <CategoryQna />;
+    //         default:
+    //             return <ResultBox />;
+    //     }
+    // };
+
     return (
         <InputRefContext.Provider value={searchInputRef}>
             <div>
@@ -69,7 +71,7 @@ function SearchResult() {
                             <SeachAndCategory category={category} setCategory={setCategory} />
                         </SearchResultHeaderBox>
                         <SearchResultContentBox>
-                            {renderContent()}
+                            <ResultBox />
                             <SideBar />
                         </SearchResultContentBox>
                     </SearchResultContainer>

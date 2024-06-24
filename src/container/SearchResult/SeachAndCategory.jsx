@@ -15,7 +15,7 @@ function SeachAndCategory({category, setCategory }) {
     <SearchCategoryBarBox>
       <SearchCategoryBarInner>
         <SearchBox />
-        <CategoryBox category={category} setCategory={setCategory}/>
+        {/* <CategoryBox category={category} setCategory={setCategory}/> */}
       </SearchCategoryBarInner>
     </SearchCategoryBarBox>
   );
