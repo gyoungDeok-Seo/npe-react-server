@@ -1,6 +1,6 @@
 export const answerListApi = async (qnaId) => {
   const response = await fetch(
-    `http://localhost:10000/answers/api/list?id=${qnaId}`,
+    `http://52.78.106.170:10000/answers/api/list?id=${qnaId}`,
     {
       method: "GET",
       credentials: "include",
@@ -14,7 +14,7 @@ export const answerListApi = async (qnaId) => {
 };
 
 export const createAnswerApi = async (data) => {
-  const response = await fetch("http://localhost:10000/answers/api/create", {
+  const response = await fetch("http://52.78.106.170:10000/answers/api/create", {
     method: "POST",
     credentials: "include",
     headers: {
@@ -27,7 +27,7 @@ export const createAnswerApi = async (data) => {
 };
 
 export const updateAnswerApi = async (data) => {
-  const response = await fetch("http://localhost:10000/answers/api/update", {
+  const response = await fetch("http://52.78.106.170:10000/answers/api/update", {
     method: "POST",
     credentials: "include",
     headers: {
@@ -40,7 +40,7 @@ export const updateAnswerApi = async (data) => {
 };
 
 export const deleteAnswerApi = async (data) => {
-  const response = await fetch("http://localhost:10000/answers/api/delete", {
+  const response = await fetch("http://52.78.106.170:10000/answers/api/delete", {
     method: "POST",
     credentials: "include",
     headers: {
@@ -54,7 +54,7 @@ export const deleteAnswerApi = async (data) => {
 
 export const answerLikeApi = async (data) => {
   const response = await fetch(
-    "http://localhost:10000/answers/api/answer-like",
+    "http://52.78.106.170:10000/answers/api/answer-like",
     {
       method: "POST",
       credentials: "include",
@@ -69,7 +69,7 @@ export const answerLikeApi = async (data) => {
 };
 
 export const answerDeleteApi = async (data) => {
-  await fetch(`http://localhost:10000/answers/api/hard-delete`, {
+  await fetch(`http://52.78.106.170:10000/answers/api/hard-delete`, {
     method: "DELETE",
     credentials: "include",
     headers: {

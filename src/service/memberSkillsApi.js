@@ -1,5 +1,5 @@
 export const getMemberSkillsListFetch = async () => {
-  const response = await fetch(`http://localhost:10000/members/api/skill`, {
+  const response = await fetch(`http://52.78.106.170:10000/members/api/skill`, {
     method: "GET",
     credentials: "include", // 세션 쿠키를 포함하여 요청
   });

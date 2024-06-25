@@ -171,7 +171,7 @@ function Profile({ member, same }) {
 
     useEffect(() => {
         const fetchMemberSkill = async () => {
-            const response = await fetch(`http://localhost:10000/members/api/skill?memberId=${pathname.split("/")[2]}`, {
+            const response = await fetch(`http://52.78.106.170:10000/members/api/skill?memberId=${pathname.split("/")[2]}`, {
                 method: "GET",
                 credentials: "include",
             });
@@ -188,7 +188,7 @@ function Profile({ member, same }) {
         };
 
         const fetchMemberCareer = async () => {
-            const response = await fetch(`http://localhost:10000/members/api/career-list?memberId=${pathname.split("/")[2]}`, {
+            const response = await fetch(`http://52.78.106.170:10000/members/api/career-list?memberId=${pathname.split("/")[2]}`, {
                 method: "GET",
                 credentials: "include",
             });
@@ -201,7 +201,7 @@ function Profile({ member, same }) {
         };
 
         const fetchMemberEducation = async () => {
-            const response = await fetch(`http://localhost:10000/members/api/education-list?memberId=${pathname.split("/")[2]}`, {
+            const response = await fetch(`http://52.78.106.170:10000/members/api/education-list?memberId=${pathname.split("/")[2]}`, {
                 method: "GET",
                 credentials: "include",
             });

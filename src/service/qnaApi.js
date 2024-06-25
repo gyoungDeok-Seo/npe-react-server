@@ -5,7 +5,7 @@ export const a = (() => {
       formData.append(`uploadFile`, file.file);
     });
 
-    const response = await fetch("http://localhost:10000/file/upload", {
+    const response = await fetch("http://52.78.106.170:10000/file/upload", {
       method: "POST",
       credentials: "include".to,
       body: formData,
@@ -20,7 +20,7 @@ export const a = (() => {
 })();
 
 export const createQnaApi = async (qnaData) => {
-  const response = await fetch("http://localhost:10000/qnas/api/create", {
+  const response = await fetch("http://52.78.106.170:10000/qnas/api/create", {
     method: "POST",
     credentials: "include",
     headers: {
@@ -34,7 +34,7 @@ export const createQnaApi = async (qnaData) => {
 
 export const qnaDetailApi = async (qnaId) => {
   const response = await fetch(
-    `http://localhost:10000/qnas/api/detail?id=${qnaId}`,
+    `http://52.78.106.170:10000/qnas/api/detail?id=${qnaId}`,
     {
       method: "GET",
       credentials: "include",
@@ -48,7 +48,7 @@ export const qnaDetailApi = async (qnaId) => {
 };
 
 export const deleteQnaApi = async (qnaId) => {
-  await fetch(`http://localhost:10000/qnas/api/delete?id=${qnaId}`, {
+  await fetch(`http://52.78.106.170:10000/qnas/api/delete?id=${qnaId}`, {
     method: "GET",
     credentials: "include",
     headers: {
@@ -59,7 +59,7 @@ export const deleteQnaApi = async (qnaId) => {
 
 export const categoryListApi = async () => {
   const response = await fetch(
-    `http://localhost:10000/qnas/api/category/list`,
+    `http://52.78.106.170:10000/qnas/api/category/list`,
     {
       method: "GET",
       credentials: "include",
@@ -73,7 +73,7 @@ export const categoryListApi = async () => {
 };
 
 export const topTenListApi = async () => {
-  const response = await fetch(`http://localhost:10000/qnas/api/top-ten/list`, {
+  const response = await fetch(`http://52.78.106.170:10000/qnas/api/top-ten/list`, {
     method: "GET",
     credentials: "include",
     headers: {
@@ -86,7 +86,7 @@ export const topTenListApi = async () => {
 
 export const bestAnswerListApi = async () => {
   const response = await fetch(
-    `http://localhost:10000/qnas/api/best-answer/list`,
+    `http://52.78.106.170:10000/qnas/api/best-answer/list`,
     {
       method: "GET",
       credentials: "include",
@@ -101,7 +101,7 @@ export const bestAnswerListApi = async () => {
 
 export const qnaListApi = async (categoryValue, tagsParams, pages) => {
   const response = await fetch(
-    `http://localhost:10000/qnas/api/list?category=${categoryValue}&page=${pages}&tags=${tagsParams}`,
+    `http://52.78.106.170:10000/qnas/api/list?category=${categoryValue}&page=${pages}&tags=${tagsParams}`,
     {
       method: "GET",
       credentials: "include",
@@ -116,7 +116,7 @@ export const qnaListApi = async (categoryValue, tagsParams, pages) => {
 
 export const tagQnaListApi = async (tag, pages) => {
   const response = await fetch(
-    `http://localhost:10000/qnas/api/list-tag?page=${pages}&tag=${tag}`,
+    `http://52.78.106.170:10000/qnas/api/list-tag?page=${pages}&tag=${tag}`,
     {
       method: "GET",
       credentials: "include",

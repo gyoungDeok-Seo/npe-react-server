@@ -34,7 +34,7 @@ function Profiles() {
     const [same, setSame] = useState();
 
     const fetchData = async (page, endpoint, actionCreator, currentState) => {
-        const response = await fetch(`http://localhost:10000/members/api/${endpoint}?page=${page}&memberId=${pathname.split("/")[2]}`, {
+        const response = await fetch(`http://52.78.106.170:10000/members/api/${endpoint}?page=${page}&memberId=${pathname.split("/")[2]}`, {
             method: "GET",
             credentials: "include",
         });
@@ -55,7 +55,7 @@ function Profiles() {
         // 서버에서 세션 정보를 가져와 로그인 상태를 설정합니다.
         const fetchUserSession = async () => {
             try {
-                const response = await fetch(`http://localhost:10000/members/api/session?memberId=${pathname.split("/")[2]}`, {
+                const response = await fetch(`http://52.78.106.170:10000/members/api/session?memberId=${pathname.split("/")[2]}`, {
                     method: "GET",
                     credentials: "include", // 세션 쿠키를 포함하여 요청
                 }); // 서버에서 세션 정보를 가져오는 엔드포인트 설정
