@@ -240,12 +240,19 @@ const AnswerReplyList = styled.div`
     border-top-width: 1px;
 `;
 
+const ProfanityWarning = styled.span`
+    color: var(--color-coral-800, #be1e08);
+    font-size: 0.875rem;
+    font-weight: 600;
+`;
+
 function PeopleAnswer({ answer, setReportModal, setIsModify, setDeleteModal, setLikeModal, setAnswerList }) {
     const [isAnswerMenuShow, setIsAnswerMenuShow] = useState(false);
     const [isReplyShow, setIsReplyShow] = useState(true);
     const [replyTextareaValue, setReplyTextTextareaValue] = useState("");
     const { qnaDetailData } = useSelector((state) => state.qnaDetail);
-    const dispatch = useDispatch();
+    const [profanityState, setProfanityState] = useState(false);
+
     const handlerClickLikeBtn = async () => {
         const request = {
             id: answer?.id,
@@ -294,10 +301,13 @@ function PeopleAnswer({ answer, setReportModal, setIsModify, setDeleteModal, set
 
         const isProfanity = await checkTheComment(request.replayContent);
         if (isProfanity) {
-            await insertProfanityApi(replyTextareaValue, isProfanity);
+            await insertProfanityApi(request.replayContent, isProfanity);
+            setProfanityState(true);
         } else {
             const response = await createReplyApi(request);
+            setProfanityState(false);
             setAnswerList(response);
+            setReplyTextTextareaValue("");
         }
     };
 
@@ -307,6 +317,7 @@ function PeopleAnswer({ answer, setReportModal, setIsModify, setDeleteModal, set
             document.removeEventListener("click", handleClickOutside);
         };
     }, []);
+
     return (
         <>
             <PeopleAnswerRecommendedSector>
@@ -431,10 +442,13 @@ function PeopleAnswer({ answer, setReportModal, setIsModify, setDeleteModal, set
                 <AnswerReplyWriteSector>
                     <MemberProfileImg alt="프로필 이미지" src="https://publy.imgix.net/static/images/img_profile-dummy.png?w=200&h=200&auto=format&fm=png" />
                     <AnswerReplyRegistrationBox>
-                        <AnswerReplyTextarea placeholder="댓글을 남겨주세요" onChange={handleReplyTextareaChange}></AnswerReplyTextarea>
-                        <AnswerReplyRegistrationBtn isWrite={replyTextareaValue} disabled={!replyTextareaValue} onClick={handleSendReply}>
-                            <AnswerReplyRegistrationText>등록</AnswerReplyRegistrationText>
-                        </AnswerReplyRegistrationBtn>
+                        <AnswerReplyTextarea placeholder="댓글을 남겨주세요" onChange={handleReplyTextareaChange} value={replyTextareaValue}></AnswerReplyTextarea>
+                        <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                            <ProfanityWarning>{profanityState && "작성한 댓글이 욕설을 포함하고 있어 등록할 수 없습니다."}</ProfanityWarning>
+                            <AnswerReplyRegistrationBtn isWrite={replyTextareaValue} disabled={!replyTextareaValue} onClick={handleSendReply}>
+                                <AnswerReplyRegistrationText>등록</AnswerReplyRegistrationText>
+                            </AnswerReplyRegistrationBtn>
+                        </div>
                     </AnswerReplyRegistrationBox>
                 </AnswerReplyWriteSector>
             )}
