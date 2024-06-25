@@ -78,8 +78,9 @@ const AnswerWriterPosition = styled(ProfileBtnTextDefault)`
 `;
 
 const AnswerWriteTime = styled(ProfileBtnTextDefault)`
-    color: #64748b;
-    font-size: 0.75rem;
+  color: #64748b;
+  font-size: 0.75rem;
+
 `;
 
 const AnswerText = styled.p`
@@ -88,10 +89,11 @@ const AnswerText = styled.p`
 `;
 
 const AnswerContentModifyWrap = styled.div`
-    border-color: #e2e8f0;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 0.25rem;
+  border-color: #e2e8f0;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0.25rem;
+
 `;
 
 const AnswerContentModifyContainer = styled.div`
@@ -109,52 +111,52 @@ const AnswerContentModifyItem = styled.div`
 `;
 
 const AnswerContentModifyTextarea = styled.textarea`
-    color: #0f172a;
-    padding: 0;
-    border-width: 0;
-    resize: none;
-    width: 100%;
-    min-height: 4.5rem;
-    &::placeholder {
-        color: #94a3b8;
-    }
-    &:focus-visible {
-        outline: none;
-        box-shadow: none;
-    }
+  color: #0f172a;
+  padding: 0;
+  border-width: 0;
+  resize: none;
+  width: 100%;
+  min-height: 4.5rem;
+  &::placeholder {
+    color: #94a3b8;
+  }
+  &:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
 `;
 
 const AnswerContentModifyBtnBox = styled.div`
-    padding: 0.75rem;
-    border-color: #e2e8f0;
-    border-style: solid;
-    border-width: 0;
-    border-top-width: 1px;
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
+  padding: 0.75rem;
+  border-color: #e2e8f0;
+  border-style: solid;
+  border-width: 0;
+  border-top-width: 1px;
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
 `;
 
 const AnswerContentModifyBtn = styled.button`
-    color: ${({ isWrite }) => (isWrite ? "#fff" : "#94a3b8")};
-    font-weight: 700;
-    font-size: 0.75rem;
-    padding-top: 0.375rem;
-    padding-bottom: 0.375rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    background-color: ${({ isWrite }) => (isWrite ? "#334155" : "#f1f5f9")};
-    border-color: ${({ isWrite }) => (isWrite ? "#334155" : "#f1f5f9")};
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 0.25rem;
-    justify-content: center;
-    align-items: center;
-    display: inline-flex;
-    &:hover {
-        background-color: ${({ isWrite }) => (isWrite ? "#1e293b" : "")};
-        cursor: ${({ isWrite }) => (isWrite ? "pointer" : "default")};
-    }
+  color: ${({ isWrite }) => (isWrite ? "#fff" : "#94a3b8")};
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: ${({ isWrite }) => (isWrite ? "#334155" : "#f1f5f9")};
+  border-color: ${({ isWrite }) => (isWrite ? "#334155" : "#f1f5f9")};
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0.25rem;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  &:hover {
+    background-color: ${({ isWrite }) => (isWrite ? "#1e293b" : "")};
+    cursor: ${({ isWrite }) => (isWrite ? "pointer" : "default")};
+  }
 `;
 
 const AnswerContentModifyText = styled.span`
@@ -203,50 +205,92 @@ function AnswerContentBox({ answer, index, setAnswerList }) {
         }
     };
 
-    return (
-        <>
-            <AnswerListBox key={index}>
-                <AnswerMains>
-                    <AnswerWriterInfoBox>
-                        <ProfileLink to={`/pofiles/${answer?.memberId}`}>
-                            <AnswerWriterImage src={answer?.kakaoProfileUrl} />
-                        </ProfileLink>
-                        <ProfileBtn>
-                            <AnswerWriterName>{answer?.memberName}</AnswerWriterName>
-                            <AnswerWriterPosition>{answer?.memberPosition}</AnswerWriterPosition>
-                            <AnswerWriteTime>{timeForToday(answer?.createdDate)}</AnswerWriteTime>
-                        </ProfileBtn>
-                    </AnswerWriterInfoBox>
-                    {isModify ? (
-                        <AnswerContentModifyWrap>
-                            <AnswerContentModifyContainer>
-                                <AnswerContentModifyBox>
-                                    <AnswerContentModifyItem>
-                                        <AnswerContentModifyTextarea onChange={handlerChangeValue} style={{ height: "72px" }} placeholder="답변으로 나누고 싶은 경험이 있으신가요?">
-                                            {modifyValue}
-                                        </AnswerContentModifyTextarea>
-                                    </AnswerContentModifyItem>
-                                </AnswerContentModifyBox>
-                            </AnswerContentModifyContainer>
-                            <AnswerContentModifyBtnBox>
-                                <ProfanityWarning>{profanityState && "작성한 댓글이 욕설을 포함하고 있어 등록할 수 없습니다."}</ProfanityWarning>
-                                <AnswerContentModifyBtn onClick={handlerClickModifyDoneBtn} isWrite={modifyValue} disabled={!modifyValue}>
-                                    <AnswerContentModifyText>수정</AnswerContentModifyText>
-                                </AnswerContentModifyBtn>
-                            </AnswerContentModifyBtnBox>
-                        </AnswerContentModifyWrap>
-                    ) : (
-                        <div>
-                            <AnswerText style={{ overflowWrap: "anywhere", whiteSpace: `pre-wrap` }}>{answer?.answerContent}</AnswerText>
-                        </div>
-                    )}
-                </AnswerMains>
-                {answer?.answerType === "ai" ? <AiAnswer /> : <PeopleAnswer setAnswerList={setAnswerList} setReportModal={setReportModal} setIsModify={setIsModify} setDeleteModal={setDeleteModal} setLikeModal={setLikeModal} answer={answer} />}
-            </AnswerListBox>
-            {likeModal && <LikeUserModal setLikeUsersModal={setLikeModal} data={answer} />}
-            {reportModal && <ReportModal setModal={setReportModal} type={type} />}
-            {deleteModal && <DeleteModal setModal={setDeleteModal} data={answer} setAnswerList={setAnswerList} />}
-        </>
-    );
+  return (
+    <>
+      <AnswerListBox key={index}>
+        <AnswerMains>
+          <AnswerWriterInfoBox>
+            <ProfileLink to={`/pofiles/${answer?.memberId}`}>
+              <AnswerWriterImage src={answer?.kakaoProfileUrl} />
+            </ProfileLink>
+            <ProfileBtn>
+              <AnswerWriterName>{answer?.memberName}</AnswerWriterName>
+              <AnswerWriterPosition>
+                {answer?.memberPosition}
+              </AnswerWriterPosition>
+              <AnswerWriteTime>
+                {timeForToday(answer?.createdDate)}
+              </AnswerWriteTime>
+            </ProfileBtn>
+          </AnswerWriterInfoBox>
+          {isModify ? (
+            <AnswerContentModifyWrap>
+              <AnswerContentModifyContainer>
+                <AnswerContentModifyBox>
+                  <AnswerContentModifyItem>
+                    <AnswerContentModifyTextarea
+                      onChange={handlerChangeValue}
+                      style={{ height: "72px" }}
+                      placeholder="답변으로 나누고 싶은 경험이 있으신가요?"
+                    >
+                      {modifyValue}
+                    </AnswerContentModifyTextarea>
+                  </AnswerContentModifyItem>
+                </AnswerContentModifyBox>
+              </AnswerContentModifyContainer>
+              <AnswerContentModifyBtnBox>
+                <AnswerContentModifyBtn
+                  onClick={handlerClickModifyDoneBtn}
+                  isWrite={modifyValue}
+                  disabled={!modifyValue}
+                >
+                  <AnswerContentModifyText>수정</AnswerContentModifyText>
+                </AnswerContentModifyBtn>
+              </AnswerContentModifyBtnBox>
+            </AnswerContentModifyWrap>
+          ) : (
+            <div>
+              <AnswerText
+                style={{ overflowWrap: "anywhere", whiteSpace: `pre-wrap` }}
+              >
+                {answer?.answerContent}
+              </AnswerText>
+            </div>
+          )}
+        </AnswerMains>
+        {answer?.answerType === "ai" ? (
+          <AiAnswer />
+        ) : (
+          <PeopleAnswer
+            setAnswerList={setAnswerList}
+            setReportModal={setReportModal}
+            setIsModify={setIsModify}
+            setDeleteModal={setDeleteModal}
+            setLikeModal={setLikeModal}
+            answer={answer}
+          />
+        )}
+      </AnswerListBox>
+      {likeModal && (
+        <LikeUserModal setLikeUsersModal={setLikeModal} data={answer} />
+      )}
+      {reportModal && (
+        <ReportModal
+          setModal={setReportModal}
+          type={type}
+          data={answer}
+          setAnswerList={setAnswerList}
+        />
+      )}
+      {deleteModal && (
+        <DeleteModal
+          setModal={setDeleteModal}
+          data={answer}
+          setAnswerList={setAnswerList}
+        />
+      )}
+    </>
+  );
+
 }
 export default AnswerContentBox;

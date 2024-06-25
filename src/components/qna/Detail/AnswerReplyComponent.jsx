@@ -69,9 +69,10 @@ const AnswerReplyWriterDisplayBox = styled.div`
 `;
 
 const AnswerReplyWriterDisplay = styled.p`
-    color: #fff;
-    font-weight: 700;
-    font-size: 10px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 10px;
+
 `;
 
 const AnswerReplyWriterPositionTime = styled.p`
@@ -85,6 +86,7 @@ const AnswerReplyContentBox = styled.div`
     margin-left: 2.75rem;
 `;
 const AnswerReplyContentItem = styled.div`
+
     color: #0f172a;
     font-size: 0.875rem;
     padding-top: 0.5rem;
@@ -127,25 +129,26 @@ const AnswerReplyContentModifyTextarea = styled.textarea`
 `;
 
 const AnswerReplyContentModifyBtn = styled.button`
-    color: ${({ isWrite }) => (isWrite ? "#fff" : "#94a3b8")};
-    font-weight: 700;
-    font-size: 0.75rem;
-    padding-top: 0.375rem;
-    padding-bottom: 0.375rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    background-color: ${({ isWrite }) => (isWrite ? "#334155" : "#f1f5f9")};
-    border-color: ${({ isWrite }) => (isWrite ? "#334155" : "#f1f5f9")};
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 0.25rem;
-    align-self: flex-end;
-    flex-shrink: 0;
-    display: block;
-    &:hover {
-        background-color: ${({ isWrite }) => (isWrite ? "#1e293b" : "")};
-        cursor: ${({ isWrite }) => (isWrite ? "pointer" : "default")};
-    }
+  color: ${({ isWrite }) => (isWrite ? "#fff" : "#94a3b8")};
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: ${({ isWrite }) => (isWrite ? "#334155" : "#f1f5f9")};
+  border-color: ${({ isWrite }) => (isWrite ? "#334155" : "#f1f5f9")};
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0.25rem;
+  align-self: flex-end;
+  flex-shrink: 0;
+  display: block;
+  &:hover {
+    background-color: ${({ isWrite }) => (isWrite ? "#1e293b" : "")};
+    cursor: ${({ isWrite }) => (isWrite ? "pointer" : "default")};
+  }
+
 `;
 
 const AnswerReplyActionBox = styled.div`
@@ -452,6 +455,7 @@ function AnswerReplyComponent({ reply, index, setAnswerList, qnaId }) {
                         <span>좋아요 {reply?.likeCnt}</span>
                     </AnswerReplyListBtn>
                 )}
+
                 <ProfanityWarning>{profanityState && "작성한 댓글이 욕설을 포함하고 있어 등록할 수 없습니다."}</ProfanityWarning>
                 <AnswerReplyLikeBtn onClick={handlerClickReplyLike}>
                     <AnswerReplyLikeSvg isLike={reply?.memberLiked} width="16" height="16" strokeWidth="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
