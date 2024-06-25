@@ -9,81 +9,83 @@ import PeopleAnswer from "./PeopleAnswer";
 import { updateAnswerApi } from "../../../service/answerApi";
 
 import { timeForToday } from "../../profiles/QnaActivity/QnaActivityAnswer";
+import { checkTheComment, insertProfanityApi } from "../../../service/answerReplyApi";
 
 const AnswerListBox = styled.div`
-  background-color: #fff;
-  border-color: #e2e8f0;
-  border-style: solid;
-  border-width: 1px;
+    background-color: #fff;
+    border-color: #e2e8f0;
+    border-style: solid;
+    border-width: 1px;
 `;
 
 const AnswerMains = styled.div`
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  gap: 2rem;
-  flex-direction: column;
-  display: flex;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    gap: 2rem;
+    flex-direction: column;
+    display: flex;
 `;
 
 const AnswerWriterInfoBox = styled.div`
-  gap: 0.75rem;
-  align-items: center;
-  display: flex;
-  position: relative;
+    gap: 0.75rem;
+    align-items: center;
+    display: flex;
+    position: relative;
 `;
 
 const ProfileLink = styled(Link)`
-  flex-shrink: 0;
+    flex-shrink: 0;
 `;
 
 const AnswerWriterImage = styled.img`
-  object-fit: cover;
-  border-radius: 9999px;
-  width: 2.5rem;
-  height: 2.5rem;
-  aspect-ratio: 1 / 1;
-  border-width: 1px;
-  border-style: solid;
-  border-color: rgb(226 232 240 /1);
-  background-color: rgb(255 255 255 / 1);
-  overflow: hidden;
+    object-fit: cover;
+    border-radius: 9999px;
+    width: 2.5rem;
+    height: 2.5rem;
+    aspect-ratio: 1 / 1;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(226 232 240 /1);
+    background-color: rgb(255 255 255 / 1);
+    overflow: hidden;
 `;
 
 const ProfileBtn = styled.button`
-  text-align: left;
-  padding: 0;
-  display: block;
+    text-align: left;
+    padding: 0;
+    display: block;
 `;
 
 const ProfileBtnTextDefault = styled.p`
-  word-break: break-all;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
+    word-break: break-all;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
 `;
 
 const AnswerWriterName = styled(ProfileBtnTextDefault)`
-  color: #0f172a;
-  font-weight: 700;
-  font-size: 0.875rem;
+    color: #0f172a;
+    font-weight: 700;
+    font-size: 0.875rem;
 `;
 
 const AnswerWriterPosition = styled(ProfileBtnTextDefault)`
-  color: #334155;
-  font-size: 0.75rem;
+    color: #334155;
+    font-size: 0.75rem;
 `;
 
 const AnswerWriteTime = styled(ProfileBtnTextDefault)`
   color: #64748b;
   font-size: 0.75rem;
+
 `;
 
 const AnswerText = styled.p`
-  color: #0f172a;
-  font-size: 1rem;
+    color: #0f172a;
+    font-size: 1rem;
 `;
 
 const AnswerContentModifyWrap = styled.div`
@@ -91,20 +93,21 @@ const AnswerContentModifyWrap = styled.div`
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;
+
 `;
 
 const AnswerContentModifyContainer = styled.div`
-  padding: 0.75rem;
+    padding: 0.75rem;
 `;
 
 const AnswerContentModifyBox = styled.div`
-  background-color: #fff;
-  position: relative;
+    background-color: #fff;
+    position: relative;
 `;
 
 const AnswerContentModifyItem = styled.div`
-  overflow-y: auto;
-  max-height: 22.5rem;
+    overflow-y: auto;
+    max-height: 22.5rem;
 `;
 
 const AnswerContentModifyTextarea = styled.textarea`
@@ -157,34 +160,50 @@ const AnswerContentModifyBtn = styled.button`
 `;
 
 const AnswerContentModifyText = styled.span`
-  text-overflow: ellipsis;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+`;
+
+const ProfanityWarning = styled.span`
+    color: var(--color-coral-800, #be1e08);
+    font-size: 0.875rem;
+    font-weight: 600;
 `;
 
 function AnswerContentBox({ answer, index, setAnswerList }) {
-  const type = "답글";
-  const [likeModal, setLikeModal] = useState(false);
-  const [modifyValue, setModifyValue] = useState(answer.answerContent || "");
-  const [reportModal, setReportModal] = useState(false);
-  const [isModify, setIsModify] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
-  const handlerChangeValue = (e) => {
-    setModifyValue(e.target.value);
-  };
+    const type = "답글";
+    const [likeModal, setLikeModal] = useState(false);
+    const [modifyValue, setModifyValue] = useState(answer.answerContent || "");
+    const [reportModal, setReportModal] = useState(false);
+    const [isModify, setIsModify] = useState(false);
+    const [deleteModal, setDeleteModal] = useState(false);
+    const [profanityState, setProfanityState] = useState(false);
 
-  const handlerClickModifyDoneBtn = async () => {
-    const data = {
-      id: answer.id,
-      answerContent: modifyValue,
-      questionId: answer.questionId,
+    const handlerChangeValue = (e) => {
+        setModifyValue(e.target.value);
     };
-    const response = await updateAnswerApi(data);
-    setIsModify(false);
-    setAnswerList(response);
-  };
+
+    const handlerClickModifyDoneBtn = async () => {
+        const data = {
+            id: answer.id,
+            answerContent: modifyValue,
+            questionId: answer.questionId,
+        };
+
+        const isProfanity = await checkTheComment(data.answerContent);
+        if (isProfanity) {
+            await insertProfanityApi(data.answerContent, isProfanity);
+            setProfanityState(true);
+        } else {
+            const response = await updateAnswerApi(data);
+            setProfanityState(false);
+            setIsModify(false);
+            setAnswerList(response);
+        }
+    };
 
   return (
     <>
@@ -272,5 +291,6 @@ function AnswerContentBox({ answer, index, setAnswerList }) {
       )}
     </>
   );
+
 }
 export default AnswerContentBox;
