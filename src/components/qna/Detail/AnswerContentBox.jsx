@@ -77,7 +77,7 @@ const AnswerWriterPosition = styled(ProfileBtnTextDefault)`
 `;
 
 const AnswerWriteTime = styled(ProfileBtnTextDefault)`
-  color:#64748b;
+  color: #64748b;
   font-size: 0.75rem;
 `;
 
@@ -87,7 +87,7 @@ const AnswerText = styled.p`
 `;
 
 const AnswerContentModifyWrap = styled.div`
-  border-color:#e2e8f0;
+  border-color: #e2e8f0;
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;
@@ -108,7 +108,7 @@ const AnswerContentModifyItem = styled.div`
 `;
 
 const AnswerContentModifyTextarea = styled.textarea`
-  color:#0f172a;
+  color: #0f172a;
   padding: 0;
   border-width: 0;
   resize: none;
@@ -125,7 +125,7 @@ const AnswerContentModifyTextarea = styled.textarea`
 
 const AnswerContentModifyBtnBox = styled.div`
   padding: 0.75rem;
-  border-color:#e2e8f0;
+  border-color: #e2e8f0;
   border-style: solid;
   border-width: 0;
   border-top-width: 1px;
@@ -135,24 +135,15 @@ const AnswerContentModifyBtnBox = styled.div`
 `;
 
 const AnswerContentModifyBtn = styled.button`
-  color: ${({ isWrite }) =>
-    isWrite
-      ? "#fff"
-      : "#94a3b8"};
+  color: ${({ isWrite }) => (isWrite ? "#fff" : "#94a3b8")};
   font-weight: 700;
   font-size: 0.75rem;
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  background-color: ${({ isWrite }) =>
-    isWrite
-      ? "#334155"
-      : "#f1f5f9"};
-  border-color: ${({ isWrite }) =>
-    isWrite
-      ? "#334155"
-      : "#f1f5f9"};
+  background-color: ${({ isWrite }) => (isWrite ? "#334155" : "#f1f5f9")};
+  border-color: ${({ isWrite }) => (isWrite ? "#334155" : "#f1f5f9")};
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;
@@ -160,10 +151,7 @@ const AnswerContentModifyBtn = styled.button`
   align-items: center;
   display: inline-flex;
   &:hover {
-    background-color: ${({ isWrite }) =>
-      isWrite
-        ? "#1e293b"
-        : ""};
+    background-color: ${({ isWrite }) => (isWrite ? "#1e293b" : "")};
     cursor: ${({ isWrite }) => (isWrite ? "pointer" : "default")};
   }
 `;
@@ -267,7 +255,14 @@ function AnswerContentBox({ answer, index, setAnswerList }) {
       {likeModal && (
         <LikeUserModal setLikeUsersModal={setLikeModal} data={answer} />
       )}
-      {reportModal && <ReportModal setModal={setReportModal} type={type} />}
+      {reportModal && (
+        <ReportModal
+          setModal={setReportModal}
+          type={type}
+          data={answer}
+          setAnswerList={setAnswerList}
+        />
+      )}
       {deleteModal && (
         <DeleteModal
           setModal={setDeleteModal}

@@ -68,7 +68,7 @@ const AnswerReplyWriterDisplayBox = styled.div`
 `;
 
 const AnswerReplyWriterDisplay = styled.p`
-  color:#fff;
+  color: #fff;
   font-weight: 700;
   font-size: 10px;
 `;
@@ -90,7 +90,7 @@ const AnswerReplyContentItem = styled.div`
   padding-bottom: 0.5rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  background-color:  #f8fafc;
+  background-color: #f8fafc;
   border-radius: 0.25rem;
 `;
 
@@ -126,24 +126,15 @@ const AnswerReplyContentModifyTextarea = styled.textarea`
 `;
 
 const AnswerReplyContentModifyBtn = styled.button`
-  color: ${({ isWrite }) =>
-    isWrite
-      ? "#fff"
-      : "#94a3b8"};
+  color: ${({ isWrite }) => (isWrite ? "#fff" : "#94a3b8")};
   font-weight: 700;
   font-size: 0.75rem;
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  background-color: ${({ isWrite }) =>
-    isWrite
-      ? "#334155"
-      : "#f1f5f9"};
-  border-color: ${({ isWrite }) =>
-    isWrite
-      ? "#334155"
-      : "#f1f5f9"};
+  background-color: ${({ isWrite }) => (isWrite ? "#334155" : "#f1f5f9")};
+  border-color: ${({ isWrite }) => (isWrite ? "#334155" : "#f1f5f9")};
   border-style: solid;
   border-width: 1px;
   border-radius: 0.25rem;
@@ -151,10 +142,7 @@ const AnswerReplyContentModifyBtn = styled.button`
   flex-shrink: 0;
   display: block;
   &:hover {
-    background-color: ${({ isWrite }) =>
-      isWrite
-        ? "#1e293b"
-        : ""};
+    background-color: ${({ isWrite }) => (isWrite ? "#1e293b" : "")};
     cursor: ${({ isWrite }) => (isWrite ? "pointer" : "default")};
   }
 `;
@@ -533,7 +521,14 @@ function AnswerReplyComponent({ reply, index, setAnswerList, qnaId }) {
         <LikeUserModal setLikeUsersModal={setLikeModal} data={reply} />
       )}
       {replyReportModal && (
-        <ReportModal setModal={setReplyReportModal} type={type} />
+        <ReportModal
+          setModal={setReplyReportModal}
+          type={type}
+          data={reply}
+          reply={reply}
+          setAnswerList={setAnswerList}
+          qnaId={qnaId}
+        />
       )}
       {replyDeleteModal && (
         <DeleteModal

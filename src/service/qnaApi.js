@@ -128,3 +128,4 @@ export const tagQnaListApi = async (tag, pages) => {
   const json = await response.json();
   return json;
 };
+
