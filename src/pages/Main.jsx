@@ -18,9 +18,9 @@ function Main() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(memberId);
+        console.log(pathname);
         // isLogin && navigate("/home");
-    }, [memberId]);
+    }, [pathname]);
 
     return (
         <div>
