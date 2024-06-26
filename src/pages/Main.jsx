@@ -7,43 +7,42 @@ import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
-  flex-direction: column;
-  min-width: 1024px;
+    flex-direction: column;
+    min-width: 1024px;
 `;
 
 function Main() {
-  const [isLogin, setIsLogin] = useState(false);
-  const memberId = new URLSearchParams(search).get("id") || "";
-  const {pathname} = useLocation();
-  const navigate = useNavigate();
+    const [isLogin, setIsLogin] = useState(false);
+    const memberId = new URLSearchParams(search).get("id") || "";
+    const { pathname } = useLocation();
+    const navigate = useNavigate();
+    console.log(memberId);
+    useEffect(() => {
+        // isLogin && navigate("/home");
+    }, []);
 
-  useEffect(() => {
-    console.log(memberId)
-    // isLogin && navigate("/home");
-  }, []);
-
-  return (
-    <div>
-      <div
-        style={{
-          position: "fixed",
-          zIndex: 9999,
-          top: "16px",
-          left: "16px",
-          right: "16px",
-          bottom: "16px",
-          pointerEvents: "none",
-        }}
-      ></div>
-      <div>
-        <MainHeader isLogin={isLogin} setIsLogin={setIsLogin} />
-        <Container>
-          <Landing />
-          <Introduction />
-        </Container>
-        <Footer />
-      </div>
-    </div>
-  );
+    return (
+        <div>
+            <div
+                style={{
+                    position: "fixed",
+                    zIndex: 9999,
+                    top: "16px",
+                    left: "16px",
+                    right: "16px",
+                    bottom: "16px",
+                    pointerEvents: "none",
+                }}
+            ></div>
+            <div>
+                <MainHeader isLogin={isLogin} setIsLogin={setIsLogin} />
+                <Container>
+                    <Landing />
+                    <Introduction />
+                </Container>
+                <Footer />
+            </div>
+        </div>
+    );
 }
 export default Main;
