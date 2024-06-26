@@ -37,7 +37,7 @@ const KakaoImg = styled.img`
 
 function NonLoginNav() {
     const handlerClickLogin = async () => {
-        window.location.href = "http://52.78.106.170:10000/kakao/login/end-point";
+        window.location.href = " /kakao/login/end-point";
     };
 
     return (
