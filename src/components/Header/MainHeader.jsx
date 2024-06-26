@@ -62,7 +62,7 @@ function MainHeader({ setAvoidMistakesModal, qnaId }) {
     const isLoggedIn = useSelector((state) => state.loginStatus.status);
     const [member, setMember] = useState(null);
     const categories = useSelector((state) => state.categoryList);
-    const memberId = new URLSearchParams(search).get("id") || "";
+    const memberId = new URLSearchParams(search).get("/id") || "";
     useEffect(() => {
         setPath(pathname);
         // 서버에서 세션 정보를 가져와 로그인 상태를 설정합니다.
