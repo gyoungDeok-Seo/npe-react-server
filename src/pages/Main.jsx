@@ -4,7 +4,7 @@ import MainHeader from "../components/Header/MainHeader";
 import Introduction from "../container/Main/Introduction";
 import Landing from "../container/Main/Landing";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   flex-direction: column;
@@ -13,11 +13,14 @@ const Container = styled.div`
 
 function Main() {
   const [isLogin, setIsLogin] = useState(false);
+  const {pathname} = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    isLogin && navigate("/home");
-  }, [isLogin, navigate]);
+    const memberId = new URLSearchParams(search).get("id") || "";
+    console.log(memberId)
+    // isLogin && navigate("/home");
+  }, []);
 
   return (
     <div>
