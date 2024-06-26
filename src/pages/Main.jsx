@@ -16,10 +16,11 @@ function Main() {
     const memberId = new URLSearchParams(search).get("id") || "";
     const { pathname } = useLocation();
     const navigate = useNavigate();
-    console.log(memberId);
+
     useEffect(() => {
+        console.log(memberId);
         // isLogin && navigate("/home");
-    }, []);
+    }, [memberId]);
 
     return (
         <div>
