@@ -62,12 +62,13 @@ function MainHeader({ setAvoidMistakesModal, qnaId }) {
     const isLoggedIn = useSelector((state) => state.loginStatus.status);
     const [member, setMember] = useState(null);
     const categories = useSelector((state) => state.categoryList);
+    const memberId = new URLSearchParams(search).get("id") || "";
     useEffect(() => {
         setPath(pathname);
         // 서버에서 세션 정보를 가져와 로그인 상태를 설정합니다.
         const fetchUserSession = async () => {
             try {
-                const response = await fetch("/members/api/session", {
+                const response = await fetch(`/members/api/session?mac=${memberId}`, {
                     method: "GET",
                     credentials: "include", // 세션 쿠키를 포함하여 요청
                 }); // 서버에서 세션 정보를 가져오는 엔드포인트 설정

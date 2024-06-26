@@ -13,12 +13,10 @@ const Container = styled.div`
 
 function Main() {
     const [isLogin, setIsLogin] = useState(false);
-    const memberId = new URLSearchParams(search).get("id") || "";
     const { pathname } = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(pathname);
         // isLogin && navigate("/home");
     }, [pathname]);
 
